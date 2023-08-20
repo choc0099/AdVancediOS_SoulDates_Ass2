@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
+		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
+		32D538362A91F20100DFC38D /* BasicDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* BasicDetailsSetupView.swift */; };
+		32D538382A91F21B00DFC38D /* DisabilitySetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */; };
+		32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */; };
+		32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383B2A91F25900DFC38D /* AbouteMeView.swift */; };
+		32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */; };
+		32D538402A91F2C600DFC38D /* DreamList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383F2A91F2C600DFC38D /* DreamList.swift */; };
 		32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */; };
 		32F250F52A90D2C10084424B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F42A90D2C10084424B /* ContentView.swift */; };
 		32F250F72A90D2C20084424B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32F250F62A90D2C20084424B /* Assets.xcassets */; };
@@ -38,6 +45,13 @@
 
 /* Begin PBXFileReference section */
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
+		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
+		32D538352A91F20100DFC38D /* BasicDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDetailsSetupView.swift; sourceTree = "<group>"; };
+		32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilitySetupView.swift; sourceTree = "<group>"; };
+		32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreferencesView.swift; sourceTree = "<group>"; };
+		32D5383B2A91F25900DFC38D /* AbouteMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbouteMeView.swift; sourceTree = "<group>"; };
+		32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSeekerProfile.swift; sourceTree = "<group>"; };
+		32D5383F2A91F2C600DFC38D /* DreamList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamList.swift; sourceTree = "<group>"; };
 		32F250EF2A90D2C10084424B /* AdvancediOS_SouldDates_Ass1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancediOS_SouldDates_Ass1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1App.swift; sourceTree = "<group>"; };
 		32F250F42A90D2C10084424B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +94,8 @@
 		32D5382C2A91F04800DFC38D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */,
+				32D5383F2A91F2C600DFC38D /* DreamList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -87,6 +103,10 @@
 		32D5382D2A91F05800DFC38D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				32D538342A91F1D700DFC38D /* Initial Setup */,
+				32F2511C2A90D5390084424B /* WelcomeView.swift */,
+				32F2511E2A90DE800084424B /* ProfileView.swift */,
+				32D538322A91F1CC00DFC38D /* LookView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -97,6 +117,17 @@
 				32D538302A91F0A300DFC38D /* Verifiable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		32D538342A91F1D700DFC38D /* Initial Setup */ = {
+			isa = PBXGroup;
+			children = (
+				32D538352A91F20100DFC38D /* BasicDetailsSetupView.swift */,
+				32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */,
+				32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */,
+				32D5383B2A91F25900DFC38D /* AbouteMeView.swift */,
+			);
+			path = "Initial Setup";
 			sourceTree = "<group>";
 		};
 		32F250E62A90D2C10084424B = {
@@ -129,8 +160,6 @@
 				32F250F42A90D2C10084424B /* ContentView.swift */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,
-				32F2511C2A90D5390084424B /* WelcomeView.swift */,
-				32F2511E2A90DE800084424B /* ProfileView.swift */,
 			);
 			path = AdvancediOS_SouldDates_Ass1;
 			sourceTree = "<group>";
@@ -291,10 +320,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
+				32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
+				32D538402A91F2C600DFC38D /* DreamList.swift in Sources */,
+				32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */,
 				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
+				32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */,
+				32D538362A91F20100DFC38D /* BasicDetailsSetupView.swift in Sources */,
 				32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */,
+				32D538382A91F21B00DFC38D /* DisabilitySetupView.swift in Sources */,
+				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
