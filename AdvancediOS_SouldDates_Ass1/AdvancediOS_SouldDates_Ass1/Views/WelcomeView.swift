@@ -9,18 +9,14 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        
         NavigationStack {
-            VStack {
-                
-                Text("Welcome to SoulDates")
-                    .font(.title)
-                    .fontWeight(.bold).padding()
-                Text("Find your perfect match.").padding()
-                NavigationLink("GET STARTED") {
-                    BasicDetailsSetupView()
-                }
-            }
+            Text("Welcome to SoulDates")
+                .font(.title)
+                .fontWeight(.bold).padding()
+            Text("Find your perfect match.").padding()
+            NavigationLink("GET STARTED") {
+                AgeCheckSetupView()
+            }.padding().background(.green).foregroundColor(.black).bold()
         }
     }
 }

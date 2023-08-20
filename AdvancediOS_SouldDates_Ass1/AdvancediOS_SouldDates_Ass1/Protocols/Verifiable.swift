@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Verifiable {
+    var referenceNumber: Int64 {get set}
     var expiryDate: Date {get set}
     var dateIssued: Date {get set}
     var type: String {get set}
