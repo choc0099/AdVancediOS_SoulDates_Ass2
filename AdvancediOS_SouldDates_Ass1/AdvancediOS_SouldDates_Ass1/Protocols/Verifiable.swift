@@ -8,5 +8,9 @@
 import Foundation
 
 protocol Verifiable {
-    func validateBackGroundCheck()
+    var expiryDate: Date {get set}
+    var dateIssued: Date {get set}
+    var type: String {get set}
+    
+    func validate()
 }
