@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */; };
 		32F250F52A90D2C10084424B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F42A90D2C10084424B /* ContentView.swift */; };
 		32F250F72A90D2C20084424B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32F250F62A90D2C20084424B /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 		32F2510E2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2510D2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITests.swift */; };
 		32F251102A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2510F2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift */; };
 		32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2511C2A90D5390084424B /* WelcomeView.swift */; };
+		32F2511F2A90DE800084424B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2511E2A90DE800084424B /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32F250EF2A90D2C10084424B /* AdvancediOS_SouldDates_Ass1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancediOS_SouldDates_Ass1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1App.swift; sourceTree = "<group>"; };
 		32F250F42A90D2C10084424B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		32F2510D2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1UITests.swift; sourceTree = "<group>"; };
 		32F2510F2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		32F2511C2A90D5390084424B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		32F2511E2A90DE800084424B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32D5382C2A91F04800DFC38D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		32D5382D2A91F05800DFC38D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		32D5382F2A91F07C00DFC38D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				32D538302A91F0A300DFC38D /* Verifiable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		32F250E62A90D2C10084424B = {
 			isa = PBXGroup;
 			children = (
@@ -97,10 +123,14 @@
 			isa = PBXGroup;
 			children = (
 				32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */,
+				32D5382F2A91F07C00DFC38D /* Protocols */,
+				32D5382D2A91F05800DFC38D /* Views */,
+				32D5382C2A91F04800DFC38D /* Models */,
 				32F250F42A90D2C10084424B /* ContentView.swift */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,
 				32F2511C2A90D5390084424B /* WelcomeView.swift */,
+				32F2511E2A90DE800084424B /* ProfileView.swift */,
 			);
 			path = AdvancediOS_SouldDates_Ass1;
 			sourceTree = "<group>";
@@ -260,7 +290,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
+				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
 				32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */,
 			);
