@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct LookView: View {
-    var body: some View {
+    @State var allocatedMatchSeekers: [MatchSeeker]
+    var body: some View
+    {
         NavigationStack {
-            
+            List(allocatedMatchSeekers)
+            {
+                matchSeeker in
+                MatchSeekerRow(matchSeeker: matchSeeker)
+            }
         }
     }
 }
 
 struct LookView_Previews: PreviewProvider {
     static var previews: some View {
-        LookView()
+        LookView(allocatedMatchSeekers: matchSeekersSample)
     }
 }

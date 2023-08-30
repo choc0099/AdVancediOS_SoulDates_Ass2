@@ -22,10 +22,10 @@ protocol MatchSeekerUser: Identifiable {
     var screenName: String {get set}
     var bio: String {get set}
     var hobbies: String {get set}
-    var interests: String {get set}
+    var favouriteMusic: String {get set}
     var isScammer: Bool {get set}
     var gender: Gender {get set}
-    var sexuality: Sexuality {get set}
+    var interestedIn: InterestedIn {get set}
     var policeCheck: PoliceCheck? {get set}
     var proofOfAge: ProofOfAge? {get set}
     var refereeCheck: RefereeCheck? {get set}
@@ -96,7 +96,7 @@ struct MatchSeeker: MatchSeekerUser {
     var gender: Gender
     var dateOfBirth: Date
     var bio: String
-    var interests: String
+    var favouriteMusic: String
     var policeCheck: PoliceCheck?
     var proofOfAge: ProofOfAge?
     var refereeCheck: RefereeCheck?
@@ -104,16 +104,16 @@ struct MatchSeeker: MatchSeekerUser {
     var isDisabled: Bool
     var discloseDisability: Bool
     var isScammer: Bool
-    var sexuality: Sexuality
+    var interestedIn: InterestedIn
     
-    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, interests: String, sexuality: Sexuality, disability: Disability? = nil) {
+    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, interestedIn: InterestedIn, disability: Disability? = nil) {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
         self.dateOfBirth = dateOfBirth
         self.bio = bio
-        self.interests = interests
-        self.sexuality = sexuality
+        self.favouriteMusic = favourteMusic
+        self.interestedIn = interestedIn
         self.disability = disability
         self.policeCheck = nil
         self.refereeCheck = nil

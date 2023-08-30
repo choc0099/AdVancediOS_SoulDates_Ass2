@@ -15,11 +15,12 @@ enum Gender {
     case other
 }
 
-enum Sexuality {
-    case straight
-    case gay
-    case lesbian
+enum InterestedIn {
+    case men
+    case women
+    case both
     case other
+    case all
 }
 /*
 struct MatchSeeker: MatchSeekerUser {

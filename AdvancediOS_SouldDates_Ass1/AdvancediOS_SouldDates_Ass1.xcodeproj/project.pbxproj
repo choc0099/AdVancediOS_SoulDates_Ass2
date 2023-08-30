@@ -31,7 +31,6 @@
 		32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */; };
 		32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519182A9F1282005DA063 /* MatchSeekerRow.swift */; };
 		32F5191B2A9F1317005DA063 /* SoulDatesSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */; };
-		32F5191D2A9F13F7005DA063 /* MatchSeekerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F5191C2A9F13F7005DA063 /* MatchSeekerData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +78,6 @@
 		32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 		32F519182A9F1282005DA063 /* MatchSeekerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSeekerRow.swift; sourceTree = "<group>"; };
 		32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulDatesSampleData.swift; sourceTree = "<group>"; };
-		32F5191C2A9F13F7005DA063 /* MatchSeekerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSeekerData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +153,6 @@
 		32F250E62A90D2C10084424B = {
 			isa = PBXGroup;
 			children = (
-				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
 				32F250F12A90D2C10084424B /* AdvancediOS_SouldDates_Ass1 */,
 				32F251022A90D2C20084424B /* AdvancediOS_SouldDates_Ass1Tests */,
 				32F2510C2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITests */,
@@ -176,6 +173,7 @@
 		32F250F12A90D2C10084424B /* AdvancediOS_SouldDates_Ass1 */ = {
 			isa = PBXGroup;
 			children = (
+				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
 				32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */,
 				32D5382F2A91F07C00DFC38D /* Protocols */,
 				32D5382D2A91F05800DFC38D /* Views */,
@@ -183,7 +181,6 @@
 				32F250F42A90D2C10084424B /* ContentView.swift */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,
-				32F5191C2A9F13F7005DA063 /* MatchSeekerData.swift */,
 			);
 			path = AdvancediOS_SouldDates_Ass1;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */,
 				32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
-				32F5191D2A9F13F7005DA063 /* MatchSeekerData.swift in Sources */,
 				32D538442A91F37000DFC38D /* SettingsView.swift in Sources */,
 				32F5191B2A9F1317005DA063 /* SoulDatesSampleData.swift in Sources */,
 				32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */,
