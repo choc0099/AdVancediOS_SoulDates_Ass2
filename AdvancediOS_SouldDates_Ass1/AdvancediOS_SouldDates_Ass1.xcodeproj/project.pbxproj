@@ -27,6 +27,8 @@
 		32F251102A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2510F2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift */; };
 		32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2511C2A90D5390084424B /* WelcomeView.swift */; };
 		32F2511F2A90DE800084424B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F2511E2A90DE800084424B /* ProfileView.swift */; };
+		32F519152A9EEDBB005DA063 /* Persons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519142A9EEDBB005DA063 /* Persons.swift */; };
+		32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		32F2510F2A90D2C20084424B /* AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		32F2511C2A90D5390084424B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		32F2511E2A90DE800084424B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		32F519142A9EEDBB005DA063 /* Persons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persons.swift; sourceTree = "<group>"; };
+		32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +106,9 @@
 			children = (
 				32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */,
 				32D5383F2A91F2C600DFC38D /* DreamList.swift */,
+				32F519142A9EEDBB005DA063 /* Persons.swift */,
 				32D538412A91F33C00DFC38D /* AccountSettings.swift */,
+				32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,10 +336,12 @@
 			files = (
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */,
+				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
 				32D538402A91F2C600DFC38D /* DreamList.swift in Sources */,
 				32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */,
 				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
+				32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
 				32D538442A91F37000DFC38D /* SettingsView.swift in Sources */,
 				32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */,

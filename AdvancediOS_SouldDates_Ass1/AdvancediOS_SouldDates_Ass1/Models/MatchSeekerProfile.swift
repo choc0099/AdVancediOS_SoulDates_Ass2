@@ -19,12 +19,13 @@ enum Sexuality {
     case straight
     case gay
     case lesbian
+    case other
 }
-
-struct MatchSeeker: Identifiable {
+/*
+struct MatchSeeker: MatchSeekerUser {
     var id: UUID = UUID()
     var name: String
-    //var dateOfBirth: Date
+    var dateOfBirth: Date
     var age: Int
     var bio: String
     var Hobbies: String
@@ -50,4 +51,4 @@ struct MatchSeeker: Identifiable {
             gender = "Other"
         }
     }
-}
+}*/

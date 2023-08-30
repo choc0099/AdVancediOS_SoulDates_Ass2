@@ -7,11 +7,12 @@
 
 import Foundation
 
-protocol Verifiable {
-    var referenceNumber: Int64 {get set}
+//this protocol will be used for police checks, reference checks and proof of age idenficiation.
+protocol Verifiable: Identifiable {
+    
     var expiryDate: Date {get set}
     var dateIssued: Date {get set}
-    var type: String {get set}
     
-    func validate()
 }
+
+
