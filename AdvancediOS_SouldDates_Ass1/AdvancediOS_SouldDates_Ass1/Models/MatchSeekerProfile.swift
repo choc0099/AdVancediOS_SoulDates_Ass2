@@ -7,12 +7,14 @@
 
 import Foundation
 
-enum Gender {
+enum Gender: String, CaseIterable, Identifiable {
     case female
     case male
     case nonbinary
     case transgender
     case other
+    
+    var id: Self {self }
 }
 
 enum InterestedIn {

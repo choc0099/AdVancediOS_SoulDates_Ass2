@@ -9,6 +9,8 @@ import Foundation
 
 enum ProfileError: Error {
     case underAgeException
+    case noMatchesFound(message: String)
+    case caseSelectionNotListed(message: String)
 }
 
 protocol Person {
@@ -81,13 +83,6 @@ struct AnyMatchSeeker {
     }
 }
 
-class AllMatchSeekers {
-    var matchSeekers: [MatchSeeker]
-    
-    init(matchSeekers: [MatchSeeker]) {
-        self.matchSeekers = matchSeekers
-    }
-}
 
 struct MatchSeeker: MatchSeekerUser {
     var id: UUID = UUID()

@@ -31,6 +31,7 @@
 		32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */; };
 		32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F519182A9F1282005DA063 /* MatchSeekerRow.swift */; };
 		32F5191B2A9F1317005DA063 /* SoulDatesSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */; };
+		32F5191F2A9F487A005DA063 /* SoulDatesMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 		32F519182A9F1282005DA063 /* MatchSeekerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSeekerRow.swift; sourceTree = "<group>"; };
 		32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulDatesSampleData.swift; sourceTree = "<group>"; };
+		32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulDatesMain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,11 +110,13 @@
 		32D5382C2A91F04800DFC38D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				32F2511C2A90D5390084424B /* WelcomeView.swift */,
 				32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */,
 				32D5383F2A91F2C600DFC38D /* DreamList.swift */,
 				32F519142A9EEDBB005DA063 /* Persons.swift */,
 				32D538412A91F33C00DFC38D /* AccountSettings.swift */,
 				32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */,
+				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				32D538342A91F1D700DFC38D /* Initial Setup */,
-				32F2511C2A90D5390084424B /* WelcomeView.swift */,
 				32F2511E2A90DE800084424B /* ProfileView.swift */,
 				32D538322A91F1CC00DFC38D /* LookView.swift */,
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
@@ -347,6 +350,7 @@
 				32D538402A91F2C600DFC38D /* DreamList.swift in Sources */,
 				32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */,
 				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
+				32F5191F2A9F487A005DA063 /* SoulDatesMain.swift in Sources */,
 				32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */,
 				32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
