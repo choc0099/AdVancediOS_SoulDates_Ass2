@@ -106,8 +106,7 @@ struct MatchSeeker: MatchSeekerUser {
     var isScammer: Bool
     var sexuality: Sexuality
     
-    init(id: UUID, screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, interests: String, sexuality: Sexuality, disability: Disability? = nil) {
-        self.id = id
+    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, interests: String, sexuality: Sexuality, disability: Disability? = nil) {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
