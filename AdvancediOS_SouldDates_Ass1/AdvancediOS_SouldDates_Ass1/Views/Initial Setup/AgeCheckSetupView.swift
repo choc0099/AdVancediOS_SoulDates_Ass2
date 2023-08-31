@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AgeCheckSetupView: View {
     @State private var name: String = ""
+    @State private var dateOfBirth: Date = Date.now
     
     var body: some View {
         NavigationStack() {
@@ -17,10 +18,8 @@ struct AgeCheckSetupView: View {
                 "Name",
                 text: $name
             )
-            
-            /*Text("What is your Age?")
-            Stepper("Age", value: <#T##Binding<Strideable>#>)
-              }.padding()*/        }
+            DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
+        }
         
     }
 }
