@@ -13,11 +13,37 @@ enum ProfileError: Error {
     case caseSelectionNotListed(message: String)
 }
 
-protocol Person {
-    var id: UUID {get set}
-    var screenNamt: String {get set}
+enum Gender: String, CaseIterable, Identifiable {
+    case female
+    case male
+    case nonbinary
+    case transgender
+    case other
+    
+    var id: Self {self }
 }
 
+enum InterestedIn {
+    case men
+    case women
+    case both
+    case other
+    case all
+}
+
+enum DisabilityPreference: String, Identifiable {
+    case withDisability = "With Disabilty"
+    case withoutDisability = "Without Disability"
+    case openMinded = "I am open minded"
+    
+    var id: Self {self}
+}
+
+protocol Person: Identifiable {
+    var id: UUID {get set}
+    var screenName: String {get set}
+}
+/*
 protocol MatchSeekerUser: Identifiable {
     var id: UUID {get set}
     var dateOfBirth: Date {get set}
@@ -27,13 +53,11 @@ protocol MatchSeekerUser: Identifiable {
     var favouriteMusic: String {get set}
     var isScammer: Bool {get set}
     var gender: Gender {get set}
-    var interestedIn: InterestedIn {get set}
+    var datingPreference: DatingPreference {get set}
+    var disability: Disability? {get set}
     var policeCheck: PoliceCheck? {get set}
     var proofOfAge: ProofOfAge? {get set}
     var refereeCheck: RefereeCheck? {get set}
-    var disability: Disability? {get set}
-    var isDisabled: Bool {get set}
-    var discloseDisability: Bool {get set}
     
     //these are the functions where match seekers can upload their background checks.
     mutating func setPoliceCheck(policeCheck: PoliceCheck)
@@ -41,8 +65,8 @@ protocol MatchSeekerUser: Identifiable {
     mutating func setProofOfAge(proofOfAge: ProofOfAge)
     mutating func toggleScammer()
     
-}
-
+}*/
+/*
 extension MatchSeekerUser {
     mutating func setPoliceCheck(policeCheck: PoliceCheck) {
         self.policeCheck = policeCheck
@@ -66,11 +90,18 @@ extension MatchSeekerUser {
             isScammer = false
         }
     }
-}
+}*/
 
 struct Disability {
     var disabilities: String
     var severeity: String
+}
+
+struct DatingPreference {
+    var interestedIn: InterestedIn
+    var disabilityPreference: DisabilityPreference
+    var discloseMyDisability: Bool
+    
 }
 
 struct AnyMatchSeeker {
@@ -84,11 +115,12 @@ struct AnyMatchSeeker {
 }
 
 
-struct MatchSeeker: MatchSeekerUser {
+struct MatchSeeker: Person {
     var id: UUID = UUID()
     var screenName: String
     var hobbies: String
     var gender: Gender
+    var datingPreference: DatingPreference
     var dateOfBirth: Date
     var bio: String
     var favouriteMusic: String
@@ -96,32 +128,50 @@ struct MatchSeeker: MatchSeekerUser {
     var proofOfAge: ProofOfAge?
     var refereeCheck: RefereeCheck?
     var disability: Disability?
-    var isDisabled: Bool
-    var discloseDisability: Bool
     var isScammer: Bool
-    var interestedIn: InterestedIn
     
-    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, interestedIn: InterestedIn, disability: Disability? = nil) {
+    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
         self.dateOfBirth = dateOfBirth
         self.bio = bio
         self.favouriteMusic = favourteMusic
-        self.interestedIn = interestedIn
+        self.datingPreference = datingPreference
         self.disability = disability
         self.policeCheck = nil
         self.refereeCheck = nil
-        self.discloseDisability = false
         self.proofOfAge = nil
         self.isScammer = false
-        self.isDisabled = false
     }
     
+    //functions for getters and setters
+    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
+        self.policeCheck = policeCheck
+    }
+    
+    mutating func setRefereeCheck(referee: RefereeCheck)
+    {
+        self.refereeCheck = referee
+    }
+    
+    mutating func setProofOfAge(proofOfAge: ProofOfAge)
+    {
+        self.proofOfAge = proofOfAge
+    }
+    
+    mutating func toggleScammer() {
+        if isScammer == false {
+            isScammer = true
+        }
+        else{
+            isScammer = false
+        }
+    }
 }
 
 struct Admin: Person {
     var id: UUID = UUID()
-    var screenNamt: String
+    var screenName: String
     
 }

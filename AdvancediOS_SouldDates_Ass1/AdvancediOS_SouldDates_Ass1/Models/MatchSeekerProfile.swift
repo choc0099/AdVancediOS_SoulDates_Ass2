@@ -7,23 +7,7 @@
 
 import Foundation
 
-enum Gender: String, CaseIterable, Identifiable {
-    case female
-    case male
-    case nonbinary
-    case transgender
-    case other
-    
-    var id: Self {self }
-}
 
-enum InterestedIn {
-    case men
-    case women
-    case both
-    case other
-    case all
-}
 /*
 struct MatchSeeker: MatchSeekerUser {
     var id: UUID = UUID()

@@ -110,7 +110,6 @@
 		32D5382C2A91F04800DFC38D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				32F2511C2A90D5390084424B /* WelcomeView.swift */,
 				32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */,
 				32D5383F2A91F2C600DFC38D /* DreamList.swift */,
 				32F519142A9EEDBB005DA063 /* Persons.swift */,
@@ -129,6 +128,7 @@
 				32D538322A91F1CC00DFC38D /* LookView.swift */,
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
 				32F519182A9F1282005DA063 /* MatchSeekerRow.swift */,
+				32F2511C2A90D5390084424B /* WelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
