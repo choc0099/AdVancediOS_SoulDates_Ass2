@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SoulDatesMain {
-    var matchSeekers: [MatchSeeker]
+class SoulDatesMain: ObservableObject {
+    @Published var matchSeekers: [MatchSeeker]
     
     init(matchSeekers: [MatchSeeker]) {
         self.matchSeekers = matchSeekers
@@ -19,8 +19,8 @@ class SoulDatesMain {
         //creates an empty matchSeeker list.
         matchSeekers = []
     }
-    
-    func tailorMatchSeekers(interestedIn: InterestedIn) throws -> [MatchSeeker] {
+    // a helper function to list match seekers based on the type of gender they are interested in.
+    private func tailorMatchesByGender(interestedIn: InterestedIn) throws -> [MatchSeeker] {
         guard matchSeekers.count > 0 else {
             throw ProfileError.noMatchesFound(message: "No one is registered.")
         }
@@ -59,5 +59,34 @@ class SoulDatesMain {
             }
         }
         return allocatedMatchSeekers
+    }
+    
+    func tailorMatches(interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
+        // this will be used to loop for allocated matches based on interested in.
+        let allocatedMatchSeekersByGender: [MatchSeeker] = try tailorMatchesByGender(interestedIn: interestedIn)
+        // this is another array to get allocated matches that it is based on gender and disabilities
+        var finalAllocatedMatchSeekers: [MatchSeeker] = []
+        
+        for matchSeeker in allocatedMatchSeekersByGender {
+            switch disabilityPreference {
+            case .withDisability:
+                if matchSeeker.disability != nil {
+                    finalAllocatedMatchSeekers.append(matchSeeker)
+                } else {
+                    throw ProfileError.noMatchesFound(message: "No matches with disability")
+                }
+            case .withoutDisability:
+                if matchSeeker.disability == nil {
+                    finalAllocatedMatchSeekers.append(matchSeeker)
+                } else {
+                    throw ProfileError.noMatchesFound(message: "No matches without disability")
+                }
+            case .openMinded:
+                return allocatedMatchSeekersByGender
+            }
+        }
+        return finalAllocatedMatchSeekers
+        
+        
     }
 }
