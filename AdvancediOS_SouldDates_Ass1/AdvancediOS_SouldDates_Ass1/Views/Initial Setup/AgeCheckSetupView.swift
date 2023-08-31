@@ -18,11 +18,9 @@ struct AgeCheckSetupView: View {
                 text: $name
             )
             
-            Text("What is your Age?")
-            /*Stepper(<#T##title: StringProtocol##StringProtocol#>, value: <#T##Binding<Strideable>#>)
-             }.padding()*/
-            //var sexuality: Stringvar sexuality: String
-        }
+            /*Text("What is your Age?")
+            Stepper("Age", value: <#T##Binding<Strideable>#>)
+              }.padding()*/        }
         
     }
 }

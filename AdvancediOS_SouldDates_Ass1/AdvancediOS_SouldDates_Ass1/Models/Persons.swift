@@ -130,11 +130,16 @@ struct MatchSeeker: Person {
     var disability: Disability?
     var isScammer: Bool
     
-    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) {
+    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) throws {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
-        self.dateOfBirth = dateOfBirth
+        if DateManager.validateAge(birthDate: dateOfBirth) == true {
+            self.dateOfBirth = dateOfBirth
+        }
+        else {
+            throw ProfileError.underAgeException
+        }
         self.bio = bio
         self.favouriteMusic = favourteMusic
         self.datingPreference = datingPreference
