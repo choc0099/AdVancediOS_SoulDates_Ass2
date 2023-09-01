@@ -19,7 +19,7 @@ struct AgeCheckSetupView: View {
                 text: $name
             )
             DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
-        }
+        }.padding()
         
     }
 }

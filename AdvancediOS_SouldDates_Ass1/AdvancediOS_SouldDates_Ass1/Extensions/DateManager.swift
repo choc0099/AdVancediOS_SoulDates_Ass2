@@ -23,14 +23,11 @@ class DateManager {
     }
     
     //a helper function that will be used to validate birthdate so only over 18's can join
-    static func validateAge(birthDate: Date) -> Bool {
+    static public func isUnderAge(birthDate: Date) -> Bool {
         
-        if let minAgeToAccess: Date = Calendar.current.date(byAdding: .year, value: -100, to: Date.now)
+        if let minAgeToAccess: Date = Calendar.current.date(byAdding: .year, value: -18, to: Date.now)
         {
-            if birthDate < minAgeToAccess {
-                return false //returns a false boolean if it is under age.
-            }
-            else {
+            if birthDate > minAgeToAccess {
                 return true
             }
         }

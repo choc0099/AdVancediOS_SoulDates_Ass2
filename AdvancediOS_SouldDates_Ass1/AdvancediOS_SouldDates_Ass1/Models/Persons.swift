@@ -134,7 +134,7 @@ struct MatchSeeker: Person {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
-        if DateManager.validateAge(birthDate: dateOfBirth) == true {
+        if DateManager.isUnderAge(birthDate: dateOfBirth) == true {
             self.dateOfBirth = dateOfBirth
         }
         else {

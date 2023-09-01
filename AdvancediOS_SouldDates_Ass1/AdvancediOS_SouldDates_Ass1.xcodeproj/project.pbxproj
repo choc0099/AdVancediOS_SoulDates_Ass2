@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E02AA1B9E30095A649 /* ProfileTests.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
 		32D538362A91F20100DFC38D /* BasicDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* BasicDetailsSetupView.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32BB89E02AA1B9E30095A649 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
 		32D538352A91F20100DFC38D /* BasicDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDetailsSetupView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				32F251032A90D2C20084424B /* AdvancediOS_SouldDates_Ass1Tests.swift */,
+				32BB89E02AA1B9E30095A649 /* ProfileTests.swift */,
 			);
 			path = AdvancediOS_SouldDates_Ass1Tests;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F251042A90D2C20084424B /* AdvancediOS_SouldDates_Ass1Tests.swift in Sources */,
+				32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
