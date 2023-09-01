@@ -49,7 +49,7 @@ struct AgeCheckSetupView: View {
                 message: Text("\(alertMessage)")
             )
         }.navigationDestination(isPresented: $navActive) {
-            BasicDetailsSetupView(dateOfBirth: $dateOfBirth, screenName: $screeName)
+            GenderSetupView(dateOfBirth: $dateOfBirth, screenName: $screeName )
         }
         
     }
@@ -68,5 +68,6 @@ struct AgeCheckSetupView: View {
 struct AgeCheckSetupView_Previews: PreviewProvider {
     static var previews: some View {
         AgeCheckSetupView()
+           
     }
 }
