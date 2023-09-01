@@ -11,6 +11,7 @@ enum ProfileError: Error {
     case underAgeException
     case noMatchesFound(message: String)
     case caseSelectionNotListed(message: String)
+    case emptyTextFields
 }
 
 enum Gender: String, CaseIterable, Identifiable {
