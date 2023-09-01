@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct BasicDetailsSetupView: View {
+    @Binding var dateOfBirth: Date
+    @Binding var screenName: String
+    @State var bio: String = ""
+    @State var hobbies: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Coming up")
     }
 }
 
 struct BasicDetailsSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        BasicDetailsSetupView()
+        BasicDetailsSetupView(dateOfBirth: .constant(Date.now), screenName: .constant("Cigarettes"))
     }
 }

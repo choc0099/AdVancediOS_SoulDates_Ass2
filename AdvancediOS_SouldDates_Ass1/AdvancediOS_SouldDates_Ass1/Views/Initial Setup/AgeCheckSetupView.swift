@@ -8,19 +8,52 @@
 import SwiftUI
 
 struct AgeCheckSetupView: View {
-    @State private var name: String = ""
+    
+    @State private var screeName: String = ""
     @State private var dateOfBirth: Date = Date.now
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
     
     var body: some View {
         NavigationStack() {
             Text("Enter your name:")
             TextField (
                 "Name",
-                text: $name
+                text: $screeName
             )
-            DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
+            Divider()
+            Text("Date of Birth")
+            DatePicker("", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
+            
+            Button("Next", action: {
+                do {
+                    try validate(dateOfBirth: dateOfBirth, screenName: screeName)
+                    print("Pressed")
+                
+                }
+                catch ProfileError.underAgeException {
+                    showAlert = true
+                }
+                catch {
+                    print("Invalid input")
+                }
+             
+            }).alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("You are under age!"),
+                    message: Text("You must be over 18 years old to use the dating app.")
+                )
+            }
         }.padding()
         
+    }
+    
+    func validate(dateOfBirth: Date, screenName: String) throws {
+        guard !DateManager.isUnderAge(birthDate: dateOfBirth)
+        else {
+            throw ProfileError.underAgeException
+        }
     }
 }
 
