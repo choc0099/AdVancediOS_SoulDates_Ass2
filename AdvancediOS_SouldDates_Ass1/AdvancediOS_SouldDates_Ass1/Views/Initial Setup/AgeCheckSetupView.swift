@@ -26,7 +26,7 @@ struct AgeCheckSetupView: View {
             Divider()
             Text("Date of Birth")
             DatePicker("", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
-            NavigationLink( destination: BasicDetailsSetupView(dateOfBirth: $dateOfBirth, screenName: $screeName), isActive: $navActive) {
+            
                 Button("Next", action: {
                     do {
                         try validate(dateOfBirth: dateOfBirth, screenName: screeName)
@@ -43,12 +43,13 @@ struct AgeCheckSetupView: View {
                         alertMessage = "Please enter your screen name."
                     }
                 }).padding()
-            }
         }.alert(isPresented: $showAlert) {
             Alert(
                 title: Text("\(alertTitle)"),
                 message: Text("\(alertMessage)")
             )
+        }.navigationDestination(isPresented: $navActive) {
+            BasicDetailsSetupView(dateOfBirth: $dateOfBirth, screenName: $screeName)
         }
         
     }
