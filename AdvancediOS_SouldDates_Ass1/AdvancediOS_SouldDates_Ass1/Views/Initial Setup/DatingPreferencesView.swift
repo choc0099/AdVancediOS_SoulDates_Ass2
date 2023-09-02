@@ -12,14 +12,14 @@ struct DatingPreferencesView: View {
     var body: some View {
         NavigationStack {
             VStack{
-                Text("Who are you open of dating?")
+                Text("Who are you open of dating?").padding()
                 ForEach(DisabilityPreference.allCases)
                 {
                     pref in Button {
                         
                     } label: {
-                        Text(pref.rawValue)
-                    }
+                        Text(pref.rawValue).bold()
+                    }.padding().frame(width: 240).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
                 }
             }
             

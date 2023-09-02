@@ -16,17 +16,19 @@ struct DisabilityDetailsSetupView: View {
         
         NavigationStack {
             VStack {
-                Text("What is your disabilities?")
-                TextField("Your disabilities", text: $setupVM.disability)
-                Text("How Severe is your disability?")
+                Text("What is your disabilities?").padding()
+                TextField("Your disabilities", text: $setupVM.disability).padding()
+                Divider()
+                Text("How Severe is your disability?").padding()
+                
                 Picker("", selection: $setupVM.disabilitySeverity) {
                     ForEach(DisabilitySeverity.allCases) {
                         severity in
                         Text(severity.rawValue.capitalized)
                     }
-                }.pickerStyle(.segmented)
+                }.pickerStyle(.segmented).padding()
                 Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
-                
+                Spacer()
                 Button("Next", action: {
                     do {
                         navActive = true
