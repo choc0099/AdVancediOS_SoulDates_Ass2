@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    //@StateObject var basicVM: BasicDetailsViewModel = BasicDetailsViewModel()
     var body: some View {
-        @StateObject var basicVM: BasicDetailsViewModel = BasicDetailsViewModel()
+       
         NavigationStack {
             Text("Welcome to SoulDates")
                 .font(.title)
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
             NavigationLink("GET STARTED") {
-                AgeCheckSetupView(setupVM: basicVM)
+                AgeCheckSetupView(setupVM: BasicDetailsViewModel())
             }.padding().background(.green).foregroundColor(.black).bold()
         }
     }

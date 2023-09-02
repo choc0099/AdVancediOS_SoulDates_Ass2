@@ -10,6 +10,16 @@ import SwiftUI
 struct AgeCheckSetupView: View {
     
     @ObservedObject var setupVM: BasicDetailsViewModel
+    let dateRange: ClosedRange<Date> = {
+        let calendar = Calendar.current
+        let startingDate = DateComponents(year: 1900, month: 1, day: 1)
+        let calDateComp = calendar.dateComponents([.day, .month, .year], from: Date.now)
+        let endingDate = DateComponents(year: calDateComp.year, month: calDateComp.month, day: calDateComp.day)
+        return calendar.date(from: startingDate)!
+        ...
+        calendar.date(from: endingDate)!
+        
+    }()
     @StateObject var genderVM: GenderSetupViewModel = GenderSetupViewModel()
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
@@ -25,7 +35,7 @@ struct AgeCheckSetupView: View {
             )
             Divider()
             Text("Date of Birth")
-            DatePicker("", selection: $setupVM.dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
+            DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
             
                 Button("Next", action: {
                     do {
