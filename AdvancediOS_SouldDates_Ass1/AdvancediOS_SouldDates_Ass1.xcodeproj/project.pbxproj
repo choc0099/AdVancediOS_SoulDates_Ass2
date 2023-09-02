@@ -10,8 +10,9 @@
 		32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E02AA1B9E30095A649 /* ProfileTests.swift */; };
 		32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */; };
 		32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */; };
-		32BB89E82AA2BA810095A649 /* BasicDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E72AA2BA810095A649 /* BasicDetailsViewModel.swift */; };
+		32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */; };
 		32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */; };
+		32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
 		32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* GenderSetup.swift */; };
@@ -61,8 +62,9 @@
 		32BB89E02AA1B9E30095A649 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInSetupView.swift; sourceTree = "<group>"; };
 		32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilityDetailsSetupView.swift; sourceTree = "<group>"; };
-		32BB89E72AA2BA810095A649 /* BasicDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDetailsViewModel.swift; sourceTree = "<group>"; };
+		32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupViewModel.swift; sourceTree = "<group>"; };
 		32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetupViewModel.swift; sourceTree = "<group>"; };
+		32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInViewModel.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
 		32D538352A91F20100DFC38D /* GenderSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetup.swift; sourceTree = "<group>"; };
@@ -122,8 +124,9 @@
 		32BB89E62AA2B9FA0095A649 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				32BB89E72AA2BA810095A649 /* BasicDetailsViewModel.swift */,
+				32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */,
 				32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */,
+				32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */,
 				32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */,
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
+				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
 				32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
@@ -399,7 +403,7 @@
 				32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */,
 				32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */,
 				32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */,
-				32BB89E82AA2BA810095A649 /* BasicDetailsViewModel.swift in Sources */,
+				32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */,
 				32D538462A922A3800DFC38D /* AgeCheckSetupView.swift in Sources */,
 				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);

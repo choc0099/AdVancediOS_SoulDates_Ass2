@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InterestedInSetupView: View {
-    @EnvironmentObject var basicVM: BasicDetailsViewModel
+    @EnvironmentObject var basicVM: InitialSetupViewModel
     @EnvironmentObject var genderVM: GenderSetupViewModel
     @State var interestedInInput: InterestedIn = .all
     
@@ -16,6 +16,7 @@ struct InterestedInSetupView: View {
         NavigationStack {
             VStack {
                 Text("Who are you interested in?")
+                Text("Test \(basicVM.screenName), \(genderVM.gender.rawValue)")
                 ForEach(InterestedIn.allCases) {
                      interestedIn in
                     Button {

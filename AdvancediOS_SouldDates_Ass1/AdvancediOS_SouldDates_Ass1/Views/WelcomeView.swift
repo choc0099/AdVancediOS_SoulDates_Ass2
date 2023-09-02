@@ -17,7 +17,7 @@ struct WelcomeView: View {
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
             NavigationLink("GET STARTED") {
-                AgeCheckSetupView(setupVM: BasicDetailsViewModel())
+                AgeCheckSetupView(setupVM: InitialSetupViewModel())
             }.padding().background(.green).foregroundColor(.black).bold()
         }
     }

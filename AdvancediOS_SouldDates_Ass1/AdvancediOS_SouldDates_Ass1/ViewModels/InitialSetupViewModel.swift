@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class BasicDetailsViewModel: ObservableObject {
+class InitialSetupViewModel: ObservableObject {
     @Published var screenName: String = ""
     @Published var dateOfBirth: Date = Date()
     @Published var gender: Gender = .male

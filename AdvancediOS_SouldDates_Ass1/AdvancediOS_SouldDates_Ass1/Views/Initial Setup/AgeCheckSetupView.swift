@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AgeCheckSetupView: View {
     
-    @ObservedObject var setupVM: BasicDetailsViewModel
+    @ObservedObject var setupVM: InitialSetupViewModel
     let dateRange: ClosedRange<Date> = {
         let calendar = Calendar.current
         let startingDate = DateComponents(year: 1900, month: 1, day: 1)
@@ -20,7 +20,7 @@ struct AgeCheckSetupView: View {
         calendar.date(from: endingDate)!
         
     }()
-    @StateObject var genderVM: GenderSetupViewModel = GenderSetupViewModel()
+    //@StateObject var genderVM: GenderSetupViewModel = GenderSetupViewModel()
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -59,7 +59,7 @@ struct AgeCheckSetupView: View {
                 message: Text("\(alertMessage)")
             )
         }.navigationDestination(isPresented: $navActive) {
-            GenderSetupView(genderVM: genderVM).environmentObject(setupVM)
+            GenderSetupView(setupVM: setupVM)
         }
         
     }
@@ -67,7 +67,7 @@ struct AgeCheckSetupView: View {
 
 struct AgeCheckSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        AgeCheckSetupView(setupVM: BasicDetailsViewModel())
+        AgeCheckSetupView(setupVM: InitialSetupViewModel())
            
     }
 }
