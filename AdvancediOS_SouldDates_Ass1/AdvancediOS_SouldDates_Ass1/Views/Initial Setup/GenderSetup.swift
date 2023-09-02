@@ -30,7 +30,7 @@ struct GenderSetupView: View {
                         Text(gender.rawValue.capitalized).bold()
                     }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
                 }
-            }
+            }.navigationTitle("Gender Details")
         }.navigationDestination(isPresented: $navActive) {
             InterestedInSetupView(setupVM: setupVM)
         }

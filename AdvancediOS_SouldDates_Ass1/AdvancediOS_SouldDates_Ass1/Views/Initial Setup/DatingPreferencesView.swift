@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DatingPreferencesView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
+    @State var navActive: Bool = false
     var body: some View {
         NavigationStack {
             VStack{
@@ -16,13 +17,15 @@ struct DatingPreferencesView: View {
                 ForEach(DisabilityPreference.allCases)
                 {
                     pref in Button {
-                        
+                        setupVM.disabilityPreference = pref
+                        navActive = true
                     } label: {
                         Text(pref.rawValue).bold()
                     }.padding().frame(width: 240).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
-                }
+                }.navigationTitle("Dating Preferences")
             }
-            
+        }.padding().navigationDestination(isPresented: $navActive) {
+            AbouteMeView(setupVM: setupVM)
         }
     }
 }

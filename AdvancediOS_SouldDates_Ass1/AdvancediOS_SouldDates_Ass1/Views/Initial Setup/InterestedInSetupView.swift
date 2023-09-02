@@ -14,8 +14,8 @@ struct InterestedInSetupView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Who are you interested in?")
-                Text("Test \(setupVM.screenName), \(setupVM.gender.rawValue)")
+                Text("Who are you interested in?").padding()
+               
                 ForEach(InterestedIn.allCases) {
                      interestedIn in
                     Button {
@@ -28,7 +28,7 @@ struct InterestedInSetupView: View {
             }
         }.navigationDestination(isPresented: $navActive) {
             DisabilityStatusSetupView(setupVM: setupVM)
-        }
+        }.navigationTitle("Interested in Details")
         
     }
 }

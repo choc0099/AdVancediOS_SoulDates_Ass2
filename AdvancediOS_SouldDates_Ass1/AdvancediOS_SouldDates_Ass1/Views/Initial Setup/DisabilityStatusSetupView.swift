@@ -27,7 +27,7 @@ struct DisabilityStatusSetupView: View {
                 } label: {
                     Text("No, i don't")
                 }.padding()
-            }
+            }.navigationTitle("Disability Status")
         }
                 
     }
