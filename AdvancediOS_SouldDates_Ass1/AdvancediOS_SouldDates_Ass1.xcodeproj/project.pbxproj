@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E02AA1B9E30095A649 /* ProfileTests.swift */; };
 		32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */; };
+		32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
 		32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* GenderSetup.swift */; };
-		32D538382A91F21B00DFC38D /* DisabilitySetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */; };
+		32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */; };
 		32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */; };
 		32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383B2A91F25900DFC38D /* AbouteMeView.swift */; };
 		32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */; };
@@ -57,10 +58,11 @@
 /* Begin PBXFileReference section */
 		32BB89E02AA1B9E30095A649 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInSetupView.swift; sourceTree = "<group>"; };
+		32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilityDetailsSetupView.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
 		32D538352A91F20100DFC38D /* GenderSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetup.swift; sourceTree = "<group>"; };
-		32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilitySetupView.swift; sourceTree = "<group>"; };
+		32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilityStatusSetupView.swift; sourceTree = "<group>"; };
 		32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreferencesView.swift; sourceTree = "<group>"; };
 		32D5383B2A91F25900DFC38D /* AbouteMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbouteMeView.swift; sourceTree = "<group>"; };
 		32D5383D2A91F29800DFC38D /* MatchSeekerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSeekerProfile.swift; sourceTree = "<group>"; };
@@ -151,11 +153,12 @@
 			isa = PBXGroup;
 			children = (
 				32D538352A91F20100DFC38D /* GenderSetup.swift */,
-				32D538372A91F21B00DFC38D /* DisabilitySetupView.swift */,
+				32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */,
 				32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */,
 				32D5383B2A91F25900DFC38D /* AbouteMeView.swift */,
 				32D538452A922A3800DFC38D /* AgeCheckSetupView.swift */,
 				32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */,
+				32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */,
 			);
 			path = "Initial Setup";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */,
+				32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */,
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
@@ -379,7 +383,7 @@
 				32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */,
 				32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */,
 				32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */,
-				32D538382A91F21B00DFC38D /* DisabilitySetupView.swift in Sources */,
+				32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */,
 				32D538462A922A3800DFC38D /* AgeCheckSetupView.swift in Sources */,
 				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);

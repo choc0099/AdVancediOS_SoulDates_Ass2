@@ -24,12 +24,14 @@ enum Gender: String, CaseIterable, Identifiable {
     var id: Self {self }
 }
 
-enum InterestedIn {
+enum InterestedIn: String, CaseIterable, Identifiable {
     case men
     case women
     case both
     case other
     case all
+    
+    var id: Self {self}
 }
 
 enum DisabilityPreference: String, Identifiable {

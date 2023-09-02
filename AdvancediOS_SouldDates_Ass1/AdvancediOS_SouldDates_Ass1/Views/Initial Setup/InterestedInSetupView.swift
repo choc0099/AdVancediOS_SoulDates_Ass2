@@ -11,10 +11,22 @@ struct InterestedInSetupView: View {
     @Binding var gender: Gender
     @Binding var dateOfBirth: Date
     @Binding var screenName: String
-    @State var interestedIn: InterestedIn = .all
+    @State var interestedInInput: InterestedIn = .all
     
     var body: some View {
-        Text(gender.rawValue)
+        NavigationStack {
+            VStack {
+                Text("Who are you interested in?")
+                ForEach(InterestedIn.allCases) {
+                     interestedIn in
+                    Button {
+                        interestedInInput = interestedIn
+                    } label: {
+                        Text(interestedIn.rawValue.capitalized).bold()
+                    }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
+                }
+            }
+        }
         
     }
 }
