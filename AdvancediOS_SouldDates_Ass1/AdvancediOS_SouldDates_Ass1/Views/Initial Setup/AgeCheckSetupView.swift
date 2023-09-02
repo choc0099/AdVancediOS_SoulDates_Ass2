@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AgeCheckSetupView: View {
     
-    @State private var screeName: String = ""
-    @State private var dateOfBirth: Date = Date.now
+    @ObservedObject var setupVM: BasicDetailsViewModel
+    @StateObject var genderVM: GenderSetupViewModel = GenderSetupViewModel()
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -21,15 +21,15 @@ struct AgeCheckSetupView: View {
             Text("Enter your name:")
             TextField (
                 "Name",
-                text: $screeName
+                text: $setupVM.screenName
             )
             Divider()
             Text("Date of Birth")
-            DatePicker("", selection: $dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
+            DatePicker("", selection: $setupVM.dateOfBirth, displayedComponents: [.date]).datePickerStyle(.wheel)
             
                 Button("Next", action: {
                     do {
-                        try validate(dateOfBirth: dateOfBirth, screenName: screeName)
+                        try setupVM.validateBasicDetails()
                         navActive = true
                     }
                     catch ProfileError.underAgeException {
@@ -49,25 +49,15 @@ struct AgeCheckSetupView: View {
                 message: Text("\(alertMessage)")
             )
         }.navigationDestination(isPresented: $navActive) {
-            GenderSetupView(dateOfBirth: $dateOfBirth, screenName: $screeName )
+            GenderSetupView(genderVM: genderVM).environmentObject(setupVM)
         }
         
-    }
-    
-    func validate(dateOfBirth: Date, screenName: String) throws {
-        guard (!screenName.isEmpty) else {
-             throw ProfileError.emptyTextFields
-        }
-        guard !DateManager.isUnderAge(birthDate: dateOfBirth)
-        else {
-            throw ProfileError.underAgeException
-        }
     }
 }
 
 struct AgeCheckSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        AgeCheckSetupView()
+        AgeCheckSetupView(setupVM: BasicDetailsViewModel())
            
     }
 }

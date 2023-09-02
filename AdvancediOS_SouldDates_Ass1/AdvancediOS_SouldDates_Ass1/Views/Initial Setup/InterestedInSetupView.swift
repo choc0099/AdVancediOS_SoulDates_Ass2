@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct InterestedInSetupView: View {
-    @Binding var gender: Gender
-    @Binding var dateOfBirth: Date
-    @Binding var screenName: String
+    @EnvironmentObject var basicVM: BasicDetailsViewModel
+    @EnvironmentObject var genderVM: GenderSetupViewModel
     @State var interestedInInput: InterestedIn = .all
     
     var body: some View {
@@ -33,6 +32,6 @@ struct InterestedInSetupView: View {
 
 struct InterestedInSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        InterestedInSetupView(gender: .constant(.male), dateOfBirth: .constant(Date.now), screenName: .constant("aaa"))
+        InterestedInSetupView()
     }
 }

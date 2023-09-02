@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct GenderSetupView: View {
-    @Binding var dateOfBirth: Date
-    @Binding var screenName: String
+    @EnvironmentObject var basicDetailsVM: BasicDetailsViewModel
     //@State var interestedIn: InterestedIn = .all
-    @State var genderInput: Gender = .male
+    @ObservedObject var genderVM : GenderSetupViewModel
     @State var navActive = false
     
     
@@ -21,10 +20,11 @@ struct GenderSetupView: View {
         NavigationStack {
             VStack {
                 Text("What is your gender?").font(.headline)
+                Text("Name test: \(basicDetailsVM.screenName)")
                 
                 ForEach(Gender.allCases) { gender in
                     Button {
-                        genderInput = gender
+                        genderVM.gender = gender
                         navActive = true
                          
                     } label: {
@@ -33,7 +33,7 @@ struct GenderSetupView: View {
                 }
             }
         }.navigationDestination(isPresented: $navActive) {
-            InterestedInSetupView(gender: $genderInput, dateOfBirth: $dateOfBirth, screenName: $screenName)
+            InterestedInSetupView()
         }
     }
     
@@ -45,7 +45,7 @@ struct GenderSetupView: View {
 
 struct BasicDetailsSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        GenderSetupView(dateOfBirth: .constant(Date.now), screenName: .constant("Cigarettes"))
+        GenderSetupView(genderVM: GenderSetupViewModel())
       
     }
 }
