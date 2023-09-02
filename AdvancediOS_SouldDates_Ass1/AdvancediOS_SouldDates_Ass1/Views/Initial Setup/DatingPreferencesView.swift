@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct DatingPreferencesView: View {
+    @ObservedObject var setupVM: InitialSetupViewModel
     var body: some View {
-        Text("This is dating preferences")
+        NavigationStack {
+            VStack{
+                Text("Who are you open of dating?")
+                ForEach(DisabilityPreference.allCases)
+                {
+                    pref in Button {
+                        
+                    } label: {
+                        Text(pref.rawValue)
+                    }
+                }
+            }
+            
+        }
     }
 }
 
 struct DatingPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        DatingPreferencesView()
+        DatingPreferencesView(setupVM: InitialSetupViewModel())
     }
 }

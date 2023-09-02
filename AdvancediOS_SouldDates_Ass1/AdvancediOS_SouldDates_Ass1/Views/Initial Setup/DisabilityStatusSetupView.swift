@@ -23,7 +23,7 @@ struct DisabilityStatusSetupView: View {
                 }.padding()
                 
                 NavigationLink {
-                    DatingPreferencesView()
+                    DatingPreferencesView(setupVM: setupVM)
                 } label: {
                     Text("No, i don't")
                 }.padding()

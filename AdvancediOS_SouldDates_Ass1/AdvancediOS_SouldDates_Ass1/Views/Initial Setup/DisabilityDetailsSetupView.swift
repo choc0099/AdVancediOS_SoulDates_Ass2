@@ -43,7 +43,7 @@ struct DisabilityDetailsSetupView: View {
                 }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
-            DatingPreferencesView()
+            DatingPreferencesView(setupVM: setupVM)
         }
     }
 }

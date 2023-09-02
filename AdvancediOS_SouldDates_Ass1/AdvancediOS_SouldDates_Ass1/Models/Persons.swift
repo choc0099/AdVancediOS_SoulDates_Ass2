@@ -43,9 +43,9 @@ enum DisabilitySeverity: String, CaseIterable, Identifiable {
 }
 
 enum DisabilityPreference: String, CaseIterable, Identifiable {
-    case withDisability = "With Disabilty"
-    case withoutDisability = "Without Disability"
-    case openMinded = "I am open minded"
+    case withDisability = "People with disabilities"
+    case withoutDisability = "People without disabilities"
+    case openMinded = "I am open minded!"
     
     var id: Self {self}
 }
