@@ -8,20 +8,51 @@
 import SwiftUI
 
 struct DisabilityDetailsSetupView: View {
-    @Binding var dateOfBirth: Date
-    @Binding var screenName: String
-    @Binding var gender: Gender
-    @Binding var interestedIn: InterestedIn
-    
-    
+    @ObservedObject var setupVM: InitialSetupViewModel
+    @State private var navActive: Bool = false
+    @State private var showAlert: Bool = false
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack {
+            VStack {
+                Text("What is your disabilities?")
+                TextField("Your disabilities", text: $setupVM.disability)
+                Text("How Severe is your disability?")
+                Picker("", selection: $setupVM.disabilitySeverity) {
+                    ForEach(DisabilitySeverity.allCases) {
+                        severity in
+                        Text(severity.rawValue.capitalized)
+                    }
+                }.pickerStyle(.segmented)
+                Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
+                
+                Button("Next", action: {
+                    do {
+                        navActive = true
+                        try setupVM.validateDisability()
+                    }
+                    catch {
+                        showAlert = true
+                    }
+                }).alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Text fields not entered"),
+                        message: Text("Please enter details about your disability.")
+                    )
+                }
+            }
+        }.padding().navigationDestination(isPresented: $navActive) {
+            DatingPreferencesView()
+        }
     }
 }
+        
+    
+
 
 struct DisabilityDetailsSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        DisabilityDetailsSetupView(dateOfBirth: .constant(Date.now), screenName: .constant("Choke"), gender: .constant(.male), interestedIn: .constant(.women))
+        DisabilityDetailsSetupView(setupVM: InitialSetupViewModel())
     }
 }

@@ -13,6 +13,15 @@ class InitialSetupViewModel: ObservableObject {
     @Published var dateOfBirth: Date = Date()
     @Published var gender: Gender = .male
     @Published var interestedIn: InterestedIn = .all
+    //optionals can't be used but instead, there is a seperate bollean to detemrin i a matchseeker have a disability.
+    @Published var disability: String = ""
+    @Published var disabilitySeverity: DisabilitySeverity = .mild
+    @Published var discloseMyDisability: Bool = false
+    @Published var isDisabled: Bool = false
+    @Published var bio: String = ""
+    @Published var hobbies: String = ""
+    @Published var favouriteMusic: String = ""
+    @Published var disabilityPreference: DisabilityPreference = .openMinded
     
     //a function that will be used to validate the age and names
     func validateBasicDetails() throws {
@@ -23,6 +32,16 @@ class InitialSetupViewModel: ObservableObject {
         else {
             throw ProfileError.underAgeException
         }
+    }
+    
+    func validateDisability() throws {
+        guard (!disability.isEmpty) else {
+            throw ProfileError.emptyTextFields
+        }
+    }
+    
+    func process() {
+        
     }
 }
 

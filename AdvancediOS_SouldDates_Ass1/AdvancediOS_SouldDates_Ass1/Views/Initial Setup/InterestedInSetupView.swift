@@ -8,24 +8,26 @@
 import SwiftUI
 
 struct InterestedInSetupView: View {
-    @EnvironmentObject var basicVM: InitialSetupViewModel
-    @EnvironmentObject var genderVM: GenderSetupViewModel
-    @State var interestedInInput: InterestedIn = .all
+    @ObservedObject var setupVM: InitialSetupViewModel
+    @State private var navActive: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
                 Text("Who are you interested in?")
-                Text("Test \(basicVM.screenName), \(genderVM.gender.rawValue)")
+                Text("Test \(setupVM.screenName), \(setupVM.gender.rawValue)")
                 ForEach(InterestedIn.allCases) {
                      interestedIn in
                     Button {
-                        interestedInInput = interestedIn
+                        setupVM.interestedIn = interestedIn
+                        navActive = true
                     } label: {
                         Text(interestedIn.rawValue.capitalized).bold()
                     }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
                 }
             }
+        }.navigationDestination(isPresented: $navActive) {
+            DisabilityStatusSetupView(setupVM: setupVM)
         }
         
     }
@@ -33,6 +35,6 @@ struct InterestedInSetupView: View {
 
 struct InterestedInSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        InterestedInSetupView()
+        InterestedInSetupView(setupVM: InitialSetupViewModel())
     }
 }
