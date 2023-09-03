@@ -44,10 +44,10 @@ class SoulDatesMain: ObservableObject {
                 }
             case .other:
                 if matchSeeker.gender != .male || matchSeeker.gender != .female {
-                    matchSeekers.append(matchSeeker)
+                    allocatedMatchSeekers.append(matchSeeker)
                 }
             case .all:
-                matchSeekers.append(matchSeeker)   
+                allocatedMatchSeekers.append(matchSeeker)   
             }
         }
         
@@ -86,7 +86,7 @@ class SoulDatesMain: ObservableObject {
                         finalAllocatedMatchSeekers.append(matchSeeker)
                     }
                 case .openMinded:
-                    return allocatedMatchSeekersByGender
+                    finalAllocatedMatchSeekers.append(matchSeeker)
                 }
             }
         }
