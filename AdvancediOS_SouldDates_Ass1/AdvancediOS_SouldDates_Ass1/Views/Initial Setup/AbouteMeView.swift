@@ -45,7 +45,7 @@ struct AbouteMeView: View {
                 }
             }
         }.navigationDestination(isPresented: $navActive) {
-            LookView().environmentObject(session)
+            InSessionTabView().environmentObject(session)
         }
     }
     

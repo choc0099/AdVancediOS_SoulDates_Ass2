@@ -27,7 +27,7 @@ class SoulDatesMain: ObservableObject {
     // a helper function to list match seekers based on the type of gender they are interested in.
     private func tailorMatchesByGender(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn)  -> [MatchSeeker]? {
         var allocatedMatchSeekers: [MatchSeeker] = []
-        var listedMatchSeekers: [MatchSeeker] = listMatchesWtithoutCurrentUser(currentMatchSeeker: currentMatchSeeker)
+        let listedMatchSeekers: [MatchSeeker] = listMatchesWtithoutCurrentUser(currentMatchSeeker: currentMatchSeeker)
         for matchSeeker in listedMatchSeekers {
             switch interestedIn {
             case .men:
@@ -47,7 +47,7 @@ class SoulDatesMain: ObservableObject {
                     allocatedMatchSeekers.append(matchSeeker)
                 }
             case .all:
-                allocatedMatchSeekers.append(matchSeeker)   
+                allocatedMatchSeekers.append(matchSeeker)
             }
         }
         
