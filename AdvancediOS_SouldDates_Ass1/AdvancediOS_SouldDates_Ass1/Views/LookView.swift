@@ -22,7 +22,12 @@ struct LookView: View {
             if let thereAreMatches = soulDatesMain.tailorMatches(currentMatchSeeker: session.matchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref) {
                 List(thereAreMatches) {
                     matchSeeker in
-                    MatchSeekerRow(matchSeeker: matchSeeker)
+                    NavigationLink {
+                        ProfileView(matchSeeker: matchSeeker)
+                    } label: {
+                        MatchSeekerRow(matchSeeker: matchSeeker)
+                    }
+                   
                 }
                 
             } else {
@@ -30,12 +35,12 @@ struct LookView: View {
                     .multilineTextAlignment(.center)
             }
             
-        }.navigationBarBackButtonHidden(true)
+        }.navigationBarBackButtonHidden(true).navigationTitle("Look").navigationBarTitleDisplayMode(.large)
     }
 }
 
 struct LookView_Previews: PreviewProvider {
     static var previews: some View {
-        LookView().environmentObject(SoulDatesMain())
+        LookView().environmentObject(SoulDatesMain()).environmentObject(Session())
     }
 }

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
-    //var matchSeeker: MatchSeeker
+    @State var matchSeeker: MatchSeeker
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\(matchSeeker.screenName)")
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(matchSeeker: matchSeekersSample[0])
     }
 }
