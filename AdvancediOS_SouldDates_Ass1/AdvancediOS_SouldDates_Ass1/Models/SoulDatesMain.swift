@@ -16,8 +16,7 @@ class SoulDatesMain: ObservableObject {
     
     init()
     {
-        //creates an empty matchSeeker list.
-        matchSeekers = []
+        matchSeekers = matchSeekersSample
     }
     // a helper function to list match seekers based on the type of gender they are interested in.
     private func tailorMatchesByGender(interestedIn: InterestedIn) throws -> [MatchSeeker] {

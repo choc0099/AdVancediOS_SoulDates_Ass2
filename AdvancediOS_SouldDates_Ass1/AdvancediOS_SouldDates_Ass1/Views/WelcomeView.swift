@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    //@StateObject var basicVM: BasicDetailsViewModel = BasicDetailsViewModel()
+    
     var body: some View {
         
         NavigationStack {

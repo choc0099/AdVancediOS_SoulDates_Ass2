@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct LookView: View {
-    @State var matchSeekersAllocated: [MatchSeeker]
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View
     {
         NavigationStack {
-            List(matchSeekersAllocated)
+            List(soulDatesMain.matchSeekers)
             {
                 matchSeeker in
                 MatchSeekerRow(matchSeeker: matchSeeker)
@@ -23,6 +23,6 @@ struct LookView: View {
 
 struct LookView_Previews: PreviewProvider {
     static var previews: some View {
-        LookView(matchSeekersAllocated:  matchSeekersSample)
+        LookView().environmentObject(SoulDatesMain())
     }
 }

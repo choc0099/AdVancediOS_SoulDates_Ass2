@@ -14,7 +14,7 @@ enum ProfileError: Error {
     case emptyTextFields
 }
 
-enum Gender: String, CaseIterable, Identifiable {
+enum Gender: String, CaseIterable, Identifiable, Decodable {
     case female
     case male
     case nonbinary
@@ -24,7 +24,7 @@ enum Gender: String, CaseIterable, Identifiable {
     var id: Self {self }
 }
 
-enum InterestedIn: String, CaseIterable, Identifiable {
+enum InterestedIn: String, CaseIterable, Identifiable, Decodable {
     case men
     case women
     case both
@@ -34,7 +34,7 @@ enum InterestedIn: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
-enum DisabilitySeverity: String, CaseIterable, Identifiable {
+enum DisabilitySeverity: String, CaseIterable, Identifiable, Decodable {
     case mild
     case moderate
     case severe
@@ -42,7 +42,7 @@ enum DisabilitySeverity: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-enum DisabilityPreference: String, CaseIterable, Identifiable {
+enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
     case withDisability = "People with disabilities"
     case withoutDisability = "People without disabilities"
     case openMinded = "I am open minded!"
@@ -50,7 +50,7 @@ enum DisabilityPreference: String, CaseIterable, Identifiable {
     var id: Self {self}
 }
 
-protocol Person: Identifiable {
+protocol Person: Identifiable, Decodable {
     var id: UUID {get set}
     var screenName: String {get set}
 }
@@ -103,15 +103,18 @@ extension MatchSeekerUser {
     }
 }*/
 
-struct Disability {
+struct Disability: Identifiable, Decodable {
     var disabilities: String
     var severeity: String
+    var id: UUID = UUID()
 }
 
-struct DatingPreference {
+struct DatingPreference: Decodable {
     var interestedIn: InterestedIn
     var disabilityPreference: DisabilityPreference
     var discloseMyDisability: Bool
+    
+    
     
 }
 
@@ -141,16 +144,11 @@ struct MatchSeeker: Person {
     var disability: Disability?
     var isScammer: Bool
     
-    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) throws {
+    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
-        if DateManager.isUnderAge(birthDate: dateOfBirth) == true {
-            self.dateOfBirth = dateOfBirth
-        }
-        else {
-            throw ProfileError.underAgeException
-        }
+        self.dateOfBirth = dateOfBirth
         self.bio = bio
         self.favouriteMusic = favourteMusic
         self.datingPreference = datingPreference

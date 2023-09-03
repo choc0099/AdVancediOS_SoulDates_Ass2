@@ -20,7 +20,6 @@ struct AgeCheckSetupView: View {
         calendar.date(from: endingDate)!
         
     }()
-    //@StateObject var genderVM: GenderSetupViewModel = GenderSetupViewModel()
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
@@ -28,37 +27,40 @@ struct AgeCheckSetupView: View {
     
     var body: some View {
         NavigationStack() {
-            Text("Enter your name:")
-            TextField (
-                "Name",
-                text: $setupVM.screenName
-            )
-            Divider()
-            Text("Date of Birth")
-            DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
+            ScrollView {
+                Text("Enter your screen name:")
+                TextField (
+                    "Name",
+                    text: $setupVM.screenName
+                ).textInputAutocapitalization(.never).padding().border(.black)
+                Divider()
+                Text("Date of Birth")
+                DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
+                
+                    Button("Next", action: {
+                        do {
+                            try setupVM.validateBasicDetails()
+                            navActive = true
+                        }
+                        catch ProfileError.underAgeException {
+                            showAlert = true
+                            alertTitle = "You are under age!"
+                            alertMessage = "You must be over 18 years old to use the dating app."
+                        }
+                        catch {
+                            showAlert = true
+                            alertTitle = "Name field is empty"
+                            alertMessage = "Please enter your screen name."
+                        }
+                    }).padding()
+            }
             
-                Button("Next", action: {
-                    do {
-                        try setupVM.validateBasicDetails()
-                        navActive = true
-                    }
-                    catch ProfileError.underAgeException {
-                        showAlert = true
-                        alertTitle = "You are under age!"
-                        alertMessage = "You must be over 18 years old to use the dating app."
-                    }
-                    catch {
-                        showAlert = true
-                        alertTitle = "Name field is empty"
-                        alertMessage = "Please enter your screen name."
-                    }
-                }).padding()
         }.alert(isPresented: $showAlert) {
             Alert(
                 title: Text("\(alertTitle)"),
                 message: Text("\(alertMessage)")
             )
-        }.navigationDestination(isPresented: $navActive) {
+        }.padding().navigationDestination(isPresented: $navActive) {
             GenderSetupView(setupVM: setupVM)
         }
         

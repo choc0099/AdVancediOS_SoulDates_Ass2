@@ -9,16 +9,21 @@ import SwiftUI
 
 struct AbouteMeView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View {
         NavigationStack {
             VStack {
                 Text("Enter a bio about yourself.")
-                TextEditor(text: $setupVM.bio).lineSpacing(4)
+                TextEditor(text: $setupVM.bio).lineSpacing(4).border(.black)
                 Text("What are your favourite hobbies?")
                 TextEditor(text: $setupVM.hobbies)
                 Text("What is your favourite music?")
                 TextEditor(text: $setupVM.favouriteMusic)
-            }.navigationTitle("About Me")
+                
+                Button("Finish") {
+                    
+                }
+            }.padding().navigationTitle("About Me")
         }
     }
 }
