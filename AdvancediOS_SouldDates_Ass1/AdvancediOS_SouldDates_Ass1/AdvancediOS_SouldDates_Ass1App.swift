@@ -11,10 +11,10 @@ import SwiftUI
 struct AdvancediOS_SouldDates_Ass1App: App {
     
     var body: some Scene {
-        @StateObject var soulDatesMain = SoulDatesMain()
+        
         WindowGroup {
             
-            ContentView().environmentObject(soulDatesMain)
+            ContentView()
         }
     }
 }

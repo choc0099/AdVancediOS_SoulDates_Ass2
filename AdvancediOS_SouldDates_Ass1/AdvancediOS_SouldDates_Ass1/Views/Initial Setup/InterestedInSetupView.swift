@@ -21,15 +21,15 @@ struct InterestedInSetupView: View {
                     Button {
                         navActive = true
                         setupVM.interestedIn = interestedIn
-                        
+                      
                     } label: {
-                        Text(interestedIn.rawValue.capitalized).bold()
-                    }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
+                        StyledButton(text: interestedIn.rawValue.capitalized, backGroundColour: .blue, foregroundColour: .black)
+                    }.padding()
                 }
             }
-        }.navigationDestination(isPresented: $navActive) {
+        }.navigationDestination(isPresented: $navActive, destination: {
             DisabilityStatusSetupView(setupVM: setupVM)
-        }.navigationTitle("Interested in Details")
+        }).navigationTitle("Interested in Details")
         
     }
 }

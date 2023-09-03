@@ -48,7 +48,7 @@ class InitialSetupViewModel: ObservableObject {
     
     func convertToObject() -> MatchSeeker {
         var haveDisability: Disability?
-        if(isDisabled)
+        if(isDisabled == true)
         {
             haveDisability = Disability(disabilities: disability, severeity: disabilitySeverity)
         }

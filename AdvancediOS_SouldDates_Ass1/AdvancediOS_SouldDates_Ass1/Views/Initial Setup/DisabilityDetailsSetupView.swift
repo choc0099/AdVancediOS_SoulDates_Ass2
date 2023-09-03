@@ -11,6 +11,7 @@ struct DisabilityDetailsSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
+    @State private var buttonDisabled: Bool = false
     
     var body: some View {
         
@@ -29,24 +30,29 @@ struct DisabilityDetailsSetupView: View {
                 }.pickerStyle(.segmented).padding()
                 Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
                 Spacer()
-                Button("Next", action: {
+                Button {
                     do {
                         navActive = true
+                        setupVM.isDisabled = true
                         try setupVM.validateDisability()
                     }
                     catch {
                         showAlert = true
                     }
-                }).alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Text fields not entered"),
-                        message: Text("Please enter details about your disability.")
-                    )
+                } label: {
+                    StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
                 }
+                
+                
             }
         }.padding().navigationDestination(isPresented: $navActive) {
             DatingPreferencesView(setupVM: setupVM)
-        }.navigationTitle("Disability Details")
+        }.navigationTitle("Disability Details").alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Text fields not entered"),
+                message: Text("Please enter details about your disability.")
+            )
+        }
     }
 }
         

@@ -37,7 +37,7 @@ struct AgeCheckSetupView: View {
                 Text("Date of Birth")
                 DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
                 
-                    Button("Next", action: {
+                    Button {
                         do {
                             try setupVM.validateBasicDetails()
                             navActive = true
@@ -52,7 +52,9 @@ struct AgeCheckSetupView: View {
                             alertTitle = "Name field is empty"
                             alertMessage = "Please enter your screen name."
                         }
-                    }).padding()
+                    } label: {
+                        StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
+                    }.padding()
             }
             
         }.alert(isPresented: $showAlert) {

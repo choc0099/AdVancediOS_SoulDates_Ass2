@@ -13,6 +13,7 @@
 		32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */; };
 		32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */; };
 		32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */; };
+		32C4974A2AA46853000A660E /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C497492AA46853000A660E /* StyledButton.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
 		32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* GenderSetup.swift */; };
@@ -65,6 +66,7 @@
 		32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupViewModel.swift; sourceTree = "<group>"; };
 		32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetupViewModel.swift; sourceTree = "<group>"; };
 		32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInViewModel.swift; sourceTree = "<group>"; };
+		32C497492AA46853000A660E /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
 		32D538352A91F20100DFC38D /* GenderSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetup.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
 				32F519182A9F1282005DA063 /* MatchSeekerRow.swift */,
 				32F2511C2A90D5390084424B /* WelcomeView.swift */,
+				32C497492AA46853000A660E /* StyledButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
 				32D5383E2A91F29800DFC38D /* MatchSeekerProfile.swift in Sources */,
+				32C4974A2AA46853000A660E /* StyledButton.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
 				32D538402A91F2C600DFC38D /* DreamList.swift in Sources */,

@@ -19,13 +19,13 @@ struct DisabilityStatusSetupView: View {
                 NavigationLink {
                     DisabilityDetailsSetupView(setupVM: setupVM)
                 } label: {
-                    Text("Yes, I do")
+                    StyledButton(text: "Yes, I do", backGroundColour: .red, foregroundColour: .white)
                 }.padding()
                 
                 NavigationLink {
                     DatingPreferencesView(setupVM: setupVM)
                 } label: {
-                    Text("No, i don't")
+                    StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
                 }.padding()
             }.navigationTitle("Disability Status")
         }

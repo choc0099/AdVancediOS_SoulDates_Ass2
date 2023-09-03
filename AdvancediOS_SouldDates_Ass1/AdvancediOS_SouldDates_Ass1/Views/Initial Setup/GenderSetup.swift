@@ -26,8 +26,8 @@ struct GenderSetupView: View {
                         setupVM.gender = gender
                          
                     } label: {
-                        Text(gender.rawValue.capitalized).bold()
-                    }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
+                        StyledButton(text: gender.rawValue.capitalized, backGroundColour: .blue, foregroundColour: .black)
+                    }.padding()
                 }
             }.navigationTitle("Gender Details")
         }.navigationDestination(isPresented: $navActive) {

@@ -16,9 +16,11 @@ struct WelcomeView: View {
                 .font(.title)
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
-            NavigationLink("GET STARTED") {
+            NavigationLink {
                 AgeCheckSetupView(setupVM: InitialSetupViewModel()).navigationTitle("Basic Details Setup")
-            }.padding().background(.green).foregroundColor(.black).bold()
+            } label: {
+                StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
+            }
         }
     }
 }

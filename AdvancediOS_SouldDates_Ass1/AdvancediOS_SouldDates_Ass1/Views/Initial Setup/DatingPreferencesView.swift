@@ -20,8 +20,8 @@ struct DatingPreferencesView: View {
                         setupVM.disabilityPreference = pref
                         navActive = true
                     } label: {
-                        Text(pref.rawValue).bold()
-                    }.padding().frame(width: 240).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)
+                        StyledButton(text: pref.rawValue, backGroundColour: .blue, foregroundColour: .black)
+                    }.padding()
                 }.navigationTitle("Dating Preferences")
             }
         }.padding().navigationDestination(isPresented: $navActive) {
