@@ -25,73 +25,75 @@ class SoulDatesMain: ObservableObject {
     }
     
     // a helper function to list match seekers based on the type of gender they are interested in.
-    private func tailorMatchesByGender(interestedIn: InterestedIn) throws -> [MatchSeeker] {
-        guard matchSeekers.count > 0 else {
-            throw ProfileError.noMatchesFound(message: "No one is registered.")
-        }
+    private func tailorMatchesByGender(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn)  -> [MatchSeeker]? {
         var allocatedMatchSeekers: [MatchSeeker] = []
-        for matchSeeker in matchSeekers {
+        var listedMatchSeekers: [MatchSeeker] = listMatchesWtithoutCurrentUser(currentMatchSeeker: currentMatchSeeker)
+        for matchSeeker in listedMatchSeekers {
             switch interestedIn {
             case .men:
                 if matchSeeker.gender == .male {
                     allocatedMatchSeekers.append(matchSeeker)
-                } else {
-                    throw ProfileError.noMatchesFound(message: "No \(Gender.male.rawValue)")
                 }
             case .women:
                 if matchSeeker.gender == .female {
-                    matchSeekers.append(matchSeeker)
-                }
-                else {
-                    throw ProfileError.noMatchesFound(message: "No \(Gender.female.rawValue)")
+                    allocatedMatchSeekers.append(matchSeeker)
                 }
             case .both:
                 if matchSeeker.gender == .male || matchSeeker.gender == .female {
-                    matchSeekers.append(matchSeeker)
-                }
-                else {
-                    throw ProfileError.noMatchesFound(message: "No standard genders.")
+                    allocatedMatchSeekers.append(matchSeeker)
                 }
             case .other:
                 if matchSeeker.gender != .male || matchSeeker.gender != .female {
                     matchSeekers.append(matchSeeker)
                 }
-                else {
-                    throw ProfileError.noMatchesFound(message: "no transgenders or nonbinaries")
-                }
             case .all:
                 matchSeekers.append(matchSeeker)   
             }
         }
+        
+        if allocatedMatchSeekers.isEmpty {
+            return nil
+        }
         return allocatedMatchSeekers
     }
     
-    func tailorMatches(interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
-        // this will be used to loop for allocated matches based on interested in.
-        let allocatedMatchSeekersByGender: [MatchSeeker] = try tailorMatchesByGender(interestedIn: interestedIn)
-        // this is another array to get allocated matches that it is based on gender and disabilities
-        var finalAllocatedMatchSeekers: [MatchSeeker] = []
-        
-        for matchSeeker in allocatedMatchSeekersByGender {
-            switch disabilityPreference {
-            case .withDisability:
-                if matchSeeker.disability != nil {
-                    finalAllocatedMatchSeekers.append(matchSeeker)
-                } else {
-                    throw ProfileError.noMatchesFound(message: "No matches with disability")
-                }
-            case .withoutDisability:
-                if matchSeeker.disability == nil {
-                    finalAllocatedMatchSeekers.append(matchSeeker)
-                } else {
-                    throw ProfileError.noMatchesFound(message: "No matches without disability")
-                }
-            case .openMinded:
-                return allocatedMatchSeekersByGender
+    private func listMatchesWtithoutCurrentUser(currentMatchSeeker: MatchSeeker) -> [MatchSeeker]
+    {
+        var listedMatchSekers: [MatchSeeker] = []
+        for matchSeeker in matchSeekers {
+            if matchSeeker.screenName != currentMatchSeeker.screenName {
+                listedMatchSekers.append(matchSeeker)
             }
         }
+        return listedMatchSekers
+    }
+    
+    func tailorMatches(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) -> [MatchSeeker]? {
+        // this is another array to get allocated matches that it is based on gender and disabilities
+        var finalAllocatedMatchSeekers: [MatchSeeker] = []
+        // this will be used to loop for allocated matches based on interested in.
+        if let allocatedMatchSeekersByGender = tailorMatchesByGender(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn) {
+            
+            for matchSeeker in allocatedMatchSeekersByGender {
+               
+                switch disabilityPreference {
+                case .withDisability:
+                    if matchSeeker.disability != nil {
+                        finalAllocatedMatchSeekers.append(matchSeeker)
+                    }
+                case .withoutDisability:
+                    if matchSeeker.disability == nil {
+                        finalAllocatedMatchSeekers.append(matchSeeker)
+                    }
+                case .openMinded:
+                    return allocatedMatchSeekersByGender
+                }
+            }
+        }
+        if finalAllocatedMatchSeekers.isEmpty {
+            return nil
+        }
+        
         return finalAllocatedMatchSeekers
-        
-        
     }
 }

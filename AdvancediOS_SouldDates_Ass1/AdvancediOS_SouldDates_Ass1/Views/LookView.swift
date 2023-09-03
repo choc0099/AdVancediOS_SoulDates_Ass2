@@ -9,15 +9,28 @@ import SwiftUI
 
 struct LookView: View {
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    var body: some View
-    {
+    //this is used for the individual matchSeeker accessing the app
+    @EnvironmentObject var session: Session
+    
+    
+    var body: some View  {
         NavigationStack {
-            List(soulDatesMain.matchSeekers)
-            {
-                matchSeeker in
-                MatchSeekerRow(matchSeeker: matchSeeker)
+            
+            let datingPref: DatingPreference = session.matchSeeker.datingPreference
+            let interestedIn: InterestedIn = datingPref.interestedIn
+            let disabilityPref: DisabilityPreference = datingPref.disabilityPreference
+            if let thereAreMatches = soulDatesMain.tailorMatches(currentMatchSeeker: session.matchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref) {
+                List(thereAreMatches) {
+                    matchSeeker in
+                    MatchSeekerRow(matchSeeker: matchSeeker)
+                }
+                
+            } else {
+                Text("There are no possible matches at your preference, there are plenty more fish in the sea.")
+                    .multilineTextAlignment(.center)
             }
-        }
+            
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

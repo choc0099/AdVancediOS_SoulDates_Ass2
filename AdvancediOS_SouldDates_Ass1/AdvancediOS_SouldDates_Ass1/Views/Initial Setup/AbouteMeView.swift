@@ -10,6 +10,7 @@ import SwiftUI
 struct AbouteMeView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @StateObject var session: Session = Session()
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
     var body: some View {
@@ -44,18 +45,20 @@ struct AbouteMeView: View {
                 }
             }
         }.navigationDestination(isPresented: $navActive) {
-            LookView()
+            LookView().environmentObject(session)
         }
     }
     
     func processData() {
         let matchseeker = setupVM.convertToObject()
         soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
+        session.matchSeeker = matchseeker
     }
 }
 
 struct AbouteMeView_Previews: PreviewProvider {
     static var previews: some View {
-        AbouteMeView(setupVM: InitialSetupViewModel())
+        //var matchSeeker = matchSeekersSample[0]
+        AbouteMeView(setupVM: InitialSetupViewModel(), session: Session())
     }
 }

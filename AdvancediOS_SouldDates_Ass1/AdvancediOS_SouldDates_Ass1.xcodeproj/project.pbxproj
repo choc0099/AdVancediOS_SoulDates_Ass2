@@ -14,6 +14,7 @@
 		32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */; };
 		32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */; };
 		32C4974A2AA46853000A660E /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C497492AA46853000A660E /* StyledButton.swift */; };
+		32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C4974B2AA476B8000A660E /* SessionViewModel.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
 		32D538332A91F1CC00DFC38D /* LookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538322A91F1CC00DFC38D /* LookView.swift */; };
 		32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538352A91F20100DFC38D /* GenderSetup.swift */; };
@@ -67,6 +68,7 @@
 		32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetupViewModel.swift; sourceTree = "<group>"; };
 		32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInViewModel.swift; sourceTree = "<group>"; };
 		32C497492AA46853000A660E /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
+		32C4974B2AA476B8000A660E /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
 		32D538322A91F1CC00DFC38D /* LookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookView.swift; sourceTree = "<group>"; };
 		32D538352A91F20100DFC38D /* GenderSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetup.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */,
 				32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */,
 				32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */,
+				32C4974B2AA476B8000A660E /* SessionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */,
 				32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */,
 				32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */,
+				32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */,
 				32D538462A922A3800DFC38D /* AgeCheckSetupView.swift in Sources */,
 				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);
