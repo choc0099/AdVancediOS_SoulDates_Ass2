@@ -19,8 +19,9 @@ struct InterestedInSetupView: View {
                 ForEach(InterestedIn.allCases) {
                      interestedIn in
                     Button {
-                        setupVM.interestedIn = interestedIn
                         navActive = true
+                        setupVM.interestedIn = interestedIn
+                        
                     } label: {
                         Text(interestedIn.rawValue.capitalized).bold()
                     }.padding().frame(width: 150).background(.blue).foregroundColor(.black).border(.black).cornerRadius(5)

@@ -19,12 +19,11 @@ struct GenderSetupView: View {
         NavigationStack {
             VStack {
                 Text("What is your gender?").font(.headline)
-                Text("Name test: \(setupVM.screenName)")
                 
                 ForEach(Gender.allCases) { gender in
                     Button {
-                        setupVM.gender = gender
                         navActive = true
+                        setupVM.gender = gender
                          
                     } label: {
                         Text(gender.rawValue.capitalized).bold()

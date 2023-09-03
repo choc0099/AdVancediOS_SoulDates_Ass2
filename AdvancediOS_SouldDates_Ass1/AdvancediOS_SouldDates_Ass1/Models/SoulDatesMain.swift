@@ -18,6 +18,12 @@ class SoulDatesMain: ObservableObject {
     {
         matchSeekers = matchSeekersSample
     }
+    
+    func onboardMatchSeeker(matchSeeker: MatchSeeker)
+    {
+        matchSeekers.append(matchSeeker)
+    }
+    
     // a helper function to list match seekers based on the type of gender they are interested in.
     private func tailorMatchesByGender(interestedIn: InterestedIn) throws -> [MatchSeeker] {
         guard matchSeekers.count > 0 else {

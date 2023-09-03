@@ -10,21 +10,43 @@ import SwiftUI
 struct AbouteMeView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @State var showAlert: Bool = false
+    @State var navActive: Bool = false
     var body: some View {
         NavigationStack {
             VStack {
                 Text("Enter a bio about yourself.")
                 TextEditor(text: $setupVM.bio).lineSpacing(4).border(.black)
                 Text("What are your favourite hobbies?")
-                TextEditor(text: $setupVM.hobbies)
+                TextEditor(text: $setupVM.hobbies).border(.black)
                 Text("What is your favourite music?")
-                TextEditor(text: $setupVM.favouriteMusic)
+                TextEditor(text: $setupVM.favouriteMusic).border(.black)
                 
                 Button("Finish") {
-                    
+                    do {
+                        try setupVM.validateAboutMe()
+                        //declare a constant to add a match seeker to the list
+                        processData()
+                        navActive = true
+                    }
+                    catch {
+                        showAlert = true
+                    }
                 }
-            }.padding().navigationTitle("About Me")
+            }.padding().navigationTitle("About Me").alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Some Text fields are not entered."),
+                    message: Text("Please check your text fields.")
+                )
+            }
+        }.navigationDestination(isPresented: $navActive) {
+            LookView()
         }
+    }
+    
+    func processData() {
+        let matchseeker = setupVM.convertToObject()
+        soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
     }
 }
 

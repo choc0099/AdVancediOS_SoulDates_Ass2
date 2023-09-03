@@ -40,8 +40,21 @@ class InitialSetupViewModel: ObservableObject {
         }
     }
     
-    func process() {
-        
+    func validateAboutMe() throws {
+        guard !(bio.isEmpty || hobbies.isEmpty || favouriteMusic.isEmpty) else {
+            throw ProfileError.emptyTextFields
+        }
+    }
+    
+    func convertToObject() -> MatchSeeker {
+        var haveDisability: Disability?
+        if(isDisabled)
+        {
+            haveDisability = Disability(disabilities: disability, severeity: disabilitySeverity)
+        }
+        let datingPreferences: DatingPreference = DatingPreference(interestedIn: interestedIn, disabilityPreference: disabilityPreference, discloseMyDisability: discloseMyDisability)
+        let matchSeeeker = MatchSeeker(screenName: screenName, hobbies: hobbies, gender: gender, dateOfBirth: dateOfBirth, bio: bio, favourteMusic: favouriteMusic, datingPreference: datingPreferences, disability: haveDisability)
+        return matchSeeeker
     }
 }
 

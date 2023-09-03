@@ -105,7 +105,7 @@ extension MatchSeekerUser {
 
 struct Disability: Identifiable, Decodable {
     var disabilities: String
-    var severeity: String
+    var severeity: DisabilitySeverity
     var id: UUID = UUID()
 }
 
