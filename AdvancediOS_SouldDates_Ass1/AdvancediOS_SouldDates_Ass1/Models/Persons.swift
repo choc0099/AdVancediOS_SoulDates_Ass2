@@ -113,9 +113,6 @@ struct DatingPreference: Decodable {
     var interestedIn: InterestedIn
     var disabilityPreference: DisabilityPreference
     var discloseMyDisability: Bool
-    
-    
-    
 }
 
 struct AnyMatchSeeker {

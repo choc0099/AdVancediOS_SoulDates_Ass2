@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AgeCheckSetupView: View {
+struct BasicDetailsSetupView: View {
     
     @ObservedObject var setupVM: InitialSetupViewModel
     let dateRange: ClosedRange<Date> = {
@@ -71,7 +71,7 @@ struct AgeCheckSetupView: View {
 
 struct AgeCheckSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        AgeCheckSetupView(setupVM: InitialSetupViewModel())
+        BasicDetailsSetupView(setupVM: InitialSetupViewModel())
            
     }
 }

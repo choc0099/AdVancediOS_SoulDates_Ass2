@@ -9,14 +9,16 @@ import SwiftUI
 
 struct InSessionTabView: View {
     var body: some View {
-        TabView {
-            LookView().tabItem {
-                Label("Look", systemImage: "book.fill")
-            }
-            
-            SettingsView().tabItem {
-                Label("Settings", systemImage: "sun.max")
-            }
+        NavigationStack {
+            TabView {
+                LookView().tabItem {
+                    Label("Look", systemImage: "book.fill")
+                }
+                
+                SettingsView().tabItem {
+                    Label("Settings", systemImage: "sun.max")
+                }
+            }.navigationTitle("Look").navigationBarBackButtonHidden(true).navigationBarTitleDisplayMode(.large)
         }
     }
 }
