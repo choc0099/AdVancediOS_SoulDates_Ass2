@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject var updateProfileVM: UpdateProfileViewModel = UpdateProfileViewModel()
     var body: some View {
         List() {
-            Text("Update Profile")
+            NavigationLink {
+                UpdateProfileView(updateProfileVM: updateProfileVM)
+            } label: {
+                Text("Update Profile")
+            }
+            
             Text("Background checks")
             Text("Update Dating Preference")
             Text("Update Disability Details")
