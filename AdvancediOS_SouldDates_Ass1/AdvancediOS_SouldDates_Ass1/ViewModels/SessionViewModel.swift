@@ -10,4 +10,9 @@ import Foundation
 
 class Session: ObservableObject {
     @Published var matchSeeker: MatchSeeker = MatchSeeker(screenName: "", hobbies: "", gender: .other, dateOfBirth: Date.now, bio: "", favourteMusic: "", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false))
+    
+    func startSession(matchSeeker: MatchSeeker)
+    {
+        self.matchSeeker = matchSeeker
+    }
 }

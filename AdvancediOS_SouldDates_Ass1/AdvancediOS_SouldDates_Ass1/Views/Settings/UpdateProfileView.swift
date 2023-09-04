@@ -15,33 +15,40 @@ struct UpdateProfileView: View {
         NavigationStack {
            
             Form {
-                let matchSeeker: Binding<MatchSeeker> = $session.matchSeeker
+                
                 Section("Basic Details") {
-                    HStack{
+                    HStack {
                         Text("Screen Name: ")
-                        TextField("", text: matchSeeker.screenName)
+                        TextField("", text: $updateProfileVM.screenName)
                     }
-                    DatePicker("Date of birth:", selection: $session.matchSeeker.dateOfBirth, displayedComponents: [.date]).datePickerStyle(.compact)
-                    Picker("Gender", selection: matchSeeker.gender) {
+                    DatePicker("Date of birth:", selection: $updateProfileVM.dateOfBirth, displayedComponents: [.date]).datePickerStyle(.compact)
+                    Picker("Gender", selection: $updateProfileVM.gender) {
                         ForEach(Gender.allCases) { gender in
-                            Text(gender.rawValue.capitalized)
+                           Text(gender.rawValue.capitalized)
                         }
                     }.pickerStyle(.navigationLink)
                 }
                 Section("Bio") {
-                    TextEditor(text: matchSeeker.bio).frame(minHeight: 150)
+                    TextEditor(text: $updateProfileVM.bio).frame(minHeight: 150)
                 }
                 Section("Hobbies") {
-                    TextEditor(text: matchSeeker.hobbies).frame(minHeight: 150)
+                    TextEditor(text: $updateProfileVM.hobbies).frame(minHeight: 150)
                 }
                 
               
                 Section("Favourite Music")
                 {
-                    TextEditor(text: matchSeeker.favouriteMusic).frame(minHeight: 150)
+                    TextEditor(text: $updateProfileVM.favouriteMusic).frame(minHeight: 150)
                 }
             }.onAppear {
-                //updateProfileVM.screenName = 
+                
+                //transfers the properties from the session object to the updateProfileVM so it is isolated.
+                let matchSeeker = session.matchSeeker
+                updateProfileVM.screenName = matchSeeker.screenName
+                updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
+                updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
+                updateProfileVM.gender = matchSeeker.gender
+                updateProfileVM.hobbies = matchSeeker.hobbies
             }
         }
     }

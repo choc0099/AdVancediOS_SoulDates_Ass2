@@ -10,7 +10,7 @@ import SwiftUI
 struct AbouteMeView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @StateObject var session: Session = Session()
+    @EnvironmentObject var session: Session
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
     var body: some View {
@@ -45,7 +45,7 @@ struct AbouteMeView: View {
                 }
             }
         }.navigationDestination(isPresented: $navActive) {
-            InSessionTabView().environmentObject(session)
+            InSessionTabView()
         }
     }
     
@@ -59,6 +59,6 @@ struct AbouteMeView: View {
 struct AbouteMeView_Previews: PreviewProvider {
     static var previews: some View {
         //var matchSeeker = matchSeekersSample[0]
-        AbouteMeView(setupVM: InitialSetupViewModel(), session: Session())
+        AbouteMeView(setupVM: InitialSetupViewModel())
     }
 }
