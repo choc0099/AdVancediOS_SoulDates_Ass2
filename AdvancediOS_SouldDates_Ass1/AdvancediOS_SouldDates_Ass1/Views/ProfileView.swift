@@ -12,44 +12,29 @@ struct ProfileView: View {
     @State var matchSeeker: MatchSeeker
     var body: some View {
         ScrollView {
-            VStack {
-                //let matchSeeker = profileVM.matchSeeker
-                Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
-                
-                if let haveDisability = getDisabledText() {
-                     Text(haveDisability).font(.subheadline)
-                }
-                Spacer()
-                if matchSeeker.isScammer {
-                    Text("This person was known to be a scammer.").padding()
-                }
-                
-                Text("Bio").font(.headline).padding()
-                Text("\(matchSeeker.bio)").font(.body).padding()
-                Text("Hobbies").font(.headline).padding()
-                Text(matchSeeker.hobbies).padding()
-                Text("Favourite Music").padding()
-                Text(matchSeeker.favouriteMusic).padding()
+        
+            //let matchSeeker = profileVM.matchSeeker
+            Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
+            
+            if let haveDisability = matchSeeker.getHeadlineText() {
+                 Text(haveDisability).font(.subheadline)
             }
+            Spacer()
+            if matchSeeker.isScammer {
+                Text("This person was known to be a scammer.").padding()
+            }
+            //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
+            Text("Bio").font(.headline).padding()
+            Text("\(matchSeeker.bio)").font(.body).padding()
+            Text("Hobbies").font(.headline).padding()
+            Text(matchSeeker.hobbies).padding()
+            Text("Favourite Music").padding()
+            Text("\(matchSeeker.favouriteMusic)")
+        
         }.padding()
     }
     
-    func getDisabledText() -> String?
-    {
-        var disabledText: String?
-        if let haveDisability = matchSeeker.disability {
-            if matchSeeker.datingPreference.discloseMyDisability {
-                disabledText = "\(haveDisability.disabilities), \(haveDisability.severeity.rawValue.capitalized)"
-            }
-        }
-        else {
-            if matchSeeker.datingPreference.disabilityPreference == .openMinded
-            {
-                disabledText = "Positive about disabled."
-            }
-        }
-        return disabledText
-    }
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {

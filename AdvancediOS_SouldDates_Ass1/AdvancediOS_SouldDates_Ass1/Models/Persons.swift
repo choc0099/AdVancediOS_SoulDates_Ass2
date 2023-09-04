@@ -126,60 +126,7 @@ struct AnyMatchSeeker {
 }
 
 
-struct MatchSeeker: Person {
-    var id: UUID = UUID()
-    var screenName: String
-    var hobbies: String
-    var gender: Gender
-    var datingPreference: DatingPreference
-    var dateOfBirth: Date
-    var bio: String
-    var favouriteMusic: String
-    var policeCheck: PoliceCheck?
-    var proofOfAge: ProofOfAge?
-    var refereeCheck: RefereeCheck?
-    var disability: Disability?
-    var isScammer: Bool
-    
-    init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference, disability: Disability? = nil) {
-        self.screenName = screenName
-        self.hobbies = hobbies
-        self.gender = gender
-        self.dateOfBirth = dateOfBirth
-        self.bio = bio
-        self.favouriteMusic = favourteMusic
-        self.datingPreference = datingPreference
-        self.disability = disability
-        self.policeCheck = nil
-        self.refereeCheck = nil
-        self.proofOfAge = nil
-        self.isScammer = false
-    }
-    
-    //functions for getters and setters
-    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
-        self.policeCheck = policeCheck
-    }
-    
-    mutating func setRefereeCheck(referee: RefereeCheck)
-    {
-        self.refereeCheck = referee
-    }
-    
-    mutating func setProofOfAge(proofOfAge: ProofOfAge)
-    {
-        self.proofOfAge = proofOfAge
-    }
-    
-    mutating func toggleScammer() {
-        if isScammer == false {
-            isScammer = true
-        }
-        else{
-            isScammer = false
-        }
-    }
-}
+
 
 struct Admin: Person {
     var id: UUID = UUID()

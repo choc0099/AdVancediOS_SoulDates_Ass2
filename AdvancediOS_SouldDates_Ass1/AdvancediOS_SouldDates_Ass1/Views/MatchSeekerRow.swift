@@ -13,11 +13,10 @@ struct MatchSeekerRow: View {
      
         HStack {
             VStack(alignment: .leading) {
-                Text(matchSeeker.screenName)
-                    .multilineTextAlignment(.leading)
+                Text(matchSeeker.screenName).font(.headline)
                 Spacer()
-                if let disabledMatchSeeker = matchSeeker.disability {
-                    Text(disabledMatchSeeker.disabilities)
+                if let disabledMatchSeeker = matchSeeker.getHeadlineText() {
+                    Text(disabledMatchSeeker)
                         .multilineTextAlignment(.leading)
                 }
                 else {
