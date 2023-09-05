@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var updateProfileVM: UpdateProfileViewModel = UpdateProfileViewModel()
+    @EnvironmentObject var session: Session
     var body: some View {
       NavigationStack
         {
@@ -24,8 +25,21 @@ struct SettingsView: View {
                 Text("Update Disability Details")
                 Text("Reset")
             }
+        }.onAppear{
+            transferToUpdateProfileVM()
         }
        
+    }
+    
+    func transferToUpdateProfileVM()
+    {
+        let matchSeeker = session.matchSeeker
+        updateProfileVM.screenName = matchSeeker.screenName
+        updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
+        updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
+        updateProfileVM.gender = matchSeeker.gender
+        updateProfileVM.hobbies = matchSeeker.hobbies
+        updateProfileVM.bio = matchSeeker.bio
     }
 }
 

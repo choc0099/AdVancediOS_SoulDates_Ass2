@@ -56,25 +56,13 @@ struct UpdateProfileView: View {
                         message: Text("Your updated date of birth is under the age of 18 and can not be used for our services.")
                     )
                 }
-            }.onAppear {
-            //transfers the properties from the session object to the updateProfileVM so it is isolated.
-               transferToVM()
             }.navigationDestination(isPresented: $navActive) {
-                SettingsView()
+                InSessionTabView()
             }
         }
     }
     
-    func transferToVM()
-    {
-        let matchSeeker = session.matchSeeker
-        updateProfileVM.screenName = matchSeeker.screenName
-        updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
-        updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
-        updateProfileVM.gender = matchSeeker.gender
-        updateProfileVM.hobbies = matchSeeker.hobbies
-        updateProfileVM.bio = matchSeeker.bio
-    }
+    
     
     func processData() {
         session.matchSeeker.editProfile(screenName: updateProfileVM.screenName, gender: updateProfileVM.gender, dateOfBirth: updateProfileVM.dateOfBirth, bio: updateProfileVM.bio, hobbies: updateProfileVM.hobbies, favouriteMusic: updateProfileVM.favouriteMusic)
