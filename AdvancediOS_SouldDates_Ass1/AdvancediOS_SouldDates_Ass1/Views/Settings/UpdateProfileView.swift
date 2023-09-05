@@ -10,6 +10,8 @@ import SwiftUI
 struct UpdateProfileView: View {
     @EnvironmentObject var session: Session
     @ObservedObject var updateProfileVM: UpdateProfileViewModel
+    @State var showAlert: Bool = false
+    @State var navActive: Bool = false
     var body: some View {
         
         NavigationStack {
@@ -36,22 +38,46 @@ struct UpdateProfileView: View {
                 {
                     TextEditor(text: $updateProfileVM.favouriteMusic).frame(minHeight: 150)
                 }
+            }.navigationTitle("Update Profile").toolbar {
+                Button {
+                    do {
+                        try updateProfileVM.validateDateOfBirth()
+                        processData()
+                        navActive = true
+                    }
+                    catch {
+                        showAlert = true
+                    }
+                } label: {
+                    Text("Done")
+                }.alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Under Age!"),
+                        message: Text("Your updated date of birth is under the age of 18 and can not be used for our services.")
+                    )
+                }
             }.onAppear {
             //transfers the properties from the session object to the updateProfileVM so it is isolated.
-                let matchSeeker = session.matchSeeker
-                updateProfileVM.screenName = matchSeeker.screenName
-                updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
-                updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
-                updateProfileVM.gender = matchSeeker.gender
-                updateProfileVM.hobbies = matchSeeker.hobbies
-            }
-        }.navigationTitle("Update Profile").toolbar {
-            Button {
-                
-            } label: {
-                Text("Done")
+               transferToVM()
+            }.navigationDestination(isPresented: $navActive) {
+                SettingsView()
             }
         }
+    }
+    
+    func transferToVM()
+    {
+        let matchSeeker = session.matchSeeker
+        updateProfileVM.screenName = matchSeeker.screenName
+        updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
+        updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
+        updateProfileVM.gender = matchSeeker.gender
+        updateProfileVM.hobbies = matchSeeker.hobbies
+        updateProfileVM.bio = matchSeeker.bio
+    }
+    
+    func processData() {
+        session.matchSeeker.editProfile(screenName: updateProfileVM.screenName, gender: updateProfileVM.gender, dateOfBirth: updateProfileVM.dateOfBirth, bio: updateProfileVM.bio, hobbies: updateProfileVM.hobbies, favouriteMusic: updateProfileVM.favouriteMusic)
     }
 }
 

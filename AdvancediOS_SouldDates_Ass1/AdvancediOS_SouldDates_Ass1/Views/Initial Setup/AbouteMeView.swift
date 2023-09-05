@@ -51,7 +51,6 @@ struct AbouteMeView: View {
                 else {
                     buttonDisabled = true
                 }
-                    
             }
         }.navigationDestination(isPresented: $navActive) {
             InSessionTabView()
