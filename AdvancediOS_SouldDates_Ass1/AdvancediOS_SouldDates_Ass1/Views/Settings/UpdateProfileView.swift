@@ -13,9 +13,7 @@ struct UpdateProfileView: View {
     var body: some View {
         
         NavigationStack {
-           
             Form {
-                
                 Section("Basic Details") {
                     HStack {
                         Text("Screen Name: ")
@@ -34,21 +32,24 @@ struct UpdateProfileView: View {
                 Section("Hobbies") {
                     TextEditor(text: $updateProfileVM.hobbies).frame(minHeight: 150)
                 }
-                
-              
                 Section("Favourite Music")
                 {
                     TextEditor(text: $updateProfileVM.favouriteMusic).frame(minHeight: 150)
                 }
             }.onAppear {
-                
-                //transfers the properties from the session object to the updateProfileVM so it is isolated.
+            //transfers the properties from the session object to the updateProfileVM so it is isolated.
                 let matchSeeker = session.matchSeeker
                 updateProfileVM.screenName = matchSeeker.screenName
                 updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
                 updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
                 updateProfileVM.gender = matchSeeker.gender
                 updateProfileVM.hobbies = matchSeeker.hobbies
+            }
+        }.navigationTitle("Update Profile").toolbar {
+            Button {
+                
+            } label: {
+                Text("Done")
             }
         }
     }

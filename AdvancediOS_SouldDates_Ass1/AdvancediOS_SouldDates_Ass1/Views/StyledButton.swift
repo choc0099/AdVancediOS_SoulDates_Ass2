@@ -14,7 +14,7 @@ struct StyledButton: View {
     
     
     var body: some View {
-        Text(text).fontWeight(.bold).foregroundColor(foregroundColour).padding().frame(width: 250).background(backGroundColour)
+        Text(text).fontWeight(.bold).accentColor(foregroundColour).padding().frame(width: 250).background(backGroundColour)
             .overlay(
                 RoundedRectangle(cornerRadius: 5).stroke(.black, lineWidth: 2)
             )

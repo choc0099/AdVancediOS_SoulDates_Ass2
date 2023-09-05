@@ -24,6 +24,7 @@ struct BasicDetailsSetupView: View {
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var navActive: Bool = false
+    @State private var buttonDisabled: Bool = true
     
     var body: some View {
         NavigationStack() {
@@ -32,12 +33,19 @@ struct BasicDetailsSetupView: View {
                 TextField (
                     "Name",
                     text: $setupVM.screenName
-                ).textInputAutocapitalization(.never).padding().border(.black)
+                ).textInputAutocapitalization(.never).padding().border(.red).onChange(of: setupVM.screenName) { screenName in
+                    if  screenName.count > 0 {
+                        buttonDisabled = false
+                    }
+                    else {
+                        buttonDisabled = true
+                    }
+                }
                 Divider()
                 Text("Date of Birth")
                 DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
                 
-                    Button {
+                Button {
                         do {
                             try setupVM.validateBasicDetails()
                             navActive = true
@@ -52,9 +60,9 @@ struct BasicDetailsSetupView: View {
                             alertTitle = "Name field is empty"
                             alertMessage = "Please enter your screen name."
                         }
-                    } label: {
-                        StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
-                    }.padding()
+                } label: {
+                    StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
+                    }.padding().disabled(buttonDisabled)
             }
             
         }.alert(isPresented: $showAlert) {
