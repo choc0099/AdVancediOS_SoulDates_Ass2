@@ -31,6 +31,8 @@
 		32D538442A91F37000DFC38D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538432A91F37000DFC38D /* SettingsView.swift */; };
 		32D538462A922A3800DFC38D /* BasicDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */; };
 		32E3FFD72AA6E9C300DF1B91 /* LookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */; };
+		32E3FFD92AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3FFD82AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift */; };
+		32E3FFDB2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */; };
 		32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */; };
 		32F250F52A90D2C10084424B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F250F42A90D2C10084424B /* ContentView.swift */; };
 		32F250F72A90D2C20084424B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32F250F62A90D2C20084424B /* Assets.xcassets */; };
@@ -90,6 +92,8 @@
 		32D538432A91F37000DFC38D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDetailsSetupView.swift; sourceTree = "<group>"; };
 		32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookViewModel.swift; sourceTree = "<group>"; };
+		32E3FFD82AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDisabilityDetailsView.swift; sourceTree = "<group>"; };
+		32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDisabilityDetailsViewModel.swift; sourceTree = "<group>"; };
 		32F250EF2A90D2C10084424B /* AdvancediOS_SouldDates_Ass1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancediOS_SouldDates_Ass1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancediOS_SouldDates_Ass1App.swift; sourceTree = "<group>"; };
 		32F250F42A90D2C10084424B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			children = (
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
 				321E51932AA5867600513CA9 /* UpdateProfileView.swift */,
+				32E3FFD82AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
 				32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */,
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
+				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32E3FFD72AA6E9C300DF1B91 /* LookViewModel.swift in Sources */,
 				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
+				32E3FFDB2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift in Sources */,
 				3224AD9D2AA5379300F37D2A /* InSessionTabView.swift in Sources */,
 				32C4974A2AA46853000A660E /* StyledButton.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
@@ -441,6 +448,7 @@
 				32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */,
 				32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */,
 				32D538462A922A3800DFC38D /* BasicDetailsSetupView.swift in Sources */,
+				32E3FFD92AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift in Sources */,
 				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
