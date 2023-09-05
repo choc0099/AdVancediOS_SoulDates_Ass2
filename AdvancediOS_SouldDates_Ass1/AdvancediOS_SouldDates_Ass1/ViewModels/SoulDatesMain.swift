@@ -144,4 +144,23 @@ class SoulDatesMain: ObservableObject {
         }
       
     }
+    
+    func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String)
+    {
+        if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id })
+        {
+            self.matchSeekers[index].editProfile(screenName: newScreenName, gender: newGender, dateOfBirth: newDateOfBirth, bio: newBio, hobbies: newHobbies, favouriteMusic: newFavouriteMusic)
+        }
+    }
+    
+    func getSpecificMatchSeeker(currentMatchSeeker: MatchSeeker) throws -> MatchSeeker
+    {
+        for matchSeeker in matchSeekers {
+            if matchSeeker.id == currentMatchSeeker.id {
+                return matchSeeker
+            }
+        }
+        throw ProfileError.noMatchesFound
+    }
+    
 }

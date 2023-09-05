@@ -154,6 +154,7 @@
 				321E518C2AA56E5E00513CA9 /* ProfileViewModel.swift */,
 				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
 				32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */,
+				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -165,7 +166,6 @@
 				32F519142A9EEDBB005DA063 /* Persons.swift */,
 				32D538412A91F33C00DFC38D /* AccountSettings.swift */,
 				32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */,
-				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 				321E518F2AA57ED300513CA9 /* MatchSeeker.swift */,
 			);
 			path = Models;

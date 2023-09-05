@@ -10,6 +10,7 @@ import SwiftUI
 struct UpdateProfileView: View {
     @EnvironmentObject var session: Session
     @ObservedObject var updateProfileVM: UpdateProfileViewModel
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
     var body: some View {
@@ -65,6 +66,9 @@ struct UpdateProfileView: View {
     
     
     func processData() {
+        //edits the profile from the model side
+        soulDatesMain.updateMatchSeekerProfile(currentMatchSeeker: session.matchSeeker, newScreenName: updateProfileVM.screenName, newGender: updateProfileVM.gender, newDateOfBirth: updateProfileVM.dateOfBirth, newBio: updateProfileVM.bio, newHobbies: updateProfileVM.hobbies, newFavouriteMusic: updateProfileVM.favouriteMusic)
+        //edits the profile from the session side.
         session.matchSeeker.editProfile(screenName: updateProfileVM.screenName, gender: updateProfileVM.gender, dateOfBirth: updateProfileVM.dateOfBirth, bio: updateProfileVM.bio, hobbies: updateProfileVM.hobbies, favouriteMusic: updateProfileVM.favouriteMusic)
     }
 }
