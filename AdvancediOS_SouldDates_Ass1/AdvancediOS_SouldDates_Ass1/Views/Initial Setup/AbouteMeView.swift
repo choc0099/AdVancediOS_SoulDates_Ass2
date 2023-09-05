@@ -13,6 +13,7 @@ struct AbouteMeView: View {
     @EnvironmentObject var session: Session
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
+    @State var buttonDisabled: Bool = true
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -36,16 +37,33 @@ struct AbouteMeView: View {
                         }
                     } label: {
                         StyledButton(text: "Finish", backGroundColour: .green, foregroundColour: .black)
-                    }.padding()
+                    }.padding().disabled(buttonDisabled)
                 }.padding().navigationTitle("About Me").alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("Some Text fields are not entered."),
                         message: Text("Please check your text fields.")
                     )
                 }
+            }.onChange(of: allTextEntered()) { everythingIsEneterd in
+                if everythingIsEneterd {
+                    buttonDisabled = false
+                }
+                else {
+                    buttonDisabled = true
+                }
+                    
             }
         }.navigationDestination(isPresented: $navActive) {
             InSessionTabView()
+        }
+    }
+    
+    func allTextEntered() -> Bool {
+        if !setupVM.bio.isEmpty && !setupVM.hobbies.isEmpty && !setupVM.favouriteMusic.isEmpty {
+            return true
+        }
+        else {
+            return false
         }
     }
     
