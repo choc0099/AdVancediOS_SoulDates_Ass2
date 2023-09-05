@@ -9,7 +9,7 @@ import Foundation
 
 enum ProfileError: Error {
     case underAgeException
-    case noMatchesFound(message: String)
+    case noMatchesFound
     case caseSelectionNotListed(message: String)
     case emptyTextFields
 }
