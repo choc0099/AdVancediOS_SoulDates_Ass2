@@ -28,7 +28,7 @@ class SoulDatesMain: ObservableObject {
     private func tailorMatchesByGender(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn) throws -> [MatchSeeker] {
         var allocatedMatchSeekers: [MatchSeeker] = []
         do {
-            let listedMatchSeekers: [MatchSeeker] = try listMatchesWtithoutCurrentUser(currentMatchSeeker: currentMatchSeeker)
+            let listedMatchSeekers: [MatchSeeker] = try tailorMatchesBasedOnDisability(matchSeeker: currentMatchSeeker)
             for matchSeeker in listedMatchSeekers {
                 switch interestedIn {
                 case .men:
@@ -106,7 +106,42 @@ class SoulDatesMain: ObservableObject {
         {
             throw ProfileError.noMatchesFound
         }
-                
     }
     
+    //this method will help reduce the likely hood of getting rejected, it would work if people have a disability and wish to meet people without disabilities or openminded
+    //for the matches to appear, the other person would have to be open to dating people with disabilities.
+    private func tailorMatchesBasedOnDisability(matchSeeker: MatchSeeker) throws -> [MatchSeeker]
+    {
+        do {
+            let listedMatches: [MatchSeeker] = try listMatchesWtithoutCurrentUser(currentMatchSeeker: matchSeeker)
+            var allocatedMatches: [MatchSeeker] = []
+            
+            //determines if the matchSeeker have a disability
+            if matchSeeker.disability != nil
+            {
+                for matchSeeker in listedMatches
+                {
+                    if matchSeeker.datingPreference.disabilityPreference == .openMinded || matchSeeker.datingPreference.disabilityPreference == .withDisability{
+                        allocatedMatches.append(matchSeeker)
+                    }
+                }
+                if allocatedMatches.isEmpty {
+                    throw ProfileError.noMatchesFound
+                }
+            }
+            
+            else
+            {
+                //does not do anything if a person does not declare they have a disability, it would simply return the listed matches.
+                return listedMatches
+            }
+            return allocatedMatches
+            
+            
+        }
+        catch {
+            throw ProfileError.noMatchesFound
+        }
+      
+    }
 }
