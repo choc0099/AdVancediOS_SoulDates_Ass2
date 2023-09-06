@@ -14,16 +14,18 @@ struct AbouteMeView: View {
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
     @State var buttonDisabled: Bool = true
+    @State var borderColor: Color = .primary
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
                     Text("Enter a bio about yourself.")
-                    TextEditor(text: $setupVM.bio).frame(height: 200).border(.black)
+                    TextEditor(text: $setupVM.bio).frame(height: 200).border(borderColor)
                     Text("What are your favourite hobbies?")
-                    TextEditor(text: $setupVM.hobbies).frame(height: 100).border(.black)
+                    TextEditor(text: $setupVM.hobbies).frame(height: 100).border(borderColor)
                     Text("What is your favourite music?")
-                    TextEditor(text: $setupVM.favouriteMusic).frame(height: 100).border(.black)
+                    TextEditor(text: $setupVM.favouriteMusic).frame(height: 100).border(borderColor)
                     
                     Button {
                         do {
@@ -36,7 +38,7 @@ struct AbouteMeView: View {
                             showAlert = true
                         }
                     } label: {
-                        StyledButton(text: "Finish", backGroundColour: .green, foregroundColour: .black)
+                        StyledButton(text: "Finish", backGroundColour: Color("GreenColour"), foregroundColour: .black)
                     }.padding().disabled(buttonDisabled)
                 }.padding().navigationTitle("About Me").alert(isPresented: $showAlert) {
                     Alert(
@@ -76,6 +78,11 @@ struct AbouteMeView: View {
 struct AbouteMeView_Previews: PreviewProvider {
     static var previews: some View {
         //var matchSeeker = matchSeekersSample[0]
-        AbouteMeView(setupVM: InitialSetupViewModel())
+      
+        Group {
+            AbouteMeView(setupVM: InitialSetupViewModel())
+            AbouteMeView(setupVM: InitialSetupViewModel())
+        }
+       
     }
 }

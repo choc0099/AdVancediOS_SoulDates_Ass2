@@ -18,7 +18,7 @@ struct DisabilityDetailsSetupView: View {
         NavigationStack {
             VStack {
                 Text("What is your disabilities?").padding()
-                TextField("Your disabilities", text: $setupVM.disability).padding()
+                TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)
                 Divider()
                 Text("How Severe is your disability?").padding()
                 

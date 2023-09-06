@@ -12,4 +12,5 @@ class UpdateDisabilityDetailsViewModel: ObservableObject {
     @Published var disability: String?
     @Published var disabilitySeverity: DisabilitySeverity?
     @Published var discloseMyDisability: Bool = false
+    
 }

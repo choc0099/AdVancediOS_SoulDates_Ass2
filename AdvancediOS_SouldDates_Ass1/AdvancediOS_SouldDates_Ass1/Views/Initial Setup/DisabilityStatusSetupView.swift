@@ -13,7 +13,7 @@ struct DisabilityStatusSetupView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 20) {
                 Text("Do you have a disability?")
                 
                 NavigationLink {

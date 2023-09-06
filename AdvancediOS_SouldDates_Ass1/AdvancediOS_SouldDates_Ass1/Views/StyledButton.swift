@@ -11,12 +11,12 @@ struct StyledButton: View {
     let text: String
     let backGroundColour: Color
     let foregroundColour: Color
-    
+    //@Environment(./ColorScheme) var colorScheme
     
     var body: some View {
         Text(text).fontWeight(.bold).accentColor(foregroundColour).padding().frame(width: 250).background(backGroundColour)
             .overlay(
-                RoundedRectangle(cornerRadius: 5).stroke(.black, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 5).stroke(Color("HighContrastForeground"), lineWidth: 2)
             )
             
             
@@ -25,6 +25,6 @@ struct StyledButton: View {
 
 struct StyledButton_Previews: PreviewProvider {
     static var previews: some View {
-        StyledButton(text: "Cigarettes", backGroundColour: .green, foregroundColour: .black)
+        StyledButton(text: "Cigarettes", backGroundColour: Color("GreenColour"), foregroundColour: .black)
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//this is an enum for error handling that is confined with Apple's error protocol.
 enum ProfileError: Error {
     case underAgeException
     case noMatchesFound
@@ -50,6 +50,7 @@ enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
     var id: Self {self}
 }
 
+//the perso
 protocol Person: Identifiable, Decodable {
     var id: UUID {get set}
     var screenName: String {get set}

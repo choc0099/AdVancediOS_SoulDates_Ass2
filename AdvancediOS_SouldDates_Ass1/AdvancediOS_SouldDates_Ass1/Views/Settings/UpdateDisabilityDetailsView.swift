@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UpdateDisabilityDetailsView: View {
     @ObservedObject var updateDisabilityVM: UpdateDisabilityDetailsViewModel
+    
     @State var disabilityText: String = ""
     @State var disabilitySeverity: DisabilitySeverity = .moderate
     var body: some View {
@@ -35,7 +36,20 @@ struct UpdateDisabilityDetailsView: View {
             if let haveDisability = updateDisabilityVM.disability {
                 disabilityText = haveDisability
             }
+            if let haveDisabilitySeverity = updateDisabilityVM.disabilitySeverity {
+                disabilitySeverity = haveDisabilitySeverity
+            }
+        }.navigationTitle("Update Disability Details").toolbar{
+            Button {
+                
+            } label: {
+                Text("Done")
+            }
         }
+    }
+    
+    func processData() {
+        
     }
 }
 
