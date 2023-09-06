@@ -12,17 +12,19 @@ struct DatingPreferencesView: View {
     @State var navActive: Bool = false
     var body: some View {
         NavigationStack {
-            VStack{
-                Text("Who are you open of dating?").padding()
-                ForEach(DisabilityPreference.allCases)
-                {
-                    pref in Button {
-                        setupVM.disabilityPreference = pref
-                        navActive = true
-                    } label: {
-                        StyledButton(text: pref.rawValue, backGroundColour: .blue, foregroundColour: .black)
-                    }.padding()
-                }.navigationTitle("Dating Preferences")
+            ScrollView {
+                VStack{
+                    Text("Who are you open of dating?").padding()
+                    ForEach(DisabilityPreference.allCases)
+                    {
+                        pref in Button {
+                            setupVM.disabilityPreference = pref
+                            navActive = true
+                        } label: {
+                            StyledButton(text: pref.rawValue, backGroundColour: .blue, foregroundColour: .black)
+                        }.padding()
+                    }.navigationTitle("Dating Preferences")
+                }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
             AbouteMeView(setupVM: setupVM)

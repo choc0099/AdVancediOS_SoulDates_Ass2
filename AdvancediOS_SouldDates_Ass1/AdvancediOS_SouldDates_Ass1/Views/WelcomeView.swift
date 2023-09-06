@@ -17,7 +17,7 @@ struct WelcomeView: View {
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
             NavigationLink {
-                BasicDetailsSetupView(setupVM: InitialSetupViewModel()).navigationTitle("Basic Details Setup")
+                BasicDetailsSetupView(setupVM: InitialSetupViewModel())
             } label: {
                 StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
             }

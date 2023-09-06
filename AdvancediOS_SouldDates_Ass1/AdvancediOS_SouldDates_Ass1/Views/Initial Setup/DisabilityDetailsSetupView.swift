@@ -16,34 +16,36 @@ struct DisabilityDetailsSetupView: View {
     var body: some View {
         
         NavigationStack {
-            VStack {
-                Text("What is your disabilities?").padding()
-                TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)
-                Divider()
-                Text("How Severe is your disability?").padding()
-                
-                Picker("", selection: $setupVM.disabilitySeverity) {
-                    ForEach(DisabilitySeverity.allCases) {
-                        severity in
-                        Text(severity.rawValue.capitalized)
+            ScrollView {
+                VStack {
+                    Text("What is your disabilities?").padding()
+                    TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)
+                    Divider()
+                    Text("How Severe is your disability?").padding()
+                    
+                    Picker("", selection: $setupVM.disabilitySeverity) {
+                        ForEach(DisabilitySeverity.allCases) {
+                            severity in
+                            Text(severity.rawValue.capitalized)
+                        }
+                    }.pickerStyle(.segmented).padding()
+                    Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
+                    Spacer()
+                    Button {
+                        do {
+                            navActive = true
+                            setupVM.isDisabled = true
+                            try setupVM.validateDisability()
+                        }
+                        catch {
+                            showAlert = true
+                        }
+                    } label: {
+                        StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
                     }
-                }.pickerStyle(.segmented).padding()
-                Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
-                Spacer()
-                Button {
-                    do {
-                        navActive = true
-                        setupVM.isDisabled = true
-                        try setupVM.validateDisability()
-                    }
-                    catch {
-                        showAlert = true
-                    }
-                } label: {
-                    StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
+                    
+                    
                 }
-                
-                
             }
         }.padding().navigationDestination(isPresented: $navActive) {
             DatingPreferencesView(setupVM: setupVM)

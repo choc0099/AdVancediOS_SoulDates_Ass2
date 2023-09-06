@@ -17,19 +17,21 @@ struct GenderSetupView: View {
         //debug to see if date is passed
         
         NavigationStack {
-            VStack {
-                Text("What is your gender?").font(.headline)
-                
-                ForEach(Gender.allCases) { gender in
-                    Button {
-                        navActive = true
-                        setupVM.gender = gender
-                         
-                    } label: {
-                        StyledButton(text: gender.rawValue.capitalized, backGroundColour: .blue, foregroundColour: .black)
-                    }.padding()
-                }
-            }.navigationTitle("Gender Details")
+            ScrollView {
+                VStack(spacing: 20) {
+                    Text("What is your gender?").font(.headline)
+                    
+                    ForEach(Gender.allCases) { gender in
+                        Button {
+                            navActive = true
+                            setupVM.gender = gender
+                             
+                        } label: {
+                            StyledButton(text: gender.rawValue.capitalized, backGroundColour: Color("GreenColour"), foregroundColour: Color("HighContrastForeground"))
+                        }.padding()
+                    }
+                }.navigationTitle("Gender Details")
+            }
         }.navigationDestination(isPresented: $navActive) {
             InterestedInSetupView(setupVM: setupVM)
         }

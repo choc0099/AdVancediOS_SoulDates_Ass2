@@ -13,18 +13,20 @@ struct InterestedInSetupView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("Who are you interested in?").padding()
-               
-                ForEach(InterestedIn.allCases) {
-                     interestedIn in
-                    Button {
-                        navActive = true
-                        setupVM.interestedIn = interestedIn
-                      
-                    } label: {
-                        StyledButton(text: interestedIn.rawValue.capitalized, backGroundColour: .blue, foregroundColour: .black)
-                    }.padding()
+            ScrollView {
+                VStack {
+                    Text("Who are you interested in?").padding()
+                   
+                    ForEach(InterestedIn.allCases) {
+                         interestedIn in
+                        Button {
+                            navActive = true
+                            setupVM.interestedIn = interestedIn
+                          
+                        } label: {
+                            StyledButton(text: interestedIn.rawValue.capitalized, backGroundColour: .blue, foregroundColour: .black)
+                        }.padding()
+                    }
                 }
             }
         }.navigationDestination(isPresented: $navActive, destination: {

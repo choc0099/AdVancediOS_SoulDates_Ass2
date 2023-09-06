@@ -29,42 +29,44 @@ struct BasicDetailsSetupView: View {
     var body: some View {
         NavigationStack() {
             ScrollView {
-                Text("Enter your screen name:")
-                TextField (
-                    "Name",
-                    text: $setupVM.screenName
-                ).textInputAutocapitalization(.never).padding().border(.red).onChange(of: setupVM.screenName) { screenName in
-                    if  screenName.count > 0 {
-                        buttonDisabled = false
+                VStack(spacing: 20) {
+                    Text("Enter your screen name:")
+                    TextField (
+                        "Name",
+                        text: $setupVM.screenName
+                    ).textInputAutocapitalization(.never).padding().border(Color("HighContrastForeground")).onChange(of: setupVM.screenName) { screenName in
+                        if  screenName.count > 0 {
+                            buttonDisabled = false
+                        }
+                        else {
+                            buttonDisabled = true
+                        }
                     }
-                    else {
-                        buttonDisabled = true
-                    }
+                    
+                    Divider()
+                    
+                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.automatic).textContentType(.dateTime)
+                    
+                    Button {
+                            do {
+                                try setupVM.validateBasicDetails()
+                                navActive = true
+                            }
+                            catch ProfileError.underAgeException {
+                                showAlert = true
+                                alertTitle = "You are under age!"
+                                alertMessage = "You must be over 18 years old to use the dating app."
+                            }
+                            catch {
+                                showAlert = true
+                                alertTitle = "Name field is empty"
+                                alertMessage = "Please enter your screen name."
+                            }
+                    } label: {
+                        StyledButton(text: "Next", backGroundColour: Color("GreenColour"), foregroundColour: .black)
+                        }.padding().disabled(buttonDisabled)
                 }
-                Divider()
-                Text("Date of Birth")
-                DatePicker("", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.wheel)
-                
-                Button {
-                        do {
-                            try setupVM.validateBasicDetails()
-                            navActive = true
-                        }
-                        catch ProfileError.underAgeException {
-                            showAlert = true
-                            alertTitle = "You are under age!"
-                            alertMessage = "You must be over 18 years old to use the dating app."
-                        }
-                        catch {
-                            showAlert = true
-                            alertTitle = "Name field is empty"
-                            alertMessage = "Please enter your screen name."
-                        }
-                } label: {
-                    StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
-                    }.padding().disabled(buttonDisabled)
             }
-            
         }.alert(isPresented: $showAlert) {
             Alert(
                 title: Text("\(alertTitle)"),
@@ -72,7 +74,7 @@ struct BasicDetailsSetupView: View {
             )
         }.padding().navigationDestination(isPresented: $navActive) {
             GenderSetupView(setupVM: setupVM)
-        }
+        }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.large)
         
     }
 }
