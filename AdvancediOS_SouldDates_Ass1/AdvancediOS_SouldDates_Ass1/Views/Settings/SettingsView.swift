@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @StateObject var updateProfileVM: UpdateProfileViewModel = UpdateProfileViewModel()
     @EnvironmentObject var session: Session
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View {
       NavigationStack
         {
@@ -38,7 +39,7 @@ struct SettingsView: View {
     
     func transferToUpdateProfileVM()
     {
-        let matchSeeker = session.matchSeeker
+        let matchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         updateProfileVM.screenName = matchSeeker.screenName
         updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
         updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic

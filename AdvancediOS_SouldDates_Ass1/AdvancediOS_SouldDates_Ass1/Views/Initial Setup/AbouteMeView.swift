@@ -71,7 +71,7 @@ struct AbouteMeView: View {
     func processData() {
         let matchseeker = setupVM.convertToObject()
         soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
-        session.matchSeeker = matchseeker
+        session.matchSeekerId = matchseeker.id
     }
 }
 

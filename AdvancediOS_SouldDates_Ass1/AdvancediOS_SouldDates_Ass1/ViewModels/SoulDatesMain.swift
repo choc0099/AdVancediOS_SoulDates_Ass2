@@ -160,9 +160,9 @@ class SoulDatesMain: ObservableObject {
             //checks if the user has toggled that they have a disability.
             if let haveDisabiliy = disability {
                 //checks if they already have a disability and wants to update their disability details
-                if var haveDisabilityMain = self.matchSeekers[index].disability
+                if let haveDisabilityMain = self.matchSeekers[index].disability
                 {
-                    haveDisabilityMain.updateDisabilityDetails(disabilities: haveDisabiliy.disabilities, disabilitySeverity: haveDisabiliy.severeity)
+                    self.matchSeekers[index].disability?.updateDisabilityDetails(disabilities: haveDisabiliy.disabilities, disabilitySeverity: haveDisabiliy.severeity)
                 }
                 else {
                     self.matchSeekers[index].disability = Disability(disabilities: haveDisabiliy.disabilities, severeity: haveDisabiliy.severeity)
@@ -174,12 +174,11 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func getSpecificMatchSeeker(currentMatchSeeker: MatchSeeker) throws -> MatchSeeker
+    func getSpecificMatchSeeker(matchSeekerId: UUID) throws -> MatchSeeker
     {
-        for matchSeeker in matchSeekers {
-            if matchSeeker.id == currentMatchSeeker.id {
-                return matchSeeker
-            }
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
+        {
+            return self.matchSeekers[index]
         }
         throw ProfileError.noMatchesFound
     }

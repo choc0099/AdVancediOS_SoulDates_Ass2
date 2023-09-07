@@ -35,11 +35,11 @@ struct UpdateDisabilityDetailsView: View {
             }
         }.onAppear {
             
-            if let matchSeekerHaveDisability = session.matchSeeker.disability {
+            /*if let matchSeekerHaveDisability = session.matchSeeker.disability {
                 updateDisabilityVM.isDisabled = true
                 disabilityText = matchSeekerHaveDisability.disabilities
                 disabilitySeverity = matchSeekerHaveDisability.severeity
-            }
+            }*/
             if let haveDisability = updateDisabilityVM.disability {
                 disabilityText = haveDisability
             }
@@ -57,7 +57,7 @@ struct UpdateDisabilityDetailsView: View {
     }
     
     func processData() {
-        updateOnSesstion()
+        //updateOnSesstion()
         updateOnMain()
     }
     //this will update it on the model.
@@ -70,16 +70,18 @@ struct UpdateDisabilityDetailsView: View {
             disability = nil
         }
         
-        soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: session.matchSeeker, disability: disability)
+        let allocatedMatchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability)
     }
     //this will update it on the session side.
+    /*
     func updateOnSesstion() {
         //var disability: Disability?
         if updateDisabilityVM.isDisabled {
             //this will update disability details if they already have disabilities.
             if var haveDisability = self.session.matchSeeker.disability
             {
-                haveDisability.updateDisabilityDetails(disabilities: disabilityText, disabilitySeverity: disabilitySeverity)
+                session.matchSeeker.disability?.updateDisabilityDetails(disabilities: disabilityText, disabilitySeverity: disabilitySeverity)
             }
             else {
                 session.matchSeeker.disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
@@ -88,7 +90,7 @@ struct UpdateDisabilityDetailsView: View {
         else {
             session.matchSeeker.disability = nil
         }
-    }
+    }*/
 }
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {

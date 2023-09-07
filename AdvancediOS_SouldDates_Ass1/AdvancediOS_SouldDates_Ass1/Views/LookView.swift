@@ -47,11 +47,12 @@ struct LookView: View {
     func gatherMatches() {
         
         do {
-            let datingPref: DatingPreference = session.matchSeeker.datingPreference
+            let currentMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+            let datingPref: DatingPreference = currentMatchSeeker.datingPreference
             let interestedIn: InterestedIn = datingPref.interestedIn
             let disabilityPref: DisabilityPreference = datingPref.disabilityPreference
             
-            matches = try soulDatesMain.tailorMatches(currentMatchSeeker: session.matchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref)
+            matches = try soulDatesMain.tailorMatches(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref)
             lookError = .noError
         }
         catch ProfileError.noMatchesFound

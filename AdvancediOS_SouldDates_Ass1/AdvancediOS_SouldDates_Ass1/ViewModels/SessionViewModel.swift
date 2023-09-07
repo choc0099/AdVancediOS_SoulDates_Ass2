@@ -9,10 +9,12 @@
 import Foundation
 
 class Session: ObservableObject {
-    @Published var matchSeeker: MatchSeeker = MatchSeeker(screenName: "", hobbies: "", gender: .other, dateOfBirth: Date.now, bio: "", favourteMusic: "", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false))
+    //@Published var matchSeeker: MatchSeeker = MatchSeeker(screenName: "", hobbies: "", gender: .other, dateOfBirth: Date.now, bio: "", favourteMusic: "", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false))
     
+    var matchSeekerId: UUID = UUID()
+    /*
     func startSession(matchSeeker: MatchSeeker)
     {
         self.matchSeeker = matchSeeker
-    }
+    }*/
 }
