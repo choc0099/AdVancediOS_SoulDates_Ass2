@@ -160,7 +160,7 @@ class SoulDatesMain: ObservableObject {
             //checks if the user has toggled that they have a disability.
             if let haveDisabiliy = disability {
                 //checks if they already have a disability and wants to update their disability details
-                if let haveDisabilityMain = self.matchSeekers[index].disability
+                if self.matchSeekers[index].disability != nil
                 {
                     self.matchSeekers[index].disability?.updateDisabilityDetails(disabilities: haveDisabiliy.disabilities, disabilitySeverity: haveDisabiliy.severeity)
                 }

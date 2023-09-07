@@ -7,17 +7,17 @@
 
 import SwiftUI
 
+enum Tab: Hashable {
+    case look
+    case dreamList
+    case settings
+}
 struct InSessionTabView: View {
-    enum Tab {
-        case look
-        case dreamList
-        case settings
-    }
+    @State var selectedTab: Tab = .look
     var body: some View {
-     
         NavigationStack {
-            TabView {
-                LookView().tabItem {
+            TabView(selection: $selectedTab) {
+                LookView(selectedTab: $selectedTab).tabItem {
                     Label("Look", systemImage: "book.fill")
                 }.tag(Tab.look)
                 

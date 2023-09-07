@@ -8,6 +8,7 @@
 import Foundation
 
 class UpdateDisabilityDetailsViewModel: ObservableObject {
+    @Published var matchSeekerId: UUID = UUID()
     @Published var isDisabled: Bool = false
     @Published var disability: String?
     @Published var disabilitySeverity: DisabilitySeverity?

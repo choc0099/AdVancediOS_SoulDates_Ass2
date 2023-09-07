@@ -13,6 +13,7 @@ struct UpdateDisabilityDetailsView: View {
     @EnvironmentObject var session: Session
     @State var disabilityText: String = ""
     @State var disabilitySeverity: DisabilitySeverity = .moderate
+    @State var navActive: Bool = false
     var body: some View {
         Form {
             Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
@@ -35,11 +36,12 @@ struct UpdateDisabilityDetailsView: View {
             }
         }.onAppear {
             
-            /*if let matchSeekerHaveDisability = session.matchSeeker.disability {
+            let allocatedMatchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+            if let matchSeekerHaveDisability = allocatedMatchSeeker.disability {
                 updateDisabilityVM.isDisabled = true
                 disabilityText = matchSeekerHaveDisability.disabilities
                 disabilitySeverity = matchSeekerHaveDisability.severeity
-            }*/
+            }
             if let haveDisability = updateDisabilityVM.disability {
                 disabilityText = haveDisability
             }
@@ -47,7 +49,9 @@ struct UpdateDisabilityDetailsView: View {
                 disabilitySeverity = haveDisabilitySeverity
             }
            
-        }.navigationTitle("Update Disability Details").toolbar{
+        }.navigationDestination(isPresented: $navActive, destination: {
+            InSessionTabView()
+        }).navigationTitle("Update Disability Details").toolbar{
             Button {
                 processData()
             } label: {
@@ -74,23 +78,6 @@ struct UpdateDisabilityDetailsView: View {
         soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability)
     }
     //this will update it on the session side.
-    /*
-    func updateOnSesstion() {
-        //var disability: Disability?
-        if updateDisabilityVM.isDisabled {
-            //this will update disability details if they already have disabilities.
-            if var haveDisability = self.session.matchSeeker.disability
-            {
-                session.matchSeeker.disability?.updateDisabilityDetails(disabilities: disabilityText, disabilitySeverity: disabilitySeverity)
-            }
-            else {
-                session.matchSeeker.disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
-            }
-        }
-        else {
-            session.matchSeeker.disability = nil
-        }
-    }*/
 }
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {

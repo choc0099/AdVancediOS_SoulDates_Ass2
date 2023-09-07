@@ -46,7 +46,7 @@ struct BasicDetailsSetupView: View {
                     Divider()
                     
                     DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.automatic).textContentType(.dateTime)
-                    
+                    Spacer(minLength: 50)
                     Button {
                             do {
                                 try setupVM.validateBasicDetails()

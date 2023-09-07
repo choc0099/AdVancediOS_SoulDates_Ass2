@@ -19,7 +19,7 @@ struct LookView: View {
     @EnvironmentObject var session: Session
     @State var lookError: LookError = .noError
     @State var matches: [MatchSeeker] = []
-    
+    @Binding var selectedTab: Tab
     var body: some View  {
         NavigationStack {
             if(lookError == .noError)
@@ -27,9 +27,9 @@ struct LookView: View {
                 List(matches) {
                     matchSeeker in
                     NavigationLink {
-                        ProfileView(matchSeeker: matchSeeker)
+                        ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)
                     } label: {
-                        MatchSeekerRow(matchSeeker: matchSeeker)
+                        MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
                     }
                 }
             }
@@ -68,6 +68,6 @@ struct LookView: View {
 
 struct LookView_Previews: PreviewProvider {
     static var previews: some View {
-        LookView().environmentObject(SoulDatesMain()).environmentObject(Session())
+        LookView(selectedTab: .constant(.look)).environmentObject(SoulDatesMain()).environmentObject(Session())
     }
 }

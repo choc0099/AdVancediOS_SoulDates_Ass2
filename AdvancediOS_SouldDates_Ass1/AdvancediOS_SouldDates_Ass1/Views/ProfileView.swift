@@ -10,34 +10,38 @@ import SwiftUI
 struct ProfileView: View {
     //@ObservedObject var profileVM = ProfileViewModel()
     @State var matchSeeker: MatchSeeker
+    @Binding var selectedTab: Tab
     var body: some View {
-        ScrollView {
         
-            //let matchSeeker = profileVM.matchSeeker
-            Group {
-                Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
-                
-                if let haveDisability = matchSeeker.getHeadlineText() {
-                     Text(haveDisability).font(.subheadline)
-                }
-            }
-           
-            Spacer()
-            if matchSeeker.isScammer {
-                Text("This person was known to be a scammer.").padding()
-            }
-            //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
-            Group {
-                Text("Bio").font(.headline).padding()
-                Text("\(matchSeeker.bio)").font(.body).padding()
-                Text("Hobbies").font(.headline).padding()
-                Text(matchSeeker.hobbies).padding()
-                Text("Favourite Music").padding()
-                Text("\(matchSeeker.favouriteMusic)")
+        NavigationStack {
+            ScrollView {
             
-            }
-           
-        }.padding()
+                //let matchSeeker = profileVM.matchSeeker
+                Group {
+                    Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
+                    
+                    if let haveDisability = matchSeeker.getHeadlineText() {
+                         Text(haveDisability).font(.subheadline)
+                    }
+                }
+               
+                Spacer()
+                if matchSeeker.isScammer {
+                    Text("This person was known to be a scammer.").padding()
+                }
+                //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
+                Group {
+                    Text("Bio").font(.headline).padding()
+                    Text("\(matchSeeker.bio)").font(.body).padding()
+                    Text("Hobbies").font(.headline).padding()
+                    Text(matchSeeker.hobbies).padding()
+                    Text("Favourite Music").padding()
+                    Text("\(matchSeeker.favouriteMusic)")
+                
+                }
+               
+            }.padding().toolbar(.visible, for: .tabBar)
+        }
     }
     
     
@@ -45,6 +49,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(matchSeeker: matchSeekersSample[1])
+        ProfileView(matchSeeker: matchSeekersSample[1], selectedTab: .constant(.look) )
     }
 }

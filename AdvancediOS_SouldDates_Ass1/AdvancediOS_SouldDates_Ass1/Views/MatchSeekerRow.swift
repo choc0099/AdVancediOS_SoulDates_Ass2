@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MatchSeekerRow: View {
     @State var matchSeeker: MatchSeeker
+    @Binding var selectedTab: Tab
     var body: some View {
      
         HStack {
@@ -30,6 +31,6 @@ struct MatchSeekerRow: View {
 
 struct MatchSeekerRow_Previews: PreviewProvider {
     static var previews: some View {
-        MatchSeekerRow(matchSeeker: matchSeekersSample[3])
+        MatchSeekerRow(matchSeeker: matchSeekersSample[3], selectedTab: .constant(.look))
     }
 }
