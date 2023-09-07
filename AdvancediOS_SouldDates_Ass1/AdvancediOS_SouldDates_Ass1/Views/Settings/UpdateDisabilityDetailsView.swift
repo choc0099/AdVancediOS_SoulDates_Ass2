@@ -9,7 +9,8 @@ import SwiftUI
 
 struct UpdateDisabilityDetailsView: View {
     @ObservedObject var updateDisabilityVM: UpdateDisabilityDetailsViewModel
-    
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @EnvironmentObject var session: Session
     @State var disabilityText: String = ""
     @State var disabilitySeverity: DisabilitySeverity = .moderate
     var body: some View {
@@ -33,15 +34,22 @@ struct UpdateDisabilityDetailsView: View {
                 }
             }
         }.onAppear {
+            
+            if let matchSeekerHaveDisability = session.matchSeeker.disability {
+                updateDisabilityVM.isDisabled = true
+                disabilityText = matchSeekerHaveDisability.disabilities
+                disabilitySeverity = matchSeekerHaveDisability.severeity
+            }
             if let haveDisability = updateDisabilityVM.disability {
                 disabilityText = haveDisability
             }
             if let haveDisabilitySeverity = updateDisabilityVM.disabilitySeverity {
                 disabilitySeverity = haveDisabilitySeverity
             }
+           
         }.navigationTitle("Update Disability Details").toolbar{
             Button {
-                
+                processData()
             } label: {
                 Text("Done")
             }
@@ -49,7 +57,37 @@ struct UpdateDisabilityDetailsView: View {
     }
     
     func processData() {
+        updateOnSesstion()
+        updateOnMain()
+    }
+    //this will update it on the model.
+    func updateOnMain() {
+        var disability: Disability?
+        if updateDisabilityVM.isDisabled {
+            disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
+        }
+        else {
+            disability = nil
+        }
         
+        soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: session.matchSeeker, disability: disability)
+    }
+    //this will update it on the session side.
+    func updateOnSesstion() {
+        //var disability: Disability?
+        if updateDisabilityVM.isDisabled {
+            //this will update disability details if they already have disabilities.
+            if var haveDisability = self.session.matchSeeker.disability
+            {
+                haveDisability.updateDisabilityDetails(disabilities: disabilityText, disabilitySeverity: disabilitySeverity)
+            }
+            else {
+                session.matchSeeker.disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
+            }
+        }
+        else {
+            session.matchSeeker.disability = nil
+        }
     }
 }
 

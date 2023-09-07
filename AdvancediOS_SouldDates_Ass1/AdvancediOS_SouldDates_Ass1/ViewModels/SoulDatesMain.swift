@@ -153,6 +153,27 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
+    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil)
+    {
+        //checks for the specific matchSeeker
+        if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id }) {
+            //checks if the user has toggled that they have a disability.
+            if let haveDisabiliy = disability {
+                //checks if they already have a disability and wants to update their disability details
+                if var haveDisabilityMain = self.matchSeekers[index].disability
+                {
+                    haveDisabilityMain.updateDisabilityDetails(disabilities: haveDisabiliy.disabilities, disabilitySeverity: haveDisabiliy.severeity)
+                }
+                else {
+                    self.matchSeekers[index].disability = Disability(disabilities: haveDisabiliy.disabilities, severeity: haveDisabiliy.severeity)
+                }
+            }
+            else {
+                self.matchSeekers[index].disability = nil
+            }
+        }
+    }
+    
     func getSpecificMatchSeeker(currentMatchSeeker: MatchSeeker) throws -> MatchSeeker
     {
         for matchSeeker in matchSeekers {

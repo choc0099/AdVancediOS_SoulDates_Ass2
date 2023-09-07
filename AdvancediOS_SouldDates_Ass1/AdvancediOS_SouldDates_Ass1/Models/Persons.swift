@@ -104,11 +104,7 @@ extension MatchSeekerUser {
     }
 }*/
 
-struct Disability: Identifiable, Decodable {
-    var disabilities: String
-    var severeity: DisabilitySeverity
-    var id: UUID = UUID()
-}
+
 
 struct DatingPreference: Decodable {
     var interestedIn: InterestedIn

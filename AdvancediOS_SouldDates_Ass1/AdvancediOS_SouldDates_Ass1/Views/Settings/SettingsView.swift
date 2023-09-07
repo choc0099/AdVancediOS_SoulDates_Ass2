@@ -22,7 +22,12 @@ struct SettingsView: View {
                 
                 Text("Background checks")
                 Text("Update Dating Preference")
-                Text("Update Disability Details")
+                NavigationLink {
+                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel())
+                } label: {
+                    Text("Update Disability Details")
+                }
+             
                 Text("Reset")
             }
         }.onAppear{
