@@ -199,4 +199,25 @@ class SoulDatesMain: ObservableObject {
         throw ProfileError.matchSeekerNotExist
     }
     
+    func updateMatchSeekerBackgroundCheck(currentMatchSeeker: MatchSeeker, backgroundCheck: BackgroundCheck?) throws {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            self.matchSeekers[index].backgroundCheck = backgroundCheck
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+    }
+    
+    func updatePoliceCheckDetails(currentMatchSeeker: MatchSeeker, issueDate: Date, expiryDate: Date, description: String) throws
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            self.matchSeekers[index].backgroundCheck?.policeCheck?.updatePoliceCheckDetails(dateIssued: issueDate, expiryDate: expiryDate, description: description)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+    }
+    
 }
