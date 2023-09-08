@@ -117,7 +117,7 @@ class SoulDatesMain: ObservableObject {
             var allocatedMatches: [MatchSeeker] = []
             
             //determines if the matchSeeker have a disability
-            if matchSeeker.disability != nil
+            if matchSeeker.disability != nil && !matchSeeker.datingPreference.riskGettingRejected
             {
                 for matchSeeker in listedMatches
                 {
