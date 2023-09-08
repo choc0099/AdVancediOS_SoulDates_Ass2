@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct UpdateBackgroundCheckView: View {
+    @StateObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel = UpdatePoliceCheckViewModel()
     var body: some View {
         List {
-            Text("Police Checks")
+            NavigationLink {
+                UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
+            } label: {
+                Text("Police Checks")
+            }
+            
             Text("Proof of Age")
             Text("Raference Checks")
         }

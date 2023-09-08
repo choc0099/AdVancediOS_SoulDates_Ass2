@@ -22,7 +22,12 @@ struct SettingsView: View {
                     Text("Update Profile")
                 }
                 
-                Text("Background checks")
+                NavigationLink {
+                    UpdateBackgroundCheckView()
+                } label: {
+                    Text("Background checks")
+                }
+             
                 NavigationLink {
                     UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM)
                 } label: {
@@ -35,7 +40,13 @@ struct SettingsView: View {
                     Text("Update Disability Details")
                 }
              
-                Text("Reset")
+                NavigationLink {
+                    WelcomeView()
+                } label: {
+                    Text("Reset")
+                }
+                
+                
             }
         }.onAppear{
             do {
@@ -44,9 +55,7 @@ struct SettingsView: View {
             } catch {
                 print("The matchSeeker on the soulDatesMain does not exist.")
             }
-           
         }
-       
     }
     
     func transferToUpdateProfileVM() throws {

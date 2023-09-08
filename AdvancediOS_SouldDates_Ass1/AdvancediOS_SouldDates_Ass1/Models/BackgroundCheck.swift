@@ -13,6 +13,12 @@ struct PoliceCheck: Verifiable {
     var expiryDate: Date
     var description: String
     
+    mutating func updatePoliceCheckDetails(dateIssued: Date, expiryDate: Date, description: String)
+    {
+        self.dateIssued = dateIssued
+        self.expiryDate = expiryDate
+        self.description = description
+    }
 }
 
 struct ProofOfAge: Verifiable {
@@ -24,6 +30,7 @@ struct ProofOfAge: Verifiable {
     var legalFirstName: String
     var legalLastName: String
     var streetAddress: String
+    
 }
 
 struct RefereeCheck: Verifiable {
@@ -40,16 +47,16 @@ struct BackgroundCheck: Decodable {
     var refereeCheck: RefereeCheck?
     
     //functions for getters and setters
-    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
+    mutating func setPoliceCheck(policeCheck: PoliceCheck?) {
         self.policeCheck = policeCheck
     }
     
-    mutating func setRefereeCheck(referee: RefereeCheck)
+    mutating func setRefereeCheck(referee: RefereeCheck?)
     {
         self.refereeCheck = referee
     }
     
-    mutating func setProofOfAge(proofOfAge: ProofOfAge)
+    mutating func setProofOfAge(proofOfAge: ProofOfAge?)
     {
         self.proofOfAge = proofOfAge
     }
