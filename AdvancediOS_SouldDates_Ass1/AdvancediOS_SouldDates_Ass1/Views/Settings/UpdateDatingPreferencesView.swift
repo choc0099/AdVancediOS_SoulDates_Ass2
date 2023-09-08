@@ -11,26 +11,62 @@ struct UpdateDatingPreferencesView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @ObservedObject var updateDatingPrefVM: UpdateDatingPreferncesViewModel
-
+    @State var showAlert: Bool = false
+    @State var navActive: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
+    
     var body: some View {
-        Form {
-            Section("Dating Prefernces") {
-                Picker("Interested in", selection: $updateDatingPrefVM.interestedIn) {
-                    ForEach(InterestedIn.allCases) {
-                        option in
-                        Text(option.rawValue.capitalized)
+       
+        NavigationStack {
+            Form {
+                Section("Dating Prefernces") {
+                    Picker("Interested in", selection: $updateDatingPrefVM.interestedIn) {
+                        ForEach(InterestedIn.allCases) {
+                            option in
+                            Text(option.rawValue.capitalized)
+                        }
+                    }.pickerStyle(.navigationLink)
+                    
+                    Picker("Who are you open with dating?", selection: $updateDatingPrefVM.disabilityPrefernces) {
+                        ForEach(DisabilityPreference.allCases)
+                        {
+                            option in
+                            Text(option.rawValue)
+                        }
+                    }.pickerStyle(.navigationLink)
+                }
+            }.toolbar {
+                Button {
+                    do {
+                        try processData()
+                        navActive = true
                     }
-                }.pickerStyle(.navigationLink)
-                
-                Picker("Who are you open with dating?", selection: $updateDatingPrefVM.disabilityPrefernces) {
-                    ForEach(DisabilityPreference.allCases)
-                    {
-                        option in
-                        Text(option.rawValue)
+                    catch {
+                        showAlert = true
+                        alertTitle = "Something went wrong!"
+                        alertMessage = "Unable to update dating preferences."
+                        print(error)
                     }
-                }.pickerStyle(.navigationLink)
+                } label: {
+                    Text("Done")
+                }.navigationDestination(isPresented: $navActive) {
+                    InSessionTabView()
+                }.alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage)
+                    )
+                }
             }
         }
+    }
+    
+    func processData() throws {
+        //gets the matchSeeker from session
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+       try soulDatesMain.updateMatchSeekerDatingPreference(currentMatchSeeker: matchSeeker, newInterestedIn: updateDatingPrefVM.interestedIn, newDisabilityPrefernce: updateDatingPrefVM.disabilityPrefernces)
+        
     }
 }
 

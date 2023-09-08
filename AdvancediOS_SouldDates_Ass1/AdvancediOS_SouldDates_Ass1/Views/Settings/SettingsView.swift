@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var updateProfileVM: UpdateProfileViewModel = UpdateProfileViewModel()
+    @StateObject var updateDatingPrefVM: UpdateDatingPreferncesViewModel = UpdateDatingPreferncesViewModel()
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View {
@@ -22,7 +23,12 @@ struct SettingsView: View {
                 }
                 
                 Text("Background checks")
-                Text("Update Dating Preference")
+                NavigationLink {
+                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM)
+                } label: {
+                    Text("Update Dating Preference")
+                }
+                
                 NavigationLink {
                     UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel())
                 } label: {
@@ -32,26 +38,36 @@ struct SettingsView: View {
                 Text("Reset")
             }
         }.onAppear{
-            transferToUpdateProfileVM()
+            do {
+                try transferToUpdateProfileVM()
+                try transferToUpdateDatingPrefernceVM()
+            } catch {
+                print("The matchSeeker on the soulDatesMain does not exist.")
+            }
+           
         }
        
     }
     
-    func transferToUpdateProfileVM()
-    {
-        do {
-            let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-            updateProfileVM.screenName = matchSeeker.screenName
-            updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
-            updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
-            updateProfileVM.gender = matchSeeker.gender
-            updateProfileVM.hobbies = matchSeeker.hobbies
-            updateProfileVM.bio = matchSeeker.bio
-        }
-        catch {
-            print("An error has occurred while passing matchseeker data to the VM")
-        }
+    func transferToUpdateProfileVM() throws {
         
+        let matchSeeker = try getMatchSeekerFromSesstion()
+        updateProfileVM.screenName = matchSeeker.screenName
+        updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
+        updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
+        updateProfileVM.gender = matchSeeker.gender
+        updateProfileVM.hobbies = matchSeeker.hobbies
+        updateProfileVM.bio = matchSeeker.bio
+    }
+     
+    func transferToUpdateDatingPrefernceVM() throws {
+        let matchSeeker = try getMatchSeekerFromSesstion()
+        updateDatingPrefVM.interestedIn = matchSeeker.datingPreference.interestedIn
+        updateDatingPrefVM.disabilityPrefernces = matchSeeker.datingPreference.disabilityPreference
+    }
+    
+    func getMatchSeekerFromSesstion() throws -> MatchSeeker {
+        return try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
     }
 }
 

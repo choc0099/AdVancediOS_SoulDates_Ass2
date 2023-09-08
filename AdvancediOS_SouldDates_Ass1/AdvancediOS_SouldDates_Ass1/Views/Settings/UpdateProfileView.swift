@@ -73,8 +73,6 @@ struct UpdateProfileView: View {
         }
     }
     
-    
-    
     func processData() throws {
         //gets the matchSeeker based on stored matchSeeker id from session
         let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)

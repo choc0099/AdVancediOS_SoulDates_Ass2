@@ -182,7 +182,10 @@ class SoulDatesMain: ObservableObject {
         {
             self.matchSeekers[index].datingPreference.updateDatingPrefernces(interstedIn: newInterestedIn, disabilityPreferences: newDisabilityPrefernce)
         }
-        throw ProfileError.matchSeekerNotExist
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+       
     }
     
     func getSpecificMatchSeeker(matchSeekerId: UUID) throws -> MatchSeeker
