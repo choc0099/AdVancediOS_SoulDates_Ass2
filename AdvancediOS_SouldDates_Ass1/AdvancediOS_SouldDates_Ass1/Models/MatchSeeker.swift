@@ -16,9 +16,7 @@ struct MatchSeeker: Person {
     var dateOfBirth: Date
     var bio: String
     var favouriteMusic: String
-    var policeCheck: PoliceCheck?
-    var proofOfAge: ProofOfAge?
-    var refereeCheck: RefereeCheck?
+    var backgroundCheck: BackgroundCheck?
     var disability: Disability?
     var isScammer: Bool
     
@@ -32,25 +30,8 @@ struct MatchSeeker: Person {
         self.favouriteMusic = favourteMusic
         self.datingPreference = datingPreference
         self.disability = disability
-        self.policeCheck = nil
-        self.refereeCheck = nil
-        self.proofOfAge = nil
         self.isScammer = false
-    }
-    
-    //functions for getters and setters
-    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
-        self.policeCheck = policeCheck
-    }
-    
-    mutating func setRefereeCheck(referee: RefereeCheck)
-    {
-        self.refereeCheck = referee
-    }
-    
-    mutating func setProofOfAge(proofOfAge: ProofOfAge)
-    {
-        self.proofOfAge = proofOfAge
+        self.backgroundCheck = nil
     }
     
     mutating func toggleScammer() {

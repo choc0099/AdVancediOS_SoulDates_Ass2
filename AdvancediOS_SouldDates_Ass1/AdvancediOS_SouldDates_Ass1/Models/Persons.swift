@@ -35,13 +35,7 @@ enum InterestedIn: String, CaseIterable, Identifiable, Decodable {
     var id: Self {self}
 }
 
-enum DisabilitySeverity: String, CaseIterable, Identifiable, Decodable {
-    case mild
-    case moderate
-    case severe
-    
-    var id: Self { self }
-}
+
 
 enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
     case withDisability = "People with disabilities"

@@ -15,6 +15,9 @@
 		329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */; };
 		329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */; };
 		329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */; };
+		32B174682AABAED00007BA5A /* UpdateBackgroundCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B174672AABAED00007BA5A /* UpdateBackgroundCheckView.swift */; };
+		32B1746B2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B1746A2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift */; };
+		32B1746D2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */; };
 		32B66C542AA9578700FF139D /* Disability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B66C532AA9578700FF139D /* Disability.swift */; };
 		32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E02AA1B9E30095A649 /* ProfileTests.swift */; };
 		32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */; };
@@ -80,6 +83,9 @@
 		329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreference.swift; sourceTree = "<group>"; };
 		329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesView.swift; sourceTree = "<group>"; };
 		329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesViewModel.swift; sourceTree = "<group>"; };
+		32B174672AABAED00007BA5A /* UpdateBackgroundCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBackgroundCheckView.swift; sourceTree = "<group>"; };
+		32B1746A2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePoliceCheckView.swift; sourceTree = "<group>"; };
+		32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePoliceCheckViewModel.swift; sourceTree = "<group>"; };
 		32B66C532AA9578700FF139D /* Disability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disability.swift; sourceTree = "<group>"; };
 		32BB89E02AA1B9E30095A649 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInSetupView.swift; sourceTree = "<group>"; };
@@ -150,12 +156,22 @@
 		321E518E2AA57E1200513CA9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				32B174692AABAF3C0007BA5A /* BackgroundChecks */,
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
 				321E51932AA5867600513CA9 /* UpdateProfileView.swift */,
 				32E3FFD82AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift */,
 				329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		32B174692AABAF3C0007BA5A /* BackgroundChecks */ = {
+			isa = PBXGroup;
+			children = (
+				32B174672AABAED00007BA5A /* UpdateBackgroundCheckView.swift */,
+				32B1746A2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift */,
+			);
+			path = BackgroundChecks;
 			sourceTree = "<group>";
 		};
 		32BB89E62AA2B9FA0095A649 /* ViewModels */ = {
@@ -171,6 +187,7 @@
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
 				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
+				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -443,9 +460,11 @@
 				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
 				321E51942AA5867600513CA9 /* UpdateProfileView.swift in Sources */,
 				32F519222AA07547005DA063 /* DateManager.swift in Sources */,
+				32B1746D2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift in Sources */,
 				32F5191F2A9F487A005DA063 /* SoulDatesMain.swift in Sources */,
 				32B66C542AA9578700FF139D /* Disability.swift in Sources */,
 				32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */,
+				32B1746B2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift in Sources */,
 				32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
 				32D538442A91F37000DFC38D /* SettingsView.swift in Sources */,
@@ -457,6 +476,7 @@
 				321E51962AA588D700513CA9 /* UpdateProfileViewModel.swift in Sources */,
 				32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */,
 				321E51902AA57ED300513CA9 /* MatchSeeker.swift in Sources */,
+				32B174682AABAED00007BA5A /* UpdateBackgroundCheckView.swift in Sources */,
 				321E518D2AA56E5E00513CA9 /* ProfileViewModel.swift in Sources */,
 				329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */,
 				329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */,

@@ -7,12 +7,11 @@
 
 import Foundation
 
-
 struct PoliceCheck: Verifiable {
     var id: UUID = UUID()
     var dateIssued: Date
     var expiryDate: Date
-    var isCriminalRecord: Bool
+    var description: String
     
 }
 
@@ -33,4 +32,26 @@ struct RefereeCheck: Verifiable {
     var expiryDate: Date
     var refereeName: String
     var description: String
+}
+
+struct BackgroundCheck: Decodable {
+    var policeCheck: PoliceCheck?
+    var proofOfAge: ProofOfAge?
+    var refereeCheck: RefereeCheck?
+    
+    //functions for getters and setters
+    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
+        self.policeCheck = policeCheck
+    }
+    
+    mutating func setRefereeCheck(referee: RefereeCheck)
+    {
+        self.refereeCheck = referee
+    }
+    
+    mutating func setProofOfAge(proofOfAge: ProofOfAge)
+    {
+        self.proofOfAge = proofOfAge
+    }
+    
 }
