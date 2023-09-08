@@ -153,7 +153,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil) throws
+    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil, discloseDisability: Bool, riskRejections: Bool) throws
     {
         //checks for the specific matchSeeker
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id }) {
@@ -171,6 +171,8 @@ class SoulDatesMain: ObservableObject {
             else {
                 self.matchSeekers[index].disability = nil
             }
+            //this will also update dating preferneces and privacy relating to disability
+            self.matchSeekers[index].datingPreference.updateDisabilityRelatedPreference(discloseDisability: discloseDisability, riskRejections: riskRejections)
         } else {
             throw ProfileError.matchSeekerNotExist
         }

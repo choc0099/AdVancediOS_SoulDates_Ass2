@@ -31,24 +31,34 @@ struct UpdateDisabilityDetailsView: View {
                     }
                 }.pickerStyle(.segmented)
                 
-                Section {
-                    Toggle("Disclose my disability: ", isOn: $updateDisabilityVM.discloseMyDisability)
+                Section("Disability related settings:") {
+                    Toggle("Disclose my disability:", isOn: $updateDisabilityVM.discloseMyDisability)
+                    Toggle("Risk getting rejected:", isOn: $updateDisabilityVM.riskGettingRejected)
                 }
             }
         }.onAppear {
             
-            let allocatedMatchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-            if let matchSeekerHaveDisability = allocatedMatchSeeker.disability {
-                updateDisabilityVM.isDisabled = true
-                disabilityText = matchSeekerHaveDisability.disabilities
-                disabilitySeverity = matchSeekerHaveDisability.severeity
+            do {
+                let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+                if let matchSeekerHaveDisability = allocatedMatchSeeker.disability {
+                    updateDisabilityVM.isDisabled = true
+                    disabilityText = matchSeekerHaveDisability.disabilities
+                    disabilitySeverity = matchSeekerHaveDisability.severeity
+                    let datingPref = allocatedMatchSeeker.datingPreference
+                    updateDisabilityVM.discloseMyDisability = datingPref.discloseMyDisability
+                    updateDisabilityVM.riskGettingRejected = datingPref.riskGettingRejected
+                }
+                if let haveDisability = updateDisabilityVM.disability {
+                    disabilityText = haveDisability
+                }
+                if let haveDisabilitySeverity = updateDisabilityVM.disabilitySeverity {
+                    disabilitySeverity = haveDisabilitySeverity
+                }
             }
-            if let haveDisability = updateDisabilityVM.disability {
-                disabilityText = haveDisability
+            catch {
+                print("The matchSeeker does not exist.")
             }
-            if let haveDisabilitySeverity = updateDisabilityVM.disabilitySeverity {
-                disabilitySeverity = haveDisabilitySeverity
-            }
+           
            
         }.navigationDestination(isPresented: $navActive, destination: {
             InSessionTabView()
@@ -84,13 +94,13 @@ struct UpdateDisabilityDetailsView: View {
         }
         
         let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability)
+        try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability, discloseDisability: updateDisabilityVM.discloseMyDisability, riskRejections: updateDisabilityVM.riskGettingRejected)
     }
     //this will update it on the session side.
 }
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel())
+        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
