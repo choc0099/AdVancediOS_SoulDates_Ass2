@@ -14,7 +14,7 @@ struct SettingsView: View {
     var body: some View {
       NavigationStack
         {
-            List() {
+            List {
                 NavigationLink {
                     UpdateProfileView(updateProfileVM: updateProfileVM)
                 } label: {
@@ -39,13 +39,19 @@ struct SettingsView: View {
     
     func transferToUpdateProfileVM()
     {
-        let matchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        updateProfileVM.screenName = matchSeeker.screenName
-        updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
-        updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
-        updateProfileVM.gender = matchSeeker.gender
-        updateProfileVM.hobbies = matchSeeker.hobbies
-        updateProfileVM.bio = matchSeeker.bio
+        do {
+            let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+            updateProfileVM.screenName = matchSeeker.screenName
+            updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth
+            updateProfileVM.favouriteMusic = matchSeeker.favouriteMusic
+            updateProfileVM.gender = matchSeeker.gender
+            updateProfileVM.hobbies = matchSeeker.hobbies
+            updateProfileVM.bio = matchSeeker.bio
+        }
+        catch {
+            print("An error has occurred while passing matchseeker data to the VM")
+        }
+        
     }
 }
 

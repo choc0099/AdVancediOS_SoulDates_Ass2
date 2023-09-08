@@ -10,6 +10,7 @@ import Foundation
 enum ProfileError: Error {
     case underAgeException
     case noMatchesFound
+    case matchSeekerNotExist
     case caseSelectionNotListed(message: String)
     case emptyTextFields
 }
@@ -106,11 +107,6 @@ extension MatchSeekerUser {
 
 
 
-struct DatingPreference: Decodable {
-    var interestedIn: InterestedIn
-    var disabilityPreference: DisabilityPreference
-    var discloseMyDisability: Bool
-}
 
 struct AnyMatchSeeker {
     var id = UUID()

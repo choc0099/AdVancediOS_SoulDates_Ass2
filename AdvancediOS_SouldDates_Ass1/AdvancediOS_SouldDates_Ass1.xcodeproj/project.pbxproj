@@ -12,6 +12,9 @@
 		321E51942AA5867600513CA9 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E51932AA5867600513CA9 /* UpdateProfileView.swift */; };
 		321E51962AA588D700513CA9 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */; };
 		3224AD9D2AA5379300F37D2A /* InSessionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3224AD9C2AA5379300F37D2A /* InSessionTabView.swift */; };
+		329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */; };
+		329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */; };
+		329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */; };
 		32B66C542AA9578700FF139D /* Disability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B66C532AA9578700FF139D /* Disability.swift */; };
 		32BB89E12AA1B9E30095A649 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E02AA1B9E30095A649 /* ProfileTests.swift */; };
 		32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */; };
@@ -74,6 +77,9 @@
 		321E51932AA5867600513CA9 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
 		3224AD9C2AA5379300F37D2A /* InSessionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSessionTabView.swift; sourceTree = "<group>"; };
+		329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreference.swift; sourceTree = "<group>"; };
+		329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesView.swift; sourceTree = "<group>"; };
+		329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesViewModel.swift; sourceTree = "<group>"; };
 		32B66C532AA9578700FF139D /* Disability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disability.swift; sourceTree = "<group>"; };
 		32BB89E02AA1B9E30095A649 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInSetupView.swift; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 				32D538432A91F37000DFC38D /* SettingsView.swift */,
 				321E51932AA5867600513CA9 /* UpdateProfileView.swift */,
 				32E3FFD82AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift */,
+				329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -163,6 +170,7 @@
 				32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */,
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
+				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 				32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */,
 				321E518F2AA57ED300513CA9 /* MatchSeeker.swift */,
 				32B66C532AA9578700FF139D /* Disability.swift */,
+				329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,12 +451,15 @@
 				32D538442A91F37000DFC38D /* SettingsView.swift in Sources */,
 				32F5191B2A9F1317005DA063 /* SoulDatesSampleData.swift in Sources */,
 				32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */,
+				329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */,
 				32D538362A91F20100DFC38D /* GenderSetup.swift in Sources */,
 				32F250F32A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift in Sources */,
 				321E51962AA588D700513CA9 /* UpdateProfileViewModel.swift in Sources */,
 				32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */,
 				321E51902AA57ED300513CA9 /* MatchSeeker.swift in Sources */,
 				321E518D2AA56E5E00513CA9 /* ProfileViewModel.swift in Sources */,
+				329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */,
+				329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */,
 				32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */,
 				32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */,
 				32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */,

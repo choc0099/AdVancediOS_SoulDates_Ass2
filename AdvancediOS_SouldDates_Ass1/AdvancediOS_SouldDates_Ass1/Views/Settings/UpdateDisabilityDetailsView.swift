@@ -14,6 +14,7 @@ struct UpdateDisabilityDetailsView: View {
     @State var disabilityText: String = ""
     @State var disabilitySeverity: DisabilitySeverity = .moderate
     @State var navActive: Bool = false
+    @State var showAlert: Bool = false
     var body: some View {
         Form {
             Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
@@ -53,19 +54,27 @@ struct UpdateDisabilityDetailsView: View {
             InSessionTabView()
         }).navigationTitle("Update Disability Details").toolbar{
             Button {
-                processData()
+                do{
+                    try processData()
+                    navActive = true
+                }
+                catch {
+                    print("the matchSeeker from the session does not exist in the matchSeekerMain.")
+                }
+                
             } label: {
                 Text("Done")
             }
         }
     }
     
-    func processData() {
-        //updateOnSesstion()
-        updateOnMain()
+    func processData() throws {
+        
+        try updateOnMain()
     }
     //this will update it on the model.
-    func updateOnMain() {
+    func updateOnMain() throws {
+        
         var disability: Disability?
         if updateDisabilityVM.isDisabled {
             disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
@@ -74,8 +83,8 @@ struct UpdateDisabilityDetailsView: View {
             disability = nil
         }
         
-        let allocatedMatchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability)
+        let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability)
     }
     //this will update it on the session side.
 }

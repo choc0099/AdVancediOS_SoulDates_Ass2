@@ -14,7 +14,7 @@ struct InterestedInSetupView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
                     Text("Who are you interested in?").padding()
                    
                     ForEach(InterestedIn.allCases) {

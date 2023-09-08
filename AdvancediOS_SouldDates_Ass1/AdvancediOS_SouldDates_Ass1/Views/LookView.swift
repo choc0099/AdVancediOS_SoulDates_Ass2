@@ -34,10 +34,13 @@ struct LookView: View {
                 }
             }
             else if (lookError == .noMatches) {
-                Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.")
+                VStack(spacing: 20) {
+                    Text("No Matches").font(.headline)
+                    Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
+                }
             }
             else if (lookError == .unkown) {
-                Text("Sorry, something went wrong.")
+                Text("Sorry, something went wrong.").font(.headline)
             }
         }.onAppear {
             gatherMatches()

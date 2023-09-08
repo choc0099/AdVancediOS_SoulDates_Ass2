@@ -129,15 +129,12 @@ class SoulDatesMain: ObservableObject {
                     throw ProfileError.noMatchesFound
                 }
             }
-            
             else
             {
                 //does not do anything if a person does not declare they have a disability, it would simply return the listed matches.
                 return listedMatches
             }
             return allocatedMatches
-            
-            
         }
         catch {
             throw ProfileError.noMatchesFound
@@ -145,15 +142,18 @@ class SoulDatesMain: ObservableObject {
       
     }
     
-    func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String)
+    func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String) throws
     {
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id })
         {
             self.matchSeekers[index].editProfile(screenName: newScreenName, gender: newGender, dateOfBirth: newDateOfBirth, bio: newBio, hobbies: newHobbies, favouriteMusic: newFavouriteMusic)
         }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
     }
     
-    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil)
+    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil) throws
     {
         //checks for the specific matchSeeker
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id }) {
@@ -171,7 +171,18 @@ class SoulDatesMain: ObservableObject {
             else {
                 self.matchSeekers[index].disability = nil
             }
+        } else {
+            throw ProfileError.matchSeekerNotExist
         }
+    }
+    
+    func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference) throws
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            self.matchSeekers[index].datingPreference.updateDatingPrefernces(interstedIn: newInterestedIn, disabilityPreferences: newDisabilityPrefernce)
+        }
+        throw ProfileError.matchSeekerNotExist
     }
     
     func getSpecificMatchSeeker(matchSeekerId: UUID) throws -> MatchSeeker
@@ -180,7 +191,7 @@ class SoulDatesMain: ObservableObject {
         {
             return self.matchSeekers[index]
         }
-        throw ProfileError.noMatchesFound
+        throw ProfileError.matchSeekerNotExist
     }
     
 }

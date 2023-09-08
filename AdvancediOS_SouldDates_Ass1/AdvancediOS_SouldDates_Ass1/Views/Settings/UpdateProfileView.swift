@@ -13,6 +13,8 @@ struct UpdateProfileView: View {
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
+    @State var alertMessage: String = ""
+    @State var alertTitle: String = ""
     var body: some View {
         
         NavigationStack {
@@ -43,18 +45,26 @@ struct UpdateProfileView: View {
                 Button {
                     do {
                         try updateProfileVM.validateDateOfBirth()
-                        processData()
+                        try processData()
                         navActive = true
+                    }
+                    catch ProfileError.underAgeException {
+                        showAlert = true
+                        alertTitle = "Under Age!"
+                        alertMessage = "Your updated date of birth is under the age of 18 and can not be used for our services."
                     }
                     catch {
                         showAlert = true
+                        alertTitle = "Something went wrong!"
+                        alertMessage = "Unable to update matchSeeker Profile Details."
+                        print("The MatchSeeker id does not exisit in the SoulDates Main.")
                     }
                 } label: {
                     Text("Done")
                 }.alert(isPresented: $showAlert) {
                     Alert(
-                        title: Text("Under Age!"),
-                        message: Text("Your updated date of birth is under the age of 18 and can not be used for our services.")
+                        title: Text(alertTitle),
+                        message: Text(alertMessage)
                     )
                 }
             }.navigationDestination(isPresented: $navActive) {
@@ -65,13 +75,12 @@ struct UpdateProfileView: View {
     
     
     
-    func processData() {
+    func processData() throws {
         //gets the matchSeeker based on stored matchSeeker id from session
-        let allocatedMatchSeeker = try! soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         
         //edits the profile from the model side
-        soulDatesMain.updateMatchSeekerProfile(currentMatchSeeker: allocatedMatchSeeker, newScreenName: updateProfileVM.screenName, newGender: updateProfileVM.gender, newDateOfBirth: updateProfileVM.dateOfBirth, newBio: updateProfileVM.bio, newHobbies: updateProfileVM.hobbies, newFavouriteMusic: updateProfileVM.favouriteMusic)
-        //edits the profile from the session side.
+        try soulDatesMain.updateMatchSeekerProfile(currentMatchSeeker: allocatedMatchSeeker, newScreenName: updateProfileVM.screenName, newGender: updateProfileVM.gender, newDateOfBirth: updateProfileVM.dateOfBirth, newBio: updateProfileVM.bio, newHobbies: updateProfileVM.hobbies, newFavouriteMusic: updateProfileVM.favouriteMusic)
     }
 }
 
