@@ -9,6 +9,12 @@ import SwiftUI
 
 struct UpdateRefereeCheckView: View {
     @ObservedObject var updateRefereeVM: UpdateRefereeCheckViewModel
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @EnvironmentObject var session: Session
+    @State var navAcitve: Bool = false
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
     var body: some View {
         NavigationStack {
             Form {
@@ -26,14 +32,73 @@ struct UpdateRefereeCheckView: View {
                     {
                         TextEditor(text: $updateRefereeVM.description)
                     }
-                    
                 }
+            }.toolbar{
+                Button {
+                    do {
+                        try processData()
+                        navAcitve = true
+                    }
+                    catch {
+                        showAlert = true
+                        alertTitle = "Something Went Wrong!"
+                        alertMessage = "Unable to update referee check."
+                    }
+                } label: {
+                    Text("Done")
+                }
+            }.navigationDestination(isPresented: $navAcitve, destination: {
+                InSessionTabView()
+            }).onAppear {
+                do {
+                    //updates the view model.
+                    try updateVM()
+                }
+                catch {
+                    print("MatchSeeker does not exist.")
+                }
+            }.alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertTitle),
+                    message: Text(alertMessage)
+                )
             }
         }
     }
+    // a helper function to update the view model when the view has appeared.
+    func updateVM() throws {
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        if let matchSeekerReferee = matchSeeker.backgroundCheck?.refereeCheck {
+            updateRefereeVM.isRefereeChecked = true
+            updateRefereeVM.dateIssued = matchSeekerReferee.dateIssued
+            updateRefereeVM.expiryDate = matchSeekerReferee.expiryDate
+            updateRefereeVM.description = matchSeekerReferee.description
+            updateRefereeVM.rafereeName = matchSeekerReferee.refereeName
+        }
+    }
     
+    //this will update referee data into the model
     func processData() throws {
-        //let matchSeeker = soul
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        if updateRefereeVM.isRefereeChecked {
+            if matchSeeker.backgroundCheck?.refereeCheck != nil {
+                try soulDatesMain.updateRefereeDetails(currentMatchSeeker: matchSeeker, refereeName: updateRefereeVM.rafereeName, description: updateRefereeVM.description, dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate)
+            }
+            else if matchSeeker.backgroundCheck?.refereeCheck == nil && matchSeeker.backgroundCheck != nil {
+                try initialiseRefereeCheck(matchSeeker)
+            }
+            else {
+                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck())
+                try initialiseRefereeCheck(matchSeeker)
+            }
+        }
+        else {
+           try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: nil)
+        }
+    }
+    
+    func initialiseRefereeCheck(_ matchSeeker: MatchSeeker) throws {
+        try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: RefereeCheck(dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate, refereeName: updateRefereeVM.rafereeName, description: updateRefereeVM.description))
     }
 }
 
