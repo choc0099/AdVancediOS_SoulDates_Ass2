@@ -21,8 +21,11 @@ struct UpdateBackgroundCheckView: View {
             } label: {
                 Text("Proof of Age")
             }
-            
-            Text("Raference Checks")
+            NavigationLink {
+                UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
+            } label: {
+                Text("Raference Checks")
+            }
         }
     }
 }

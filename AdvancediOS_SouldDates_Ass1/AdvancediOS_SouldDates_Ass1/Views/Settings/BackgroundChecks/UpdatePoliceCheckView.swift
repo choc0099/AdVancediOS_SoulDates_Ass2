@@ -90,7 +90,7 @@ struct UpdatePoliceCheckView: View {
     }
     
     func processData() throws {
-        var matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         //checks if the backgroundcheck is nil
      
         
