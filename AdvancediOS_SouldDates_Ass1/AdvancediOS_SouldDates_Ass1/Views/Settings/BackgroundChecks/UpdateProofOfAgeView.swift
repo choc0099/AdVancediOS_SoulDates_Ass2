@@ -110,12 +110,11 @@ struct UpdateProofOfAgeView: View {
             if matchSeeker.backgroundCheck?.proofOfAge != nil {
                try soulDatesMain.updateProofOfAgeDetails(currentMatchSeeker: matchSeeker, legalFirstName: updateProofOfAgeVM.legalFirstName, legalLastName: updateProofOfAgeVM.legalLastName, dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber)
             }
-            else if matchSeeker.backgroundCheck?.proofOfAge == nil {
+            else if matchSeeker.backgroundCheck?.proofOfAge == nil && matchSeeker.backgroundCheck != nil {
               try initialiseProofOfAge(matchSeeker: matchSeeker)
             } // checks if it is the first background check.
             else if matchSeeker.backgroundCheck == nil {
-                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck())
-                try initialiseProofOfAge(matchSeeker: matchSeeker)
+                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck(proofOfAge: ProofOfAge(dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber, legalFirstName: updateProofOfAgeVM.legalFirstName, legalLastName: updateProofOfAgeVM.legalLastName, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth )))
             }
         }
         else { // this will set the proofOfAge object to nil if the matchSeeker no longer wants their proof of age.
