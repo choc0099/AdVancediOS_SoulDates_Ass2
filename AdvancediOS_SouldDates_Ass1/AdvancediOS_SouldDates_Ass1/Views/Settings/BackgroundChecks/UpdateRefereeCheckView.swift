@@ -31,6 +31,10 @@ struct UpdateRefereeCheckView: View {
             }
         }
     }
+    
+    func processData() throws {
+        //let matchSeeker = soul
+    }
 }
 
 struct UpdateRefereeCheckView_Previews: PreviewProvider {

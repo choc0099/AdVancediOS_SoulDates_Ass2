@@ -96,7 +96,7 @@ struct UpdatePoliceCheckView: View {
         
         if updatePoliceCheckVM.isPoliceChecked {
             if matchSeeker.backgroundCheck == nil {
-                try soulDatesMain.updateMatchSeekerBackgroundCheck(currentMatchSeeker: matchSeeker, backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)))
+                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)))
             }
             else {
                try soulDatesMain.updatePoliceCheckDetails(currentMatchSeeker: matchSeeker, issueDate: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)
@@ -104,7 +104,7 @@ struct UpdatePoliceCheckView: View {
             }
         }
         else {
-            try soulDatesMain.updateMatchSeekerBackgroundCheck(currentMatchSeeker: matchSeeker, backgroundCheck: nil)
+            try soulDatesMain.managePoliceCheck(currentMatchSeeker: matchSeeker, policeCheck: nil)
         }
     }
 }

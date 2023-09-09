@@ -85,29 +85,41 @@ struct BackgroundCheck: Decodable {
 extension SoulDatesMain {
    
     //this will be used to set or nil a background check.
-    func manageBackgroundChecks(currentMatchSeekr: MatchSeeker, backgroundCheck: BackgroundCheck?)
+    func manageBackgroundChecks(currentMatchSeekr: MatchSeeker, backgroundCheck: BackgroundCheck?) throws
     {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeekr.id})
         {
             self.matchSeekers[index].setBackgroundCheck(backgroundCheck: backgroundCheck)
         }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
     }
     
-    func managePoliceCheck(currentMatchSeeker: MatchSeeker, policeCheck: PoliceCheck?) {
+    func managePoliceCheck(currentMatchSeeker: MatchSeeker, policeCheck: PoliceCheck?) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.setPoliceCheck(policeCheck: policeCheck)
         }
-    }
-    
-    func manageProofOfAgeCheck(currentMatchSeeker: MatchSeeker, proofOfAge: ProofOfAge?) {
-        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
-            self.matchSeekers[index].backgroundCheck?.setProofOfAge(proofOfAge: proofOfAge)
+        else {
+            throw ProfileError.matchSeekerNotExist
         }
     }
     
-    func manageRefereeCheck(currentMatchSeeker: MatchSeeker, refereeCheck: RefereeCheck?) {
+    func manageProofOfAgeCheck(currentMatchSeeker: MatchSeeker, proofOfAge: ProofOfAge?) throws{
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
+            self.matchSeekers[index].backgroundCheck?.setProofOfAge(proofOfAge: proofOfAge)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+    }
+    
+    func manageRefereeCheck(currentMatchSeeker: MatchSeeker, refereeCheck: RefereeCheck?) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.setRefereeCheck(referee: refereeCheck)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
         }
     }
     
@@ -123,18 +135,23 @@ extension SoulDatesMain {
     }
     
     //this will be used to update existing proofOfAgeDetails if they have already provided us with that.
-    func updateProofOfAgeDetails(currentMatchSeeker: MatchSeeker, legalFirstName: String, legalLastName: String, dateIssued: Date, expiryDate: Date, streetAddress: String, dateOfBirth: Date, issuer: String, proofOfIdNumber: String)
-    {
+    func updateProofOfAgeDetails(currentMatchSeeker: MatchSeeker, legalFirstName: String, legalLastName: String, dateIssued: Date, expiryDate: Date, streetAddress: String, dateOfBirth: Date, issuer: String, proofOfIdNumber: String) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
         {
             //updates the proof of age details from the matchSeekers
             self.matchSeekers[index].backgroundCheck?.proofOfAge?.updateDetails(dateIssued: dateIssued, expiryDate: expiryDate, issuer: issuer, proofOfIdNumber: proofOfIdNumber, legalFirstName: legalFirstName, legalLastName: legalLastName, streetAddress: streetAddress, dateOfBirth: dateOfBirth)
         }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
     }
     
-    func updateRefereeDetails(currentMatchSeeker: MatchSeeker, refereeName: String, description: String, dateIssued: Date, expiryDate: Date) {
+    func updateRefereeDetails(currentMatchSeeker: MatchSeeker, refereeName: String, description: String, dateIssued: Date, expiryDate: Date) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.refereeCheck?.updateRefereeCheck(dateIssued: dateIssued, expiryDate: expiryDate, description: description, refereeName: refereeName)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
         }
     }
 }

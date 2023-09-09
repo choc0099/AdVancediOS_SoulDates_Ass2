@@ -142,8 +142,7 @@ class SoulDatesMain: ObservableObject {
       
     }
     
-    func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String) throws
-    {
+    func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String) throws {
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id })
         {
             self.matchSeekers[index].editProfile(screenName: newScreenName, gender: newGender, dateOfBirth: newDateOfBirth, bio: newBio, hobbies: newHobbies, favouriteMusic: newFavouriteMusic)
@@ -153,8 +152,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil, discloseDisability: Bool, riskRejections: Bool) throws
-    {
+    func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil, discloseDisability: Bool, riskRejections: Bool) throws {
         //checks for the specific matchSeeker
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id }) {
             //checks if the user has toggled that they have a disability.
@@ -178,8 +176,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference) throws
-    {
+    func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
         {
             self.matchSeekers[index].datingPreference.updateDatingPrefernces(interstedIn: newInterestedIn, disabilityPreferences: newDisabilityPrefernce)
@@ -192,22 +189,9 @@ class SoulDatesMain: ObservableObject {
     
     func getSpecificMatchSeeker(matchSeekerId: UUID) throws -> MatchSeeker
     {
-        if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
-        {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId}) {
             return self.matchSeekers[index]
         }
         throw ProfileError.matchSeekerNotExist
     }
-    
-    func updateMatchSeekerBackgroundCheck(currentMatchSeeker: MatchSeeker, backgroundCheck: BackgroundCheck?) throws {
-        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
-        {
-            self.matchSeekers[index].backgroundCheck = backgroundCheck
-        }
-        else {
-            throw ProfileError.matchSeekerNotExist
-        }
-    }
-    
-    
 }

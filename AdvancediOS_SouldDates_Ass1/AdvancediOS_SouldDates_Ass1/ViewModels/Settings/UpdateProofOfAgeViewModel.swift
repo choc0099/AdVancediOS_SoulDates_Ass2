@@ -16,5 +16,7 @@ class UpdateProofOfAgeViewModel: ObservableObject {
     @Published var legalFirstName: String = ""
     @Published var legalLastName: String = ""
     @Published var address: String = ""
-    
+    @Published var dateOfBirth: Date = Date()
+    @Published var session: Session = Session()
+    @Published var soulDatesMain: SoulDatesMain = SoulDatesMain()
 }

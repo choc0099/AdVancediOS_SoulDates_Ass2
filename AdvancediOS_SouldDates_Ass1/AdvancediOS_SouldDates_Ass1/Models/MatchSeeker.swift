@@ -68,7 +68,7 @@ struct MatchSeeker: Person {
         return disabledText
     }
     
-    func setBackgroundCheck(backgroundCheck: BackgroundCheck?) {
+    mutating func setBackgroundCheck(backgroundCheck: BackgroundCheck?) {
         self.backgroundCheck = backgroundCheck
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UpdateProofOfAgeView: View {
     @ObservedObject var updateProofOfAge: UpdateProofOfAgeViewModel
+    @EnvironmentObject var session: Session
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View {
         NavigationStack {
             Form {
@@ -39,12 +41,12 @@ struct UpdateProofOfAgeView: View {
                         HStack() {
                             Text("First Name").frame(width: 100, alignment: .leading)
                             TextField("First Name", text: $updateProofOfAge.legalFirstName)
-                            
                         }
                         HStack {
                             Text("Last Name").frame(width: 100, alignment: .leading)
                             TextField("Last Name", text: $updateProofOfAge.legalLastName)
                         }
+                        DatePicker("Date of birth", selection: $updateProofOfAge.dateOfBirth, displayedComponents: [.date])
                         
                     }
                     Section("Address") {
@@ -53,6 +55,31 @@ struct UpdateProofOfAgeView: View {
                 }
             }
         }
+    }
+    
+    func processData() throws {
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        
+        //check if they declared that they have a proofOfAge check
+        if updateProofOfAge.isProofOfAge {
+            if matchSeeker.backgroundCheck?.proofOfAge != nil {
+               try soulDatesMain.updateProofOfAgeDetails(currentMatchSeeker: matchSeeker, legalFirstName: updateProofOfAge.legalFirstName, legalLastName: updateProofOfAge.legalLastName, dateIssued: updateProofOfAge.dateIssued, expiryDate: updateProofOfAge.expiryDate, streetAddress: updateProofOfAge.address, dateOfBirth: updateProofOfAge.dateOfBirth, issuer: updateProofOfAge.issuer, proofOfIdNumber: updateProofOfAge.proofOfAgeIdNumber)
+            }
+            else if matchSeeker.backgroundCheck?.proofOfAge == nil {
+              try initializeProofOfAge(matchSeeker: matchSeeker)
+            } // checks if it is the first background check.
+            else {
+                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck())
+                try initializeProofOfAge(matchSeeker: matchSeeker)
+            }
+        }
+        else {
+           try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: nil)
+        }
+    }
+    
+    private func initializeProofOfAge(matchSeeker: MatchSeeker) throws {
+        try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: ProofOfAge(dateIssued: updateProofOfAge.dateIssued, expiryDate: updateProofOfAge.expiryDate, issuer: updateProofOfAge.issuer, proofOfIdNumber: updateProofOfAge.proofOfAgeIdNumber, legalFirstName: updateProofOfAge.legalLastName, legalLastName: updateProofOfAge.legalLastName, streetAddress: updateProofOfAge.address, dateOfBirth: updateProofOfAge.dateOfBirth))
     }
 }
 
