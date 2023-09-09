@@ -104,7 +104,7 @@ struct UpdatePoliceCheckView: View {
             }
         }
         else {
-           try soulDatesMain.updateMatchSeekerBackgroundCheck(currentMatchSeeker: matchSeeker, backgroundCheck: nil)
+            try soulDatesMain.updateMatchSeekerBackgroundCheck(currentMatchSeeker: matchSeeker, backgroundCheck: nil)
         }
     }
 }

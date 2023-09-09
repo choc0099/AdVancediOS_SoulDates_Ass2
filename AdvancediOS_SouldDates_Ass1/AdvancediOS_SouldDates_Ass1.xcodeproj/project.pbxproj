@@ -12,6 +12,10 @@
 		321E51942AA5867600513CA9 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E51932AA5867600513CA9 /* UpdateProfileView.swift */; };
 		321E51962AA588D700513CA9 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */; };
 		3224AD9D2AA5379300F37D2A /* InSessionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3224AD9C2AA5379300F37D2A /* InSessionTabView.swift */; };
+		3250E6D82AABE2A700666581 /* UpdateProofOfAgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6D72AABE2A700666581 /* UpdateProofOfAgeView.swift */; };
+		3250E6DA2AABE2D500666581 /* UpdateProofOfAgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */; };
+		3250E6DC2AABFE1F00666581 /* UpdateRefereeCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6DB2AABFE1F00666581 /* UpdateRefereeCheckView.swift */; };
+		3250E6DF2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */; };
 		329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */; };
 		329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */; };
 		329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */; };
@@ -80,6 +84,10 @@
 		321E51932AA5867600513CA9 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
 		3224AD9C2AA5379300F37D2A /* InSessionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSessionTabView.swift; sourceTree = "<group>"; };
+		3250E6D72AABE2A700666581 /* UpdateProofOfAgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProofOfAgeView.swift; sourceTree = "<group>"; };
+		3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProofOfAgeViewModel.swift; sourceTree = "<group>"; };
+		3250E6DB2AABFE1F00666581 /* UpdateRefereeCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefereeCheckView.swift; sourceTree = "<group>"; };
+		3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefereeCheckViewModel.swift; sourceTree = "<group>"; };
 		329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreference.swift; sourceTree = "<group>"; };
 		329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesView.swift; sourceTree = "<group>"; };
 		329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesViewModel.swift; sourceTree = "<group>"; };
@@ -165,11 +173,26 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		3250E6DD2AABFE3E00666581 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
+				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
+				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
+				3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */,
+				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
+				3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		32B174692AABAF3C0007BA5A /* BackgroundChecks */ = {
 			isa = PBXGroup;
 			children = (
 				32B174672AABAED00007BA5A /* UpdateBackgroundCheckView.swift */,
 				32B1746A2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift */,
+				3250E6D72AABE2A700666581 /* UpdateProofOfAgeView.swift */,
+				3250E6DB2AABFE1F00666581 /* UpdateRefereeCheckView.swift */,
 			);
 			path = BackgroundChecks;
 			sourceTree = "<group>";
@@ -177,17 +200,14 @@
 		32BB89E62AA2B9FA0095A649 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3250E6DD2AABFE3E00666581 /* Settings */,
 				32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */,
 				32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */,
 				32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */,
 				32C4974B2AA476B8000A660E /* SessionViewModel.swift */,
 				321E518C2AA56E5E00513CA9 /* ProfileViewModel.swift */,
-				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
 				32E3FFD62AA6E9C300DF1B91 /* LookViewModel.swift */,
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
-				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
-				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
-				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -451,6 +471,7 @@
 				32E3FFD72AA6E9C300DF1B91 /* LookViewModel.swift in Sources */,
 				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
 				32E3FFDB2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift in Sources */,
+				3250E6D82AABE2A700666581 /* UpdateProofOfAgeView.swift in Sources */,
 				3224AD9D2AA5379300F37D2A /* InSessionTabView.swift in Sources */,
 				32C4974A2AA46853000A660E /* StyledButton.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
@@ -462,12 +483,14 @@
 				32F519222AA07547005DA063 /* DateManager.swift in Sources */,
 				32B1746D2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift in Sources */,
 				32F5191F2A9F487A005DA063 /* SoulDatesMain.swift in Sources */,
+				3250E6DF2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift in Sources */,
 				32B66C542AA9578700FF139D /* Disability.swift in Sources */,
 				32F519192A9F1282005DA063 /* MatchSeekerRow.swift in Sources */,
 				32B1746B2AABAF6E0007BA5A /* UpdatePoliceCheckView.swift in Sources */,
 				32F519172A9EEEB6005DA063 /* BackgroundCheck.swift in Sources */,
 				32F2511D2A90D5390084424B /* WelcomeView.swift in Sources */,
 				32D538442A91F37000DFC38D /* SettingsView.swift in Sources */,
+				3250E6DA2AABE2D500666581 /* UpdateProofOfAgeViewModel.swift in Sources */,
 				32F5191B2A9F1317005DA063 /* SoulDatesSampleData.swift in Sources */,
 				32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */,
 				329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */,
@@ -484,6 +507,7 @@
 				32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */,
 				32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */,
 				32D538462A922A3800DFC38D /* BasicDetailsSetupView.swift in Sources */,
+				3250E6DC2AABFE1F00666581 /* UpdateRefereeCheckView.swift in Sources */,
 				32E3FFD92AA73F3E00DF1B91 /* UpdateDisabilityDetailsView.swift in Sources */,
 				32D538332A91F1CC00DFC38D /* LookView.swift in Sources */,
 			);

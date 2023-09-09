@@ -30,7 +30,6 @@ struct ProofOfAge: Verifiable {
     var legalFirstName: String
     var legalLastName: String
     var streetAddress: String
-    
 }
 
 struct RefereeCheck: Verifiable {
