@@ -209,15 +209,5 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func updatePoliceCheckDetails(currentMatchSeeker: MatchSeeker, issueDate: Date, expiryDate: Date, description: String) throws
-    {
-        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
-        {
-            self.matchSeekers[index].backgroundCheck?.policeCheck?.updatePoliceCheckDetails(dateIssued: issueDate, expiryDate: expiryDate, description: description)
-        }
-        else {
-            throw ProfileError.matchSeekerNotExist
-        }
-    }
     
 }

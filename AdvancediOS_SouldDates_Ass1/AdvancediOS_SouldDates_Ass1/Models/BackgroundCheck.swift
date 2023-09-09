@@ -30,6 +30,19 @@ struct ProofOfAge: Verifiable {
     var legalFirstName: String
     var legalLastName: String
     var streetAddress: String
+    var dateOfBirth: Date
+    
+    mutating func updateDetails(dateIssued: Date, expiryDate: Date, issuer: String, proofOfIdNumber: String, legalFirstName: String, legalLastName: String, streetAddress: String, dateOfBirth: Date)
+    {
+        self.dateIssued = dateIssued
+        self.dateOfBirth = dateOfBirth
+        self.expiryDate = expiryDate
+        self.issuer = issuer
+        self.legalFirstName = legalFirstName
+        self.legalLastName = legalLastName
+        self.proofOfIdNumber = proofOfIdNumber
+        self.streetAddress = streetAddress
+    }
 }
 
 struct RefereeCheck: Verifiable {
@@ -38,6 +51,13 @@ struct RefereeCheck: Verifiable {
     var expiryDate: Date
     var refereeName: String
     var description: String
+    //this will be used to update the refereeCheck
+    mutating func updateRefereeCheck(dateIssued: Date, expiryDate: Date, description: String, refereeName: String) {
+        self.dateIssued = dateIssued
+        self.expiryDate = expiryDate
+        self.description = description
+        self.refereeName = refereeName
+    }
 }
 
 struct BackgroundCheck: Decodable {
@@ -60,4 +80,61 @@ struct BackgroundCheck: Decodable {
         self.proofOfAge = proofOfAge
     }
     
+}
+//adds additional functions related to background checks on the main class
+extension SoulDatesMain {
+   
+    //this will be used to set or nil a background check.
+    func manageBackgroundChecks(currentMatchSeekr: MatchSeeker, backgroundCheck: BackgroundCheck?)
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeekr.id})
+        {
+            self.matchSeekers[index].setBackgroundCheck(backgroundCheck: backgroundCheck)
+        }
+    }
+    
+    func managePoliceCheck(currentMatchSeeker: MatchSeeker, policeCheck: PoliceCheck?) {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
+            self.matchSeekers[index].backgroundCheck?.setPoliceCheck(policeCheck: policeCheck)
+        }
+    }
+    
+    func manageProofOfAgeCheck(currentMatchSeeker: MatchSeeker, proofOfAge: ProofOfAge?) {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
+            self.matchSeekers[index].backgroundCheck?.setProofOfAge(proofOfAge: proofOfAge)
+        }
+    }
+    
+    func manageRefereeCheck(currentMatchSeeker: MatchSeeker, refereeCheck: RefereeCheck?) {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
+            self.matchSeekers[index].backgroundCheck?.setRefereeCheck(referee: refereeCheck)
+        }
+    }
+    
+    func updatePoliceCheckDetails(currentMatchSeeker: MatchSeeker, issueDate: Date, expiryDate: Date, description: String) throws
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            self.matchSeekers[index].backgroundCheck?.policeCheck?.updatePoliceCheckDetails(dateIssued: issueDate, expiryDate: expiryDate, description: description)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+    }
+    
+    //this will be used to update existing proofOfAgeDetails if they have already provided us with that.
+    func updateProofOfAgeDetails(currentMatchSeeker: MatchSeeker, legalFirstName: String, legalLastName: String, dateIssued: Date, expiryDate: Date, streetAddress: String, dateOfBirth: Date, issuer: String, proofOfIdNumber: String)
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            //updates the proof of age details from the matchSeekers
+            self.matchSeekers[index].backgroundCheck?.proofOfAge?.updateDetails(dateIssued: dateIssued, expiryDate: expiryDate, issuer: issuer, proofOfIdNumber: proofOfIdNumber, legalFirstName: legalFirstName, legalLastName: legalLastName, streetAddress: streetAddress, dateOfBirth: dateOfBirth)
+        }
+    }
+    
+    func updateRefereeDetails(currentMatchSeeker: MatchSeeker, refereeName: String, description: String, dateIssued: Date, expiryDate: Date) {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
+            self.matchSeekers[index].backgroundCheck?.refereeCheck?.updateRefereeCheck(dateIssued: dateIssued, expiryDate: expiryDate, description: description, refereeName: refereeName)
+        }
+    }
 }
