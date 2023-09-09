@@ -19,4 +19,11 @@ class UpdateProofOfAgeViewModel: ObservableObject {
     @Published var dateOfBirth: Date = Date()
     @Published var session: Session = Session()
     @Published var soulDatesMain: SoulDatesMain = SoulDatesMain()
+    
+    func validateDateOfBirth() throws {
+        guard !DateManager.isUnderAge(birthDate: dateOfBirth) else {
+            throw ProfileError.underAgeException
+        }
+    }
+    
 }

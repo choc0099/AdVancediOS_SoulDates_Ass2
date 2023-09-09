@@ -16,6 +16,7 @@ struct UpdateProofOfAgeView: View {
     @State var alertTitle: String = ""
     @State var alertMessage: String = ""
     
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -25,12 +26,12 @@ struct UpdateProofOfAgeView: View {
                 
                 if updateProofOfAgeVM.isProofOfAge {
                     Section(content: {
-                        HStack () {
+                        HStack {
                             Text("ID Number").frame(width: 100, alignment: .leading)
                             Spacer()
                             TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber)
                         }
-                        HStack () {
+                        HStack {
                             Text("Issuer").frame(width: 100, alignment: .leading)
                             Spacer()
                             TextField("Issuer", text: $updateProofOfAgeVM.issuer)
@@ -61,8 +62,14 @@ struct UpdateProofOfAgeView: View {
             }.toolbar{
                 Button {
                     do {
+                        try updateProofOfAgeVM.validateDateOfBirth()
                         try processData()
                         navActive = true
+                    }
+                    catch ProfileError.underAgeException {
+                        showAlert = true
+                        alertTitle = "Under Age!"
+                        alertMessage = "The proof of Age that was provided is under age to be continue using our app."
                     }
                     catch {
                         showAlert = true
@@ -129,6 +136,6 @@ struct UpdateProofOfAgeView: View {
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
