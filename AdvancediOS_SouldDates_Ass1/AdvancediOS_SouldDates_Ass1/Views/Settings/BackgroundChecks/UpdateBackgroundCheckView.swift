@@ -17,7 +17,7 @@ struct UpdateBackgroundCheckView: View {
                 Text("Police Checks")
             }
             NavigationLink {
-                UpdateProofOfAgeView(updateProofOfAge: UpdateProofOfAgeViewModel())
+                UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
             } label: {
                 Text("Proof of Age")
             }

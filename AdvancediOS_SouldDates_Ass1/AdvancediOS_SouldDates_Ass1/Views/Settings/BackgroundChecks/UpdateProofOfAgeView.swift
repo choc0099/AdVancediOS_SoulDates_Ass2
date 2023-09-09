@@ -8,30 +8,35 @@
 import SwiftUI
 
 struct UpdateProofOfAgeView: View {
-    @ObservedObject var updateProofOfAge: UpdateProofOfAgeViewModel
+    @ObservedObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @State var navActive: Bool = false
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertMessage: String = ""
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Toggle("Proof of Age Check", isOn: $updateProofOfAge.isProofOfAge)
+                    Toggle("Proof of Age Check", isOn: $updateProofOfAgeVM.isProofOfAge)
                 }
                 
-                if updateProofOfAge.isProofOfAge {
+                if updateProofOfAgeVM.isProofOfAge {
                     Section(content: {
                         HStack () {
                             Text("ID Number").frame(width: 100, alignment: .leading)
                             Spacer()
-                            TextField("ID Number", text: $updateProofOfAge.proofOfAgeIdNumber)
+                            TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber)
                         }
                         HStack () {
                             Text("Issuer").frame(width: 100, alignment: .leading)
                             Spacer()
-                            TextField("Issuer", text: $updateProofOfAge.issuer)
+                            TextField("Issuer", text: $updateProofOfAgeVM.issuer)
                         }
-                        DatePicker("Date issued:", selection: $updateProofOfAge.dateIssued, displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateProofOfAge.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued:", selection: $updateProofOfAgeVM.dateIssued, displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateProofOfAgeVM.expiryDate, displayedComponents: [.date])
                     }, header: {
                         Text("Proof of Age Details")
                     }, footer: {
@@ -40,20 +45,60 @@ struct UpdateProofOfAgeView: View {
                     Section("Personal Details") {
                         HStack() {
                             Text("First Name").frame(width: 100, alignment: .leading)
-                            TextField("First Name", text: $updateProofOfAge.legalFirstName)
+                            TextField("First Name", text: $updateProofOfAgeVM.legalFirstName)
                         }
                         HStack {
                             Text("Last Name").frame(width: 100, alignment: .leading)
-                            TextField("Last Name", text: $updateProofOfAge.legalLastName)
+                            TextField("Last Name", text: $updateProofOfAgeVM.legalLastName)
                         }
-                        DatePicker("Date of birth", selection: $updateProofOfAge.dateOfBirth, displayedComponents: [.date])
+                        DatePicker("Date of birth", selection: $updateProofOfAgeVM.dateOfBirth, displayedComponents: [.date])
                         
                     }
                     Section("Address") {
-                        TextEditor(text: $updateProofOfAge.address)
+                        TextEditor(text: $updateProofOfAgeVM.address)
                     }
                 }
+            }.toolbar{
+                Button {
+                    do {
+                        try processData()
+                        navActive = true
+                    }
+                    catch {
+                        showAlert = true
+                        alertTitle = "Something went wrong!"
+                        alertMessage = "Unable to update proof of age details."
+                    }
+                } label: {
+                    Text("Done")
+                }
+            }.navigationDestination(isPresented: $navActive, destination: {
+                InSessionTabView()
+            }).onAppear {
+                do {
+                    try updateVM()
+                }
+                catch {
+                    print("MatchSeeker does not exist.")
+                }
             }
+        }
+    }
+    //a function that updates the view model from the session once its being viewed.
+    func updateVM() throws {
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        if let matchSeekerProofOfAge = matchSeeker.backgroundCheck?.proofOfAge {
+            updateProofOfAgeVM.isProofOfAge       = true
+            updateProofOfAgeVM.address            = matchSeekerProofOfAge.streetAddress
+            updateProofOfAgeVM.dateIssued         = matchSeekerProofOfAge.dateIssued
+            updateProofOfAgeVM.dateOfBirth        = matchSeekerProofOfAge.dateOfBirth
+            updateProofOfAgeVM.legalFirstName     = matchSeekerProofOfAge.legalFirstName
+            updateProofOfAgeVM.legalLastName      = matchSeekerProofOfAge.legalLastName
+            updateProofOfAgeVM.issuer             = matchSeekerProofOfAge.issuer
+            updateProofOfAgeVM.proofOfAgeIdNumber = matchSeekerProofOfAge.proofOfIdNumber
+        }
+        else {
+            updateProofOfAgeVM.isProofOfAge = false
         }
     }
     
@@ -61,30 +106,30 @@ struct UpdateProofOfAgeView: View {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         
         //check if they declared that they have a proofOfAge check
-        if updateProofOfAge.isProofOfAge {
+        if updateProofOfAgeVM.isProofOfAge {
             if matchSeeker.backgroundCheck?.proofOfAge != nil {
-               try soulDatesMain.updateProofOfAgeDetails(currentMatchSeeker: matchSeeker, legalFirstName: updateProofOfAge.legalFirstName, legalLastName: updateProofOfAge.legalLastName, dateIssued: updateProofOfAge.dateIssued, expiryDate: updateProofOfAge.expiryDate, streetAddress: updateProofOfAge.address, dateOfBirth: updateProofOfAge.dateOfBirth, issuer: updateProofOfAge.issuer, proofOfIdNumber: updateProofOfAge.proofOfAgeIdNumber)
+               try soulDatesMain.updateProofOfAgeDetails(currentMatchSeeker: matchSeeker, legalFirstName: updateProofOfAgeVM.legalFirstName, legalLastName: updateProofOfAgeVM.legalLastName, dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber)
             }
             else if matchSeeker.backgroundCheck?.proofOfAge == nil {
-              try initializeProofOfAge(matchSeeker: matchSeeker)
+              try initialiseProofOfAge(matchSeeker: matchSeeker)
             } // checks if it is the first background check.
-            else {
+            else if matchSeeker.backgroundCheck == nil {
                 try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck())
-                try initializeProofOfAge(matchSeeker: matchSeeker)
+                try initialiseProofOfAge(matchSeeker: matchSeeker)
             }
         }
-        else {
+        else { // this will set the proofOfAge object to nil if the matchSeeker no longer wants their proof of age.
            try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: nil)
         }
     }
     
-    private func initializeProofOfAge(matchSeeker: MatchSeeker) throws {
-        try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: ProofOfAge(dateIssued: updateProofOfAge.dateIssued, expiryDate: updateProofOfAge.expiryDate, issuer: updateProofOfAge.issuer, proofOfIdNumber: updateProofOfAge.proofOfAgeIdNumber, legalFirstName: updateProofOfAge.legalLastName, legalLastName: updateProofOfAge.legalLastName, streetAddress: updateProofOfAge.address, dateOfBirth: updateProofOfAge.dateOfBirth))
+    private func initialiseProofOfAge(matchSeeker: MatchSeeker) throws {
+        try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: ProofOfAge(dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber, legalFirstName: updateProofOfAgeVM.legalLastName, legalLastName: updateProofOfAgeVM.legalLastName, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth))
     }
 }
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAge: UpdateProofOfAgeViewModel())
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
     }
 }
