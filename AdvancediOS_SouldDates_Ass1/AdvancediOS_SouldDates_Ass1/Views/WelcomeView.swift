@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    
+    @Binding var showWelcome: Bool
     var body: some View {
-        
+    
         NavigationStack {
             Text("Welcome to SoulDates")
                 .font(.title)
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
             NavigationLink {
-                BasicDetailsSetupView(setupVM: InitialSetupViewModel())
+                BasicDetailsSetupView(setupVM: InitialSetupViewModel(), showWelcome: $showWelcome)
             } label: {
                 StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
             }
@@ -27,6 +27,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeView(showWelcome: .constant(true))
     }
 }

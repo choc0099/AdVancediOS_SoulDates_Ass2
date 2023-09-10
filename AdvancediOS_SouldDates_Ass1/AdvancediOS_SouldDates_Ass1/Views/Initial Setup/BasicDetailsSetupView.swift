@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct BasicDetailsSetupView: View {
-    
+   
     @ObservedObject var setupVM: InitialSetupViewModel
+    @Binding var showWelcome: Bool
     let dateRange: ClosedRange<Date> = {
         let calendar = Calendar.current
         let startingDate = DateComponents(year: 1900, month: 1, day: 1)
@@ -73,7 +74,7 @@ struct BasicDetailsSetupView: View {
                 message: Text("\(alertMessage)")
             )
         }.padding().navigationDestination(isPresented: $navActive) {
-            GenderSetupView(setupVM: setupVM)
+            GenderSetupView(setupVM: setupVM, showWelcome: $showWelcome)
         }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.large)
         
     }
@@ -81,7 +82,7 @@ struct BasicDetailsSetupView: View {
 
 struct AgeCheckSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        BasicDetailsSetupView(setupVM: InitialSetupViewModel())
+        BasicDetailsSetupView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
            
     }
 }

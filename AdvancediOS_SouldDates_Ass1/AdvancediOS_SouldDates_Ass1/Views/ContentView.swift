@@ -11,19 +11,16 @@ struct ContentView: View {
 
     //@StateObject var soulDatesMain = SoulDatesMain()
     @State var selectedTab: Tab = .look
+    @State var showWelcome: Bool = true
     var body: some View {
         
-            TabView(selection: $selectedTab) {
-                LookView(selectedTab: $selectedTab).tabItem {
-                    Label("Look", systemImage: "book.fill")
-                }.tag(Tab.look)
-                
-                SettingsView().tabItem {
-                    Label("Settings", systemImage: "sun.max")
-                }.tag(Tab.settings)
-        
-
-            }.padding()
+        //the welcome view will show up when the user runs the app
+        //For the navigations in the tab view to work where tab bars are still visible,
+        //I had to enbed the TabSessionView inside the ContentView and use pop overs for
+        //the setup process.
+        InSessionTabView().fullScreenCover(isPresented: $showWelcome) {
+            WelcomeView(showWelcome: $showWelcome)
+        }
     }
 }
 

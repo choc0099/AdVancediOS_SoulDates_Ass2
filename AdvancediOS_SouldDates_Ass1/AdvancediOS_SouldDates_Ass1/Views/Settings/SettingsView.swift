@@ -41,7 +41,7 @@ struct SettingsView: View {
                 }
              
                 NavigationLink {
-                    WelcomeView()
+                    //WelcomeView()
                 } label: {
                     Text("Reset")
                 }

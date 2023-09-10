@@ -15,7 +15,7 @@ struct AbouteMeView: View {
     @State var navActive: Bool = false
     @State var buttonDisabled: Bool = true
     @State var borderColor: Color = .primary
-    
+    @Binding var showWelcome: Bool
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -32,7 +32,7 @@ struct AbouteMeView: View {
                             try setupVM.validateAboutMe()
                             //declare a constant to add a match seeker to the list
                             processData()
-                            navActive = true
+                            showWelcome = false // dismisses the welcome/setup full-screen sheet.
                         }
                         catch {
                             showAlert = true
@@ -54,8 +54,6 @@ struct AbouteMeView: View {
                     buttonDisabled = true
                 }
             }
-        }.navigationDestination(isPresented: $navActive) {
-            InSessionTabView()
         }
     }
     
@@ -80,8 +78,7 @@ struct AbouteMeView_Previews: PreviewProvider {
         //var matchSeeker = matchSeekersSample[0]
       
         Group {
-            AbouteMeView(setupVM: InitialSetupViewModel())
-            AbouteMeView(setupVM: InitialSetupViewModel())
+            AbouteMeView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
         }
        
     }

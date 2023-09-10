@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DisabilityDetailsSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
+    @Binding var showWelcome: Bool
     @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
     @State private var buttonDisabled: Bool = false
@@ -48,7 +49,7 @@ struct DisabilityDetailsSetupView: View {
                 }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
-            DatingPreferencesView(setupVM: setupVM)
+            DatingPreferencesView(setupVM: setupVM, showWelcome: $showWelcome)
         }.navigationTitle("Disability Details").alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Text fields not entered"),
@@ -63,6 +64,6 @@ struct DisabilityDetailsSetupView: View {
 
 struct DisabilityDetailsSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        DisabilityDetailsSetupView(setupVM: InitialSetupViewModel())
+        DisabilityDetailsSetupView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
     }
 }

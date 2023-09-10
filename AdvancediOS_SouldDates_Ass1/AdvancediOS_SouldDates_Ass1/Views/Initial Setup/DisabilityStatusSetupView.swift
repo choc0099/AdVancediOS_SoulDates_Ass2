@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DisabilityStatusSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
-    
+    @Binding var showWelcome: Bool
     
     var body: some View {
         NavigationStack {
@@ -17,13 +17,13 @@ struct DisabilityStatusSetupView: View {
                 Text("Do you have a disability?")
                 
                 NavigationLink {
-                    DisabilityDetailsSetupView(setupVM: setupVM)
+                    DisabilityDetailsSetupView(setupVM: setupVM, showWelcome: $showWelcome)
                 } label: {
                     StyledButton(text: "Yes, I do", backGroundColour: .red, foregroundColour: .white)
                 }.padding()
                 
                 NavigationLink {
-                    DatingPreferencesView(setupVM: setupVM)
+                    DatingPreferencesView(setupVM: setupVM, showWelcome: $showWelcome)
                 } label: {
                     StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
                 }.padding()
@@ -35,6 +35,6 @@ struct DisabilityStatusSetupView: View {
 
 struct DisabilitySetupView_Previews: PreviewProvider {
     static var previews: some View {
-        DisabilityStatusSetupView(setupVM: InitialSetupViewModel())
+        DisabilityStatusSetupView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
     }
 }

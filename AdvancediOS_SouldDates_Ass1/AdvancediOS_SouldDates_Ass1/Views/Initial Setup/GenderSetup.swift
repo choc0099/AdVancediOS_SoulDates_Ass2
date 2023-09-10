@@ -11,7 +11,7 @@ struct GenderSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     //@State var interestedIn: InterestedIn = .all
     @State var navActive = false
-    
+    @Binding var showWelcome: Bool
     
     var body: some View {
         //debug to see if date is passed
@@ -33,7 +33,7 @@ struct GenderSetupView: View {
                 }.navigationTitle("Gender Details")
             }
         }.navigationDestination(isPresented: $navActive) {
-            InterestedInSetupView(setupVM: setupVM)
+            InterestedInSetupView(setupVM: setupVM, showWelcome: $showWelcome)
         }
     }
     
@@ -45,7 +45,7 @@ struct GenderSetupView: View {
 
 struct BasicDetailsSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        GenderSetupView(setupVM: InitialSetupViewModel())
+        GenderSetupView(setupVM: InitialSetupViewModel(), showWelcome: .constant(true))
       
     }
 }
