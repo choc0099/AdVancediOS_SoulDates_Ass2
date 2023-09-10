@@ -33,18 +33,27 @@ class Session: ObservableObject {
         }
     }
     
-    func addToDreamList( matchSeeker: MatchSeeker) throws
-    {
-        //
+    func addToDreamList( matchSeeker: MatchSeeker) throws {
         //if souldDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeeker.id)
         dreamList.append(matchSeeker)
     }
     
     func removeFromDreamList(matchSeeker: MatchSeeker) {
-        if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id})
-        {
+        if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id}) {
             self.dreamList.remove(at: index)
         }
     }
     
+    //A function that gets all potential matches that are saved in the dreamList
+    //with error handling if there are no matches in the dreamlist.
+    func getDreamList() throws -> [MatchSeeker] {
+        
+        if !self.dreamList.isEmpty
+        {
+            return self.dreamList
+        }
+        else {
+            throw ProfileError.noMatchesFound
+        }
+    }
 }
