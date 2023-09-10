@@ -194,4 +194,14 @@ class SoulDatesMain: ObservableObject {
         }
         throw ProfileError.matchSeekerNotExist
     }
+    
+    func toggleMatchSeekerScammer(currentMatchSeeker: MatchSeeker) throws {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
+        {
+            self.matchSeekers[index].toggleScammer()
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
+        }
+    }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     //@ObservedObject var profileVM = ProfileViewModel()
     @State var matchSeeker: MatchSeeker
+    @EnvironmentObject var session: Session
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
     @State var showActionSheet: Bool = false
     var body: some View {
@@ -40,7 +42,6 @@ struct ProfileView: View {
                     Text("\(matchSeeker.favouriteMusic)")
                 
                 }
-               
             }.padding().toolbar(.visible, for: .tabBar)
         }.toolbar {
             Button {
