@@ -19,12 +19,15 @@ struct InSessionTabView: View {
         
        
             TabView(selection: $selectedTab) {
+            
+                LookView(selectedTab: $selectedTab)
+                .tabItem {
+                    Label("Look", systemImage: "book.fill")
+                }.tag(Tab.look)
                 
-                    LookView(selectedTab: $selectedTab)
-                    .tabItem {
-                        Label("Look", systemImage: "book.fill")
-                    }.tag(Tab.look)
-                
+                DreamListView(selectedTab: $selectedTab).tabItem {
+                    Label("DreamList", systemImage: "heart.fill")
+                }
                 
                 SettingsView(selectedTab: $selectedTab)
                 .tabItem {

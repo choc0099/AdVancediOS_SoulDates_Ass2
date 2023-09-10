@@ -16,6 +16,7 @@
 		3250E6DA2AABE2D500666581 /* UpdateProofOfAgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */; };
 		3250E6DC2AABFE1F00666581 /* UpdateRefereeCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6DB2AABFE1F00666581 /* UpdateRefereeCheckView.swift */; };
 		3250E6DF2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */; };
+		3250E6E12AAE7E7A00666581 /* DreamListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6E02AAE7E7A00666581 /* DreamListView.swift */; };
 		329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */; };
 		329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */; };
 		329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */; };
@@ -88,6 +89,7 @@
 		3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProofOfAgeViewModel.swift; sourceTree = "<group>"; };
 		3250E6DB2AABFE1F00666581 /* UpdateRefereeCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefereeCheckView.swift; sourceTree = "<group>"; };
 		3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRefereeCheckViewModel.swift; sourceTree = "<group>"; };
+		3250E6E02AAE7E7A00666581 /* DreamListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamListView.swift; sourceTree = "<group>"; };
 		329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreference.swift; sourceTree = "<group>"; };
 		329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesView.swift; sourceTree = "<group>"; };
 		329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesViewModel.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				32F2511C2A90D5390084424B /* WelcomeView.swift */,
 				32C497492AA46853000A660E /* StyledButton.swift */,
 				3224AD9C2AA5379300F37D2A /* InSessionTabView.swift */,
+				3250E6E02AAE7E7A00666581 /* DreamListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */,
 				32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */,
 				32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */,
+				3250E6E12AAE7E7A00666581 /* DreamListView.swift in Sources */,
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32E3FFD72AA6E9C300DF1B91 /* LookViewModel.swift in Sources */,
 				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
