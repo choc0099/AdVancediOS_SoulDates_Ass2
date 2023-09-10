@@ -15,7 +15,7 @@ struct UpdateProfileView: View {
     @State var navActive: Bool = false
     @State var alertMessage: String = ""
     @State var alertTitle: String = ""
-    
+    @Binding var selectedTab: Tab
     var body: some View {
         NavigationStack {
             Form {
@@ -46,7 +46,7 @@ struct UpdateProfileView: View {
                     do {
                         try updateProfileVM.validateDateOfBirth()
                         try processData()
-                        navActive = true
+                        selectedTab = .look
                     }
                     catch ProfileError.underAgeException {
                         showAlert = true
@@ -54,7 +54,7 @@ struct UpdateProfileView: View {
                         alertMessage = "Your updated date of birth is under the age of 18 and can not be used for our services."
                     }
                     catch {
-                        showAlert = true
+                        
                         alertTitle = "Something went wrong!"
                         alertMessage = "Unable to update matchSeeker Profile Details."
                         print("The MatchSeeker id does not exisit in the SoulDates Main.")
@@ -67,8 +67,6 @@ struct UpdateProfileView: View {
                         message: Text(alertMessage)
                     )
                 }
-            }.navigationDestination(isPresented: $navActive) {
-                InSessionTabView()
             }
         }
     }
@@ -84,6 +82,6 @@ struct UpdateProfileView: View {
 
 struct UpdateProFileView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProfileView(updateProfileVM: UpdateProfileViewModel()).environmentObject(Session())
+        UpdateProfileView(updateProfileVM: UpdateProfileViewModel(), selectedTab: .constant(.settings)).environmentObject(Session())
     }
 }

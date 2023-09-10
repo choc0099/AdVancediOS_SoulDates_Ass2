@@ -26,13 +26,11 @@ struct InSessionTabView: View {
                     }.tag(Tab.look)
                 
                 
-                SettingsView().navigationTitle("Settings")
-                 
+                SettingsView(selectedTab: $selectedTab)
                 .tabItem {
                     Label("Settings", systemImage: "sun.max")
                 }.tag(Tab.settings)
             }
-        
     }
 }
 

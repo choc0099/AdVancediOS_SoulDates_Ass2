@@ -12,11 +12,12 @@ struct SettingsView: View {
     @StateObject var updateDatingPrefVM: UpdateDatingPreferncesViewModel = UpdateDatingPreferncesViewModel()
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
+    @Binding var selectedTab: Tab
     var body: some View {
       NavigationStack {
             List {
                 NavigationLink {
-                    UpdateProfileView(updateProfileVM: updateProfileVM)
+                    UpdateProfileView(updateProfileVM: updateProfileVM, selectedTab: $selectedTab)
                 } label: {
                     Text("Update Profile")
                 }
@@ -79,6 +80,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environmentObject(Session())
+        SettingsView(selectedTab: .constant(.settings)).environmentObject(Session())
     }
 }

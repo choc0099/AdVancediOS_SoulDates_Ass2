@@ -11,6 +11,7 @@ struct ProfileView: View {
     //@ObservedObject var profileVM = ProfileViewModel()
     @State var matchSeeker: MatchSeeker
     @Binding var selectedTab: Tab
+    @State var showActionSheet: Bool = false
     var body: some View {
         
         NavigationStack {
@@ -41,6 +42,18 @@ struct ProfileView: View {
                 }
                
             }.padding().toolbar(.visible, for: .tabBar)
+        }.toolbar {
+            Button {
+                showActionSheet = true
+            } label: {
+                Image(systemName: "ellipsis")
+            }
+        }.actionSheet(isPresented: $showActionSheet) {
+            ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
+                .default(Text("Add to DreamList")),
+                .default(Text("Report Scam")),
+                .cancel()
+            ])
         }
     }
     
