@@ -14,6 +14,9 @@ struct ProfileView: View {
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
     @State var showActionSheet: Bool = false
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    
     var body: some View {
         
         NavigationStack {
@@ -30,7 +33,7 @@ struct ProfileView: View {
                
                 Spacer()
                 if matchSeeker.isScammer {
-                    Text("This person was known to be a scammer.").padding()
+                    Text("This person was known to be a scammer.").padding().fontWeight(.bold).background(.red).foregroundColor(.white)
                 }
                 //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
                 Group {
@@ -51,10 +54,29 @@ struct ProfileView: View {
             }
         }.actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
-                .default(Text("Add to DreamList")),
-                .default(Text("Report Scam")),
+                .default(Text("Add to DreamList")) {
+                    
+                },
+                .default(Text("Report Scam")) {
+                    do {
+                        //updates it on the backend side
+                        try soulDatesMain.toggleMatchSeekerScammer(currentMatchSeeker: matchSeeker)
+                        //imdediately updates it to the view side.
+                        matchSeeker.toggleScammer()
+                        session.gatherMatches(soulDatesMain: soulDatesMain)
+                    }
+                    catch {
+                        showAlert = true
+                        alertTitle = "An error has occurred."
+                    }
+                },
                 .cancel()
             ])
+        }.alert(isPresented: $showAlert) {
+            Alert(
+                title:
+                    Text(alertTitle)
+            )
         }
     }
     
