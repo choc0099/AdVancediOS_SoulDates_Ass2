@@ -8,7 +8,7 @@
 import Foundation
 
 //this protocol will be used for police checks, reference checks and proof of age idenficiation.
-protocol Verifiable: Identifiable, Decodable {
+protocol Verifiable: Identifiable, Decodable, Hashable {
     
     var expiryDate: Date {get set}
     var dateIssued: Date {get set}

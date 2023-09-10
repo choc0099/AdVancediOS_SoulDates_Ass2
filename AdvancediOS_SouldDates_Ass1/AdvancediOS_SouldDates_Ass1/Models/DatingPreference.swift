@@ -13,7 +13,7 @@ enum DisabilitySeverity: String, CaseIterable, Identifiable, Decodable {
     
     var id: Self { self }
 }
-struct DatingPreference: Decodable {
+struct DatingPreference: Decodable, Hashable {
     var interestedIn: InterestedIn
     var disabilityPreference: DisabilityPreference
     var discloseMyDisability: Bool

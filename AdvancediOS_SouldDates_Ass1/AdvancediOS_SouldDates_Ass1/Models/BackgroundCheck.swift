@@ -60,7 +60,7 @@ struct RefereeCheck: Verifiable {
     }
 }
 
-struct BackgroundCheck: Decodable {
+struct BackgroundCheck: Decodable, Hashable {
     var policeCheck: PoliceCheck?
     var proofOfAge: ProofOfAge?
     var refereeCheck: RefereeCheck?
@@ -79,6 +79,10 @@ struct BackgroundCheck: Decodable {
     {
         self.proofOfAge = proofOfAge
     }
+    /*
+    static func ==(Ihs: BackgroundCheck, rhs: BackgroundCheck) -> Bool {
+        return Ihs.hashValue == rhs.hashValue
+    }*/
     
 }
 //adds additional functions related to background checks on the main class

@@ -15,17 +15,23 @@ enum Tab: Hashable {
 struct InSessionTabView: View {
     @State var selectedTab: Tab = .look
     var body: some View {
-        NavigationStack {
+        
             TabView(selection: $selectedTab) {
-                LookView(selectedTab: $selectedTab).tabItem {
+                //NavigationStack {
+                    LookView(selectedTab: $selectedTab).navigationDestination(for: MatchSeeker.self) { matchSeekerProfile in
+                        ProfileView(matchSeeker: matchSeekerProfile, selectedTab: .constant(.look))
+                    }
+                
+                .tabItem {
                     Label("Look", systemImage: "book.fill")
                 }.tag(Tab.look)
-                
-                SettingsView().tabItem {
+                //NavigationStack {
+                    SettingsView()
+                 
+                .tabItem {
                     Label("Settings", systemImage: "sun.max")
                 }.tag(Tab.settings)
-            }.navigationTitle("Look").navigationBarBackButtonHidden(true).navigationBarTitleDisplayMode(.large)
-        }
+            }
     }
 }
 

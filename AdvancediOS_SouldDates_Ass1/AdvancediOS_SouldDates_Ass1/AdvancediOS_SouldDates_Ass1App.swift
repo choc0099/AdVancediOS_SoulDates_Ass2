@@ -14,7 +14,7 @@ struct AdvancediOS_SouldDates_Ass1App: App {
         
         WindowGroup {
             
-            ContentView().environmentObject(Session())
+            ContentView().environmentObject(Session()).environmentObject(SoulDatesMain())
         }
     }
 }

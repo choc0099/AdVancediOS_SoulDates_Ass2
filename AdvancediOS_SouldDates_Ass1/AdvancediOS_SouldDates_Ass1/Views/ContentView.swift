@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var soulDatesMain = SoulDatesMain()
     var body: some View {
-        VStack {
-            WelcomeView().environmentObject(soulDatesMain)
+        NavigationStack {
+            VStack {
+                WelcomeView()
+            }
+            .padding()
         }
-        .padding()
     }
 }
 

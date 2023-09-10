@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Disability: Identifiable, Decodable {
+struct Disability: Identifiable, Hashable, Decodable {
     var disabilities: String
     var severeity: DisabilitySeverity
     var id: UUID = UUID()

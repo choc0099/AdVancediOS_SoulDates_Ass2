@@ -46,7 +46,7 @@ enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
 }
 
 //the perso
-protocol Person: Identifiable, Decodable {
+protocol Person: Identifiable, Hashable, Decodable {
     var id: UUID {get set}
     var screenName: String {get set}
 }

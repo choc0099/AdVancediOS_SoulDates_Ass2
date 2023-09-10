@@ -22,33 +22,33 @@ struct LookView: View {
     @Binding var selectedTab: Tab
     var body: some View  {
         NavigationStack {
-            if(lookError == .noError)
-            {
-                List(matches) {
-                    matchSeeker in
-                    NavigationLink {
-                        ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)
-                    } label: {
-                        MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
+            Group {
+                if(lookError == .noError) {
+                    List(matches) {
+                        matchSeeker in
+                        NavigationLink(value: matchSeeker) {
+                            MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
+                        }
+                    }.navigationDestination(for: MatchSeeker.self) { matchSeekerProfile in
+                        ProfileView(matchSeeker: matchSeekerProfile, selectedTab: $selectedTab)
                     }
                 }
-            }
-            else if (lookError == .noMatches) {
-                VStack(spacing: 20) {
-                    Text("No Matches").font(.headline)
-                    Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
+                else if (lookError == .noMatches) {
+                    VStack(spacing: 20) {
+                        Text("No Matches").font(.headline)
+                        Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
+                    }
                 }
+                else if (lookError == .unkown) {
+                    Text("Sorry, something went wrong.").font(.headline)
+                }
+            }.onAppear {
+                gatherMatches()
             }
-            else if (lookError == .unkown) {
-                Text("Sorry, something went wrong.").font(.headline)
-            }
-        }.onAppear {
-            gatherMatches()
-        }.navigationBarBackButtonHidden(true).navigationTitle("Look").navigationBarTitleDisplayMode(.large)
+        }
     }
     
     func gatherMatches() {
-        
         do {
             let currentMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
             let datingPref: DatingPreference = currentMatchSeeker.datingPreference
@@ -65,7 +65,6 @@ struct LookView: View {
         catch {
             lookError = .unkown
         }
-       
     }
 }
 
