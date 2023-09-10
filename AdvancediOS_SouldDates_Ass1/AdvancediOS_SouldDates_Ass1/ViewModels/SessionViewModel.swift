@@ -12,6 +12,7 @@ class Session: ObservableObject {
     @Published var matchSeekerId: UUID = UUID()
     @Published var yourMatches: [MatchSeeker] = []
     @Published var lookError: LookError = .unkown
+    @Published var dreamList: [MatchSeeker] = [] //this is used to store dreamLists for potential matchSeekers.
     
     func gatherMatches(soulDatesMain: SoulDatesMain) {
         do {
@@ -31,4 +32,19 @@ class Session: ObservableObject {
             lookError = .unkown
         }
     }
+    
+    func addToDreamList( matchSeeker: MatchSeeker) throws
+    {
+        //
+        //if souldDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeeker.id)
+        dreamList.append(matchSeeker)
+    }
+    
+    func removeFromDreamList(matchSeeker: MatchSeeker) {
+        if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id})
+        {
+            self.dreamList.remove(at: index)
+        }
+    }
+    
 }
