@@ -9,12 +9,20 @@ import SwiftUI
 
 @main
 struct AdvancediOS_SouldDates_Ass1App: App {
-    
+    @StateObject var session: Session = Session()
+    @StateObject var soulDatesMain: SoulDatesMain = SoulDatesMain()
     var body: some Scene {
         
         WindowGroup {
             
-            ContentView().environmentObject(Session()).environmentObject(SoulDatesMain())
+
+
+            ContentView().onAppear{
+                let matchSeeker = MatchSeeker(screenName: "mark", hobbies: "computers", gender: .male, dateOfBirth: Date.now, bio: "I like to use computers", favourteMusic: "Ememin", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false))
+                soulDatesMain.onboardMatchSeeker(matchSeeker: matchSeeker)
+                session.matchSeekerId = matchSeeker.id
+            }.environmentObject(session).environmentObject(soulDatesMain)
+
         }
     }
 }

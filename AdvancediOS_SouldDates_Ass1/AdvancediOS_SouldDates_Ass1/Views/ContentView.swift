@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    //@StateObject var soulDatesMain = SoulDatesMain()
+    @State var selectedTab: Tab = .look
     var body: some View {
-        NavigationStack {
-            VStack {
-                WelcomeView()
-            }
-            .padding()
-        }
+        
+            TabView(selection: $selectedTab) {
+                LookView(selectedTab: $selectedTab).tabItem {
+                    Label("Look", systemImage: "book.fill")
+                }.tag(Tab.look)
+                
+                SettingsView().tabItem {
+                    Label("Settings", systemImage: "sun.max")
+                }.tag(Tab.settings)
+        
+
+            }.padding()
     }
 }
 

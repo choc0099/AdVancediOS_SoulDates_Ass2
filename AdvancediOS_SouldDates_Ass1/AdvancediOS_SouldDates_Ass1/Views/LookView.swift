@@ -26,11 +26,9 @@ struct LookView: View {
                 if(lookError == .noError) {
                     List(matches) {
                         matchSeeker in
-                        NavigationLink(value: matchSeeker) {
+                        NavigationLink(destination: ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)) {
                             MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
                         }
-                    }.navigationDestination(for: MatchSeeker.self) { matchSeekerProfile in
-                        ProfileView(matchSeeker: matchSeekerProfile, selectedTab: $selectedTab)
                     }
                 }
                 else if (lookError == .noMatches) {

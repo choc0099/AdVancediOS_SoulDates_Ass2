@@ -15,8 +15,8 @@ struct UpdateProfileView: View {
     @State var navActive: Bool = false
     @State var alertMessage: String = ""
     @State var alertTitle: String = ""
+    
     var body: some View {
-        
         NavigationStack {
             Form {
                 Section("Basic Details") {

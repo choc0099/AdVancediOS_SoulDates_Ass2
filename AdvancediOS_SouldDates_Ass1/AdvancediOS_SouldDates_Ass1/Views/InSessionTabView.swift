@@ -12,6 +12,7 @@ enum Tab: Hashable {
     case dreamList
     case settings
 }
+
 struct InSessionTabView: View {
     @State var selectedTab: Tab = .look
     var body: some View {
