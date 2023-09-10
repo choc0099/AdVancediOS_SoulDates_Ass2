@@ -11,6 +11,8 @@ struct ContentView: View {
 
     //@StateObject var soulDatesMain = SoulDatesMain()
     @State var selectedTab: Tab = .look
+    @EnvironmentObject var session: Session
+    @EnvironmentObject var soulDatesMain: SoulDatesMain
     @State var showWelcome: Bool = true
     var body: some View {
         
@@ -18,10 +20,14 @@ struct ContentView: View {
         //For the navigations in the tab view to work where tab bars are still visible,
         //I had to enbed the TabSessionView inside the ContentView and use pop overs for
         //the setup process.
-        InSessionTabView().fullScreenCover(isPresented: $showWelcome) {
+        InSessionTabView().padding().fullScreenCover(isPresented: $showWelcome, onDismiss: {
+            session.gatherMatches(soulDatesMain: soulDatesMain)
+        }) {
             WelcomeView(showWelcome: $showWelcome)
         }
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

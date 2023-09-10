@@ -13,8 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     var body: some View {
-      NavigationStack
-        {
+      NavigationStack {
             List {
                 NavigationLink {
                     UpdateProfileView(updateProfileVM: updateProfileVM)
@@ -45,9 +44,7 @@ struct SettingsView: View {
                 } label: {
                     Text("Reset")
                 }
-                
-                
-            }
+            }.navigationTitle("Settings")
         }.onAppear{
             do {
                 try transferToUpdateProfileVM()

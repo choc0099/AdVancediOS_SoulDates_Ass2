@@ -44,7 +44,7 @@ class SoulDatesMain: ObservableObject {
                         allocatedMatchSeekers.append(matchSeeker)
                     }
                 case .other:
-                    if matchSeeker.gender != .male || matchSeeker.gender != .female {
+                    if matchSeeker.gender != .male && matchSeeker.gender != .female {
                         allocatedMatchSeekers.append(matchSeeker)
                     }
                 case .all:

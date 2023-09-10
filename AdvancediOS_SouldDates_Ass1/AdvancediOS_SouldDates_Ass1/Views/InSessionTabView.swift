@@ -17,22 +17,22 @@ struct InSessionTabView: View {
     @State var selectedTab: Tab = .look
     var body: some View {
         
+       
             TabView(selection: $selectedTab) {
-                //NavigationStack {
-                    LookView(selectedTab: $selectedTab).navigationDestination(for: MatchSeeker.self) { matchSeekerProfile in
-                        ProfileView(matchSeeker: matchSeekerProfile, selectedTab: .constant(.look))
-                    }
                 
-                .tabItem {
-                    Label("Look", systemImage: "book.fill")
-                }.tag(Tab.look)
-                //NavigationStack {
-                    SettingsView()
+                    LookView(selectedTab: $selectedTab)
+                    .tabItem {
+                        Label("Look", systemImage: "book.fill")
+                    }.tag(Tab.look)
+                
+                
+                SettingsView().navigationTitle("Settings")
                  
                 .tabItem {
                     Label("Settings", systemImage: "sun.max")
                 }.tag(Tab.settings)
             }
+        
     }
 }
 

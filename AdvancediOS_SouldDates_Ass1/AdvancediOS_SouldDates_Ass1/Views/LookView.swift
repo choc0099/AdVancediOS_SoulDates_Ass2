@@ -23,45 +23,26 @@ struct LookView: View {
     var body: some View  {
         NavigationStack {
             Group {
-                if(lookError == .noError) {
-                    List(matches) {
+                if(session.lookError == .noError) {
+                    List(session.yourMatches) {
                         matchSeeker in
                         NavigationLink(destination: ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)) {
                             MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
                         }
                     }
                 }
-                else if (lookError == .noMatches) {
+                else if (session.lookError == .noMatches) {
                     VStack(spacing: 20) {
                         Text("No Matches").font(.headline)
                         Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
                     }
                 }
-                else if (lookError == .unkown) {
+                else if (session.lookError == .unkown) {
                     Text("Sorry, something went wrong.").font(.headline)
                 }
-            }.onAppear {
-                gatherMatches()
-            }
-        }
-    }
-    
-    func gatherMatches() {
-        do {
-            let currentMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-            let datingPref: DatingPreference = currentMatchSeeker.datingPreference
-            let interestedIn: InterestedIn = datingPref.interestedIn
-            let disabilityPref: DisabilityPreference = datingPref.disabilityPreference
-            
-            matches = try soulDatesMain.tailorMatches(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref)
-            lookError = .noError
-        }
-        catch ProfileError.noMatchesFound
-        {
-            lookError = .noMatches
-        }
-        catch {
-            lookError = .unkown
+            }.navigationTitle("Look")
+        }.onAppear{
+            session.gatherMatches(soulDatesMain: soulDatesMain)
         }
     }
 }
