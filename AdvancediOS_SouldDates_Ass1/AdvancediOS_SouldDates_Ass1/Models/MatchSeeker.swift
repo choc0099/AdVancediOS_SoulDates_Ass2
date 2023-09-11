@@ -19,9 +19,10 @@ struct MatchSeeker: Person {
     var backgroundCheck: BackgroundCheck?
     var disability: Disability?
     var isScammer: Bool
+    var imageName: String?
     
     init(screenName: String, hobbies: String, gender: Gender, dateOfBirth: Date, bio: String, favourteMusic: String, datingPreference: DatingPreference,
-         disability: Disability? = nil) {
+         disability: Disability? = nil, imageName: String? = nil) {
         self.screenName = screenName
         self.hobbies = hobbies
         self.gender = gender
@@ -32,6 +33,7 @@ struct MatchSeeker: Person {
         self.disability = disability
         self.isScammer = false
         self.backgroundCheck = nil
+        self.imageName = imageName
     }
     
     mutating func toggleScammer() {
