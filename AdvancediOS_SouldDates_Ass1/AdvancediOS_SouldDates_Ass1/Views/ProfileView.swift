@@ -21,29 +21,35 @@ struct ProfileView: View {
         
         NavigationStack {
             ScrollView {
-            
-                //let matchSeeker = profileVM.matchSeeker
-                Group {
-                    Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
-                    
-                    if let haveDisability = matchSeeker.getHeadlineText() {
-                         Text(haveDisability).font(.subheadline)
+                VStack(spacing: 20) {
+                    ProfileImageView(matchSeekerImage: matchSeeker.imageName, imageSize: 250)
+                    //let matchSeeker = profileVM.matchSeeker
+                    Group {
+                        Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
+                        
+                        if let haveDisability = matchSeeker.getHeadlineText() {
+                             Text(haveDisability).font(.subheadline)
+                        }
                     }
+                    
+                    
+                    Spacer()
+                    if matchSeeker.isScammer {
+                        Text("This person was known to be a scammer.").padding().fontWeight(.bold).background(.red).foregroundColor(.white)
+                    }
+                    //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
+                    Group {
+                        Text("Bio").font(.headline).padding()
+                        Text("\(matchSeeker.bio)").font(.body).padding()
+                        Text("Hobbies").font(.headline).padding()
+                        Text(matchSeeker.hobbies).padding()
+                        Text("Favourite Music").padding()
+                        Text("\(matchSeeker.favouriteMusic)")
+                    }
+                   
                 }
-               
-                Spacer()
-                if matchSeeker.isScammer {
-                    Text("This person was known to be a scammer.").padding().fontWeight(.bold).background(.red).foregroundColor(.white)
-                }
-                //Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
-                Group {
-                    Text("Bio").font(.headline).padding()
-                    Text("\(matchSeeker.bio)").font(.body).padding()
-                    Text("Hobbies").font(.headline).padding()
-                    Text(matchSeeker.hobbies).padding()
-                    Text("Favourite Music").padding()
-                    Text("\(matchSeeker.favouriteMusic)")
-                }
+                //this is where you would see the profile iamge
+                
             }.padding().toolbar(.visible, for: .tabBar)
         }.toolbar {
             Button {

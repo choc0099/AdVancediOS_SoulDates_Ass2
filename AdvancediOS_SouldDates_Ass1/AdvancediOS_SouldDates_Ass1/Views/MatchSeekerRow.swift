@@ -12,7 +12,8 @@ struct MatchSeekerRow: View {
     @Binding var selectedTab: Tab
     var body: some View {
      
-        HStack {
+        HStack(spacing: 20) {
+            ProfileImageView(matchSeekerImage: matchSeeker.imageName, imageSize: 50)
             VStack(alignment: .leading) {
                 Text(matchSeeker.screenName).font(.headline)
                 Spacer()
@@ -23,7 +24,7 @@ struct MatchSeekerRow: View {
                 else {
                     Text("")
                 }
-            }.padding()
+            }
         }.frame(height: 70)
         
     }
@@ -31,6 +32,6 @@ struct MatchSeekerRow: View {
 
 struct MatchSeekerRow_Previews: PreviewProvider {
     static var previews: some View {
-        MatchSeekerRow(matchSeeker: matchSeekersSample[3], selectedTab: .constant(.look))
+        MatchSeekerRow(matchSeeker: matchSeekersSample[0], selectedTab: .constant(.look))
     }
 }
