@@ -46,8 +46,8 @@ enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
     var id: Self {self}
 }
 
-//the perso
-protocol Person: Identifiable, Hashable, Decodable {
+//the person protocol is a set of properties that are required for this app as ezch person has their own id's and screenNames.
+protocol Person: Identifiable, Decodable {
     var id: UUID {get set}
     var screenName: String {get set}
 }
@@ -101,23 +101,7 @@ extension MatchSeekerUser {
 }*/
 
 
-
-
-struct AnyMatchSeeker {
-    var id = UUID()
-    var screenName: String
-    
-    init(id: UUID = UUID(), screenName: String) {
-        self.id = id
-        self.screenName = screenName
-    }
-}
-
-
-
-
 struct Admin: Person {
     var id: UUID = UUID()
     var screenName: String
-    
 }

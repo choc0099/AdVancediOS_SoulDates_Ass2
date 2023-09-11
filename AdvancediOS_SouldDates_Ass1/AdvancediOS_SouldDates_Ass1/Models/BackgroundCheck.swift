@@ -60,7 +60,7 @@ struct RefereeCheck: Verifiable {
     }
 }
 
-struct BackgroundCheck: Decodable, Hashable {
+struct BackgroundCheck: Decodable {
     var policeCheck: PoliceCheck?
     var proofOfAge: ProofOfAge?
     var refereeCheck: RefereeCheck?

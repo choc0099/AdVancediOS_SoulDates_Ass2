@@ -73,4 +73,6 @@ struct MatchSeeker: Person {
     mutating func setBackgroundCheck(backgroundCheck: BackgroundCheck?) {
         self.backgroundCheck = backgroundCheck
     }
+    
+    
 }
