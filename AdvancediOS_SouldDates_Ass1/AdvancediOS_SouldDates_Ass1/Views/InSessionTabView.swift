@@ -27,7 +27,7 @@ struct InSessionTabView: View {
                 
                 DreamListView(selectedTab: $selectedTab).tabItem {
                     Label("DreamList", systemImage: "heart.fill")
-                }
+                }.tag(Tab.dreamList)
                 
                 SettingsView(selectedTab: $selectedTab)
                 .tabItem {

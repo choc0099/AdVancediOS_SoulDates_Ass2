@@ -18,13 +18,14 @@ struct DreamListView: View {
             Group {
                 if errorStatus == .noError {
                     List(dreamList) { matchSeeker in
-                        NavigationLink{
-                            ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)
-                        } label: {
+                        NavigationLink (destination: ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab))
+                        {
                             MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab).swipeActions {
                                 Button(role: .destructive) {
+                                    selectedTab = .dreamList
                                     do {
                                         try session.removeFromDreamList(matchSeeker: matchSeeker)
+                                  
                                     }
                                     catch {
                                         print("Unable to delete item.")
