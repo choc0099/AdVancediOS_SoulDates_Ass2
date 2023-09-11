@@ -12,12 +12,12 @@ struct ProfileImageView: View {
     @State var imageSize: CGFloat
     var body: some View {
         if let hasImage = matchSeekerImage {
-            Image(hasImage).resizable().8scaledToFill().frame(width: imageSize, height: imageSize).clipShape(Circle()).overlay{
+            Image(hasImage).resizable().scaledToFill().frame(width: imageSize, height: imageSize).clipShape(Circle()).overlay{
                 Circle().stroke(.gray, lineWidth: 5)
             }
         }
         else {
-            Image(systemName: "person.fill").resizable().frame(width: imageSize, height: imageSize)
+            Image(systemName: "person.circle").resizable().frame(width: imageSize, height: imageSize)
         }
         
     }
