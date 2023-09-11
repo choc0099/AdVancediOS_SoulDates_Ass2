@@ -12,14 +12,31 @@ struct DreamListView: View {
     @EnvironmentObject var session: Session
     @State var dreamList: [MatchSeeker] = []
     @Binding var selectedTab: Tab
+    @State var navActive: Bool = true
     var body: some View {
         NavigationStack {
             Group {
                 if errorStatus == .noError {
                     List(dreamList) { matchSeeker in
-                        NavigationLink(destination: ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)) {
-                            MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab)
+                        NavigationLink{
+                            ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab)
+                        } label: {
+                            MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab).swipeActions {
+                                Button(role: .destructive) {
+                                    do {
+                                        try session.removeFromDreamList(matchSeeker: matchSeeker)
+                                    }
+                                    catch {
+                                        print("Unable to delete item.")
+                                    }
+                                } label: {
+                                    Label("Remove", systemImage: "trash.fill")
+                                }
+
+                            }
+                            
                         }
+    
                     }
                 }
                 else {

@@ -38,9 +38,12 @@ class Session: ObservableObject {
         dreamList.append(matchSeeker)
     }
     
-    func removeFromDreamList(matchSeeker: MatchSeeker) {
+    func removeFromDreamList(matchSeeker: MatchSeeker) throws {
         if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id}) {
             self.dreamList.remove(at: index)
+        }
+        else {
+            throw ProfileError.matchSeekerNotExist
         }
     }
     
