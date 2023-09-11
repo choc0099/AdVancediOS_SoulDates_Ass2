@@ -17,7 +17,7 @@ struct ProfileImageView: View {
             }
         }
         else {
-            Image(systemName: "person.circle").resizable().frame(width: imageSize, height: imageSize)
+            Image(systemName: "person.circle").resizable().frame(width: imageSize, height: imageSize).foregroundColor(.gray)
         }
         
     }
