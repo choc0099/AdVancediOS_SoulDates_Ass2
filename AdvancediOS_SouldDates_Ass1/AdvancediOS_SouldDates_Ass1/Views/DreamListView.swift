@@ -25,7 +25,7 @@ struct DreamListView: View {
                                     selectedTab = .dreamList
                                     do {
                                         try session.removeFromDreamList(matchSeeker: matchSeeker)
-                                  
+                                        loadDreamList() // refreshes the dreamList after remove.
                                     }
                                     catch {
                                         print("Unable to delete item.")
@@ -49,13 +49,17 @@ struct DreamListView: View {
                 }
             }.navigationTitle("Dream List")
         }.onAppear {
-            do {
-                dreamList = try session.getDreamList()
-                errorStatus = .noError
-            }
-            catch {
-                errorStatus = .noMatches
-            }
+            loadDreamList()
+        }
+    }
+    
+    func loadDreamList() {
+        do {
+            dreamList = try session.getDreamList()
+            errorStatus = .noError
+        }
+        catch {
+            errorStatus = .noMatches
         }
     }
 }
