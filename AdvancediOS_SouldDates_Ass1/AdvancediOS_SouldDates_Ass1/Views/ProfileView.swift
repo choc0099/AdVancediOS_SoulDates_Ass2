@@ -43,7 +43,6 @@ struct ProfileView: View {
                     Text(matchSeeker.hobbies).padding()
                     Text("Favourite Music").padding()
                     Text("\(matchSeeker.favouriteMusic)")
-                
                 }
             }.padding().toolbar(.visible, for: .tabBar)
         }.toolbar {
@@ -55,7 +54,15 @@ struct ProfileView: View {
         }.actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
                 .default(Text("Add to DreamList")) {
-                    
+                    do {
+                        try session.addToDreamList(matchSeeker: matchSeeker)
+                        showAlert = true
+                        alertTitle = "Match Seeker added to Dream List."
+                    }
+                    catch {
+                        showAlert = true
+                        alertTitle = "Unable to add to Dream List."
+                    }
                 },
                 .default(Text("Report Scam")) {
                     do {

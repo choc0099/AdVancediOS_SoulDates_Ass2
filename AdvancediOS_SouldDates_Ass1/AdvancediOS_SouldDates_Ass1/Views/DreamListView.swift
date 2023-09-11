@@ -25,11 +25,11 @@ struct DreamListView: View {
                 else {
                     VStack(spacing: 20) {
                         Text("DreamList is Empty").font(.headline)
-                        Text("You have not added any matches onto your DreamList.")
+                        Text("You have not added any matches onto your DreamList.").multilineTextAlignment(.center)
                     }
                     
                 }
-            }
+            }.navigationTitle("Dream List")
         }.onAppear {
             do {
                 dreamList = try session.getDreamList()
