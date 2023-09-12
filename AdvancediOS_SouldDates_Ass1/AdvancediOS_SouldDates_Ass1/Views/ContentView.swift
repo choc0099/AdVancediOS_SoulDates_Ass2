@@ -13,18 +13,21 @@ struct ContentView: View {
     @State var selectedTab: Tab = .look
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @State var showWelcome: Bool = true
+    @State var isOnSession: Bool = false
     var body: some View {
         
         //the welcome view will show up when the user runs the app
         //For the navigations in the tab view to work where tab bars are still visible,
         //I had to enbed the TabSessionView inside the ContentView and use pop overs for
         //the setup process.
-        InSessionTabView().padding().fullScreenCover(isPresented: $showWelcome, onDismiss: {
-            session.gatherMatches(soulDatesMain: soulDatesMain)
-        }) {
-            WelcomeView(showWelcome: $showWelcome)
+       
+        if !isOnSession {
+            WelcomeView(showWelcome: $isOnSession)
         }
+        else {
+            InSessionTabView()
+        }
+        
     }
     
     

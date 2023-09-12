@@ -28,7 +28,7 @@ struct DatingPreferencesView: View {
                 }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
-            AbouteMeView(setupVM: setupVM, showWelcome: $showWelcome)
+            AbouteMeView(setupVM: setupVM, isOnSession: $showWelcome)
         }
     }
 }
