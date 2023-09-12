@@ -33,9 +33,18 @@ class Session: ObservableObject {
         }
     }
     
-    func addToDreamList( matchSeeker: MatchSeeker) throws {
-        //if souldDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeeker.id)
+    func addToDreamList( matchSeeker: MatchSeeker) {
         dreamList.append(matchSeeker)
+    }
+    
+    func checkAlreadyAdded(selectedMatchSeeker: MatchSeeker) -> Bool
+    {
+        for item in dreamList {
+            if selectedMatchSeeker.id == item.id {
+                return true
+            }
+        }
+        return false
     }
     
     func removeFromDreamList(matchSeeker: MatchSeeker) throws {

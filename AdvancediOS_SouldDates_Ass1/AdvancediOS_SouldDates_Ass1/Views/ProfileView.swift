@@ -13,9 +13,10 @@ struct ProfileView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
-    @State var showActionSheet: Bool = false
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
+    @State private var showActionSheet: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var dreamListStatus: String = ""
     
     var body: some View {
         
@@ -59,16 +60,8 @@ struct ProfileView: View {
             }
         }.actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
-                .default(Text("Add to DreamList")) {
-                    do {
-                        try session.addToDreamList(matchSeeker: matchSeeker)
-                        showAlert = true
-                        alertTitle = "Match Seeker added to Dream List."
-                    }
-                    catch {
-                        showAlert = true
-                        alertTitle = "Unable to add to Dream List."
-                    }
+                .default(Text(dreamListStatus)) {
+                    handleDreamList()
                 },
                 .default(Text("Report Scam")) {
                     do {
@@ -85,6 +78,14 @@ struct ProfileView: View {
                 },
                 .cancel()
             ])
+        }.onAppear{
+            if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker)
+            {
+                dreamListStatus = "Remove from DreamList"
+            }
+            else {
+                dreamListStatus = "Add to DreamList"
+            }
         }.alert(isPresented: $showAlert) {
             Alert(
                 title:
@@ -93,6 +94,24 @@ struct ProfileView: View {
         }
     }
     
+    func handleDreamList() {
+        do {
+            if !session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker) {
+                session.addToDreamList(matchSeeker: matchSeeker)
+                showAlert = true
+                alertTitle = "Match Seeker added to Dream List."
+            }
+            else {
+                try session.removeFromDreamList(matchSeeker: matchSeeker)
+                showAlert = true
+                alertTitle = "Match Seeker removed from Dream List."
+            }
+        }
+        catch {
+            showAlert = true
+          alertTitle = "Unable to remove from Dream List."
+        }
+    }
     
 }
 
