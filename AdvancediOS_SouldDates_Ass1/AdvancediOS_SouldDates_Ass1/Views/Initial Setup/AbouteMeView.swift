@@ -68,6 +68,8 @@ struct AbouteMeView: View {
     
     func processData() {
         let matchseeker = setupVM.convertToObject()
+        //saves the matchSeeker to the session
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: matchseeker)
         soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
         session.matchSeekerId = matchseeker.id
     }

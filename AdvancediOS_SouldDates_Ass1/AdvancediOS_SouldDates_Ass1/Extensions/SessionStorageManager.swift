@@ -9,10 +9,10 @@ import Foundation
 
 class SessionStorageManager {
     
-    static let SESSION_MATCH_SEEKER_KEY = "matchSeekerKey"
-    static let SESSION_ID_KEY = "sessionIdKey"
-    static let DREAM_LIST_KEY = "dreamListKey"
-    static let defaults = UserDefaults.standard
+    private static let SESSION_MATCH_SEEKER_KEY = "matchSeekerKey"
+    private static let SESSION_ID_KEY = "sessionIdKey"
+    private static let DREAM_LIST_KEY = "dreamListKey"
+    private static let defaults = UserDefaults.standard
     
     //stores the matchSeeker that was used during the session into user defaults.
     //this also includes dating preferences
