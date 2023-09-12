@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum LookError {
+enum LookError: String, Codable {
     case noError
     case noMatches
     case unkown
