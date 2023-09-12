@@ -55,6 +55,7 @@ struct DreamListView: View {
     
     func loadDreamList() {
         do {
+            
             dreamList = try session.getDreamList()
             errorStatus = .noError
         }

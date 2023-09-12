@@ -33,6 +33,8 @@ struct ContentView: View {
             if let savedMatchSeeker = SessionStorageManager.readMatchSeekerFromUserDefaults() {
                 session.matchSeekerId = savedMatchSeeker.id
                 isOnSession = true
+                //loads the dreamLists from user defaults.
+                session.dreamList = SessionStorageManager.loadDreamList()
                 soulDatesMain.onboardMatchSeeker(matchSeeker: savedMatchSeeker)
             }
         }

@@ -34,7 +34,11 @@ class Session: ObservableObject {
     }
     
     func addToDreamList( matchSeeker: MatchSeeker) {
-        dreamList.append(matchSeeker)
+        //adds it to the dream list property.
+        self.dreamList.append(matchSeeker)
+        //saves the state of the dreamList to user defaults.
+        SessionStorageManager.saveDreamList(dreamlist: dreamList)
+        
     }
     
     func checkAlreadyAdded(selectedMatchSeeker: MatchSeeker) -> Bool
@@ -50,6 +54,8 @@ class Session: ObservableObject {
     func removeFromDreamList(matchSeeker: MatchSeeker) throws {
         if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id}) {
             self.dreamList.remove(at: index)
+            //overwrites what ever is on the current dream list after removal
+            SessionStorageManager.saveDreamList(dreamlist: dreamList)
         }
         else {
             throw ProfileError.matchSeekerNotExist
