@@ -204,4 +204,12 @@ class SoulDatesMain: ObservableObject {
             throw ProfileError.matchSeekerNotExist
         }
     }
+    
+    func removeMatchSeeker(matchSeekerId: UUID)
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
+        {
+            self.matchSeekers.remove(at: index)
+        }
+    }
 }

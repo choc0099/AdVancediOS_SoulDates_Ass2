@@ -14,6 +14,7 @@ struct SettingsView: View {
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
     @Binding var isOnSession: Bool
+    @State private var showAlert: Bool = false
     var body: some View {
       NavigationStack {
             List {
@@ -42,7 +43,7 @@ struct SettingsView: View {
                 }
              
                 Button {
-                    isOnSession = false
+                    showAlert = true
                 } label: {
                     Text("Reset")
                 }
@@ -54,7 +55,19 @@ struct SettingsView: View {
             } catch {
                 print("The matchSeeker on the soulDatesMain does not exist.")
             }
+        }.alert(isPresented: $showAlert) {
+            Alert(title: Text("Are you sure you want to reset your settings."), message: Text("You will lose your saved data including dreamLists and Match Seeker preferences."), primaryButton: .destructive(Text("Yes"), action: {
+                //performs reset actions
+                handleReset()
+                //returns back to the WelcomeView
+                isOnSession = false
+            }), secondaryButton:.default(Text("No")))
         }
+    }
+    
+    func handleReset() {
+        SessionStorageManager.clearEverthing()
+        soulDatesMain.removeMatchSeeker(matchSeekerId: session.matchSeekerId)
     }
     
     func transferToUpdateProfileVM() throws {

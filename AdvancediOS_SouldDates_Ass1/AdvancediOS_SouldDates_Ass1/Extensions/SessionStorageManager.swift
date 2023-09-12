@@ -52,4 +52,10 @@ class SessionStorageManager {
         }
     }
     
+    //this will clear saved data from user defaults when a match seeker resets the settings.
+    static func clearEverthing() {
+        defaults.removeObject(forKey: DREAM_LIST_KEY)
+        defaults.removeObject(forKey: SESSION_MATCH_SEEKER_KEY)
+    }
+    
 }
