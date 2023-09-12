@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatchSeeker: Person {
+struct MatchSeeker: Person, Codable {
     var id: UUID = UUID()
     var screenName: String
     var hobbies: String
@@ -73,6 +73,4 @@ struct MatchSeeker: Person {
     mutating func setBackgroundCheck(backgroundCheck: BackgroundCheck?) {
         self.backgroundCheck = backgroundCheck
     }
-    
-    
 }
