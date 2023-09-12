@@ -15,15 +15,16 @@ struct SettingsView: View {
     @Binding var selectedTab: Tab
     @Binding var isOnSession: Bool
     @State private var showAlert: Bool = false
+    @State var settingsNavPath: NavigationPath = NavigationPath()
     var body: some View {
-      NavigationStack {
+      NavigationStack(path: $settingsNavPath) {
             List {
                 NavigationLink {
                     UpdateProfileView(updateProfileVM: updateProfileVM, selectedTab: $selectedTab)
                 } label: {
                     Text("Update Profile")
                 }
-                
+
                 NavigationLink {
                     UpdateBackgroundCheckView(isOnSession: $isOnSession)
                 } label: {
@@ -37,11 +38,10 @@ struct SettingsView: View {
                 }
                 
                 NavigationLink {
-                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: $isOnSession)
+                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: $isOnSession, selectedTab: $selectedTab)
                 } label: {
                     Text("Update Disability Details")
                 }
-             
                 Button {
                     showAlert = true
                 } label: {

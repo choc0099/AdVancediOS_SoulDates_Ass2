@@ -16,6 +16,7 @@ struct UpdateDisabilityDetailsView: View {
     @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
     @Binding var isOnSession: Bool
+    @Binding var selectedTab: Tab
     
     var body: some View {
         Form {
@@ -60,10 +61,10 @@ struct UpdateDisabilityDetailsView: View {
             catch {
                 print("The matchSeeker does not exist.")
             }
-           
-           
+            
+            
         }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView(isOnSession: $isOnSession)
+            SettingsView(selectedTab: $selectedTab, isOnSession: $isOnSession)
         }).navigationTitle("Update Disability Details").toolbar{
             Button {
                 do{
@@ -102,11 +103,10 @@ struct UpdateDisabilityDetailsView: View {
         SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: updatedMatchSeeker)
         
     }
-    //this will update it on the session side.
 }
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: .constant(true)).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: .constant(true), selectedTab: .constant(.settings)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
