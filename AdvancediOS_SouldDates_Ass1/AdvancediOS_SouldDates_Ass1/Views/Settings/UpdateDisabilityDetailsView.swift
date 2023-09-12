@@ -95,6 +95,10 @@ struct UpdateDisabilityDetailsView: View {
         
         let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability, discloseDisability: updateDisabilityVM.discloseMyDisability, riskRejections: updateDisabilityVM.riskGettingRejected)
+        //saves it to user defaults, it will overwrite it.
+        let updatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: updatedMatchSeeker)
+        
     }
     //this will update it on the session side.
 }
