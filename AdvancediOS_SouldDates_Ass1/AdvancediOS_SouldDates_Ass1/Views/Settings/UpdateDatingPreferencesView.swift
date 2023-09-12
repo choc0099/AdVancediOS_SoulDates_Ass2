@@ -11,10 +11,11 @@ struct UpdateDatingPreferencesView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @ObservedObject var updateDatingPrefVM: UpdateDatingPreferncesViewModel
-    @State var showAlert: Bool = false
-    @State var navActive: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    @State private var navActive: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @Binding var isOnSession: Bool
     
     var body: some View {
        
@@ -51,7 +52,7 @@ struct UpdateDatingPreferencesView: View {
                 } label: {
                     Text("Done")
                 }.navigationDestination(isPresented: $navActive) {
-                    InSessionTabView()
+                    InSessionTabView(isOnSession: $isOnSession)
                 }.alert(isPresented: $showAlert) {
                     Alert(
                         title: Text(alertTitle),
@@ -72,6 +73,7 @@ struct UpdateDatingPreferencesView: View {
 
 struct UpdateDatingPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDatingPreferencesView(updateDatingPrefVM: UpdateDatingPreferncesViewModel())
+        UpdateDatingPreferencesView(updateDatingPrefVM: UpdateDatingPreferncesViewModel(),
+                                    isOnSession: .constant(true))
     }
 }

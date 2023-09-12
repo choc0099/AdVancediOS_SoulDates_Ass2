@@ -11,10 +11,11 @@ struct UpdatePoliceCheckView: View {
     @ObservedObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
-    @State var navActive: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var navActive: Bool = false
+    @Binding var isOnSession: Bool
     
     var body: some View {
         NavigationStack {
@@ -66,7 +67,7 @@ struct UpdatePoliceCheckView: View {
                 message: Text(alertMessage)
             )
         }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView()
+            InSessionTabView(isOnSession: $isOnSession)
         }).onAppear {
             do {
                 let matchSeeker: MatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
@@ -111,6 +112,6 @@ struct UpdatePoliceCheckView: View {
 
 struct UpdatePoliceCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel())
+        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel(), isOnSession: .constant(true))
     }
 }

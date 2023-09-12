@@ -22,10 +22,10 @@ struct ContentView: View {
         //the setup process.
         Group {
             if !isOnSession {
-                WelcomeView(showWelcome: $isOnSession)
+                WelcomeView(isOnSession: $isOnSession)
             }
             else {
-                InSessionTabView()
+                InSessionTabView(isOnSession: $isOnSession)
             }
         }.padding().onAppear{
             

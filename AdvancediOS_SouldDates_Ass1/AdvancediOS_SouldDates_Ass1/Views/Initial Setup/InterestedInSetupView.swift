@@ -10,7 +10,7 @@ import SwiftUI
 struct InterestedInSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @State var navActive: Bool = false
-    @Binding  var showWelcome: Bool
+    @Binding  var isOnSession: Bool
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -30,7 +30,7 @@ struct InterestedInSetupView: View {
                 }
             }
         }.navigationDestination(isPresented: $navActive, destination: {
-            DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $showWelcome)
+            DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $isOnSession)
         }).navigationTitle("Interested in Details")
         
     }
@@ -38,6 +38,6 @@ struct InterestedInSetupView: View {
 
 struct InterestedInSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        InterestedInSetupView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
+        InterestedInSetupView(setupVM: InitialSetupViewModel(), isOnSession: .constant(false))
     }
 }

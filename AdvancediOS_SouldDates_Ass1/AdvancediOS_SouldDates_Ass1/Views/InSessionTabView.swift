@@ -15,6 +15,7 @@ enum Tab: Hashable {
 
 struct InSessionTabView: View {
     @State var selectedTab: Tab = .look
+    @Binding var isOnSession: Bool
     var body: some View {
         
        
@@ -29,7 +30,7 @@ struct InSessionTabView: View {
                     Label("DreamList", systemImage: "heart.fill")
                 }.tag(Tab.dreamList)
                 
-                SettingsView(selectedTab: $selectedTab)
+                SettingsView(selectedTab: $selectedTab, isOnSession: $isOnSession)
                 .tabItem {
                     Label("Settings", systemImage: "sun.max")
                 }.tag(Tab.settings)
@@ -39,6 +40,6 @@ struct InSessionTabView: View {
 
 struct InSessionTabView_Previews: PreviewProvider {
     static var previews: some View {
-        InSessionTabView().environmentObject(Session()).environmentObject(SoulDatesMain())
+        InSessionTabView(isOnSession: .constant(true)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

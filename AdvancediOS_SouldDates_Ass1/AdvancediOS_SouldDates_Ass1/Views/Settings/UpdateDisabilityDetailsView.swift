@@ -11,10 +11,12 @@ struct UpdateDisabilityDetailsView: View {
     @ObservedObject var updateDisabilityVM: UpdateDisabilityDetailsViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State var disabilityText: String = ""
-    @State var disabilitySeverity: DisabilitySeverity = .moderate
-    @State var navActive: Bool = false
-    @State var showAlert: Bool = false
+    @State private var disabilityText: String = ""
+    @State private var disabilitySeverity: DisabilitySeverity = .moderate
+    @State private var navActive: Bool = false
+    @State private var showAlert: Bool = false
+    @Binding var isOnSession: Bool
+    
     var body: some View {
         Form {
             Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
@@ -61,7 +63,7 @@ struct UpdateDisabilityDetailsView: View {
            
            
         }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView()
+            InSessionTabView(isOnSession: $isOnSession)
         }).navigationTitle("Update Disability Details").toolbar{
             Button {
                 do{
@@ -105,6 +107,6 @@ struct UpdateDisabilityDetailsView: View {
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: .constant(true)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

@@ -17,13 +17,13 @@ struct DisabilityStatusSetupView: View {
                 Text("Do you have a disability?")
                 
                 NavigationLink {
-                    DisabilityDetailsSetupView(setupVM: setupVM, showWelcome: $showWelcome)
+                    DisabilityDetailsSetupView(setupVM: setupVM, isOnSession: $showWelcome)
                 } label: {
                     StyledButton(text: "Yes, I do", backGroundColour: .red, foregroundColour: .white)
                 }.padding()
                 
                 NavigationLink {
-                    DatingPreferencesView(setupVM: setupVM, showWelcome: $showWelcome)
+                    DatingPreferencesView(setupVM: setupVM, isOnSession: $showWelcome)
                 } label: {
                     StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
                 }.padding()

@@ -11,10 +11,11 @@ struct UpdateRefereeCheckView: View {
     @ObservedObject var updateRefereeVM: UpdateRefereeCheckViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State var navAcitve: Bool = false
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
+    @State private var navAcitve: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @Binding var isOnSession: Bool
     var body: some View {
         NavigationStack {
             Form {
@@ -48,7 +49,7 @@ struct UpdateRefereeCheckView: View {
                     Text("Done")
                 }
             }.navigationDestination(isPresented: $navAcitve, destination: {
-                InSessionTabView()
+                InSessionTabView(isOnSession: $isOnSession)
             }).onAppear {
                 do {
                     //updates the view model.
@@ -104,6 +105,6 @@ struct UpdateRefereeCheckView: View {
 
 struct UpdateRefereeCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
+        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: .constant(false))
     }
 }

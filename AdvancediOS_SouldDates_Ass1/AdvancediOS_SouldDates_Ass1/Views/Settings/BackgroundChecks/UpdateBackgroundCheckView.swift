@@ -9,20 +9,21 @@ import SwiftUI
 
 struct UpdateBackgroundCheckView: View {
     @StateObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel = UpdatePoliceCheckViewModel()
+    @Binding var isOnSession: Bool
     var body: some View {
         List {
             NavigationLink {
-                UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
+                UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM, isOnSession: $isOnSession)
             } label: {
                 Text("Police Checks")
             }
             NavigationLink {
-                UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
+                UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel(), isOnSession: $isOnSession)
             } label: {
                 Text("Proof of Age")
             }
             NavigationLink {
-                UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
+                UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: $isOnSession)
             } label: {
                 Text("Raference Checks")
             }
@@ -32,6 +33,6 @@ struct UpdateBackgroundCheckView: View {
 
 struct UpdateBackgroundCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateBackgroundCheckView()
+        UpdateBackgroundCheckView(isOnSession: .constant(false))
     }
 }

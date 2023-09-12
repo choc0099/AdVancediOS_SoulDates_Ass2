@@ -13,6 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
+    @Binding var isOnSession: Bool
     var body: some View {
       NavigationStack {
             List {
@@ -23,25 +24,25 @@ struct SettingsView: View {
                 }
                 
                 NavigationLink {
-                    UpdateBackgroundCheckView()
+                    UpdateBackgroundCheckView(isOnSession: $isOnSession)
                 } label: {
                     Text("Background checks")
                 }
              
                 NavigationLink {
-                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM)
+                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM, isOnSession: $isOnSession)
                 } label: {
                     Text("Update Dating Preference")
                 }
                 
                 NavigationLink {
-                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel())
+                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: $isOnSession)
                 } label: {
                     Text("Update Disability Details")
                 }
              
-                NavigationLink {
-                    //WelcomeView()
+                Button {
+                    isOnSession = false
                 } label: {
                     Text("Reset")
                 }
@@ -80,6 +81,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(selectedTab: .constant(.settings)).environmentObject(Session())
+        SettingsView(selectedTab: .constant(.settings), isOnSession: .constant(false)).environmentObject(Session())
     }
 }

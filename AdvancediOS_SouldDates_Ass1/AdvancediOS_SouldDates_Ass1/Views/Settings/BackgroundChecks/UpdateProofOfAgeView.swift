@@ -11,11 +11,11 @@ struct UpdateProofOfAgeView: View {
     @ObservedObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @State var navActive: Bool = false
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
-    
+    @State private var navActive: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @Binding var isOnSession: Bool
     
     var body: some View {
         NavigationStack {
@@ -80,7 +80,7 @@ struct UpdateProofOfAgeView: View {
                     Text("Done")
                 }
             }.navigationDestination(isPresented: $navActive, destination: {
-                InSessionTabView()
+                InSessionTabView(isOnSession: $isOnSession)
             }).onAppear {
                 do {
                     try updateVM()
@@ -136,6 +136,8 @@ struct UpdateProofOfAgeView: View {
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel(), isOnSession: .constant(true))
+            .environmentObject(Session())
+            .environmentObject(SoulDatesMain())
     }
 }
