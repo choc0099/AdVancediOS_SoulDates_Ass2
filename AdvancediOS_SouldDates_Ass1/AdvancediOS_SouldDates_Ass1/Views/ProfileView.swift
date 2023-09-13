@@ -17,6 +17,7 @@ struct ProfileView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var dreamListStatus: String = ""
+    @State private var alertMessage: String = ""
     //this is the constants that will store a system image names
     private let scamIcon: String = "exclamationmark.triangle.fill"
     private let backgroundCheckIcon: String = "checkmark.seal"
@@ -75,6 +76,19 @@ struct ProfileView: View {
                 }
                 //this is where you would see the profile iamge
                 
+                
+                //according to my UI Design, the connect button is used to sent a connection request to a match seeker.
+                //for the purpose of this prototype, there will be no API communications, therefore an alert will show.
+                //that the feature is still in development.
+                Button {
+                   //shows an alert to a user that the app is a prototype
+                    showAlert = true
+                    alertTitle = "Under Construction!"
+                    alertMessage = "This app is currently a prototype and does not have access to API's, we are still working on this feature."
+                } label: {
+                    StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
+                }
+                
             }.padding().toolbar(.visible, for: .tabBar)
         }.toolbar {
             Button {
@@ -113,7 +127,8 @@ struct ProfileView: View {
         }.alert(isPresented: $showAlert) {
             Alert(
                 title:
-                    Text(alertTitle)
+                    Text(alertTitle),
+                message: Text(alertMessage)
             )
         }
     }
