@@ -74,4 +74,13 @@ class Session: ObservableObject {
             throw ProfileError.noMatchesFound
         }
     }
+    
+    //this will overwrite the matchSeeker that is in session.
+    //to user defaults when you update things such as
+    //dating preferences, disability status, background checks and profiles.
+    func overWriteMatchSeekertoUserDefautls(soulDatesMain: SoulDatesMain) throws {
+        //gets the matchSeeker taht is currently in session.
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeekerId)
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: matchSeeker)
+    }
 }

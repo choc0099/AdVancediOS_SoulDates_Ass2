@@ -90,10 +90,10 @@ struct UpdatePoliceCheckView: View {
         }
     }
     
+    //updates the police check details onto the MatchSeeker struct based on different scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         //checks if the backgroundcheck is nil
-     
         
         if updatePoliceCheckVM.isPoliceChecked {
             if matchSeeker.backgroundCheck == nil {
@@ -107,6 +107,7 @@ struct UpdatePoliceCheckView: View {
         else {
             try soulDatesMain.managePoliceCheck(currentMatchSeeker: matchSeeker, policeCheck: nil)
         }
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
 }
 

@@ -77,6 +77,9 @@ struct UpdateProfileView: View {
         
         //edits the profile from the model side
         try soulDatesMain.updateMatchSeekerProfile(currentMatchSeeker: allocatedMatchSeeker, newScreenName: updateProfileVM.screenName, newGender: updateProfileVM.gender, newDateOfBirth: updateProfileVM.dateOfBirth, newBio: updateProfileVM.bio, newHobbies: updateProfileVM.hobbies, newFavouriteMusic: updateProfileVM.favouriteMusic)
+        
+        //overwrites matchSeeker updated profile to userDefaults
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
 }
 

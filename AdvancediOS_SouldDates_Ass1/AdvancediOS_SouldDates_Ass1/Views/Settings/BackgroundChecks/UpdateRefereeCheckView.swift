@@ -79,6 +79,7 @@ struct UpdateRefereeCheckView: View {
     }
     
     //this will update referee data into the model
+    //there are conditional statements that will determine in certain use cases, for example, if they no longer want a refaree check and if the actual background check is not allocated.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         if updateRefereeVM.isRefereeChecked {
@@ -96,6 +97,9 @@ struct UpdateRefereeCheckView: View {
         else {
            try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: nil)
         }
+        
+        //overwrites it to userDefaults
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
     
     func initialiseRefereeCheck(_ matchSeeker: MatchSeeker) throws {

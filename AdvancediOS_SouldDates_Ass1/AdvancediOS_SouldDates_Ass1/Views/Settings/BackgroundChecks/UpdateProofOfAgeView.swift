@@ -109,6 +109,7 @@ struct UpdateProofOfAgeView: View {
         }
     }
     
+    //this will update the proof of age check details based on scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         
@@ -127,6 +128,8 @@ struct UpdateProofOfAgeView: View {
         else { // this will set the proofOfAge object to nil if the matchSeeker no longer wants their proof of age.
            try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: nil)
         }
+        //overwrites it to userDefaults
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
     
     private func initialiseProofOfAge(matchSeeker: MatchSeeker) throws {

@@ -68,6 +68,8 @@ struct UpdateDatingPreferencesView: View {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
        try soulDatesMain.updateMatchSeekerDatingPreference(currentMatchSeeker: matchSeeker, newInterestedIn: updateDatingPrefVM.interestedIn, newDisabilityPrefernce: updateDatingPrefVM.disabilityPrefernces)
         
+        //overwrites the dating preferences to userDefaults.
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
 }
 
