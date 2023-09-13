@@ -75,6 +75,12 @@ class Session: ObservableObject {
         }
     }
     
+    //this will clear all stuffs from the dreamList while it was in memory
+    //after the matchSeeker resets their settings.
+    func clearAllDreamList() {
+        self.dreamList.removeAll()
+    }
+    
     //this will overwrite the matchSeeker that is in session.
     //to user defaults when you update things such as
     //dating preferences, disability status, background checks and profiles.

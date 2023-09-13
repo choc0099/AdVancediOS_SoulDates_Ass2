@@ -65,9 +65,14 @@ struct SettingsView: View {
         }
     }
     
+    //this is a function that will clear all data including matchSeeker details
+    //when the function is called.
     func handleReset() {
         SessionStorageManager.clearEverthing()
+        //removes the allocated matchSeeker from memory.
         soulDatesMain.removeMatchSeeker(matchSeekerId: session.matchSeekerId)
+        //clears the dreamList from memory
+        session.clearAllDreamList()
     }
     
     func transferToUpdateProfileVM() throws {
