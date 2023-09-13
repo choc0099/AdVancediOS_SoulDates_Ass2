@@ -94,7 +94,7 @@ struct ProfileView: View {
             Button {
                 showActionSheet = true
             } label: {
-                Image(systemName: "ellipsis")
+                Image(systemName: "ellipsis.circle")
             }
         }.actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
@@ -108,6 +108,8 @@ struct ProfileView: View {
                         //imdediately updates it to the view side.
                         matchSeeker.toggleScammer()
                         session.gatherMatches(soulDatesMain: soulDatesMain)
+                        //saves the scammer status to user defaults
+                        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
                     }
                     catch {
                         showAlert = true
