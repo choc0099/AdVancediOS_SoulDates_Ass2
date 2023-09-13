@@ -41,7 +41,6 @@
 		32D538382A91F21B00DFC38D /* DisabilityStatusSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */; };
 		32D5383A2A91F23D00DFC38D /* DatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */; };
 		32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383B2A91F25900DFC38D /* AbouteMeView.swift */; };
-		32D538402A91F2C600DFC38D /* DreamList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D5383F2A91F2C600DFC38D /* DreamList.swift */; };
 		32D538422A91F33C00DFC38D /* AccountSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538412A91F33C00DFC38D /* AccountSettings.swift */; };
 		32D538442A91F37000DFC38D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538432A91F37000DFC38D /* SettingsView.swift */; };
 		32D538462A922A3800DFC38D /* BasicDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */; };
@@ -117,7 +116,6 @@
 		32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilityStatusSetupView.swift; sourceTree = "<group>"; };
 		32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreferencesView.swift; sourceTree = "<group>"; };
 		32D5383B2A91F25900DFC38D /* AbouteMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbouteMeView.swift; sourceTree = "<group>"; };
-		32D5383F2A91F2C600DFC38D /* DreamList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamList.swift; sourceTree = "<group>"; };
 		32D538412A91F33C00DFC38D /* AccountSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettings.swift; sourceTree = "<group>"; };
 		32D538432A91F37000DFC38D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDetailsSetupView.swift; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 		32D5382C2A91F04800DFC38D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				32D5383F2A91F2C600DFC38D /* DreamList.swift */,
 				32F519142A9EEDBB005DA063 /* Persons.swift */,
 				32D538412A91F33C00DFC38D /* AccountSettings.swift */,
 				32F519162A9EEEB6005DA063 /* BackgroundCheck.swift */,
@@ -500,7 +497,6 @@
 				3277DDAF2AB1C043005B5471 /* BackgroundCheckStatusView.swift in Sources */,
 				32F519152A9EEDBB005DA063 /* Persons.swift in Sources */,
 				32F250F52A90D2C10084424B /* ContentView.swift in Sources */,
-				32D538402A91F2C600DFC38D /* DreamList.swift in Sources */,
 				32D5383C2A91F25900DFC38D /* AbouteMeView.swift in Sources */,
 				32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */,
 				321E51942AA5867600513CA9 /* UpdateProfileView.swift in Sources */,
