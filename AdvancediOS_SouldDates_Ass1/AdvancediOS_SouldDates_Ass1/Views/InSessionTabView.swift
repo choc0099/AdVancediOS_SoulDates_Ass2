@@ -16,6 +16,9 @@ enum Tab: Hashable {
 struct InSessionTabView: View {
     @State var selectedTab: Tab = .look
     @Binding var isOnSession: Bool
+    //this will be used to root back to the root view of the app when the user taps done after updating thier settings
+    @Environment(\.presentationMode) var presentationMode
+    @State var isOnRootView: Bool = false
     var body: some View {
         
        

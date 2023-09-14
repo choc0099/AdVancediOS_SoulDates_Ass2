@@ -16,6 +16,8 @@ struct UpdateProfileView: View {
     @State var alertMessage: String = ""
     @State var alertTitle: String = ""
     @Binding var selectedTab: Tab
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -46,7 +48,8 @@ struct UpdateProfileView: View {
                     do {
                         try updateProfileVM.validateDateOfBirth()
                         try processData()
-                        selectedTab = .look
+                        //goes back to the previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     catch ProfileError.underAgeException {
                         showAlert = true

@@ -13,10 +13,10 @@ struct UpdateDisabilityDetailsView: View {
     @EnvironmentObject var session: Session
     @State private var disabilityText: String = ""
     @State private var disabilitySeverity: DisabilitySeverity = .moderate
-    @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
     @Binding var isOnSession: Bool
     @Binding var selectedTab: Tab
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
@@ -34,10 +34,14 @@ struct UpdateDisabilityDetailsView: View {
                     }
                 }.pickerStyle(.segmented)
                 
-                Section("Disability related settings:") {
+                Section(content: {
                     Toggle("Disclose my disability:", isOn: $updateDisabilityVM.discloseMyDisability)
                     Toggle("Risk getting rejected:", isOn: $updateDisabilityVM.riskGettingRejected)
-                }
+                }, header: {
+                    Text("Disability related settings")
+                }, footer: {
+                    Text("The risk of getting rejected toggle shows matchSeekers who do not declare that they are open minded.")
+                }) 
             }
         }.onAppear {
             
@@ -63,13 +67,13 @@ struct UpdateDisabilityDetailsView: View {
             }
             
             
-        }.navigationDestination(isPresented: $navActive, destination: {
-            SettingsView(selectedTab: $selectedTab, isOnSession: $isOnSession)
-        }).navigationTitle("Update Disability Details").toolbar{
+        }.navigationTitle("Update Disability Details").toolbar{
             Button {
                 do{
+                    //handles changes
                     try processData()
-                    navActive = true
+                    //goes back to the previous view
+                    presentationMode.wrappedValue.dismiss()
                 }
                 catch {
                     print("the matchSeeker from the session does not exist in the matchSeekerMain.")

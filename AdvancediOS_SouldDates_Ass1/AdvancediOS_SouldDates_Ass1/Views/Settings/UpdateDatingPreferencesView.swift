@@ -16,6 +16,8 @@ struct UpdateDatingPreferencesView: View {
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @Binding var isOnSession: Bool
+    //this is used to go back to the previous view
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
        
@@ -41,7 +43,7 @@ struct UpdateDatingPreferencesView: View {
                 Button {
                     do {
                         try processData()
-                        navActive = true
+                        presentationMode.wrappedValue.dismiss()
                     }
                     catch {
                         showAlert = true
