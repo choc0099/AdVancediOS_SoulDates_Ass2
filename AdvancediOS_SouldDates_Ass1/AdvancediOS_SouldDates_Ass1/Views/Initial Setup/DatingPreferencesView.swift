@@ -10,7 +10,7 @@ import SwiftUI
 struct DatingPreferencesView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @State var navActive: Bool = false
-    @Binding var showWelcome: Bool
+    @Binding var isOnSession: Bool
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -28,13 +28,13 @@ struct DatingPreferencesView: View {
                 }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
-            AbouteMeView(setupVM: setupVM, showWelcome: $showWelcome)
+            AbouteMeView(setupVM: setupVM, isOnSession: $isOnSession)
         }
     }
 }
 
 struct DatingPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        DatingPreferencesView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
+        DatingPreferencesView(setupVM: InitialSetupViewModel(), isOnSession: .constant(false))
     }
 }

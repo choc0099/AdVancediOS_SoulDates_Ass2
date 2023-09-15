@@ -13,18 +13,33 @@ struct ContentView: View {
     @State var selectedTab: Tab = .look
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @State var showWelcome: Bool = true
+    @State var isOnSession: Bool = false
     var body: some View {
         
         //the welcome view will show up when the user runs the app
         //For the navigations in the tab view to work where tab bars are still visible,
         //I had to enbed the TabSessionView inside the ContentView and use pop overs for
         //the setup process.
-        InSessionTabView().padding().fullScreenCover(isPresented: $showWelcome, onDismiss: {
-            session.gatherMatches(soulDatesMain: soulDatesMain)
-        }) {
-            WelcomeView(showWelcome: $showWelcome)
+        Group {
+            if !isOnSession {
+                WelcomeView(isOnSession: $isOnSession)
+            }
+            else {
+                InSessionTabView(isOnSession: $isOnSession)
+            }
+        }.padding().onAppear{
+            
+            //this will be used to go straight to the Look view if there is a matchSeeker saved in userDefaults.
+            if let savedMatchSeeker = SessionStorageManager.readMatchSeekerFromUserDefaults() {
+                session.matchSeekerId = savedMatchSeeker.id
+                isOnSession = true
+                //loads the dreamLists from user defaults.
+                session.dreamList = SessionStorageManager.loadDreamList()
+                soulDatesMain.onboardMatchSeeker(matchSeeker: savedMatchSeeker)
+            }
         }
+        
+        
     }
     
     

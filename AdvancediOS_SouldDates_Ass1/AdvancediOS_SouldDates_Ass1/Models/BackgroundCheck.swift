@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PoliceCheck: Verifiable {
+struct PoliceCheck: Verifiable, Codable {
     var id: UUID = UUID()
     var dateIssued: Date
     var expiryDate: Date
@@ -21,7 +21,7 @@ struct PoliceCheck: Verifiable {
     }
 }
 
-struct ProofOfAge: Verifiable {
+struct ProofOfAge: Verifiable, Codable {
     var id: UUID = UUID()
     var dateIssued: Date
     var expiryDate: Date
@@ -45,7 +45,7 @@ struct ProofOfAge: Verifiable {
     }
 }
 
-struct RefereeCheck: Verifiable {
+struct RefereeCheck: Verifiable, Codable {
     var id: UUID = UUID()
     var dateIssued: Date
     var expiryDate: Date
@@ -60,7 +60,7 @@ struct RefereeCheck: Verifiable {
     }
 }
 
-struct BackgroundCheck: Decodable {
+struct BackgroundCheck: Codable {
     var policeCheck: PoliceCheck?
     var proofOfAge: ProofOfAge?
     var refereeCheck: RefereeCheck?

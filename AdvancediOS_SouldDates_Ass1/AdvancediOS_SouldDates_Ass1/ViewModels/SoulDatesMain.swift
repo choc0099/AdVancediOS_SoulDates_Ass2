@@ -17,6 +17,11 @@ class SoulDatesMain: ObservableObject {
     init()
     {
         matchSeekers = matchSeekersSample
+        //sets a fake scammer status for a matchSeeker
+        self.matchSeekers[0].toggleScammer()
+        
+        //sets the fake background check information for a matchSeeker
+        self.matchSeekers[1].setBackgroundCheck(backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: Date.now, expiryDate: Date.now, description: "trustworthy"), proofOfAge: ProofOfAge(dateIssued: Date.now, expiryDate: Date.now, issuer: "NSW", proofOfIdNumber: "122299883", legalFirstName: "Samantha", legalLastName: "Filler", streetAddress: "777 Phill Street, Chipandale", dateOfBirth: Date.now), refereeCheck: RefereeCheck(dateIssued: Date.now, expiryDate: Date.now, refereeName: "Jane", description: "She has done a great job.")))
     }
     
     func onboardMatchSeeker(matchSeeker: MatchSeeker)
@@ -202,6 +207,14 @@ class SoulDatesMain: ObservableObject {
         }
         else {
             throw ProfileError.matchSeekerNotExist
+        }
+    }
+    
+    func removeMatchSeeker(matchSeekerId: UUID)
+    {
+        if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
+        {
+            self.matchSeekers.remove(at: index)
         }
     }
 }

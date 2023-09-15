@@ -33,7 +33,7 @@ struct GenderSetupView: View {
                 }.navigationTitle("Gender Details")
             }
         }.navigationDestination(isPresented: $navActive) {
-            InterestedInSetupView(setupVM: setupVM, showWelcome: $showWelcome)
+            InterestedInSetupView(setupVM: setupVM, isOnSession: $showWelcome)
         }
     }
     

@@ -11,10 +11,13 @@ struct UpdatePoliceCheckView: View {
     @ObservedObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
-    @State var navActive: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @Binding var isOnSession: Bool
+    
+    //this will be used to go back to the previous screen
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
@@ -24,8 +27,7 @@ struct UpdatePoliceCheckView: View {
                 }
                 
                 if updatePoliceCheckVM.isPoliceChecked {
-                    Section("Police Check Dates")
-                    {
+                    Section("Police Check Dates") {
                         DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, displayedComponents: [.date])
                         DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, displayedComponents: [.date])
                     }
@@ -33,8 +35,7 @@ struct UpdatePoliceCheckView: View {
                         TextEditor(text: $updatePoliceCheckVM.description)
                     }
                     
-                    Section("Criminal Record")
-                    {
+                    Section("Criminal Record") {
                         Toggle("Do you have criminal record?", isOn: $updatePoliceCheckVM.isCriminalRecord)
                     }
                 }
@@ -44,7 +45,8 @@ struct UpdatePoliceCheckView: View {
                 do {
                     if !updatePoliceCheckVM.isCriminalRecord{
                         try processData()
-                        navActive = true
+                        //goes back to the previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     else {
                         showAlert = true
@@ -65,9 +67,7 @@ struct UpdatePoliceCheckView: View {
                 title: Text(alertTitle),
                 message: Text(alertMessage)
             )
-        }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView()
-        }).onAppear {
+        }.onAppear {
             do {
                 let matchSeeker: MatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
                 // this will update the view if there is already a police check in place.
@@ -89,10 +89,10 @@ struct UpdatePoliceCheckView: View {
         }
     }
     
+    //updates the police check details onto the MatchSeeker struct based on different scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         //checks if the backgroundcheck is nil
-     
         
         if updatePoliceCheckVM.isPoliceChecked {
             if matchSeeker.backgroundCheck == nil {
@@ -106,11 +106,12 @@ struct UpdatePoliceCheckView: View {
         else {
             try soulDatesMain.managePoliceCheck(currentMatchSeeker: matchSeeker, policeCheck: nil)
         }
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
 }
 
 struct UpdatePoliceCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel())
+        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel(), isOnSession: .constant(true))
     }
 }

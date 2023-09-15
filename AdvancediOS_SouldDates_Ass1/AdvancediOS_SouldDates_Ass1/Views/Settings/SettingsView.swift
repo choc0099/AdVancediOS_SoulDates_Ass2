@@ -13,35 +13,37 @@ struct SettingsView: View {
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @Binding var selectedTab: Tab
+    @Binding var isOnSession: Bool
+    @State private var showAlert: Bool = false
+    @State var settingsNavPath: NavigationPath = NavigationPath()
     var body: some View {
-      NavigationStack {
+      NavigationStack(path: $settingsNavPath) {
             List {
                 NavigationLink {
                     UpdateProfileView(updateProfileVM: updateProfileVM, selectedTab: $selectedTab)
                 } label: {
                     Text("Update Profile")
                 }
-                
+
                 NavigationLink {
-                    UpdateBackgroundCheckView()
+                    UpdateBackgroundCheckView(isOnSession: $isOnSession)
                 } label: {
                     Text("Background checks")
                 }
              
                 NavigationLink {
-                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM)
+                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM, isOnSession: $isOnSession)
                 } label: {
                     Text("Update Dating Preference")
                 }
                 
                 NavigationLink {
-                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel())
+                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: $isOnSession, selectedTab: $selectedTab)
                 } label: {
                     Text("Update Disability Details")
                 }
-             
-                NavigationLink {
-                    //WelcomeView()
+                Button {
+                    showAlert = true
                 } label: {
                     Text("Reset")
                 }
@@ -53,7 +55,24 @@ struct SettingsView: View {
             } catch {
                 print("The matchSeeker on the soulDatesMain does not exist.")
             }
+        }.alert(isPresented: $showAlert) {
+            Alert(title: Text("Are you sure you want to reset your settings."), message: Text("You will lose your saved data including dreamLists and Match Seeker preferences."), primaryButton: .destructive(Text("Yes"), action: {
+                //performs reset actions
+                handleReset()
+                //returns back to the WelcomeView
+                isOnSession = false
+            }), secondaryButton:.default(Text("No")))
         }
+    }
+    
+    //this is a function that will clear all data including matchSeeker details
+    //when the function is called.
+    func handleReset() {
+        SessionStorageManager.clearEverthing()
+        //removes the allocated matchSeeker from memory.
+        soulDatesMain.removeMatchSeeker(matchSeekerId: session.matchSeekerId)
+        //clears the dreamList from memory
+        session.clearAllDreamList()
     }
     
     func transferToUpdateProfileVM() throws {
@@ -80,6 +99,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(selectedTab: .constant(.settings)).environmentObject(Session())
+        SettingsView(selectedTab: .constant(.settings), isOnSession: .constant(false)).environmentObject(Session())
     }
 }

@@ -16,7 +16,7 @@ enum ProfileError: Error {
     case matchSeekerAlreadyAdded
 }
 
-enum Gender: String, CaseIterable, Identifiable, Decodable {
+enum Gender: String, CaseIterable, Identifiable, Codable {
     case female
     case male
     case nonbinary
@@ -26,7 +26,7 @@ enum Gender: String, CaseIterable, Identifiable, Decodable {
     var id: Self {self }
 }
 
-enum InterestedIn: String, CaseIterable, Identifiable, Decodable {
+enum InterestedIn: String, CaseIterable, Identifiable, Codable {
     case men
     case women
     case both
@@ -38,7 +38,7 @@ enum InterestedIn: String, CaseIterable, Identifiable, Decodable {
 
 
 
-enum DisabilityPreference: String, CaseIterable, Identifiable, Decodable {
+enum DisabilityPreference: String, CaseIterable, Identifiable, Codable {
     case withDisability = "People with disabilities"
     case withoutDisability = "People without disabilities"
     case openMinded = "I am open minded!"

@@ -11,11 +11,12 @@ struct UpdateProofOfAgeView: View {
     @ObservedObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @State var navActive: Bool = false
-    @State var showAlert: Bool = false
-    @State var alertTitle: String = ""
-    @State var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @Binding var isOnSession: Bool
     
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
@@ -62,9 +63,11 @@ struct UpdateProofOfAgeView: View {
             }.toolbar{
                 Button {
                     do {
+                        //validates the date of birth
                         try updateProofOfAgeVM.validateDateOfBirth()
                         try processData()
-                        navActive = true
+                        //goes back to previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     catch ProfileError.underAgeException {
                         showAlert = true
@@ -79,9 +82,7 @@ struct UpdateProofOfAgeView: View {
                 } label: {
                     Text("Done")
                 }
-            }.navigationDestination(isPresented: $navActive, destination: {
-                InSessionTabView()
-            }).onAppear {
+            }.onAppear {
                 do {
                     try updateVM()
                 }
@@ -109,6 +110,7 @@ struct UpdateProofOfAgeView: View {
         }
     }
     
+    //this will update the proof of age check details based on scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         
@@ -127,6 +129,8 @@ struct UpdateProofOfAgeView: View {
         else { // this will set the proofOfAge object to nil if the matchSeeker no longer wants their proof of age.
            try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: nil)
         }
+        //overwrites it to userDefaults
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
     
     private func initialiseProofOfAge(matchSeeker: MatchSeeker) throws {
@@ -136,6 +140,8 @@ struct UpdateProofOfAgeView: View {
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel(), isOnSession: .constant(true))
+            .environmentObject(Session())
+            .environmentObject(SoulDatesMain())
     }
 }

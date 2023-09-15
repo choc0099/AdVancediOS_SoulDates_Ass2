@@ -6,14 +6,14 @@
 //
 
 import Foundation
-enum DisabilitySeverity: String, CaseIterable, Identifiable, Decodable {
+enum DisabilitySeverity: String, CaseIterable, Identifiable, Codable {
     case mild
     case moderate
     case severe
     
     var id: Self { self }
 }
-struct DatingPreference: Decodable, Hashable {
+struct DatingPreference: Codable {
     var interestedIn: InterestedIn
     var disabilityPreference: DisabilityPreference
     var discloseMyDisability: Bool
@@ -37,4 +37,6 @@ struct DatingPreference: Decodable, Hashable {
         self.discloseMyDisability = discloseDisability
         self.riskGettingRejected = riskRejections
     }
+    
+    
 }

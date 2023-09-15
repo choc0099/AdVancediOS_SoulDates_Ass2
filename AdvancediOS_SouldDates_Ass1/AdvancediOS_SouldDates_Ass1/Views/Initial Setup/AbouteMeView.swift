@@ -15,7 +15,7 @@ struct AbouteMeView: View {
     @State var navActive: Bool = false
     @State var buttonDisabled: Bool = true
     @State var borderColor: Color = .primary
-    @Binding var showWelcome: Bool
+    @Binding var isOnSession: Bool
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -32,7 +32,7 @@ struct AbouteMeView: View {
                             try setupVM.validateAboutMe()
                             //declare a constant to add a match seeker to the list
                             processData()
-                            showWelcome = false // dismisses the welcome/setup full-screen sheet.
+                            isOnSession = true // dismisses the welcome/setup full-screen sheet.
                         }
                         catch {
                             showAlert = true
@@ -68,6 +68,8 @@ struct AbouteMeView: View {
     
     func processData() {
         let matchseeker = setupVM.convertToObject()
+        //saves the matchSeeker to the session
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: matchseeker)
         soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
         session.matchSeekerId = matchseeker.id
     }
@@ -78,7 +80,7 @@ struct AbouteMeView_Previews: PreviewProvider {
         //var matchSeeker = matchSeekersSample[0]
       
         Group {
-            AbouteMeView(setupVM: InitialSetupViewModel(), showWelcome: .constant(false))
+            AbouteMeView(setupVM: InitialSetupViewModel(), isOnSession: .constant(false))
         }
        
     }

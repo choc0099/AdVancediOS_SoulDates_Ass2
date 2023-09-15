@@ -11,10 +11,13 @@ struct UpdateDisabilityDetailsView: View {
     @ObservedObject var updateDisabilityVM: UpdateDisabilityDetailsViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State var disabilityText: String = ""
-    @State var disabilitySeverity: DisabilitySeverity = .moderate
-    @State var navActive: Bool = false
-    @State var showAlert: Bool = false
+    @State private var disabilityText: String = ""
+    @State private var disabilitySeverity: DisabilitySeverity = .moderate
+    @State private var showAlert: Bool = false
+    @Binding var isOnSession: Bool
+    @Binding var selectedTab: Tab
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         Form {
             Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
@@ -31,10 +34,14 @@ struct UpdateDisabilityDetailsView: View {
                     }
                 }.pickerStyle(.segmented)
                 
-                Section("Disability related settings:") {
+                Section(content: {
                     Toggle("Disclose my disability:", isOn: $updateDisabilityVM.discloseMyDisability)
                     Toggle("Risk getting rejected:", isOn: $updateDisabilityVM.riskGettingRejected)
-                }
+                }, header: {
+                    Text("Disability related settings")
+                }, footer: {
+                    Text("The risk of getting rejected toggle shows matchSeekers who do not declare that they are open minded.")
+                }) 
             }
         }.onAppear {
             
@@ -58,15 +65,15 @@ struct UpdateDisabilityDetailsView: View {
             catch {
                 print("The matchSeeker does not exist.")
             }
-           
-           
-        }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView()
-        }).navigationTitle("Update Disability Details").toolbar{
+            
+            
+        }.navigationTitle("Update Disability Details").toolbar{
             Button {
                 do{
+                    //handles changes
                     try processData()
-                    navActive = true
+                    //goes back to the previous view
+                    presentationMode.wrappedValue.dismiss()
                 }
                 catch {
                     print("the matchSeeker from the session does not exist in the matchSeekerMain.")
@@ -95,12 +102,15 @@ struct UpdateDisabilityDetailsView: View {
         
         let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability, discloseDisability: updateDisabilityVM.discloseMyDisability, riskRejections: updateDisabilityVM.riskGettingRejected)
+        //saves it to user defaults, it will overwrite it.
+        let updatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: updatedMatchSeeker)
+        
     }
-    //this will update it on the session side.
 }
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: .constant(true), selectedTab: .constant(.settings)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

@@ -34,7 +34,11 @@ class Session: ObservableObject {
     }
     
     func addToDreamList( matchSeeker: MatchSeeker) {
-        dreamList.append(matchSeeker)
+        //adds it to the dream list property.
+        self.dreamList.append(matchSeeker)
+        //saves the state of the dreamList to user defaults.
+        SessionStorageManager.saveDreamList(dreamlist: dreamList)
+        
     }
     
     func checkAlreadyAdded(selectedMatchSeeker: MatchSeeker) -> Bool
@@ -50,6 +54,8 @@ class Session: ObservableObject {
     func removeFromDreamList(matchSeeker: MatchSeeker) throws {
         if let index = self.dreamList.firstIndex(where: {$0.id == matchSeeker.id}) {
             self.dreamList.remove(at: index)
+            //overwrites what ever is on the current dream list after removal
+            SessionStorageManager.saveDreamList(dreamlist: dreamList)
         }
         else {
             throw ProfileError.matchSeekerNotExist
@@ -67,5 +73,20 @@ class Session: ObservableObject {
         else {
             throw ProfileError.noMatchesFound
         }
+    }
+    
+    //this will clear all stuffs from the dreamList while it was in memory
+    //after the matchSeeker resets their settings.
+    func clearAllDreamList() {
+        self.dreamList.removeAll()
+    }
+    
+    //this will overwrite the matchSeeker that is in session.
+    //to user defaults when you update things such as
+    //dating preferences, disability status, background checks and profiles.
+    func overWriteMatchSeekertoUserDefautls(soulDatesMain: SoulDatesMain) throws {
+        //gets the matchSeeker taht is currently in session.
+        let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeekerId)
+        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: matchSeeker)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @Binding var showWelcome: Bool
+    @Binding var isOnSession: Bool
     var body: some View {
     
         NavigationStack {
@@ -17,7 +17,7 @@ struct WelcomeView: View {
                 .fontWeight(.bold).padding()
             Text("Find your perfect match.").padding()
             NavigationLink {
-                BasicDetailsSetupView(setupVM: InitialSetupViewModel(), showWelcome: $showWelcome)
+                BasicDetailsSetupView(setupVM: InitialSetupViewModel(), isOnSession: $isOnSession)
             } label: {
                 StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
             }
@@ -27,6 +27,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView(showWelcome: .constant(true))
+        WelcomeView(isOnSession: .constant(true))
     }
 }
