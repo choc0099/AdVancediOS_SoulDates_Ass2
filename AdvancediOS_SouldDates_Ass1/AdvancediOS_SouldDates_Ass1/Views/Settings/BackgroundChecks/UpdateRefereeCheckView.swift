@@ -27,8 +27,8 @@ struct UpdateRefereeCheckView: View {
                             Text("Referee Name:").frame(width: 128, alignment: .leading)
                             TextField("Name", text: $updateRefereeVM.rafereeName)
                         }
-                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, in: RefereeCheck.issuedDateRange(), displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, in: RefereeCheck.expiryDateRange(), displayedComponents: [.date])
                     }
                     Section("Description")
                     {
@@ -109,6 +109,6 @@ struct UpdateRefereeCheckView: View {
 
 struct UpdateRefereeCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: .constant(false))
+        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: .constant(false)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

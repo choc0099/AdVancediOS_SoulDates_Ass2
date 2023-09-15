@@ -28,8 +28,8 @@ struct UpdatePoliceCheckView: View {
                 
                 if updatePoliceCheckVM.isPoliceChecked {
                     Section("Police Check Dates") {
-                        DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, displayedComponents: [.date])
-                        DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, in: PoliceCheck.issuedDateRange(), displayedComponents: [.date])
+                        DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, in: PoliceCheck.expiryDateRange(), displayedComponents: [.date])
                     }
                     Section("Description") {
                         TextEditor(text: $updatePoliceCheckVM.description)
@@ -112,6 +112,6 @@ struct UpdatePoliceCheckView: View {
 
 struct UpdatePoliceCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel(), isOnSession: .constant(true))
+        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel(), isOnSession: .constant(true)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

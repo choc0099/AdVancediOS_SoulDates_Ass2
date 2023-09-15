@@ -37,8 +37,8 @@ struct UpdateProofOfAgeView: View {
                             Spacer()
                             TextField("Issuer", text: $updateProofOfAgeVM.issuer)
                         }
-                        DatePicker("Date issued:", selection: $updateProofOfAgeVM.dateIssued, displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateProofOfAgeVM.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued:", selection: $updateProofOfAgeVM.dateIssued, in: ProofOfAge.issuedDateRange(), displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateProofOfAgeVM.expiryDate, in: ProofOfAge.expiryDateRange(), displayedComponents: [.date])
                     }, header: {
                         Text("Proof of Age Details")
                     }, footer: {
