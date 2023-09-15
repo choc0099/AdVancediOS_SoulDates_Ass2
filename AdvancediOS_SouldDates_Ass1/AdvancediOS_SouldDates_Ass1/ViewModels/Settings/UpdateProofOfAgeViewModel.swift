@@ -24,13 +24,29 @@ class UpdateProofOfAgeViewModel: ObservableObject {
     func validate() throws {
         let numericOnly = try Regex("[0-9]+")
         
-        guard try !(numericOnly.firstMatch(in: proofOfAgeIdNumber) == nil) else {
-            throw ProfileError.invalidIDNumber
+        if isProofOfAge {
+            guard try !(numericOnly.firstMatch(in: proofOfAgeIdNumber) == nil) else {
+                throw ProfileError.invalidIDNumber
+            }
+            
+            guard !DateManager.isUnderAge(birthDate: dateOfBirth) else {
+                throw ProfileError.underAgeException
+            }
         }
         
-        guard !DateManager.isUnderAge(birthDate: dateOfBirth) else {
-            throw ProfileError.underAgeException
-        }
+    }
+    
+    
+    //resets the proof of age details from the VM side if the user decides to no longer have their proof of age details.
+    func resetVM() {
+        self.proofOfAgeIdNumber = ""
+        self.dateIssued = Date.now
+        self.expiryDate = Date.now
+        self.issuer = ""
+        self.legalFirstName = ""
+        self.legalLastName = ""
+        self.address = ""
+        self.dateOfBirth = Date.now
     }
     
 }

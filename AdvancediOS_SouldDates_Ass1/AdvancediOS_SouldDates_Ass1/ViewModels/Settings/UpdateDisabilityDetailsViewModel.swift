@@ -15,4 +15,9 @@ class UpdateDisabilityDetailsViewModel: ObservableObject {
     @Published var discloseMyDisability: Bool = false
     @Published var riskGettingRejected: Bool = false // this will enable people to view more matches to people that does not declare that they are open minded.
     
+    //this will clear all the inputs stored in the VM after the user has turned off the isDisabled toggle
+    func resetVM() {
+        disability = nil
+        disabilitySeverity = nil
+    }
 }

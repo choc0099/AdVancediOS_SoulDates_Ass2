@@ -22,7 +22,10 @@ struct UpdateProofOfAgeView: View {
         NavigationStack {
             Form {
                 Section {
-                    Toggle("Proof of Age Check", isOn: $updateProofOfAgeVM.isProofOfAge)
+                    Toggle("Proof of Age Check", isOn: $updateProofOfAgeVM.isProofOfAge).onChange(of: updateProofOfAgeVM.isProofOfAge) { isProofOfAge in
+                        //resets the text fields and dates to empty text field and default dates.
+                        updateProofOfAgeVM.resetVM()
+                    }
                 }
                 
                 if updateProofOfAgeVM.isProofOfAge {

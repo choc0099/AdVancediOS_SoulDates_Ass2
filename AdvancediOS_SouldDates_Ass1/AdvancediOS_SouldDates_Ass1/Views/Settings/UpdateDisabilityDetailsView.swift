@@ -20,7 +20,14 @@ struct UpdateDisabilityDetailsView: View {
     
     var body: some View {
         Form {
-            Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
+            Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled).onChange(of: updateDisabilityVM.isDisabled) { isDisabled in
+                if !isDisabled {
+                    //clears input from the VM
+                    disabilityText = ""
+                    disabilitySeverity = .moderate
+                    updateDisabilityVM.resetVM()
+                }
+            }
             if updateDisabilityVM.isDisabled {
                 Section("Disability Details") {
                     

@@ -20,7 +20,11 @@ struct UpdateRefereeCheckView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Toggle("Referee Check", isOn: $updateRefereeVM.isRefereeChecked)
+                Toggle("Referee Check", isOn: $updateRefereeVM.isRefereeChecked).onChange(of: updateRefereeVM.isRefereeChecked) { isRefereeChecked in
+                    if !isRefereeChecked {
+                        updateRefereeVM.resetVM()
+                    }
+                }
                 if updateRefereeVM.isRefereeChecked {
                     Section("Referee Details") {
                         HStack(spacing: 10) {

@@ -23,7 +23,13 @@ struct UpdatePoliceCheckView: View {
         NavigationStack {
             Form {
                 Section("Police Check") {
-                    Toggle("Do you have police check?", isOn: $updatePoliceCheckVM.isPoliceChecked)
+                    Toggle("Do you have police check?", isOn: $updatePoliceCheckVM.isPoliceChecked).onChange(of: updatePoliceCheckVM.isPoliceChecked) {
+                        isPoliceChecked in
+                        //clears the fields if the user toggles the isPoliceChecked to false
+                        if !isPoliceChecked {
+                            updatePoliceCheckVM.resetVM() // clears all the fields
+                        }
+                    }
                 }
                 
                 if updatePoliceCheckVM.isPoliceChecked {
@@ -54,7 +60,7 @@ struct UpdatePoliceCheckView: View {
                         alertMessage = "You have not declared that you do not have a criminal record."
                     }
                 }
-                catch {
+                catch { // shows an alert
                     showAlert = true
                     alertTitle = "Something went wrong!"
                     alertMessage = "Unable to update your police check."
