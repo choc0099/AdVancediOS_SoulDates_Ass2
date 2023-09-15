@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RegexBuilder
 
 class UpdateProofOfAgeViewModel: ObservableObject {
     @Published var isProofOfAge: Bool = false
@@ -20,7 +21,13 @@ class UpdateProofOfAgeViewModel: ObservableObject {
     @Published var session: Session = Session()
     @Published var soulDatesMain: SoulDatesMain = SoulDatesMain()
     
-    func validateDateOfBirth() throws {
+    func validate() throws {
+        let numericOnly = try Regex("[0-9]+")
+        
+        guard try !(numericOnly.firstMatch(in: proofOfAgeIdNumber) == nil) else {
+            throw ProfileError.invalidIDNumber
+        }
+        
         guard !DateManager.isUnderAge(birthDate: dateOfBirth) else {
             throw ProfileError.underAgeException
         }

@@ -30,7 +30,7 @@ struct UpdateProofOfAgeView: View {
                         HStack {
                             Text("ID Number").frame(width: 100, alignment: .leading)
                             Spacer()
-                            TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber)
+                            TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber).keyboardType(.numberPad)
                         }
                         HStack {
                             Text("Issuer").frame(width: 100, alignment: .leading)
@@ -64,7 +64,7 @@ struct UpdateProofOfAgeView: View {
                 Button {
                     do {
                         //validates the date of birth
-                        try updateProofOfAgeVM.validateDateOfBirth()
+                        try updateProofOfAgeVM.validate()
                         try processData()
                         //goes back to previous view
                         presentationMode.wrappedValue.dismiss()
@@ -73,6 +73,12 @@ struct UpdateProofOfAgeView: View {
                         showAlert = true
                         alertTitle = "Under Age!"
                         alertMessage = "The proof of Age that was provided is under age to be continue using our app."
+                    }
+                    catch ProfileError.invalidIDNumber
+                    {
+                        showAlert = true
+                        alertTitle = "Only numerics can be entered"
+                        alertMessage = "Your Proof of age ID number must have digits only."
                     }
                     catch {
                         showAlert = true
@@ -89,6 +95,8 @@ struct UpdateProofOfAgeView: View {
                 catch {
                     print("MatchSeeker does not exist.")
                 }
+            }.alert(isPresented: $showAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage))
             }
         }
     }

@@ -14,6 +14,11 @@ enum ProfileError: Error {
     case caseSelectionNotListed(message: String)
     case emptyTextFields
     case matchSeekerAlreadyAdded
+    case invalidIDNumber
+}
+
+enum matchSeekerError: Error {
+    
 }
 
 enum Gender: String, CaseIterable, Identifiable, Codable {
