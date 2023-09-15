@@ -11,11 +11,12 @@ struct UpdateProofOfAgeView: View {
     @ObservedObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel
     @EnvironmentObject var session: Session
     @EnvironmentObject var soulDatesMain: SoulDatesMain
-    @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @Binding var isOnSession: Bool
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
@@ -62,9 +63,11 @@ struct UpdateProofOfAgeView: View {
             }.toolbar{
                 Button {
                     do {
+                        //validates the date of birth
                         try updateProofOfAgeVM.validateDateOfBirth()
                         try processData()
-                        navActive = true
+                        //goes back to previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     catch ProfileError.underAgeException {
                         showAlert = true
@@ -79,9 +82,7 @@ struct UpdateProofOfAgeView: View {
                 } label: {
                     Text("Done")
                 }
-            }.navigationDestination(isPresented: $navActive, destination: {
-                InSessionTabView(isOnSession: $isOnSession)
-            }).onAppear {
+            }.onAppear {
                 do {
                     try updateVM()
                 }

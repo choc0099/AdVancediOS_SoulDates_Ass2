@@ -11,11 +11,12 @@ struct UpdateRefereeCheckView: View {
     @ObservedObject var updateRefereeVM: UpdateRefereeCheckViewModel
     @EnvironmentObject var soulDatesMain: SoulDatesMain
     @EnvironmentObject var session: Session
-    @State private var navAcitve: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @Binding var isOnSession: Bool
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -38,7 +39,8 @@ struct UpdateRefereeCheckView: View {
                 Button {
                     do {
                         try processData()
-                        navAcitve = true
+                        //goes back to previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     catch {
                         showAlert = true
@@ -48,9 +50,7 @@ struct UpdateRefereeCheckView: View {
                 } label: {
                     Text("Done")
                 }
-            }.navigationDestination(isPresented: $navAcitve, destination: {
-                InSessionTabView(isOnSession: $isOnSession)
-            }).onAppear {
+            }.onAppear {
                 do {
                     //updates the view model.
                     try updateVM()

@@ -14,8 +14,10 @@ struct UpdatePoliceCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @State private var navActive: Bool = false
     @Binding var isOnSession: Bool
+    
+    //this will be used to go back to the previous screen
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
@@ -25,8 +27,7 @@ struct UpdatePoliceCheckView: View {
                 }
                 
                 if updatePoliceCheckVM.isPoliceChecked {
-                    Section("Police Check Dates")
-                    {
+                    Section("Police Check Dates") {
                         DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, displayedComponents: [.date])
                         DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, displayedComponents: [.date])
                     }
@@ -34,8 +35,7 @@ struct UpdatePoliceCheckView: View {
                         TextEditor(text: $updatePoliceCheckVM.description)
                     }
                     
-                    Section("Criminal Record")
-                    {
+                    Section("Criminal Record") {
                         Toggle("Do you have criminal record?", isOn: $updatePoliceCheckVM.isCriminalRecord)
                     }
                 }
@@ -45,7 +45,8 @@ struct UpdatePoliceCheckView: View {
                 do {
                     if !updatePoliceCheckVM.isCriminalRecord{
                         try processData()
-                        navActive = true
+                        //goes back to the previous view
+                        presentationMode.wrappedValue.dismiss()
                     }
                     else {
                         showAlert = true
@@ -66,9 +67,7 @@ struct UpdatePoliceCheckView: View {
                 title: Text(alertTitle),
                 message: Text(alertMessage)
             )
-        }.navigationDestination(isPresented: $navActive, destination: {
-            InSessionTabView(isOnSession: $isOnSession)
-        }).onAppear {
+        }.onAppear {
             do {
                 let matchSeeker: MatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
                 // this will update the view if there is already a police check in place.

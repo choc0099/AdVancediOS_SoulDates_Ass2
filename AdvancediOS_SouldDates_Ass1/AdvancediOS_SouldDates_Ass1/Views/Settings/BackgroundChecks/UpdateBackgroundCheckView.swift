@@ -25,7 +25,7 @@ struct UpdateBackgroundCheckView: View {
             NavigationLink {
                 UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: $isOnSession)
             } label: {
-                Text("Raference Checks")
+                Text("Referee Checks")
             }
         }
     }
