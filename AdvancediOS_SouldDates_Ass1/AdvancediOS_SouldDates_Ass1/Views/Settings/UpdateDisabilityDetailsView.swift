@@ -100,6 +100,8 @@ struct UpdateDisabilityDetailsView: View {
         }
     }
     
+    
+    //the functions below updates the matchSeekers disability status onto the current matchSeeker instance.
     func processData() throws {
         //updates it onto the main environment object
         try updateOnMain()
