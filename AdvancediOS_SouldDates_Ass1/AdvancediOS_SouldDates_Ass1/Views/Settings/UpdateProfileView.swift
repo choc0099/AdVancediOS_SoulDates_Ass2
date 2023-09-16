@@ -46,7 +46,7 @@ struct UpdateProfileView: View {
                 {
                     TextEditor(text: $updateProfileVM.favouriteMusic).frame(minHeight: 150)
                 }
-            }.navigationTitle("Update Profile").toolbar {
+            }.navigationTitle("Update Profile").navigationBarTitleDisplayMode(.inline).toolbar {
                 Button {
                     do {
                         try updateProfileVM.validateDateOfBirth()

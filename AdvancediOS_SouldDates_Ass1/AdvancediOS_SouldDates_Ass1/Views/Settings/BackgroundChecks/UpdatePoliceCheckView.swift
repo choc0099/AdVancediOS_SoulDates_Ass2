@@ -46,7 +46,8 @@ struct UpdatePoliceCheckView: View {
                     }
                 }
             }
-        }.toolbar {
+        }.navigationTitle("Police Check").navigationBarTitleDisplayMode(.inline)
+        .toolbar {
             Button {
                 do {
                     if !updatePoliceCheckVM.isCriminalRecord{

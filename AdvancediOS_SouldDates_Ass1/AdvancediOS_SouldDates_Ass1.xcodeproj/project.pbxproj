@@ -280,13 +280,13 @@
 		32D538342A91F1D700DFC38D /* Initial Setup */ = {
 			isa = PBXGroup;
 			children = (
+				32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */,
 				32D538352A91F20100DFC38D /* GenderSetup.swift */,
+				32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */,
 				32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */,
+				32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */,
 				32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */,
 				32D5383B2A91F25900DFC38D /* AbouteMeView.swift */,
-				32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */,
-				32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */,
-				32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */,
 			);
 			path = "Initial Setup";
 			sourceTree = "<group>";

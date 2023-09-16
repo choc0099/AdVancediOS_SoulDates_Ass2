@@ -11,19 +11,20 @@ import SwiftUI
 struct BackgroundCheckStatusView: View {
     @State var text: String
     @State var backgroundColor: Color
+    @State var foregroundColor: Color
     @State var systemIconName: String
     var body: some View {
        
         HStack(spacing: 5) {
             Image(systemName: systemIconName)
             Text(text).fontWeight(.bold)
-        }.padding().accentColor(Color("HighContrastForeground")).background(backgroundColor).border(Color("HighContrastForeground"), width: 3)
+        }.padding().accentColor(foregroundColor).background(backgroundColor).border(Color("HighContrastForeground"), width: 3)
         
     }
 }
 
 struct backgroundCheckStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundCheckStatusView(text: "This Match Seeker has been policed checked.", backgroundColor: Color("GreenColour"), systemIconName: "checkmark.seal")
+        BackgroundCheckStatusView(text: "This Match Seeker has been policed checked.", backgroundColor: Color("GreenColour"), foregroundColor: Color("HighContrastForegroundColour"), systemIconName: "checkmark.seal")
     }
 }

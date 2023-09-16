@@ -61,7 +61,8 @@ struct UpdateProofOfAgeView: View {
                         TextEditor(text: $updateProofOfAgeVM.address)
                     }
                 }
-            }.toolbar{
+            }.navigationTitle("Proof of Age").navigationBarTitleDisplayMode(.inline)
+            .toolbar{
                 Button {
                     do {
                         //validates the date of birth

@@ -82,7 +82,7 @@ struct UpdateDisabilityDetailsView: View {
                 buttonDisabled = true
             }
         })
-        .navigationTitle("Update Disability Details").toolbar{
+        .navigationTitle("Update Disability Details").navigationBarTitleDisplayMode(.inline).toolbar{
             Button {
                 do{
                     //handles changes

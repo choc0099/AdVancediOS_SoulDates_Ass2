@@ -17,8 +17,7 @@ struct DisabilityStatusSetupView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
-                    
-                    Text("Do you have a disability?")
+                    Text("Do you have a disability?").font(.headline)
                     
                     NavigationLink {
                         DisabilityDetailsSetupView(setupVM: setupVM, isOnSession: $showWelcome)
@@ -34,7 +33,6 @@ struct DisabilityStatusSetupView: View {
                 }.navigationTitle("Disability Status").navigationBarTitleDisplayMode(.inline)
             }
         }
-                
     }
 }
 

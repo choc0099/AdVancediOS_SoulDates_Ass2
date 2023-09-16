@@ -11,23 +11,25 @@ struct UpdateBackgroundCheckView: View {
     @StateObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel = UpdatePoliceCheckViewModel()
     
     var body: some View {
-        List {
-            NavigationLink {
-                UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
-            } label: {
-                Text("Police Checks")
+        NavigationStack {
+            List {
+                NavigationLink {
+                    UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
+                } label: {
+                    Text("Police Checks")
+                }
+                NavigationLink {
+                    UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
+                } label: {
+                    Text("Proof of Age")
+                }
+                NavigationLink {
+                    UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
+                } label: {
+                    Text("Referee Checks")
+                }
             }
-            NavigationLink {
-                UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
-            } label: {
-                Text("Proof of Age")
-            }
-            NavigationLink {
-                UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
-            } label: {
-                Text("Referee Checks")
-            }
-        }
+        }.navigationTitle("Background Checks").navigationBarTitleDisplayMode(.inline)
     }
 }
 

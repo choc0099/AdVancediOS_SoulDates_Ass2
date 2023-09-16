@@ -43,7 +43,8 @@ struct UpdateRefereeCheckView: View {
                         TextEditor(text: $updateRefereeVM.description)
                     }
                 }
-            }.toolbar{
+            }.navigationTitle("Referee Check").navigationBarTitleDisplayMode(.inline)
+            .toolbar{
                 Button {
                     do {
                         try processData()

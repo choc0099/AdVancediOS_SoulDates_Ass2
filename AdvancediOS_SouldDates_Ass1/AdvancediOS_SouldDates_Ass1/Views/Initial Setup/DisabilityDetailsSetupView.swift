@@ -19,7 +19,7 @@ struct DisabilityDetailsSetupView: View {
         
         NavigationStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
                     ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("What is your disabilities?").padding()
                     TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)

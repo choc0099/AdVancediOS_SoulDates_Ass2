@@ -38,7 +38,7 @@ struct UpdateDatingPreferencesView: View {
                         }
                     }.pickerStyle(.navigationLink)
                 }
-            }.toolbar {
+            }.navigationTitle("Update Dating Preference").navigationBarTitleDisplayMode(.inline).toolbar {
                 Button {
                     do {
                         try processData()
