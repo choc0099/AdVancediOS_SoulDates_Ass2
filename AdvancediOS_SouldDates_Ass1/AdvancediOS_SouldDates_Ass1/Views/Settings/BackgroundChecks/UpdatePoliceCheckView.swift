@@ -34,8 +34,8 @@ struct UpdatePoliceCheckView: View {
                 
                 if updatePoliceCheckVM.isPoliceChecked {
                     Section("Police Check Dates") {
-                        DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, in: PoliceCheck.issuedDateRange(), displayedComponents: [.date])
-                        DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, in: PoliceCheck.expiryDateRange(), displayedComponents: [.date])
+                        DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, in: PoliceCheck.passedDateRange(), displayedComponents: [.date])
+                        DatePicker("ExpiryDate", selection: $updatePoliceCheckVM.expiryDate, in: PoliceCheck.futureDateRange(), displayedComponents: [.date])
                     }
                     Section("Description") {
                         TextEditor(text: $updatePoliceCheckVM.description)

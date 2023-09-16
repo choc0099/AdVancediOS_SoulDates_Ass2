@@ -31,8 +31,8 @@ struct UpdateRefereeCheckView: View {
                             Text("Referee Name:").frame(width: 128, alignment: .leading)
                             TextField("Name", text: $updateRefereeVM.rafereeName)
                         }
-                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, in: RefereeCheck.issuedDateRange(), displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, in: RefereeCheck.expiryDateRange(), displayedComponents: [.date])
+                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, in: RefereeCheck.passedDateRange(), displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, in: RefereeCheck.futureDateRange(), displayedComponents: [.date])
                     }
                     Section("Description")
                     {

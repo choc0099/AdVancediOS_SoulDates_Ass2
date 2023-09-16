@@ -26,7 +26,7 @@ struct UpdateProfileView: View {
                         Text("Screen Name: ")
                         TextField("", text: $updateProfileVM.screenName)
                     }
-                    DatePicker("Date of birth:", selection: $updateProfileVM.dateOfBirth, displayedComponents: [.date]).datePickerStyle(.compact)
+                    DatePicker("Date of birth:", selection: $updateProfileVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.compact)
                     Picker("Gender", selection: $updateProfileVM.gender) {
                         ForEach(Gender.allCases) { gender in
                            Text(gender.rawValue.capitalized)
