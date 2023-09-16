@@ -19,6 +19,8 @@ struct UpdateRefereeCheckView: View {
     var body: some View {
         NavigationStack {
             Form {
+                //this will allow the matchSeeker to declare if they have a reference check.
+                //when they toggle it, then more fields will appear.
                 Toggle("Referee Check", isOn: $updateRefereeVM.isRefereeChecked).onChange(of: updateRefereeVM.isRefereeChecked) { isRefereeChecked in
                     if !isRefereeChecked {
                         updateRefereeVM.resetVM()
