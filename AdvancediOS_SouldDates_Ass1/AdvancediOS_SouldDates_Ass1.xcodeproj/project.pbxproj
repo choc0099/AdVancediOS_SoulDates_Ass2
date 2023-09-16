@@ -314,12 +314,12 @@
 		32F250F12A90D2C10084424B /* AdvancediOS_SouldDates_Ass1 */ = {
 			isa = PBXGroup;
 			children = (
-				32BB89E62AA2B9FA0095A649 /* ViewModels */,
 				32F519202AA0752A005DA063 /* Extensions */,
 				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
 				32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */,
 				32D5382F2A91F07C00DFC38D /* Protocols */,
 				32D5382D2A91F05800DFC38D /* Views */,
+				32BB89E62AA2B9FA0095A649 /* ViewModels */,
 				32D5382C2A91F04800DFC38D /* Models */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,

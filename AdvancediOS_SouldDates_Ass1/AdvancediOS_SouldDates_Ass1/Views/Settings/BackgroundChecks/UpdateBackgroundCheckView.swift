@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UpdateBackgroundCheckView: View {
     @StateObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel = UpdatePoliceCheckViewModel()
+    @StateObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel = UpdateProofOfAgeViewModel()
+    @StateObject var updateReferreVM: UpdateRefereeCheckViewModel = UpdateRefereeCheckViewModel()
     
     var body: some View {
         NavigationStack {
@@ -19,12 +21,12 @@ struct UpdateBackgroundCheckView: View {
                     Text("Police Checks")
                 }
                 NavigationLink {
-                    UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
+                    UpdateProofOfAgeView(updateProofOfAgeVM: updateProofOfAgeVM)
                 } label: {
                     Text("Proof of Age")
                 }
                 NavigationLink {
-                    UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
+                    UpdateRefereeCheckView(updateRefereeVM: updateReferreVM)
                 } label: {
                     Text("Referee Checks")
                 }

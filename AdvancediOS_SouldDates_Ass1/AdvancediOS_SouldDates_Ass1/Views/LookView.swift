@@ -37,7 +37,8 @@ struct LookView: View {
                         Text("No Matches").font(.headline)
                         Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
                     }
-                }
+                }// if an unkown error is catched, for instance there was an error with the session id's not finding a matchseeker.
+                //This will be displayed.
                 else if (session.lookError == .unkown) {
                     Text("Sorry, something went wrong.").font(.headline)
                 }
