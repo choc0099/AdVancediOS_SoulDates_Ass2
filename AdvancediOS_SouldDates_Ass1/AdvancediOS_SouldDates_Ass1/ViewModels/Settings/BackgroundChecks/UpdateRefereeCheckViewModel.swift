@@ -31,7 +31,7 @@ class UpdateRefereeCheckViewModel: ObservableObject
     //it will also return true even if they did not fill in their detials if they chose to no longer provide a referee check.
     func allTextEnetered() -> Bool {
         if isRefereeChecked {
-            if !refereeName.isEmpty && description.isEmpty {
+            if !refereeName.isEmpty && !description.isEmpty {
                 return true
             } else {
                 return false
