@@ -14,7 +14,6 @@ struct UpdateRefereeCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -113,6 +112,6 @@ struct UpdateRefereeCheckView: View {
 
 struct UpdateRefereeCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: .constant(false)).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

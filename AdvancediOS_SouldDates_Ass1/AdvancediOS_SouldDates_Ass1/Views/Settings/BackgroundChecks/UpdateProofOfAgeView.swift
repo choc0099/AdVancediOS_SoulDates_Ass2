@@ -14,7 +14,6 @@ struct UpdateProofOfAgeView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -151,7 +150,7 @@ struct UpdateProofOfAgeView: View {
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel(), isOnSession: .constant(true))
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
             .environmentObject(Session())
             .environmentObject(SoulDatesMain())
     }

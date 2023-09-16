@@ -14,7 +14,7 @@ struct UpdatePoliceCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
+    
     
     //this will be used to go back to the previous screen
     @Environment(\.presentationMode) var presentationMode
@@ -118,6 +118,6 @@ struct UpdatePoliceCheckView: View {
 
 struct UpdatePoliceCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel(), isOnSession: .constant(true)).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdatePoliceCheckView(updatePoliceCheckVM: UpdatePoliceCheckViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
