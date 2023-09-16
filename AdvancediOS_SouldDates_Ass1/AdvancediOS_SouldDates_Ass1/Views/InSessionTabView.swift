@@ -19,11 +19,9 @@ struct InSessionTabView: View {
     //this will be used to root back to the root view of the app when the user taps done after updating thier settings
     @Environment(\.presentationMode) var presentationMode
     @State var isOnRootView: Bool = false
+    //the inSessionTabView is used to display tabs that have the Look view, dreamList view and settings View.
     var body: some View {
-        
-       
             TabView(selection: $selectedTab) {
-            
                 LookView(selectedTab: $selectedTab)
                 .tabItem {
                     Label("Look", systemImage: "book.fill")
