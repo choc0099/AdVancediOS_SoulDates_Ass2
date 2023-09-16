@@ -14,21 +14,26 @@ struct UpdateRefereeCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
             Form {
-                Toggle("Referee Check", isOn: $updateRefereeVM.isRefereeChecked)
+                //this will allow the matchSeeker to declare if they have a reference check.
+                //when they toggle it, then more fields will appear.
+                Toggle("Referee Check", isOn: $updateRefereeVM.isRefereeChecked).onChange(of: updateRefereeVM.isRefereeChecked) { isRefereeChecked in
+                    if !isRefereeChecked {
+                        updateRefereeVM.resetVM()
+                    }
+                }
                 if updateRefereeVM.isRefereeChecked {
                     Section("Referee Details") {
                         HStack(spacing: 10) {
                             Text("Referee Name:").frame(width: 128, alignment: .leading)
                             TextField("Name", text: $updateRefereeVM.rafereeName)
                         }
-                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, in: RefereeCheck.passedDateRange(), displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, in: RefereeCheck.futureDateRange(), displayedComponents: [.date])
                     }
                     Section("Description")
                     {
@@ -109,6 +114,6 @@ struct UpdateRefereeCheckView: View {
 
 struct UpdateRefereeCheckView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel(), isOnSession: .constant(false))
+        UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

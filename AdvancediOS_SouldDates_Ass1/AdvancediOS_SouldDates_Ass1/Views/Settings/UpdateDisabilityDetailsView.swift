@@ -14,13 +14,20 @@ struct UpdateDisabilityDetailsView: View {
     @State private var disabilityText: String = ""
     @State private var disabilitySeverity: DisabilitySeverity = .moderate
     @State private var showAlert: Bool = false
-    @Binding var isOnSession: Bool
+    
     @Binding var selectedTab: Tab
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Form {
-            Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled )
+            Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled).onChange(of: updateDisabilityVM.isDisabled) { isDisabled in
+                if !isDisabled {
+                    //clears input from the VM
+                    disabilityText = ""
+                    disabilitySeverity = .moderate
+                    updateDisabilityVM.resetVM()
+                }
+            }
             if updateDisabilityVM.isDisabled {
                 Section("Disability Details") {
                     
@@ -111,6 +118,6 @@ struct UpdateDisabilityDetailsView: View {
 
 struct UpdateDisabilityDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: .constant(true), selectedTab: .constant(.settings)).environmentObject(Session()).environmentObject(SoulDatesMain())
+        UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), selectedTab: .constant(.settings)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }

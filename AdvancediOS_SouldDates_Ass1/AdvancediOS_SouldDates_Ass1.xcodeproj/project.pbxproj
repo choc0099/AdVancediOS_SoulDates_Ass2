@@ -20,6 +20,7 @@
 		3250E6E32AAFC08700666581 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6E22AAFC08700666581 /* ProfileImageView.swift */; };
 		3250E6E52AB032F600666581 /* SessionStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3250E6E42AB032F600666581 /* SessionStorageManager.swift */; };
 		3277DDAF2AB1C043005B5471 /* BackgroundCheckStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3277DDAE2AB1C043005B5471 /* BackgroundCheckStatusView.swift */; };
+		3277DDB12AB527D3005B5471 /* Dateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3277DDB02AB527D3005B5471 /* Dateable.swift */; };
 		329D8DCD2AAAF0C100F3CA89 /* DatingPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */; };
 		329D8DCF2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */; };
 		329D8DD12AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */; };
@@ -95,6 +96,7 @@
 		3250E6E22AAFC08700666581 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		3250E6E42AB032F600666581 /* SessionStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStorageManager.swift; sourceTree = "<group>"; };
 		3277DDAE2AB1C043005B5471 /* BackgroundCheckStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheckStatusView.swift; sourceTree = "<group>"; };
+		3277DDB02AB527D3005B5471 /* Dateable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dateable.swift; sourceTree = "<group>"; };
 		329D8DCC2AAAF0C100F3CA89 /* DatingPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatingPreference.swift; sourceTree = "<group>"; };
 		329D8DCE2AAAF68300F3CA89 /* UpdateDatingPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesView.swift; sourceTree = "<group>"; };
 		329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDatingPreferencesViewModel.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				32D538302A91F0A300DFC38D /* Verifiable.swift */,
+				3277DDB02AB527D3005B5471 /* Dateable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
 				32E3FFD72AA6E9C300DF1B91 /* LookViewModel.swift in Sources */,
 				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
+				3277DDB12AB527D3005B5471 /* Dateable.swift in Sources */,
 				32E3FFDB2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift in Sources */,
 				3250E6D82AABE2A700666581 /* UpdateProofOfAgeView.swift in Sources */,
 				3224AD9D2AA5379300F37D2A /* InSessionTabView.swift in Sources */,

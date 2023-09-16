@@ -26,19 +26,19 @@ struct SettingsView: View {
                 }
 
                 NavigationLink {
-                    UpdateBackgroundCheckView(isOnSession: $isOnSession)
+                    UpdateBackgroundCheckView()
                 } label: {
                     Text("Background checks")
                 }
              
                 NavigationLink {
-                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM, isOnSession: $isOnSession)
+                    UpdateDatingPreferencesView(updateDatingPrefVM: updateDatingPrefVM)
                 } label: {
                     Text("Update Dating Preference")
                 }
                 
                 NavigationLink {
-                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), isOnSession: $isOnSession, selectedTab: $selectedTab)
+                    UpdateDisabilityDetailsView(updateDisabilityVM: UpdateDisabilityDetailsViewModel(), selectedTab: $selectedTab)
                 } label: {
                     Text("Update Disability Details")
                 }

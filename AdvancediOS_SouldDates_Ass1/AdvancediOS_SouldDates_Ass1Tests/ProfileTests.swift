@@ -32,6 +32,17 @@ final class ProfileTests: XCTestCase {
         XCTAssertEqual(DateManager.isUnderAge(birthDate: appropriateAge), false)
     }
     
+    func testInValidIdNumber() throws {
+        var proofOfAgeVM: UpdateProofOfAgeViewModel = UpdateProofOfAgeViewModel()
+        proofOfAgeVM.dateOfBirth = DateManager.setDate(day: 24, month: 05, year: 1997)!
+        proofOfAgeVM.proofOfAgeIdNumber = "smoked"
+        
+        XCTAssertThrowsError(try proofOfAgeVM.validate()) {
+            error in
+            XCTAssertTrue(error is ProfileError)
+        }
+    }
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

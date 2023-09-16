@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatchSeeker: Person, Codable {
+struct MatchSeeker: Person, Codable, Dateable {
     var id: UUID = UUID()
     var screenName: String
     var hobbies: String

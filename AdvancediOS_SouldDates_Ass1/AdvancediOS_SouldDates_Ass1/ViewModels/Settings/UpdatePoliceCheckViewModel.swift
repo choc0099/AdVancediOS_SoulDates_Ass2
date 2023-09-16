@@ -13,4 +13,12 @@ class UpdatePoliceCheckViewModel : ObservableObject {
     @Published var expiryDate: Date = Date()
     @Published var description: String = ""
     @Published var isCriminalRecord: Bool = false
+    
+    //resets the view model fields
+    func resetVM() {
+        self.issueDate = Date.now
+        self.expiryDate = Date.now
+        self.description = ""
+        self.isCriminalRecord = false
+    }
 }

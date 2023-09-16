@@ -14,7 +14,6 @@ struct UpdateProofOfAgeView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -22,7 +21,10 @@ struct UpdateProofOfAgeView: View {
         NavigationStack {
             Form {
                 Section {
-                    Toggle("Proof of Age Check", isOn: $updateProofOfAgeVM.isProofOfAge)
+                    Toggle("Proof of Age Check", isOn: $updateProofOfAgeVM.isProofOfAge).onChange(of: updateProofOfAgeVM.isProofOfAge) { isProofOfAge in
+                        //resets the text fields and dates to empty text field and default dates.
+                        updateProofOfAgeVM.resetVM()
+                    }
                 }
                 
                 if updateProofOfAgeVM.isProofOfAge {
@@ -30,15 +32,15 @@ struct UpdateProofOfAgeView: View {
                         HStack {
                             Text("ID Number").frame(width: 100, alignment: .leading)
                             Spacer()
-                            TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber)
+                            TextField("ID Number", text: $updateProofOfAgeVM.proofOfAgeIdNumber).keyboardType(.numberPad)
                         }
                         HStack {
                             Text("Issuer").frame(width: 100, alignment: .leading)
                             Spacer()
                             TextField("Issuer", text: $updateProofOfAgeVM.issuer)
                         }
-                        DatePicker("Date issued:", selection: $updateProofOfAgeVM.dateIssued, displayedComponents: [.date])
-                        DatePicker("Expiry Date", selection: $updateProofOfAgeVM.expiryDate, displayedComponents: [.date])
+                        DatePicker("Date issued:", selection: $updateProofOfAgeVM.dateIssued, in: ProofOfAge.passedDateRange(), displayedComponents: [.date])
+                        DatePicker("Expiry Date", selection: $updateProofOfAgeVM.expiryDate, in: ProofOfAge.futureDateRange(), displayedComponents: [.date])
                     }, header: {
                         Text("Proof of Age Details")
                     }, footer: {
@@ -64,7 +66,7 @@ struct UpdateProofOfAgeView: View {
                 Button {
                     do {
                         //validates the date of birth
-                        try updateProofOfAgeVM.validateDateOfBirth()
+                        try updateProofOfAgeVM.validate()
                         try processData()
                         //goes back to previous view
                         presentationMode.wrappedValue.dismiss()
@@ -73,6 +75,12 @@ struct UpdateProofOfAgeView: View {
                         showAlert = true
                         alertTitle = "Under Age!"
                         alertMessage = "The proof of Age that was provided is under age to be continue using our app."
+                    }
+                    catch ProfileError.invalidIDNumber
+                    {
+                        showAlert = true
+                        alertTitle = "Only numerics can be entered"
+                        alertMessage = "Your Proof of age ID number must have digits only."
                     }
                     catch {
                         showAlert = true
@@ -89,6 +97,8 @@ struct UpdateProofOfAgeView: View {
                 catch {
                     print("MatchSeeker does not exist.")
                 }
+            }.alert(isPresented: $showAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage))
             }
         }
     }
@@ -140,7 +150,7 @@ struct UpdateProofOfAgeView: View {
 
 struct UpdateProofOfAgeView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel(), isOnSession: .constant(true))
+        UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
             .environmentObject(Session())
             .environmentObject(SoulDatesMain())
     }

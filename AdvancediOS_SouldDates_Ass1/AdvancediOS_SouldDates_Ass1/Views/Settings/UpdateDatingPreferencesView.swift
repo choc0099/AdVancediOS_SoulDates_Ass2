@@ -15,7 +15,6 @@ struct UpdateDatingPreferencesView: View {
     @State private var navActive: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    @Binding var isOnSession: Bool
     //this is used to go back to the previous view
     @Environment(\.presentationMode) var presentationMode
     
@@ -53,8 +52,6 @@ struct UpdateDatingPreferencesView: View {
                     }
                 } label: {
                     Text("Done")
-                }.navigationDestination(isPresented: $navActive) {
-                    InSessionTabView(isOnSession: $isOnSession)
                 }.alert(isPresented: $showAlert) {
                     Alert(
                         title: Text(alertTitle),
@@ -77,7 +74,6 @@ struct UpdateDatingPreferencesView: View {
 
 struct UpdateDatingPreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDatingPreferencesView(updateDatingPrefVM: UpdateDatingPreferncesViewModel(),
-                                    isOnSession: .constant(true))
+        UpdateDatingPreferencesView(updateDatingPrefVM: UpdateDatingPreferncesViewModel()).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
