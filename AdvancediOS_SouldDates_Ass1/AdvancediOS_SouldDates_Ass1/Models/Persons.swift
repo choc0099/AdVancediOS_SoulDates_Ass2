@@ -16,6 +16,7 @@ enum ProfileError: Error {
     case emptyTextFields
     case matchSeekerAlreadyAdded
     case invalidIDNumber
+    case unableToRemove
 }
 
 //I have decided to use enums for gender, interestedIn and disability preferences

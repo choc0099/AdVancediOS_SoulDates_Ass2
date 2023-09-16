@@ -221,11 +221,15 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func removeMatchSeeker(matchSeekerId: UUID)
+    //removes a matchSeeker from the list when resetting the session.
+    func removeMatchSeeker(matchSeekerId: UUID) throws
     {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
         {
             self.matchSeekers.remove(at: index)
+        }
+        else {
+            throw ProfileError.unableToRemove
         }
     }
 }

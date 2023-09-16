@@ -57,12 +57,17 @@ struct SettingsView: View {
             }
         }.alert(isPresented: $showAlert) {
             Alert(title: Text("Are you sure you want to reset your settings."), message: Text("You will lose your saved data including dreamLists and Match Seeker preferences."), primaryButton: .destructive(Text("Reset"), action: {
-                //performs reset actions
-                handleReset()
-                //returns back to the WelcomeView
-                withAnimation {
-                    isOnSession = false
+                do {
+                   try handleReset()
+                    //returns back to the WelcomeView
+                    withAnimation {
+                        isOnSession = false
+                    }
+                }//performs reset actions
+                catch {
+                    print("Failed to remove matchSeeker")
                 }
+                
                
             }), secondaryButton: .cancel())
         }
@@ -70,10 +75,10 @@ struct SettingsView: View {
     
     //this is a function that will clear all data including matchSeeker details
     //when the function is called.
-    func handleReset() {
+    func handleReset() throws {
         SessionStorageManager.clearEverthing()
         //removes the allocated matchSeeker from memory.
-        soulDatesMain.removeMatchSeeker(matchSeekerId: session.matchSeekerId)
+        try soulDatesMain.removeMatchSeeker(matchSeekerId: session.matchSeekerId)
         //clears the dreamList from memory
         session.clearAllDreamList()
     }
