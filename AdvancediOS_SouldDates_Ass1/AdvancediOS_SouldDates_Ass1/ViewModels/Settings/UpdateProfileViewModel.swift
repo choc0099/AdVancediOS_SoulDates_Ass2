@@ -21,5 +21,14 @@ class UpdateProfileViewModel: ObservableObject {
         }
     }
     
-  
+    //this will return a true if all text fields contains text
+    //it will be used to determine if the button will be disabled
+    func allTextFieldEntered() -> Bool {
+        if !screenName.isEmpty && !bio.isEmpty && !favouriteMusic.isEmpty && !hobbies.isEmpty {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }

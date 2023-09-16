@@ -18,13 +18,16 @@ struct UpdateProfileView: View {
     @Binding var selectedTab: Tab
     @Environment(\.presentationMode) var presentationMode
     
+    //this is to determine if the button is disabled
+    @State var buttonDisabled: Bool = false
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section("Basic Details") {
                     HStack {
                         Text("Screen Name: ")
-                        TextField("", text: $updateProfileVM.screenName)
+                        TextField("Required", text: $updateProfileVM.screenName)
                     }
                     DatePicker("Date of birth:", selection: $updateProfileVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.compact)
                     Picker("Gender", selection: $updateProfileVM.gender) {
@@ -57,7 +60,6 @@ struct UpdateProfileView: View {
                         alertMessage = "Your updated date of birth is under the age of 18 and can not be used for our services."
                     }
                     catch {
-                        
                         alertTitle = "Something went wrong!"
                         alertMessage = "Unable to update matchSeeker Profile Details."
                         print("The MatchSeeker id does not exisit in the SoulDates Main.")
@@ -69,6 +71,12 @@ struct UpdateProfileView: View {
                         title: Text(alertTitle),
                         message: Text(alertMessage)
                     )
+                }.disabled(buttonDisabled).onChange(of: updateProfileVM.allTextFieldEntered()) { everythingEntered in
+                    if everythingEntered {
+                        buttonDisabled = false
+                    } else {
+                        buttonDisabled = true
+                    }
                 }
             }
         }
@@ -84,6 +92,8 @@ struct UpdateProfileView: View {
         //overwrites matchSeeker updated profile to userDefaults
         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
+    
+  
 }
 
 struct UpdateProFileView_Previews: PreviewProvider {
