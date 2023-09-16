@@ -22,10 +22,10 @@ struct ContentView: View {
         //the setup process.
         Group {
             if !isOnSession {
-                WelcomeView(isOnSession: $isOnSession)
+                WelcomeView(isOnSession: $isOnSession).transition(.scale)
             }
             else {
-                InSessionTabView(isOnSession: $isOnSession)
+                InSessionTabView(isOnSession: $isOnSession).transition(.scale)
             }
         }.padding().onAppear{
             
@@ -38,11 +38,7 @@ struct ContentView: View {
                 soulDatesMain.onboardMatchSeeker(matchSeeker: savedMatchSeeker)
             }
         }
-        
-        
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

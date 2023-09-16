@@ -60,7 +60,10 @@ struct SettingsView: View {
                 //performs reset actions
                 handleReset()
                 //returns back to the WelcomeView
-                isOnSession = false
+                withAnimation {
+                    isOnSession = false
+                }
+               
             }), secondaryButton: .cancel())
         }
     }
@@ -76,7 +79,6 @@ struct SettingsView: View {
     }
     
     func transferToUpdateProfileVM() throws {
-        
         let matchSeeker = try getMatchSeekerFromSesstion()
         updateProfileVM.screenName = matchSeeker.screenName
         updateProfileVM.dateOfBirth = matchSeeker.dateOfBirth

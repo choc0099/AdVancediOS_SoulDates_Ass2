@@ -34,7 +34,10 @@ struct AbouteMeView: View {
                             try setupVM.validateAboutMe()
                             //declare a constant to add a match seeker to the list
                             processData()
-                            isOnSession = true // dismisses the welcome/setup full-screen sheet.
+                            withAnimation(.easeIn) {
+                                isOnSession = true // dismisses the welcome/setup full-screen sheet.
+                            }
+                            
                         }
                         catch {
                             showAlert = true
