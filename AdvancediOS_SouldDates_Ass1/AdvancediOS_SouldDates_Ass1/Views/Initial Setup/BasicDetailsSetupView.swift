@@ -26,13 +26,14 @@ struct BasicDetailsSetupView: View {
     @State private var alertMessage: String = ""
     @State private var navActive: Bool = false
     @State private var buttonDisabled: Bool = true
-    
+    //this is a constant that is allocated for this currentView step
+    let setupStep: Float = 1
     
     var body: some View {
         NavigationStack() {
             ScrollView {
                 VStack(spacing: 20) {
-                    ProgressView(value: setupVM.calculateProgress())
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("Enter your screen name:")
                     TextField (
                         "Name",
@@ -53,6 +54,8 @@ struct BasicDetailsSetupView: View {
                     Button {
                             do {
                                 try setupVM.validateBasicDetails()
+                                //increases the step count so that the progress bar increases
+                                
                                 navActive = true
                             }
                             catch ProfileError.underAgeException {
@@ -77,7 +80,7 @@ struct BasicDetailsSetupView: View {
             )
         }.padding().navigationDestination(isPresented: $navActive) {
             GenderSetupView(setupVM: setupVM, showWelcome: $isOnSession)
-        }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.large)
+        }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.inline)
         
     }
 }

@@ -14,7 +14,7 @@ struct WelcomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 10) {
-                    ProfileImageView(matchSeekerImage: "logo", imageSize: 250)
+                    ProfileImageView(matchSeekerImage: "logo", imageSize: 200)
                     Text("Welcome to SoulDates")
                         .font(.title)
                         .fontWeight(.bold).padding()

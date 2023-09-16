@@ -10,24 +10,29 @@ import SwiftUI
 struct DisabilityStatusSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @Binding var showWelcome: Bool
+    let setupStep: Float = 4
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Text("Do you have a disability?")
-                
-                NavigationLink {
-                    DisabilityDetailsSetupView(setupVM: setupVM, isOnSession: $showWelcome)
-                } label: {
-                    StyledButton(text: "Yes, I do", backGroundColour: .red, foregroundColour: .white)
-                }.padding()
-                
-                NavigationLink {
-                    DatingPreferencesView(setupVM: setupVM, isOnSession: $showWelcome)
-                } label: {
-                    StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
-                }.padding()
-            }.navigationTitle("Disability Status")
+            ScrollView {
+                VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
+                    
+                    Text("Do you have a disability?")
+                    
+                    NavigationLink {
+                        DisabilityDetailsSetupView(setupVM: setupVM, isOnSession: $showWelcome)
+                    } label: {
+                        StyledButton(text: "Yes, I do", backGroundColour: .red, foregroundColour: .white)
+                    }.padding()
+                    
+                    NavigationLink {
+                        DatingPreferencesView(setupVM: setupVM, isOnSession: $showWelcome)
+                    } label: {
+                        StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
+                    }.padding()
+                }.navigationTitle("Disability Status").navigationBarTitleDisplayMode(.inline)
+            }
         }
                 
     }

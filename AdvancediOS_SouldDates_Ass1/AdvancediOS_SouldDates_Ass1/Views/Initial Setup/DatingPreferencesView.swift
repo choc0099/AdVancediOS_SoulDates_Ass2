@@ -11,10 +11,14 @@ struct DatingPreferencesView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @State var navActive: Bool = false
     @Binding var isOnSession: Bool
+    //this is for the progress view claculations
+    let setupStep: Float = 6
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack{
+                VStack(spacing: 20){
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("Who are you open of dating?").padding()
                     ForEach(DisabilityPreference.allCases)
                     {
