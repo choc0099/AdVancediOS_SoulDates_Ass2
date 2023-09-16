@@ -27,10 +27,12 @@ struct BasicDetailsSetupView: View {
     @State private var navActive: Bool = false
     @State private var buttonDisabled: Bool = true
     
+    
     var body: some View {
         NavigationStack() {
             ScrollView {
                 VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress())
                     Text("Enter your screen name:")
                     TextField (
                         "Name",

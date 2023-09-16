@@ -22,6 +22,9 @@ class InitialSetupViewModel: ObservableObject {
     @Published var hobbies: String = ""
     @Published var favouriteMusic: String = ""
     @Published var disabilityPreference: DisabilityPreference = .openMinded
+    //this is used for the progressView
+    
+    @Published var currentStep: Int = 1
     
     //a function that will be used to validate the age and names
     func validateBasicDetails() throws {
@@ -56,5 +59,17 @@ class InitialSetupViewModel: ObservableObject {
         let matchSeeeker = MatchSeeker(screenName: screenName, hobbies: hobbies, gender: gender, dateOfBirth: dateOfBirth, bio: bio, favourteMusic: favouriteMusic, datingPreference: datingPreferences, disability: haveDisability)
         return matchSeeeker
     }
+    
+    func calculateProgress() -> Float {
+        let stepDivision: Float = Float(currentStep) / 7
+        print(stepDivision)
+        return stepDivision
+    }
+    
+    func increaseStep() {
+        currentStep += 1
+    }
+    
+    
 }
 

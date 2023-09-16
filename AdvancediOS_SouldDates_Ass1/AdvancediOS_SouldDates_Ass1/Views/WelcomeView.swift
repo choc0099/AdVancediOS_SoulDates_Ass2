@@ -26,7 +26,7 @@ struct WelcomeView: View {
                         StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
                     }
                 }
-            }
+            }.padding()
             
         }
     }
