@@ -43,6 +43,7 @@ struct LookView: View {
                 }
             }.navigationTitle("Look")
         }.onAppear{
+            //loads the tailored matches onto this view when it is launched.
             session.gatherMatches(soulDatesMain: soulDatesMain)
         }
     }
