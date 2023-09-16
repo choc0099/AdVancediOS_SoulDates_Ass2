@@ -14,7 +14,7 @@ struct UpdatePoliceCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    
+    @State private var buttonDisasbled: Bool = false
     
     //this will be used to go back to the previous screen
     @Environment(\.presentationMode) var presentationMode
@@ -90,8 +90,12 @@ struct UpdatePoliceCheckView: View {
             } catch {
                 print("The matchSeeker from session does not exist.")
             }
-         
-            
+        }.onChange(of: updatePoliceCheckVM.allTextEntered()) { textEneterd in
+            if textEneterd {
+                buttonDisasbled = false
+            } else {
+                buttonDisasbled = true
+            }
         }
     }
     

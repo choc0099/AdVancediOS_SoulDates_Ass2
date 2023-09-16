@@ -21,4 +21,16 @@ class UpdatePoliceCheckViewModel : ObservableObject {
         self.description = ""
         self.isCriminalRecord = false
     }
+    
+    //please refer to updateDisabilityVM as it is the same type of method.
+    func allTextEntered() -> Bool {
+        if isPoliceChecked {
+            if !description.isEmpty {
+                return true
+            }
+            return false
+        }
+        return true
+    }
+    
 }
