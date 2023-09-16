@@ -184,12 +184,10 @@
 		3250E6DD2AABFE3E00666581 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				3277DDB22AB537BF005B5471 /* BackgroundChecks */,
 				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
 				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
-				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
-				3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */,
 				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
-				3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -203,6 +201,16 @@
 				3277DDAE2AB1C043005B5471 /* BackgroundCheckStatusView.swift */,
 			);
 			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		3277DDB22AB537BF005B5471 /* BackgroundChecks */ = {
+			isa = PBXGroup;
+			children = (
+				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
+				3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */,
+				3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */,
+			);
+			path = BackgroundChecks;
 			sourceTree = "<group>";
 		};
 		32B174692AABAF3C0007BA5A /* BackgroundChecks */ = {

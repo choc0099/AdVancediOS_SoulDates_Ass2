@@ -14,9 +14,8 @@ struct UpdateProofOfAgeView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    
     @Environment(\.presentationMode) var presentationMode
-    
+    @State private var buttonDisabled: Bool = false
     var body: some View {
         NavigationStack {
             Form {
@@ -89,7 +88,7 @@ struct UpdateProofOfAgeView: View {
                     }
                 } label: {
                     Text("Done")
-                }
+                }.disabled(buttonDisabled)
             }.onAppear {
                 do {
                     try updateVM()
@@ -97,7 +96,13 @@ struct UpdateProofOfAgeView: View {
                 catch {
                     print("MatchSeeker does not exist.")
                 }
-            }.alert(isPresented: $showAlert) {
+            }.onChange(of: updateProofOfAgeVM.allTextEneterd(), perform: { everythingIsEntered in
+                if everythingIsEntered {
+                    buttonDisabled = false
+                } else {
+                    buttonDisabled = true
+                }
+            }).alert(isPresented: $showAlert) {
                 Alert(title: Text(alertTitle), message: Text(alertMessage))
             }
         }
