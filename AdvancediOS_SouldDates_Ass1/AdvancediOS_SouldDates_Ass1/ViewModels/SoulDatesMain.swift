@@ -7,6 +7,7 @@
 
 import Foundation
 
+//this is the view model that displays a list of matchSeekers in a SwiftUI view.
 class SoulDatesMain: ObservableObject {
     @Published var matchSeekers: [MatchSeeker]
     
@@ -16,6 +17,7 @@ class SoulDatesMain: ObservableObject {
     
     init()
     {
+        //i have decided to use array objects for this assessment instead of JSON.
         matchSeekers = matchSeekersSample
         //sets a fake scammer status for a matchSeeker
         self.matchSeekers[0].toggleScammer()
@@ -24,6 +26,7 @@ class SoulDatesMain: ObservableObject {
         self.matchSeekers[1].setBackgroundCheck(backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: Date.now, expiryDate: Date.now, description: "trustworthy"), proofOfAge: ProofOfAge(dateIssued: Date.now, expiryDate: Date.now, issuer: "NSW", proofOfIdNumber: "122299883", legalFirstName: "Samantha", legalLastName: "Filler", streetAddress: "777 Phill Street, Chipandale", dateOfBirth: Date.now), refereeCheck: RefereeCheck(dateIssued: Date.now, expiryDate: Date.now, refereeName: "Jane", description: "She has done a great job.")))
     }
     
+    //this adds the matchSeeker to the matchSeekers list once the user has been registered.
     func onboardMatchSeeker(matchSeeker: MatchSeeker)
     {
         matchSeekers.append(matchSeeker)
@@ -56,18 +59,21 @@ class SoulDatesMain: ObservableObject {
                     allocatedMatchSeekers.append(matchSeeker)
                 }
             }
+            //throws an exception if there were no matches that are tailored to them.
             if allocatedMatchSeekers.isEmpty {
                 throw ProfileError.noMatchesFound
             }
             return allocatedMatchSeekers
         }
         catch {
+            //same as above comment
             throw ProfileError.noMatchesFound
         }
         
       
     }
     
+    //this is ued to list matches without the current matchSeeker during a session so they can't view themselves as a potential matchSeeker to connect.
     private func listMatchesWtithoutCurrentUser(currentMatchSeeker: MatchSeeker) throws -> [MatchSeeker]
     {
         var listedMatchSekers: [MatchSeeker] = []
@@ -82,6 +88,7 @@ class SoulDatesMain: ObservableObject {
         return listedMatchSekers
     }
     
+    //this is an overall function that will filter a list of matchSeekers based on their disabiity status and dating preferences
     func tailorMatches(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
         // this is another array to get allocated matches that it is based on gender and disabilities
         var finalAllocatedMatchSeekers: [MatchSeeker] = []
@@ -107,8 +114,7 @@ class SoulDatesMain: ObservableObject {
             }
             return finalAllocatedMatchSeekers
         }
-        catch
-        {
+        catch {
             throw ProfileError.noMatchesFound
         }
     }
@@ -147,6 +153,7 @@ class SoulDatesMain: ObservableObject {
       
     }
     
+    //this is a helper function to update the matchSeeker's profile that is in a matchSeeker list so it updates dyanmicly onto soulDatesMain
     func updateMatchSeekerProfile(currentMatchSeeker: MatchSeeker, newScreenName: String, newGender: Gender, newDateOfBirth: Date, newBio: String,  newHobbies: String, newFavouriteMusic: String) throws {
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id })
         {
@@ -157,6 +164,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
+    //same as above function but updates their disability related details.
     func updateMatchSeekerDisability(currentMatchSeeker: MatchSeeker, disability: Disability? = nil, discloseDisability: Bool, riskRejections: Bool) throws {
         //checks for the specific matchSeeker
         if let index = self.matchSeekers.firstIndex(where: { $0.id == currentMatchSeeker.id }) {
@@ -181,6 +189,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
+    //does the same sort of things as above function
     func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
         {
@@ -192,6 +201,8 @@ class SoulDatesMain: ObservableObject {
        
     }
     
+    //returns a matchSeeker object when trying to find a particular one..
+    //this is used on the sessionViewModel with a matchSeeker id assigned instead of creating a matchSeeker object inside session.
     func getSpecificMatchSeeker(matchSeekerId: UUID) throws -> MatchSeeker
     {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId}) {
@@ -210,11 +221,15 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    func removeMatchSeeker(matchSeekerId: UUID)
+    //removes a matchSeeker from the list when resetting the session.
+    func removeMatchSeeker(matchSeekerId: UUID) throws
     {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == matchSeekerId})
         {
             self.matchSeekers.remove(at: index)
+        }
+        else {
+            throw ProfileError.unableToRemove
         }
     }
 }

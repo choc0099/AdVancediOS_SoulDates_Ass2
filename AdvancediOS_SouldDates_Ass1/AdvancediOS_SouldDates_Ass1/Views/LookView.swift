@@ -23,6 +23,7 @@ struct LookView: View {
     var body: some View  {
         NavigationStack {
             Group {
+                //an if statement is provided for error handling based on the enums.
                 if(session.lookError == .noError) {
                     List(session.yourMatches) {
                         matchSeeker in
@@ -36,12 +37,14 @@ struct LookView: View {
                         Text("No Matches").font(.headline)
                         Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
                     }
-                }
+                }// if an unkown error is catched, for instance there was an error with the session id's not finding a matchseeker.
+                //This will be displayed.
                 else if (session.lookError == .unkown) {
                     Text("Sorry, something went wrong.").font(.headline)
                 }
             }.navigationTitle("Look")
         }.onAppear{
+            //loads the tailored matches onto this view when it is launched.
             session.gatherMatches(soulDatesMain: soulDatesMain)
         }
     }

@@ -14,6 +14,8 @@ class Session: ObservableObject {
     @Published var lookError: LookError = .unkown
     @Published var dreamList: [MatchSeeker] = [] //this is used to store dreamLists for potential matchSeekers.
     
+    //this is used to get matches that are tailored to them.
+    //it is used between multiple views so the matches update automatically when making certain changes.
     func gatherMatches(soulDatesMain: SoulDatesMain) {
         do {
             let currentMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeekerId)
@@ -33,14 +35,15 @@ class Session: ObservableObject {
         }
     }
     
+    //adds the match seeker to the dreamList, also known as favourite match seekers or shortlists.
     func addToDreamList( matchSeeker: MatchSeeker) {
         //adds it to the dream list property.
         self.dreamList.append(matchSeeker)
         //saves the state of the dreamList to user defaults.
         SessionStorageManager.saveDreamList(dreamlist: dreamList)
-        
     }
     
+    //this is a helper function to check if a matchSeeker is already added to the dreamList to prevent duplications
     func checkAlreadyAdded(selectedMatchSeeker: MatchSeeker) -> Bool
     {
         for item in dreamList {

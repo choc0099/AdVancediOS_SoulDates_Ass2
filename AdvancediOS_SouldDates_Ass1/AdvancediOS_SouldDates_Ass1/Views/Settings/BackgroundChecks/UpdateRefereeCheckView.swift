@@ -16,6 +16,9 @@ struct UpdateRefereeCheckView: View {
     @State private var alertMessage: String = ""
     @Environment(\.presentationMode) var presentationMode
     
+    //determines whether a button needs to be disabled
+    @State var buttonDisabled: Bool = false
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -30,7 +33,7 @@ struct UpdateRefereeCheckView: View {
                     Section("Referee Details") {
                         HStack(spacing: 10) {
                             Text("Referee Name:").frame(width: 128, alignment: .leading)
-                            TextField("Name", text: $updateRefereeVM.rafereeName)
+                            TextField("Name", text: $updateRefereeVM.refereeName)
                         }
                         DatePicker("Date issued", selection: $updateRefereeVM.dateIssued, in: RefereeCheck.passedDateRange(), displayedComponents: [.date])
                         DatePicker("Expiry Date", selection: $updateRefereeVM.expiryDate, in: RefereeCheck.futureDateRange(), displayedComponents: [.date])
@@ -40,7 +43,8 @@ struct UpdateRefereeCheckView: View {
                         TextEditor(text: $updateRefereeVM.description)
                     }
                 }
-            }.toolbar{
+            }.navigationTitle("Referee Check").navigationBarTitleDisplayMode(.inline)
+            .toolbar{
                 Button {
                     do {
                         try processData()
@@ -54,7 +58,7 @@ struct UpdateRefereeCheckView: View {
                     }
                 } label: {
                     Text("Done")
-                }
+                }.disabled(buttonDisabled)
             }.onAppear {
                 do {
                     //updates the view model.
@@ -68,6 +72,14 @@ struct UpdateRefereeCheckView: View {
                     title: Text(alertTitle),
                     message: Text(alertMessage)
                 )
+            }.onChange(of: updateRefereeVM.allTextEnetered()) { everythingIsEntered in
+                //this will determine if a button is disabled
+                //the done button will be disabled if there are no text entered and the refereeCheck toggle is set to true.
+                if everythingIsEntered {
+                    buttonDisabled = false
+                } else {
+                    buttonDisabled = true
+                }
             }
         }
     }
@@ -79,7 +91,7 @@ struct UpdateRefereeCheckView: View {
             updateRefereeVM.dateIssued = matchSeekerReferee.dateIssued
             updateRefereeVM.expiryDate = matchSeekerReferee.expiryDate
             updateRefereeVM.description = matchSeekerReferee.description
-            updateRefereeVM.rafereeName = matchSeekerReferee.refereeName
+            updateRefereeVM.refereeName = matchSeekerReferee.refereeName
         }
     }
     
@@ -89,7 +101,7 @@ struct UpdateRefereeCheckView: View {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         if updateRefereeVM.isRefereeChecked {
             if matchSeeker.backgroundCheck?.refereeCheck != nil {
-                try soulDatesMain.updateRefereeDetails(currentMatchSeeker: matchSeeker, refereeName: updateRefereeVM.rafereeName, description: updateRefereeVM.description, dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate)
+                try soulDatesMain.updateRefereeDetails(currentMatchSeeker: matchSeeker, refereeName: updateRefereeVM.refereeName, description: updateRefereeVM.description, dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate)
             }
             else if matchSeeker.backgroundCheck?.refereeCheck == nil && matchSeeker.backgroundCheck != nil {
                 try initialiseRefereeCheck(matchSeeker)
@@ -108,7 +120,7 @@ struct UpdateRefereeCheckView: View {
     }
     
     func initialiseRefereeCheck(_ matchSeeker: MatchSeeker) throws {
-        try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: RefereeCheck(dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate, refereeName: updateRefereeVM.rafereeName, description: updateRefereeVM.description))
+        try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: RefereeCheck(dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate, refereeName: updateRefereeVM.refereeName, description: updateRefereeVM.description))
     }
 }
 

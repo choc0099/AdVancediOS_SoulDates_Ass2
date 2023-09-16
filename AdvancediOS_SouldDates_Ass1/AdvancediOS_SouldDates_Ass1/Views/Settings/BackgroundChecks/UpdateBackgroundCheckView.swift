@@ -9,25 +9,29 @@ import SwiftUI
 
 struct UpdateBackgroundCheckView: View {
     @StateObject var updatePoliceCheckVM: UpdatePoliceCheckViewModel = UpdatePoliceCheckViewModel()
+    @StateObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel = UpdateProofOfAgeViewModel()
+    @StateObject var updateReferreVM: UpdateRefereeCheckViewModel = UpdateRefereeCheckViewModel()
     
     var body: some View {
-        List {
-            NavigationLink {
-                UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
-            } label: {
-                Text("Police Checks")
+        NavigationStack {
+            List {
+                NavigationLink {
+                    UpdatePoliceCheckView(updatePoliceCheckVM: updatePoliceCheckVM)
+                } label: {
+                    Text("Police Checks")
+                }
+                NavigationLink {
+                    UpdateProofOfAgeView(updateProofOfAgeVM: updateProofOfAgeVM)
+                } label: {
+                    Text("Proof of Age")
+                }
+                NavigationLink {
+                    UpdateRefereeCheckView(updateRefereeVM: updateReferreVM)
+                } label: {
+                    Text("Referee Checks")
+                }
             }
-            NavigationLink {
-                UpdateProofOfAgeView(updateProofOfAgeVM: UpdateProofOfAgeViewModel())
-            } label: {
-                Text("Proof of Age")
-            }
-            NavigationLink {
-                UpdateRefereeCheckView(updateRefereeVM: UpdateRefereeCheckViewModel())
-            } label: {
-                Text("Referee Checks")
-            }
-        }
+        }.navigationTitle("Background Checks").navigationBarTitleDisplayMode(.inline)
     }
 }
 

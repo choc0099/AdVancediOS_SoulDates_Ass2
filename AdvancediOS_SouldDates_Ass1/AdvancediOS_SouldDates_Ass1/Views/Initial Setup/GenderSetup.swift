@@ -9,9 +9,10 @@ import SwiftUI
 
 struct GenderSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
-    //@State var interestedIn: InterestedIn = .all
     @State var navActive = false
     @Binding var showWelcome: Bool
+    //this is used to determine the current progress of the setup process
+    let setupStep: Float = 2
     
     var body: some View {
         //debug to see if date is passed
@@ -19,6 +20,7 @@ struct GenderSetupView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("What is your gender?").font(.headline)
                     
                     ForEach(Gender.allCases) { gender in
@@ -30,7 +32,7 @@ struct GenderSetupView: View {
                             StyledButton(text: gender.rawValue.capitalized, backGroundColour: Color("GreenColour"), foregroundColour: Color("HighContrastForeground"))
                         }.padding()
                     }
-                }.navigationTitle("Gender Details")
+                }.navigationTitle("Gender Details").navigationBarTitleDisplayMode(.inline)
             }
         }.navigationDestination(isPresented: $navActive) {
             InterestedInSetupView(setupVM: setupVM, isOnSession: $showWelcome)

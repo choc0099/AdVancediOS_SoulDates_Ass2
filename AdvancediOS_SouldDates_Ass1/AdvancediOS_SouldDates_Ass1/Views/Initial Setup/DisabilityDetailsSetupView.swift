@@ -13,12 +13,14 @@ struct DisabilityDetailsSetupView: View {
     @State private var navActive: Bool = false
     @State private var showAlert: Bool = false
     @State private var buttonDisabled: Bool = false
+    let setupStep: Float = 5
     
     var body: some View {
         
         NavigationStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("What is your disabilities?").padding()
                     TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)
                     Divider()

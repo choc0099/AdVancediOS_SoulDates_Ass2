@@ -14,6 +14,8 @@ struct UpdateDisabilityDetailsView: View {
     @State private var disabilityText: String = ""
     @State private var disabilitySeverity: DisabilitySeverity = .moderate
     @State private var showAlert: Bool = false
+    @State private var buttonDisabled: Bool = false
+    
     
     @Binding var selectedTab: Tab
     @Environment(\.presentationMode) var presentationMode
@@ -21,6 +23,7 @@ struct UpdateDisabilityDetailsView: View {
     var body: some View {
         Form {
             Toggle("Do you have a disability?", isOn: $updateDisabilityVM.isDisabled).onChange(of: updateDisabilityVM.isDisabled) { isDisabled in
+                //clears the fields on the VM when the disability toggle is set to false.
                 if !isDisabled {
                     //clears input from the VM
                     disabilityText = ""
@@ -72,9 +75,14 @@ struct UpdateDisabilityDetailsView: View {
             catch {
                 print("The matchSeeker does not exist.")
             }
-            
-            
-        }.navigationTitle("Update Disability Details").toolbar{
+        }.onChange(of: allTextEnetered(), perform: { textEnetered in
+            if textEnetered {
+                buttonDisabled = false
+            } else {
+                buttonDisabled = true
+            }
+        })
+        .navigationTitle("Update Disability Details").navigationBarTitleDisplayMode(.inline).toolbar{
             Button {
                 do{
                     //handles changes
@@ -88,13 +96,17 @@ struct UpdateDisabilityDetailsView: View {
                 
             } label: {
                 Text("Done")
-            }
+            }.disabled(buttonDisabled)
         }
     }
     
+    
+    //the functions below updates the matchSeekers disability status onto the current matchSeeker instance.
     func processData() throws {
-        
+        //updates it onto the main environment object
         try updateOnMain()
+        // overwrites the disability details to userDefaults.
+        try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
     //this will update it on the model.
     func updateOnMain() throws {
@@ -109,10 +121,20 @@ struct UpdateDisabilityDetailsView: View {
         
         let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability, discloseDisability: updateDisabilityVM.discloseMyDisability, riskRejections: updateDisabilityVM.riskGettingRejected)
-        //saves it to user defaults, it will overwrite it.
-        let updatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: updatedMatchSeeker)
-        
+    }
+    
+    func allTextEnetered() -> Bool {
+        if updateDisabilityVM.isDisabled {
+            if !disabilityText.isEmpty {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            //returns true if the user decided to no longer have their disability details
+            //this is to ensure that the button is not disabled when the toggle is set to false
+            return true
+        }
     }
 }
 

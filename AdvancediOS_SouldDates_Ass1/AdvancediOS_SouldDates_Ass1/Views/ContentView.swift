@@ -22,13 +22,12 @@ struct ContentView: View {
         //the setup process.
         Group {
             if !isOnSession {
-                WelcomeView(isOnSession: $isOnSession)
+                WelcomeView(isOnSession: $isOnSession).transition(.scale)
             }
             else {
-                InSessionTabView(isOnSession: $isOnSession)
+                InSessionTabView(isOnSession: $isOnSession).transition(.scale)
             }
         }.padding().onAppear{
-            
             //this will be used to go straight to the Look view if there is a matchSeeker saved in userDefaults.
             if let savedMatchSeeker = SessionStorageManager.readMatchSeekerFromUserDefaults() {
                 session.matchSeekerId = savedMatchSeeker.id
@@ -38,11 +37,7 @@ struct ContentView: View {
                 soulDatesMain.onboardMatchSeeker(matchSeeker: savedMatchSeeker)
             }
         }
-        
-        
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

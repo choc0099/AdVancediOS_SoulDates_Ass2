@@ -56,5 +56,11 @@ class InitialSetupViewModel: ObservableObject {
         let matchSeeeker = MatchSeeker(screenName: screenName, hobbies: hobbies, gender: gender, dateOfBirth: dateOfBirth, bio: bio, favourteMusic: favouriteMusic, datingPreference: datingPreferences, disability: haveDisability)
         return matchSeeeker
     }
+    
+    func calculateProgress(currentStep: Float) -> Float {
+        let stepDivision: Float = currentStep / 7
+        print(stepDivision)
+        return stepDivision
+    }
 }
 

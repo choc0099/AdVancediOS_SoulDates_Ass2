@@ -7,12 +7,10 @@
 
 import Foundation
 
-//this protocol will be used for police checks, reference checks and proof of age idenficiation.
+//the verifiable protocol is used for multiple types of background checks including police checks, referee checks and proof of age identification. They both have an issueDate and expiryDate properties
 protocol Verifiable: Identifiable, Dateable {
-    
     var expiryDate: Date {get set}
     var dateIssued: Date {get set}
-    
 }
 
 

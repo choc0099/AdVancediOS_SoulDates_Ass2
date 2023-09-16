@@ -14,7 +14,7 @@ struct UpdatePoliceCheckView: View {
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
-    
+    @State private var buttonDisasbled: Bool = false
     
     //this will be used to go back to the previous screen
     @Environment(\.presentationMode) var presentationMode
@@ -46,9 +46,11 @@ struct UpdatePoliceCheckView: View {
                     }
                 }
             }
-        }.toolbar {
+        }.navigationTitle("Police Check").navigationBarTitleDisplayMode(.inline)
+        .toolbar {
             Button {
                 do {
+                    //an alert will show if they declare they have a criminal record.
                     if !updatePoliceCheckVM.isCriminalRecord{
                         try processData()
                         //goes back to the previous view
@@ -75,38 +77,48 @@ struct UpdatePoliceCheckView: View {
             )
         }.onAppear {
             do {
+                //updates the views when launch to check if their police check details are stored.
                 let matchSeeker: MatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
                 // this will update the view if there is already a police check in place.
                 if let havePoliceCheck = matchSeeker.backgroundCheck?.policeCheck {
-                    updatePoliceCheckVM.isPoliceChecked = true
-                    updatePoliceCheckVM.description = havePoliceCheck.description
-                    updatePoliceCheckVM.issueDate = havePoliceCheck.dateIssued
-                    updatePoliceCheckVM.expiryDate = havePoliceCheck.expiryDate
+                    updatePoliceCheckVM.isPoliceChecked     = true
+                    updatePoliceCheckVM.description         = havePoliceCheck.description
+                    updatePoliceCheckVM.issueDate           = havePoliceCheck.dateIssued
+                    updatePoliceCheckVM.expiryDate          = havePoliceCheck.expiryDate
                 }
                 else {
                     updatePoliceCheckVM.isPoliceChecked = false
+                    updatePoliceCheckVM.resetVM()
                 }
                 
             } catch {
                 print("The matchSeeker from session does not exist.")
             }
-         
-            
+        }.onChange(of: updatePoliceCheckVM.allTextEntered()) { textEneterd in
+            if textEneterd {
+                buttonDisasbled = false
+            } else {
+                buttonDisasbled = true
+            }
         }
     }
     
-    //updates the police check details onto the MatchSeeker struct based on different scenarios.
+    //updates the police check details onto the MatchSeeker object based on different scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        //checks if the backgroundcheck is nil
+        
         
         if updatePoliceCheckVM.isPoliceChecked {
-            if matchSeeker.backgroundCheck == nil {
-                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)))
+            if let haveBackgroundCheck = matchSeeker.backgroundCheck {
+                if haveBackgroundCheck.policeCheck != nil {
+                    try soulDatesMain.updatePoliceCheckDetails(currentMatchSeeker: matchSeeker, issueDate: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)
+                }
+                else {
+                    try soulDatesMain.managePoliceCheck(currentMatchSeeker: matchSeeker, policeCheck: PoliceCheck(dateIssued: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description))
+                }
             }
             else {
-               try soulDatesMain.updatePoliceCheckDetails(currentMatchSeeker: matchSeeker, issueDate: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)
-                
+                try soulDatesMain.manageBackgroundChecks(currentMatchSeekr: matchSeeker, backgroundCheck: BackgroundCheck(policeCheck: PoliceCheck(dateIssued: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)))
             }
         }
         else {

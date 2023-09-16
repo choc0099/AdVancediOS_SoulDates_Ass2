@@ -184,12 +184,10 @@
 		3250E6DD2AABFE3E00666581 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				3277DDB22AB537BF005B5471 /* BackgroundChecks */,
 				32E3FFDA2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift */,
 				329D8DD02AAAF6D200F3CA89 /* UpdateDatingPreferencesViewModel.swift */,
-				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
-				3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */,
 				321E51952AA588D700513CA9 /* UpdateProfileViewModel.swift */,
-				3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -203,6 +201,16 @@
 				3277DDAE2AB1C043005B5471 /* BackgroundCheckStatusView.swift */,
 			);
 			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		3277DDB22AB537BF005B5471 /* BackgroundChecks */ = {
+			isa = PBXGroup;
+			children = (
+				32B1746C2AABAF970007BA5A /* UpdatePoliceCheckViewModel.swift */,
+				3250E6D92AABE2D500666581 /* UpdateProofOfAgeViewModel.swift */,
+				3250E6DE2AABFE8700666581 /* UpdateRefereeCheckViewModel.swift */,
+			);
+			path = BackgroundChecks;
 			sourceTree = "<group>";
 		};
 		32B174692AABAF3C0007BA5A /* BackgroundChecks */ = {
@@ -272,13 +280,13 @@
 		32D538342A91F1D700DFC38D /* Initial Setup */ = {
 			isa = PBXGroup;
 			children = (
+				32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */,
 				32D538352A91F20100DFC38D /* GenderSetup.swift */,
+				32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */,
 				32D538372A91F21B00DFC38D /* DisabilityStatusSetupView.swift */,
+				32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */,
 				32D538392A91F23D00DFC38D /* DatingPreferencesView.swift */,
 				32D5383B2A91F25900DFC38D /* AbouteMeView.swift */,
-				32D538452A922A3800DFC38D /* BasicDetailsSetupView.swift */,
-				32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */,
-				32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */,
 			);
 			path = "Initial Setup";
 			sourceTree = "<group>";
@@ -306,12 +314,12 @@
 		32F250F12A90D2C10084424B /* AdvancediOS_SouldDates_Ass1 */ = {
 			isa = PBXGroup;
 			children = (
-				32BB89E62AA2B9FA0095A649 /* ViewModels */,
 				32F519202AA0752A005DA063 /* Extensions */,
 				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
 				32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */,
 				32D5382F2A91F07C00DFC38D /* Protocols */,
 				32D5382D2A91F05800DFC38D /* Views */,
+				32BB89E62AA2B9FA0095A649 /* ViewModels */,
 				32D5382C2A91F04800DFC38D /* Models */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,

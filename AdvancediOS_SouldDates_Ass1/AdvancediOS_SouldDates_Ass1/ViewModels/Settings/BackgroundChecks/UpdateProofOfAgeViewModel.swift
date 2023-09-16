@@ -49,4 +49,17 @@ class UpdateProofOfAgeViewModel: ObservableObject {
         self.dateOfBirth = Date.now
     }
     
+    //the same case in other view models to determine if the button is disabled or not based if there are text and their proof of age status.
+    func allTextEneterd() -> Bool {
+        if isProofOfAge {
+            if !proofOfAgeIdNumber.isEmpty && !issuer.isEmpty &&
+                !legalFirstName.isEmpty && !legalLastName.isEmpty &&
+                !address.isEmpty {
+                return true
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 }

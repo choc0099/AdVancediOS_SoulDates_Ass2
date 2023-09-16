@@ -9,12 +9,16 @@ import SwiftUI
 
 struct InterestedInSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
-    @State var navActive: Bool = false
+    @State private var navActive: Bool = false
     @Binding  var isOnSession: Bool
+    //this is used to determine the current setup step for the progress bar
+    private let setupStep: Float = 3
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("Who are you interested in?").padding()
                    
                     ForEach(InterestedIn.allCases) {
@@ -31,7 +35,7 @@ struct InterestedInSetupView: View {
             }
         }.navigationDestination(isPresented: $navActive, destination: {
             DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $isOnSession)
-        }).navigationTitle("Interested in Details")
+        }).navigationTitle("Interested in Details").navigationBarTitleDisplayMode(.inline)
         
     }
 }

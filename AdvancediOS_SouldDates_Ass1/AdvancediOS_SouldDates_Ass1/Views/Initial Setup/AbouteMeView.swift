@@ -16,10 +16,12 @@ struct AbouteMeView: View {
     @State var buttonDisabled: Bool = true
     @State var borderColor: Color = .primary
     @Binding var isOnSession: Bool
+    private let setupStep: Float = 7
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("Enter a bio about yourself.")
                     TextEditor(text: $setupVM.bio).frame(height: 200).border(borderColor)
                     Text("What are your favourite hobbies?")
@@ -32,7 +34,10 @@ struct AbouteMeView: View {
                             try setupVM.validateAboutMe()
                             //declare a constant to add a match seeker to the list
                             processData()
-                            isOnSession = true // dismisses the welcome/setup full-screen sheet.
+                            withAnimation(.easeIn) {
+                                isOnSession = true // dismisses the welcome/setup full-screen sheet.
+                            }
+                            
                         }
                         catch {
                             showAlert = true
@@ -40,7 +45,8 @@ struct AbouteMeView: View {
                     } label: {
                         StyledButton(text: "Finish", backGroundColour: Color("GreenColour"), foregroundColour: .black)
                     }.padding().disabled(buttonDisabled)
-                }.padding().navigationTitle("About Me").alert(isPresented: $showAlert) {
+                }.padding().navigationTitle("About Me").navigationBarTitleDisplayMode(.inline)
+                    .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("Some Text fields are not entered."),
                         message: Text("Please check your text fields.")
@@ -80,7 +86,7 @@ struct AbouteMeView_Previews: PreviewProvider {
         //var matchSeeker = matchSeekersSample[0]
       
         Group {
-            AbouteMeView(setupVM: InitialSetupViewModel(), isOnSession: .constant(false))
+            AbouteMeView(setupVM: InitialSetupViewModel(), isOnSession: .constant(false)).environmentObject(Session()).environmentObject(SoulDatesMain())
         }
        
     }
