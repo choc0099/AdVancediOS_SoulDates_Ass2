@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+//the dateable protocol is a similar use case of a canFly protocol where it contains an Extension with methods to filter date ranges accross multiple structs.
 protocol Dateable {
     
 }

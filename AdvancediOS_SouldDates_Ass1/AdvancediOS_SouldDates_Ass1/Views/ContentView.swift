@@ -28,7 +28,6 @@ struct ContentView: View {
                 InSessionTabView(isOnSession: $isOnSession).transition(.scale)
             }
         }.padding().onAppear{
-            
             //this will be used to go straight to the Look view if there is a matchSeeker saved in userDefaults.
             if let savedMatchSeeker = SessionStorageManager.readMatchSeekerFromUserDefaults() {
                 session.matchSeekerId = savedMatchSeeker.id

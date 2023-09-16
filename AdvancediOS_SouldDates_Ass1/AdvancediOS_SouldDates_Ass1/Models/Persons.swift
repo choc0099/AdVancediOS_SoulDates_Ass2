@@ -7,20 +7,20 @@
 
 import Foundation
 //this is an enum for error handling that is confined with Apple's error protocol.
+//it is used for error handling within certain scenarios
+//for example, it will throw an error if there are no matchSeekers in an array.
 enum ProfileError: Error {
     case underAgeException
     case noMatchesFound
     case matchSeekerNotExist
-    case caseSelectionNotListed(message: String)
     case emptyTextFields
     case matchSeekerAlreadyAdded
     case invalidIDNumber
 }
 
-enum matchSeekerError: Error {
-    
-}
-
+//I have decided to use enums for gender, interestedIn and disability preferences
+//The enums  makes it easier to access as they have to select an item instead of typing it manuelly.
+//and it makes it convienient to filter matches.
 enum Gender: String, CaseIterable, Identifiable, Codable {
     case female
     case male
@@ -41,8 +41,6 @@ enum InterestedIn: String, CaseIterable, Identifiable, Codable {
     var id: Self {self}
 }
 
-
-
 enum DisabilityPreference: String, CaseIterable, Identifiable, Codable {
     case withDisability = "People with disabilities"
     case withoutDisability = "People without disabilities"
@@ -52,60 +50,14 @@ enum DisabilityPreference: String, CaseIterable, Identifiable, Codable {
 }
 
 //the person protocol is a set of properties that are required for this app as ezch person has their own id's and screenNames.
+//it can be composed from different persons and must comform to that protocol such as matchSeekers, admins and technical support people.
 protocol Person: Identifiable, Decodable {
     var id: UUID {get set}
     var screenName: String {get set}
 }
-/*
-protocol MatchSeekerUser: Identifiable {
-    var id: UUID {get set}
-    var dateOfBirth: Date {get set}
-    var screenName: String {get set}
-    var bio: String {get set}
-    var hobbies: String {get set}
-    var favouriteMusic: String {get set}
-    var isScammer: Bool {get set}
-    var gender: Gender {get set}
-    var datingPreference: DatingPreference {get set}
-    var disability: Disability? {get set}
-    var policeCheck: PoliceCheck? {get set}
-    var proofOfAge: ProofOfAge? {get set}
-    var refereeCheck: RefereeCheck? {get set}
-    
-    //these are the functions where match seekers can upload their background checks.
-    mutating func setPoliceCheck(policeCheck: PoliceCheck)
-    mutating func setRefereeCheck(referee: RefereeCheck)
-    mutating func setProofOfAge(proofOfAge: ProofOfAge)
-    mutating func toggleScammer()
-    
-}*/
-/*
-extension MatchSeekerUser {
-    mutating func setPoliceCheck(policeCheck: PoliceCheck) {
-        self.policeCheck = policeCheck
-    }
-    
-    mutating func setRefereeCheck(referee: RefereeCheck)
-    {
-        self.refereeCheck = refereeCheck
-    }
-    
-    mutating func setProofOfAge(proofOfAge: ProofOfAge)
-    {
-        self.proofOfAge = proofOfAge
-    }
-    
-    mutating func toggleScammer() {
-        if isScammer == false {
-            isScammer = true
-        }
-        else{
-            isScammer = false
-        }
-    }
-}*/
 
-
+//this struct is currently unused as I have not added the admin-related user story
+//but its to explain that it conforms to the person protocol.
 struct Admin: Person {
     var id: UUID = UUID()
     var screenName: String

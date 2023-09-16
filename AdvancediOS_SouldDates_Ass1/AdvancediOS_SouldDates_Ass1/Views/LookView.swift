@@ -23,6 +23,7 @@ struct LookView: View {
     var body: some View  {
         NavigationStack {
             Group {
+                //an if statement is provided for error handling based on the enums.
                 if(session.lookError == .noError) {
                     List(session.yourMatches) {
                         matchSeeker in
