@@ -1,6 +1,7 @@
 # AdVancediOS_SoulDates_Ass1
 
 Github repository link: https://github.com/choc0099/AdVancediOS_SoulDates_Ass2
+Note that the project may take under a minute to load in a simulator because it is a large project.
 
 # Introduction
 This is an online dating app with limited is simplified but does not have all the features that you would expect from other dating apps. For instance, it does not use email addresses and passwords to register nor it does not have a chat feature.
