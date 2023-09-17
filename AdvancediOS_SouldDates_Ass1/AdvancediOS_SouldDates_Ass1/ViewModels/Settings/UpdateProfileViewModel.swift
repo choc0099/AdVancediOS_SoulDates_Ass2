@@ -15,6 +15,7 @@ class UpdateProfileViewModel: ObservableObject {
     @Published var hobbies: String = ""
     @Published var favouriteMusic: String = ""
     
+    //validates if the user enters an birthdate that is at an appropriate age when updating their profile.
     func validateDateOfBirth() throws {
         guard !DateManager.isUnderAge(birthDate: dateOfBirth) else {
             throw ProfileError.underAgeException

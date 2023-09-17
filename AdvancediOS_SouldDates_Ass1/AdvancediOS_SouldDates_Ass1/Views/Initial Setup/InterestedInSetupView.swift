@@ -32,7 +32,7 @@ struct InterestedInSetupView: View {
                         }.padding()
                     }
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity) //optimizes scrolling when in landscape mode.
             }
         }.navigationDestination(isPresented: $navActive, destination: {
             DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $isOnSession)

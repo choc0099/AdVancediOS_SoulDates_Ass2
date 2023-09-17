@@ -32,11 +32,11 @@ struct AbouteMeView: View {
                     
                     Button {
                         do {
+                            //checks if there are empty fields
                             try setupVM.validateAboutMe()
-                            //declare a constant to add a match seeker to the list
-                            processData()
+                            processData() //onboards the match seeker and saves it to user defaults.
                             withAnimation(.easeIn) {
-                                isOnSession = true // dismisses the welcome/setup full-screen sheet.
+                                isOnSession = true // dismisses the welcome/setup view and switches to inSessionTabView.
                             }
                             
                         }
@@ -48,12 +48,11 @@ struct AbouteMeView: View {
                     }.padding().disabled(buttonDisabled)
                 }.padding().navigationTitle("About Me").navigationBarTitleDisplayMode(.inline)
                     .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Some Text fields are not entered."),
-                        message: Text("Please check your text fields.")
-                    )
-                    }
-                    .frame(maxWidth: .infinity)
+                        Alert(
+                            title: Text("Some Text fields are not entered."),
+                            message: Text("Please check your text fields.")
+                        )
+                    }.frame(maxWidth: .infinity) // optimize scrolling when in landscape mode.
             }.onChange(of: allTextEntered()) { everythingIsEneterd in
                 if everythingIsEneterd {
                     buttonDisabled = false
@@ -63,10 +62,12 @@ struct AbouteMeView: View {
                 }
             }
         }.onAppear {
+            //when this view appears, it checks whether everything is entered and disabls the button if there are empty fields.
             buttonDisabled = allTextEntered() ? false : true
         }
     }
     
+    //A helper function to check whether all text fields are entered.
     func allTextEntered() -> Bool {
         if !setupVM.bio.isEmpty && !setupVM.hobbies.isEmpty && !setupVM.favouriteMusic.isEmpty {
             return true
@@ -76,12 +77,13 @@ struct AbouteMeView: View {
         }
     }
     
+    //onboards the match seeker and saves it to user defualts.
     func processData() {
         let matchseeker = setupVM.convertToObject()
         //saves the matchSeeker to the session
         SessionStorageManager.setMatchSeekerToUserDefaults(currentMatchSeeker: matchseeker)
         soulDatesMain.onboardMatchSeeker(matchSeeker: matchseeker)
-        session.matchSeekerId = matchseeker.id
+        session.matchSeekerId = matchseeker.id //allocates the match seeker into this session.
     }
 }
 

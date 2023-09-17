@@ -30,7 +30,7 @@ struct DatingPreferencesView: View {
                         }.padding()
                     }.navigationTitle("Dating Preferences").navigationBarTitleDisplayMode(.inline)
                 }
-            }.frame(maxWidth: .infinity)
+            }.frame(maxWidth: .infinity) //optimizes scrolling when in landscape mode.
         }.navigationDestination(isPresented: $navActive) {
             AbouteMeView(setupVM: setupVM, isOnSession: $isOnSession)
         }

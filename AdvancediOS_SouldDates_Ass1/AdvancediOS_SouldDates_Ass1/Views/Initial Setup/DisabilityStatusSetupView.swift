@@ -33,7 +33,7 @@ struct DisabilityStatusSetupView: View {
                         StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
                     }.padding()
                 }.navigationTitle("Disability Status").navigationBarTitleDisplayMode(.inline)
-            }.frame(maxWidth: .infinity)
+            }.frame(maxWidth: .infinity) //optimizes scrolling when in landscape mode.
         }
     }
 }

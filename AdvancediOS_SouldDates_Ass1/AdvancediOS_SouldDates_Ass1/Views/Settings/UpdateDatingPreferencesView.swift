@@ -36,6 +36,7 @@ struct UpdateDatingPreferencesView: View {
                         }
                     }.pickerStyle(.navigationLink)
                 }
+                //this is used to filter match seekers within a specific age range.
                 Section("Minimum Age Range") {
                     Stepper("\(updateDatingPrefVM.minAge)",  value: $updateDatingPrefVM.minAge, in: 18...100)
                 }

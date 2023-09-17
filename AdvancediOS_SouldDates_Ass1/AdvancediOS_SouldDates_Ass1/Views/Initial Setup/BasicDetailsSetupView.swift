@@ -69,7 +69,7 @@ struct BasicDetailsSetupView: View {
                     } label: {
                         StyledButton(text: "Next", backGroundColour: Color("GreenColour"), foregroundColour: .black)
                         }.padding().disabled(buttonDisabled)
-                }.frame(maxWidth: .infinity)
+                }.frame(maxWidth: .infinity) //optimizes scrolling when in landscape mode.
             }
         }.alert(isPresented: $showAlert) {
             Alert(

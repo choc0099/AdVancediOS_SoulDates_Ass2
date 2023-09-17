@@ -42,12 +42,14 @@ struct UpdateDisabilityDetailsView: View {
                 }.pickerStyle(.segmented)
                 
                 Section(content: {
+                    //this is an setting that is used whether you want to share your disability details to other match seekers on yoor profile.
                     Toggle("Disclose my disability:", isOn: $updateDisabilityVM.discloseMyDisability)
+                    //the risk of getting rejected feature is a funny feature that will allow to view more match seekers that has not declared to be positive about people with disabilities.
                     Toggle("Risk getting rejected:", isOn: $updateDisabilityVM.riskGettingRejected)
                 }, header: {
                     Text("Disability related settings")
                 }, footer: {
-                    Text("The risk of getting rejected toggle shows matchSeekers who do not declare that they are open minded.")
+                    Text("Disclose my disability option shares your disability related details on your profile, and the risk of getting rejected toggle shows matchSeekers who do not declare positive about meeting people with disabilities.")
                 }) 
             }
         }.onAppear {

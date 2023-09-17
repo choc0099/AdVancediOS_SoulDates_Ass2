@@ -49,8 +49,8 @@ struct UpdateProfileView: View {
             }.navigationTitle("Update Profile").navigationBarTitleDisplayMode(.inline).toolbar {
                 Button {
                     do {
-                        try updateProfileVM.validateDateOfBirth()
-                        try processData()
+                        try updateProfileVM.validateDateOfBirth() //validates date of birth if it is underage.
+                        try processData() // updates it on the main class and saves it to user defaults.
                         //goes back to the previous view
                         presentationMode.wrappedValue.dismiss()
                     }
@@ -92,8 +92,6 @@ struct UpdateProfileView: View {
         //overwrites matchSeeker updated profile to userDefaults
         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
     }
-    
-  
 }
 
 struct UpdateProFileView_Previews: PreviewProvider {

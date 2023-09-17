@@ -90,7 +90,7 @@ struct ProfileView: View {
                 } label: {
                     StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
                 }
-            }.padding().frame(maxWidth: .infinity)
+            }.padding().frame(maxWidth: .infinity) //optimizes scrolling when in landscape mode.
         }.toolbar {
             Button {
                 showActionSheet = true
