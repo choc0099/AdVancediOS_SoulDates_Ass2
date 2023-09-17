@@ -22,17 +22,25 @@ struct DisabilityDetailsSetupView: View {
                 VStack(spacing: 20) {
                     ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
                     Text("What is your disabilities?").padding()
-                    TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary)
+                    TextField("Your disabilities", text: $setupVM.disability).padding().border(.primary).onChange(of: !setupVM.disability.isEmpty) { isEntered in
+                        //button no longer disables when they entered this required field.
+                        if isEntered {
+                            buttonDisabled = false
+                        }
+                        else {
+                            buttonDisabled = true
+                        }
+                    }
                     Divider()
                     Text("How Severe is your disability?").padding()
-                    
-                    Picker("", selection: $setupVM.disabilitySeverity) {
+                    Picker("Severity", selection: $setupVM.disabilitySeverity) {
                         ForEach(DisabilitySeverity.allCases) {
                             severity in
                             Text(severity.rawValue.capitalized)
                         }
                     }.pickerStyle(.segmented).padding()
                     Toggle("Disclose my disability:", isOn: $setupVM.discloseMyDisability)
+                    Text("Shows your disability status on your profile").font(.caption)
                     Spacer()
                     Button {
                         do {
@@ -45,9 +53,7 @@ struct DisabilityDetailsSetupView: View {
                         }
                     } label: {
                         StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
-                    }
-                    
-                    
+                    }.disabled(buttonDisabled)
                 }
             }
         }.padding().navigationDestination(isPresented: $navActive) {
@@ -57,6 +63,10 @@ struct DisabilityDetailsSetupView: View {
                 title: Text("Text fields not entered"),
                 message: Text("Please enter details about your disability.")
             )
+        }.onAppear{
+            //checks whether the button should be disabled or not
+            //this is used if the back button is pressed to update a previous screen.
+            buttonDisabled = !setupVM.disability.isEmpty ? false : true
         }
     }
 }

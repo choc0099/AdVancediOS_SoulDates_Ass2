@@ -239,6 +239,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		32C18E982AB66A6900BECB8B /* References */ = {
+			isa = PBXGroup;
+			children = (
+				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
+			);
+			path = References;
+			sourceTree = "<group>";
+		};
 		32D5382C2A91F04800DFC38D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,8 +322,8 @@
 		32F250F12A90D2C10084424B /* AdvancediOS_SouldDates_Ass1 */ = {
 			isa = PBXGroup;
 			children = (
+				32C18E982AB66A6900BECB8B /* References */,
 				32F519202AA0752A005DA063 /* Extensions */,
-				32F5191A2A9F1317005DA063 /* SoulDatesSampleData.swift */,
 				32F250F22A90D2C10084424B /* AdvancediOS_SouldDates_Ass1App.swift */,
 				32D5382F2A91F07C00DFC38D /* Protocols */,
 				32D5382D2A91F05800DFC38D /* Views */,
