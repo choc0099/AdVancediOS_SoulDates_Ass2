@@ -15,10 +15,8 @@ struct UpdateDisabilityDetailsView: View {
     @State private var disabilitySeverity: DisabilitySeverity = .moderate
     @State private var showAlert: Bool = false
     @State private var buttonDisabled: Bool = false
-    
-    
     @Binding var selectedTab: Tab
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode //used to go back to the previous view
     
     var body: some View {
         Form {
@@ -27,13 +25,12 @@ struct UpdateDisabilityDetailsView: View {
                 if !isDisabled {
                     //clears input from the VM
                     disabilityText = ""
-                    disabilitySeverity = .moderate
+                    disabilitySeverity = .mild
                     updateDisabilityVM.resetVM()
                 }
             }
             if updateDisabilityVM.isDisabled {
                 Section("Disability Details") {
-                    
                     TextField("What Disability do you have?", text: $disabilityText)
                 }
                 
@@ -54,7 +51,7 @@ struct UpdateDisabilityDetailsView: View {
                 }) 
             }
         }.onAppear {
-            
+            //allows the user to display current disability status when they open this view from settings.
             do {
                 let allocatedMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
                 if let matchSeekerHaveDisability = allocatedMatchSeeker.disability {
@@ -85,7 +82,7 @@ struct UpdateDisabilityDetailsView: View {
         .navigationTitle("Update Disability Details").navigationBarTitleDisplayMode(.inline).toolbar{
             Button {
                 do{
-                    //handles changes
+                    //handles changes on the main VM
                     try processData()
                     //goes back to the previous view
                     presentationMode.wrappedValue.dismiss()
@@ -93,13 +90,11 @@ struct UpdateDisabilityDetailsView: View {
                 catch {
                     print("the matchSeeker from the session does not exist in the matchSeekerMain.")
                 }
-                
             } label: {
                 Text("Done")
             }.disabled(buttonDisabled)
         }
     }
-    
     
     //the functions below updates the matchSeekers disability status onto the current matchSeeker instance.
     func processData() throws {
@@ -110,8 +105,8 @@ struct UpdateDisabilityDetailsView: View {
     }
     //this will update it on the model.
     func updateOnMain() throws {
-        
         var disability: Disability?
+        //determines if they have toggled if they have a disability or not.
         if updateDisabilityVM.isDisabled {
             disability = Disability(disabilities: disabilityText, severeity: disabilitySeverity)
         }
@@ -123,6 +118,8 @@ struct UpdateDisabilityDetailsView: View {
         try soulDatesMain.updateMatchSeekerDisability(currentMatchSeeker: allocatedMatchSeeker, disability: disability, discloseDisability: updateDisabilityVM.discloseMyDisability, riskRejections: updateDisabilityVM.riskGettingRejected)
     }
     
+    //used to determine if all text is enetered or not
+    //this is to disable the done button if no text fields has been entered.
     func allTextEnetered() -> Bool {
         if updateDisabilityVM.isDisabled {
             if !disabilityText.isEmpty {

@@ -28,10 +28,10 @@ struct DatingPreferencesView: View {
                         } label: {
                             StyledButton(text: pref.rawValue, backGroundColour: .blue, foregroundColour: .black)
                         }.padding()
-                    }.navigationTitle("Dating Preferences")
+                    }.navigationTitle("Dating Preferences").navigationBarTitleDisplayMode(.inline)
                 }
-            }
-        }.padding().navigationDestination(isPresented: $navActive) {
+            }.frame(maxWidth: .infinity)
+        }.navigationDestination(isPresented: $navActive) {
             AbouteMeView(setupVM: setupVM, isOnSession: $isOnSession)
         }
     }

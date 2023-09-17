@@ -45,7 +45,7 @@ struct DisabilityDetailsSetupView: View {
                     Button {
                         do {
                             navActive = true
-                            setupVM.isDisabled = true
+                            setupVM.isDisabled = true //sets the matchSeeker to be consier having a disability when onboarding the match seeker.
                             try setupVM.validateDisability()
                         }
                         catch {
@@ -54,7 +54,7 @@ struct DisabilityDetailsSetupView: View {
                     } label: {
                         StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
                     }.disabled(buttonDisabled)
-                }
+                }.frame(maxWidth: .infinity)
             }
         }.padding().navigationDestination(isPresented: $navActive) {
             DatingPreferencesView(setupVM: setupVM, isOnSession: $isOnSession)

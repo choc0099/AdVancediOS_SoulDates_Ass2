@@ -7,6 +7,19 @@
 
 import Foundation
 
+//this is an enum for error handling that is confined with Apple's error protocol.
+//it is used for error handling within certain scenarios
+//for example, it will throw an error if there are no matchSeekers in an array.
+enum ProfileError: Error {
+    case underAgeException
+    case noMatchesFound
+    case matchSeekerNotExist
+    case emptyTextFields
+    case matchSeekerAlreadyAdded
+    case invalidIDNumber
+    case unableToRemove
+}
+
 //this is the view model that displays a list of matchSeekers in a SwiftUI view.
 class SoulDatesMain: ObservableObject {
     @Published var matchSeekers: [MatchSeeker]
@@ -69,11 +82,9 @@ class SoulDatesMain: ObservableObject {
             //same as above comment
             throw ProfileError.noMatchesFound
         }
-        
-      
     }
     
-    //this is ued to list matches without the current matchSeeker during a session so they can't view themselves as a potential matchSeeker to connect.
+    //this is used to list matches without the current matchSeeker during a session so they can't view themselves as a potential matchSeeker to connect.
     private func listMatchesWtithoutCurrentUser(currentMatchSeeker: MatchSeeker) throws -> [MatchSeeker]
     {
         var listedMatchSekers: [MatchSeeker] = []
@@ -88,8 +99,29 @@ class SoulDatesMain: ObservableObject {
         return listedMatchSekers
     }
     
-    //this is an overall function that will filter a list of matchSeekers based on their disabiity status and dating preferences
-    func tailorMatches(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
+    //filters a list of matchSeekers based on all their dating prferences including the age ranges, disability preferences and who they are interested in.
+    //it will also throw an exception if there are no matchSeekers fouond instead of shwoing an empty array. Same goes with helper functions relating to filtering matches.
+    func tailorMatches(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreferences: DisabilityPreference, minAge: Int, maxAge: Int) throws -> [MatchSeeker]
+    {
+        var finalAllocatedMatches: [MatchSeeker] = []
+        do {
+            let allocatedMatchSeekersByDisabilityPref = try tailorMatchesBasedOnDisabilityPreference(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPreferences)
+            for matchSeeker in allocatedMatchSeekersByDisabilityPref {
+                if DateManager.calculateAge(birthDate: matchSeeker.dateOfBirth) >= minAge && DateManager.calculateAge(birthDate: matchSeeker.dateOfBirth) <= maxAge {
+                    finalAllocatedMatches.append(matchSeeker)
+                }
+            }
+            if finalAllocatedMatches.isEmpty {
+                throw ProfileError.noMatchesFound
+            }
+            return finalAllocatedMatches
+        } catch {
+            throw ProfileError.noMatchesFound
+        }
+    }
+    
+    //this is a helper function that will filter a list of matchSeekers based on their disabiity status and dating preferences
+    func tailorMatchesBasedOnDisabilityPreference(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
         // this is another array to get allocated matches that it is based on gender and disabilities
         var finalAllocatedMatchSeekers: [MatchSeeker] = []
         // this will be used to loop for allocated matches based on interested in.
@@ -112,12 +144,17 @@ class SoulDatesMain: ObservableObject {
                     throw ProfileError.noMatchesFound;
                 }
             }
+            if finalAllocatedMatchSeekers.isEmpty {
+                throw ProfileError.noMatchesFound
+            }
             return finalAllocatedMatchSeekers
         }
         catch {
             throw ProfileError.noMatchesFound
         }
     }
+    
+    
     
     //this method will help reduce the likely hood of getting rejected, it would work if people have a disability and wish to meet people without disabilities or openminded
     //for the matches to appear, the other person would have to be open to dating people with disabilities.
@@ -190,15 +227,14 @@ class SoulDatesMain: ObservableObject {
     }
     
     //does the same sort of things as above function
-    func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference) throws {
+    func updateMatchSeekerDatingPreference(currentMatchSeeker: MatchSeeker, newInterestedIn: InterestedIn, newDisabilityPrefernce: DisabilityPreference, newMinAge: Int, newMaxAge: Int) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
         {
-            self.matchSeekers[index].datingPreference.updateDatingPrefernces(interstedIn: newInterestedIn, disabilityPreferences: newDisabilityPrefernce)
+            self.matchSeekers[index].datingPreference.updateDatingPrefernces(interstedIn: newInterestedIn, disabilityPreferences: newDisabilityPrefernce, minAge: newMinAge, maxAge: newMaxAge)
         }
         else {
             throw ProfileError.matchSeekerNotExist
         }
-       
     }
     
     //returns a matchSeeker object when trying to find a particular one..

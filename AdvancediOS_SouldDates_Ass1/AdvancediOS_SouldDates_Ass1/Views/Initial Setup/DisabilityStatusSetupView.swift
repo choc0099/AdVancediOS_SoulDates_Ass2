@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//this is a setup view asking whether you have a disability.
+//these will take to different navigation views accordingly.
 struct DisabilityStatusSetupView: View {
     @ObservedObject var setupVM: InitialSetupViewModel
     @Binding var showWelcome: Bool
@@ -31,7 +33,7 @@ struct DisabilityStatusSetupView: View {
                         StyledButton(text: "No, i don't", backGroundColour: .yellow, foregroundColour: .black)
                     }.padding()
                 }.navigationTitle("Disability Status").navigationBarTitleDisplayMode(.inline)
-            }
+            }.frame(maxWidth: .infinity)
         }
     }
 }

@@ -87,11 +87,11 @@ struct UpdateRefereeCheckView: View {
     func updateVM() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         if let matchSeekerReferee = matchSeeker.backgroundCheck?.refereeCheck {
-            updateRefereeVM.isRefereeChecked = true
-            updateRefereeVM.dateIssued = matchSeekerReferee.dateIssued
-            updateRefereeVM.expiryDate = matchSeekerReferee.expiryDate
-            updateRefereeVM.description = matchSeekerReferee.description
-            updateRefereeVM.refereeName = matchSeekerReferee.refereeName
+            updateRefereeVM.isRefereeChecked    = true
+            updateRefereeVM.dateIssued          = matchSeekerReferee.dateIssued
+            updateRefereeVM.expiryDate          = matchSeekerReferee.expiryDate
+            updateRefereeVM.description         = matchSeekerReferee.description
+            updateRefereeVM.refereeName         = matchSeekerReferee.refereeName
         }
     }
     
@@ -100,6 +100,7 @@ struct UpdateRefereeCheckView: View {
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
         if updateRefereeVM.isRefereeChecked {
+            //pretty similar stuffs like in the police check view.
             if matchSeeker.backgroundCheck?.refereeCheck != nil {
                 try soulDatesMain.updateRefereeDetails(currentMatchSeeker: matchSeeker, refereeName: updateRefereeVM.refereeName, description: updateRefereeVM.description, dateIssued: updateRefereeVM.dateIssued, expiryDate: updateRefereeVM.expiryDate)
             }
@@ -111,7 +112,7 @@ struct UpdateRefereeCheckView: View {
                 try initialiseRefereeCheck(matchSeeker)
             }
         }
-        else {
+        else { //sets the referee check to nil and removes it.
            try soulDatesMain.manageRefereeCheck(currentMatchSeeker: matchSeeker, refereeCheck: nil)
         }
         

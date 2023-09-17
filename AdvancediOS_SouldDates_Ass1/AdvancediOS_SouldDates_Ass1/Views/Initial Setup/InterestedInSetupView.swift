@@ -32,11 +32,11 @@ struct InterestedInSetupView: View {
                         }.padding()
                     }
                 }
+                .frame(maxWidth: .infinity)
             }
         }.navigationDestination(isPresented: $navActive, destination: {
             DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $isOnSession)
         }).navigationTitle("Interested in Details").navigationBarTitleDisplayMode(.inline)
-        
     }
 }
 

@@ -28,7 +28,7 @@ struct BasicDetailsSetupView: View {
                     TextField (
                         "Name",
                         text: $setupVM.screenName
-                    ).textInputAutocapitalization(.never).padding().border(Color("HighContrastForeground")).onChange(of: setupVM.screenName) { screenName in
+                    ).autocorrectionDisabled(true).textInputAutocapitalization(.never).padding().border(Color("HighContrastForeground")).onChange(of: setupVM.screenName) { screenName in
                         if  screenName.count > 0 {
                             buttonDisabled = false
                         }
@@ -37,21 +37,29 @@ struct BasicDetailsSetupView: View {
                         }
                     }
                     
+                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.automatic).textContentType(.dateTime)
+                    Spacer(minLength: 10)
                     Divider()
-                    Text("Date of Birth:")
-                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.graphical).textContentType(.dateTime)
-                    Spacer(minLength: 50)
+                    Group {
+                        Text("Minimum Age Range:")
+                        Stepper("\(setupVM.minAge)", value: $setupVM.minAge, in: 18...100)
+                        Text("Maximum Age Range")
+                        Stepper("\(setupVM.maxAge)", value: $setupVM.maxAge, in: 18...100)
+                        Text("This is the age ranges when it comes to looking for a matchSeeker?").font(.caption)
+                    }
+                   
                     Button {
                             do {
+                                //checks for date of birth if it is under age.
+                                //only people over 18 can use this app.
                                 try setupVM.validateBasicDetails()
-                                //increases the step count so that the progress bar increases
-                                
+                                //navigates to the next screen
                                 navActive = true
                             }
                             catch ProfileError.underAgeException {
-                                showAlert = true
-                                alertTitle = "You are under age!"
-                                alertMessage = "You must be over 18 years old to use the dating app."
+                                showAlert       = true
+                                alertTitle      = "You are under age!"
+                                alertMessage    = "You must be over 18 years old to use the dating app."
                             }
                             catch {
                                 showAlert = true
@@ -61,7 +69,7 @@ struct BasicDetailsSetupView: View {
                     } label: {
                         StyledButton(text: "Next", backGroundColour: Color("GreenColour"), foregroundColour: .black)
                         }.padding().disabled(buttonDisabled)
-                }
+                }.frame(maxWidth: .infinity)
             }
         }.alert(isPresented: $showAlert) {
             Alert(

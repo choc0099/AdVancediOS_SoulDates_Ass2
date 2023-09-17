@@ -16,9 +16,12 @@ struct ProfileView: View {
     @State private var showActionSheet: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
-    @State private var dreamListStatus: String = ""
     @State private var alertMessage: String = ""
-    
+    //these are for the actionsheet buttons based on different scenarios
+    //for example, if the match seeker is already added to a dreamlist,
+    //it will dispaly "Remove from DreamList" instead of "Add to DreamList"
+    @State private var scammerStatus: String = ""
+    @State private var dreamListStatus: String = ""
     //this is the constants that will store a system image names
     private let scamIcon: String = "exclamationmark.triangle.fill"
     private let backgroundCheckIcon: String = "checkmark.seal"
@@ -36,7 +39,6 @@ struct ProfileView: View {
                     //let matchSeeker = profileVM.matchSeeker
                     Group {
                         Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
-                        
                         if let haveDisability = matchSeeker.getHeadlineText() {
                              Text(haveDisability).font(.subheadline)
                         }
@@ -69,7 +71,7 @@ struct ProfileView: View {
                     Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
                     Group {
                         Text("Bio").font(.headline).padding()
-                        Text("\(matchSeeker.bio)").font(.body).padding()
+                        Text("\(matchSeeker.bio)").font(.body)
                         Text("Hobbies").font(.headline).padding()
                         Text(matchSeeker.hobbies).padding()
                         Text("Favourite Music").padding()
@@ -88,28 +90,31 @@ struct ProfileView: View {
                 } label: {
                     StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
                 }
-                
-            }.padding().toolbar(.visible, for: .tabBar)
+            }.padding().frame(maxWidth: .infinity)
         }.toolbar {
             Button {
                 showActionSheet = true
             } label: {
                 Image(systemName: "ellipsis.circle")
-            }
-        }.actionSheet(isPresented: $showActionSheet) {
+            }.accessibilityLabel(Text("More Options")) //makes a icon button accessible for screen reader users.
+            //displays an action sheet when the user taps more options button containing actions to undertake.
+        }.actionSheet(isPresented: $showActionSheet)  {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
                 .default(Text(dreamListStatus)) {
                     handleDreamList()
                 },
-                .default(Text("Report Scam")) {
+                .default(Text(scammerStatus)) {
                     do {
                         //updates it on the backend side
                         try soulDatesMain.toggleMatchSeekerScammer(currentMatchSeeker: matchSeeker)
                         //imdediately updates it to the view side.
                         matchSeeker.toggleScammer()
+                        //refreshes the matchSeekers in SessionView.
                         session.gatherMatches(soulDatesMain: soulDatesMain)
                         //saves the scammer status to user defaults
                         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
+                        //updates the label of the report scam button.
+                        checkScamStatus()
                     }
                     catch {
                         showAlert = true
@@ -119,8 +124,10 @@ struct ProfileView: View {
                 .cancel()
             ])
         }.onAppear{
-            if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker)
-            {
+            //calls a function to check if the match seeker is a scammer.
+            checkScamStatus()
+            //checks if matchSeeker is already added to the dreamList
+            if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker) {
                 dreamListStatus = "Remove from DreamList"
             }
             else {
@@ -134,23 +141,36 @@ struct ProfileView: View {
             )
         }
     }
+    //checks if a matchSeeker is a scammer
+    func checkScamStatus() {
+        if matchSeeker.isScammer {
+            scammerStatus = "Cancel Report Scam"
+        }
+        else {
+            scammerStatus = "Report Scam"
+        }
+    }
     
+    //adds or remove a matchseeker from the dreamList.
     func handleDreamList() {
         do {
             if !session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker) {
                 session.addToDreamList(matchSeeker: matchSeeker)
                 showAlert = true
-                alertTitle = "Match Seeker added to Dream List."
+                alertTitle = "Match Seeker Added!"
+                alertMessage = "Match Seeker added to Dream List."
             }
             else {
                 try session.removeFromDreamList(matchSeeker: matchSeeker)
                 showAlert = true
-                alertTitle = "Match Seeker removed from Dream List."
+                alertTitle = "Match Seeker Removed!"
+                alertMessage = "Match Seeker removed from Dream List."
             }
         }
         catch {
             showAlert = true
-            alertTitle = "Unable to remove from Dream List."
+            alertTitle = "Something went wrong!"
+            alertMessage = "Unable to remove from Dream List."
         }
     }
 }

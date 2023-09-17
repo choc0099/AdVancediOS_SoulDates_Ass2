@@ -17,6 +17,7 @@ struct AbouteMeView: View {
     @State var borderColor: Color = .primary
     @Binding var isOnSession: Bool
     private let setupStep: Float = 7
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -51,7 +52,8 @@ struct AbouteMeView: View {
                         title: Text("Some Text fields are not entered."),
                         message: Text("Please check your text fields.")
                     )
-                }
+                    }
+                    .frame(maxWidth: .infinity)
             }.onChange(of: allTextEntered()) { everythingIsEneterd in
                 if everythingIsEneterd {
                     buttonDisabled = false

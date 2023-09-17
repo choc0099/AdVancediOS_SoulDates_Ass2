@@ -12,6 +12,7 @@ struct UpdateBackgroundCheckView: View {
     @StateObject var updateProofOfAgeVM: UpdateProofOfAgeViewModel = UpdateProofOfAgeViewModel()
     @StateObject var updateReferreVM: UpdateRefereeCheckViewModel = UpdateRefereeCheckViewModel()
     
+    //this is a settings view that lists all the types of background checks.
     var body: some View {
         NavigationStack {
             List {

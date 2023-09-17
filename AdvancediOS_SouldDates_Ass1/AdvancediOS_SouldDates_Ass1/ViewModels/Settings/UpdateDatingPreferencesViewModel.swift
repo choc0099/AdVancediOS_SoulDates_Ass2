@@ -10,5 +10,7 @@ class UpdateDatingPreferncesViewModel: ObservableObject {
 
     @Published var interestedIn: InterestedIn = .all
     @Published var disabilityPrefernces: DisabilityPreference = .openMinded
+    @Published var minAge: Int = 18
+    @Published var maxAge: Int = 30
     
 }

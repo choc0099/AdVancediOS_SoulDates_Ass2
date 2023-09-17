@@ -27,7 +27,7 @@ struct UpdateProfileView: View {
                 Section("Basic Details") {
                     HStack {
                         Text("Screen Name: ")
-                        TextField("Required", text: $updateProfileVM.screenName)
+                        TextField("Required", text: $updateProfileVM.screenName).autocorrectionDisabled(true).textInputAutocapitalization(.never)
                     }
                     DatePicker("Date of birth:", selection: $updateProfileVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.compact)
                     Picker("Gender", selection: $updateProfileVM.gender) {

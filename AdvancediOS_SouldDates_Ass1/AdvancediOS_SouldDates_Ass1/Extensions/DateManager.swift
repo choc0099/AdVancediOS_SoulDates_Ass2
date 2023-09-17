@@ -7,9 +7,8 @@
 
 import Foundation
 
+//the date manager is a class filled with static functions are there to handle properties that have a date objects.
 class DateManager {
-    
-    
     //this will be a helper function for sample objects at this stage.
     static public func setDate(day: Int, month: Int, year: Int) -> Date? {
         var dateComp = DateComponents()
@@ -22,11 +21,9 @@ class DateManager {
         return cal.date(from: dateComp)
     }
     
-    //a helper function that will be used to validate birthdate so only over 18's can join
+    //a helper function that will be used to validate birthdate so only over 18's can join the service and returns a boolean
     static public func isUnderAge(birthDate: Date) -> Bool {
-        
-        if let minAgeToAccess: Date = Calendar.current.date(byAdding: .year, value: -18, to: Date.now)
-        {
+        if let minAgeToAccess: Date = Calendar.current.date(byAdding: .year, value: -18, to: Date.now)  {
             if birthDate > minAgeToAccess {
                 return true
             }

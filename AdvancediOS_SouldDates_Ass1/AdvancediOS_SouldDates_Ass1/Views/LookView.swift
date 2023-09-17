@@ -35,7 +35,7 @@ struct LookView: View {
                 else if (session.lookError == .noMatches) {
                     VStack(spacing: 20) {
                         Text("No Matches").font(.headline)
-                        Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body)
+                        Text("Sorry, there are no matches found for you, there are plenty of fish in the sea yet to come.").font(.body).multilineTextAlignment(.center)
                     }
                 }// if an unkown error is catched, for instance there was an error with the session id's not finding a matchseeker.
                 //This will be displayed.

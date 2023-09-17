@@ -14,20 +14,23 @@ struct WelcomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 10) {
+                    //dispplays the SoulDates logo I have customly made using my iPad.
                     ProfileImageView(matchSeekerImage: "logo", imageSize: 200)
                     Text("Welcome to SoulDates")
                         .font(.title)
-                        .fontWeight(.bold).padding()
-                    Text("Find your perfect match.").padding()
-                    Spacer()
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Text("Become a Match Seeker today, find your perfect match.").multilineTextAlignment(.center).padding()
+                    Spacer(minLength: 70)
+                    //this is a button that navigates to the inital setup process.
                     NavigationLink {
                         BasicDetailsSetupView(setupVM: InitialSetupViewModel(), isOnSession: $isOnSession)
                     } label: {
                         StyledButton(text: "GET STARTED", backGroundColour: .green, foregroundColour: .black)
                     }
-                }
+                }.frame(maxWidth: .infinity)
             }
-            
         }
     }
 }
