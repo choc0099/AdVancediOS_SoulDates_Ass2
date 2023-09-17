@@ -17,8 +17,7 @@ extension Dateable {
         let calendar = Calendar.current
         let calStartDateComp = calendar.dateComponents([.day, .month, .year], from: Date.now)
         let startingDate = DateComponents(year: calStartDateComp.year, month: calStartDateComp.month, day: calStartDateComp.day)
-        let calEndDateComp = calendar.dateComponents([.day, .month, .year], from: Date.distantFuture)
-        let endingDate = DateComponents(year: calEndDateComp.year, month: calEndDateComp.month, day: calEndDateComp.day)
+        let endingDate = DateComponents(year: 3000, month: 12, day: 31)
         return calendar.date(from: startingDate)!
         ...
         calendar.date(from: endingDate)!
@@ -26,12 +25,14 @@ extension Dateable {
     
     static func passedDateRange() -> ClosedRange<Date> {
         let calendar = Calendar.current
-        let calStartDateComp = calendar.dateComponents([.day, .month, .year], from: Date.distantPast)
-        let startingDate = DateComponents(year: calStartDateComp.year, month: calStartDateComp.month, day: calStartDateComp.year)
+        
+        let startingDate = DateComponents(year: 1870, month: 1, day: 1)
         let calEndDateComp = calendar.dateComponents([.day, .month, .year], from: Date.now)
         let endingDate = DateComponents(year: calEndDateComp.year, month: calEndDateComp.month, day: calEndDateComp.day)
         return calendar.date(from: startingDate)!
         ...
         calendar.date(from: endingDate)!
     }
+    
+   
 }

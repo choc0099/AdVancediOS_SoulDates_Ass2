@@ -13,7 +13,7 @@ struct AbouteMeView: View {
     @EnvironmentObject var session: Session
     @State var showAlert: Bool = false
     @State var navActive: Bool = false
-    @State var buttonDisabled: Bool = true
+    @State var buttonDisabled: Bool = false
     @State var borderColor: Color = .primary
     @Binding var isOnSession: Bool
     private let setupStep: Float = 7
@@ -60,6 +60,8 @@ struct AbouteMeView: View {
                     buttonDisabled = true
                 }
             }
+        }.onAppear {
+            buttonDisabled = allTextEntered() ? false : true
         }
     }
     

@@ -27,7 +27,6 @@ struct GenderSetupView: View {
                         Button {
                             navActive = true
                             setupVM.gender = gender
-                             
                         } label: {
                             StyledButton(text: gender.rawValue.capitalized, backGroundColour: Color("GreenColour"), foregroundColour: Color("HighContrastForeground"))
                         }.padding()

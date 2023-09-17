@@ -11,21 +11,11 @@ struct BasicDetailsSetupView: View {
    
     @ObservedObject var setupVM: InitialSetupViewModel
     @Binding var isOnSession: Bool
-    let dateRange: ClosedRange<Date> = {
-        let calendar = Calendar.current
-        let startingDate = DateComponents(year: 1900, month: 1, day: 1)
-        let calDateComp = calendar.dateComponents([.day, .month, .year], from: Date.now)
-        let endingDate = DateComponents(year: calDateComp.year, month: calDateComp.month, day: calDateComp.day)
-        return calendar.date(from: startingDate)!
-        ...
-        calendar.date(from: endingDate)!
-        
-    }()
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""
     @State private var navActive: Bool = false
-    @State private var buttonDisabled: Bool = true
+    @State private var buttonDisabled: Bool = false
     //this is a constant that is allocated for this currentView step
     let setupStep: Float = 1
     
@@ -48,8 +38,8 @@ struct BasicDetailsSetupView: View {
                     }
                     
                     Divider()
-                    
-                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: dateRange, displayedComponents: [.date]).datePickerStyle(.automatic).textContentType(.dateTime)
+                    Text("Date of Birth:")
+                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.graphical).textContentType(.dateTime)
                     Spacer(minLength: 50)
                     Button {
                             do {
@@ -80,7 +70,9 @@ struct BasicDetailsSetupView: View {
             )
         }.padding().navigationDestination(isPresented: $navActive) {
             GenderSetupView(setupVM: setupVM, showWelcome: $isOnSession)
-        }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.inline)
+        }.navigationTitle("Basic Details").navigationBarTitleDisplayMode(.inline).onAppear {
+            buttonDisabled = setupVM.screenName.count > 0 ? false: true
+        }
         
     }
 }

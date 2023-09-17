@@ -19,7 +19,7 @@ struct InterestedInSetupView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     ProgressView(value: setupVM.calculateProgress(currentStep: setupStep))
-                    Text("Who are you interested in?").padding()
+                    Text("Who are you interested in?").font(.headline)
                    
                     ForEach(InterestedIn.allCases) {
                          interestedIn in
