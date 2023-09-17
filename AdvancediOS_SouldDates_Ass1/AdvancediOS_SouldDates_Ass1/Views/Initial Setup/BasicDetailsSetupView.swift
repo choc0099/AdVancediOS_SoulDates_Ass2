@@ -28,7 +28,7 @@ struct BasicDetailsSetupView: View {
                     TextField (
                         "Name",
                         text: $setupVM.screenName
-                    ).textInputAutocapitalization(.never).padding().border(Color("HighContrastForeground")).onChange(of: setupVM.screenName) { screenName in
+                    ).autocorrectionDisabled(true).textInputAutocapitalization(.never).padding().border(Color("HighContrastForeground")).onChange(of: setupVM.screenName) { screenName in
                         if  screenName.count > 0 {
                             buttonDisabled = false
                         }
