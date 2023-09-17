@@ -25,7 +25,7 @@ struct UpdateDisabilityDetailsView: View {
                 if !isDisabled {
                     //clears input from the VM
                     disabilityText = ""
-                    disabilitySeverity = .moderate
+                    disabilitySeverity = .mild
                     updateDisabilityVM.resetVM()
                 }
             }

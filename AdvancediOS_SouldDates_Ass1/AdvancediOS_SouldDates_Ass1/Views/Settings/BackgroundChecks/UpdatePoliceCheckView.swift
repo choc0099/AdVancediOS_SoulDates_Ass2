@@ -31,7 +31,7 @@ struct UpdatePoliceCheckView: View {
                         }
                     }
                 }
-                
+                //displays more fields relating to police check when it is toggled to true.
                 if updatePoliceCheckVM.isPoliceChecked {
                     Section("Police Check Dates") {
                         DatePicker("Date issued:", selection: $updatePoliceCheckVM.issueDate, in: PoliceCheck.passedDateRange(), displayedComponents: [.date])
@@ -56,7 +56,7 @@ struct UpdatePoliceCheckView: View {
                         //goes back to the previous view
                         presentationMode.wrappedValue.dismiss()
                     }
-                    else {
+                    else { // this is funny! shows an alert that they can't process their police check.
                         showAlert = true
                         alertTitle = "Cannot verify police check."
                         alertMessage = "You have not declared that you do not have a criminal record."
@@ -90,11 +90,11 @@ struct UpdatePoliceCheckView: View {
                     updatePoliceCheckVM.isPoliceChecked = false
                     updatePoliceCheckVM.resetVM()
                 }
-                
             } catch {
                 print("The matchSeeker from session does not exist.")
             }
         }.onChange(of: updatePoliceCheckVM.allTextEntered()) { textEneterd in
+            //disables the done button if there are no text entered in the text fields.
             if textEneterd {
                 buttonDisasbled = false
             } else {
@@ -106,10 +106,11 @@ struct UpdatePoliceCheckView: View {
     //updates the police check details onto the MatchSeeker object based on different scenarios.
     func processData() throws {
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-        
-        
+        //if they toggled the police check to true.
         if updatePoliceCheckVM.isPoliceChecked {
+            // if there is already a background check instance
             if let haveBackgroundCheck = matchSeeker.backgroundCheck {
+                //if they already provided us with police check details.
                 if haveBackgroundCheck.policeCheck != nil {
                     try soulDatesMain.updatePoliceCheckDetails(currentMatchSeeker: matchSeeker, issueDate: updatePoliceCheckVM.issueDate, expiryDate: updatePoliceCheckVM.expiryDate, description: updatePoliceCheckVM.description)
                 }

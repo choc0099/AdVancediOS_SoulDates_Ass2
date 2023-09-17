@@ -57,7 +57,6 @@ struct UpdateProofOfAgeView: View {
                             TextField("Last Name", text: $updateProofOfAgeVM.legalLastName)
                         }
                         DatePicker("Date of birth", selection: $updateProofOfAgeVM.dateOfBirth, displayedComponents: [.date])
-                        
                     }
                     Section("Address") {
                         TextEditor(text: $updateProofOfAgeVM.address)
@@ -84,7 +83,7 @@ struct UpdateProofOfAgeView: View {
                     showAlert = true
                     alertTitle = "Under Age!"
                     alertMessage = "The proof of Age that was provided is under age to be continue using our app."
-                }
+                }// this error is catched if they use other characters apart from digits for proof of age id number.
                 catch ProfileError.invalidIDNumber {
                     showAlert = true
                     alertTitle = "Only numerics can be entered"
@@ -120,8 +119,6 @@ struct UpdateProofOfAgeView: View {
             updateProofOfAgeVM.legalLastName      = haveProofOfAge.legalLastName
             updateProofOfAgeVM.issuer             = haveProofOfAge.issuer
             updateProofOfAgeVM.proofOfAgeIdNumber = haveProofOfAge.proofOfIdNumber
-            
-            
         }
         else {
             updateProofOfAgeVM.isProofOfAge = false
@@ -136,6 +133,7 @@ struct UpdateProofOfAgeView: View {
         
         //check if they declared that they have a proofOfAge check
         if updateProofOfAgeVM.isProofOfAge {
+            //refer to police check view as they do similar stuffs.
             if let haveBackgroundCheck = matchSeeker.backgroundCheck {
                 if haveBackgroundCheck.proofOfAge != nil {
                     try soulDatesMain.updateProofOfAgeDetails(currentMatchSeeker: matchSeeker, legalFirstName: updateProofOfAgeVM.legalFirstName, legalLastName: updateProofOfAgeVM.legalLastName, dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber)
@@ -153,11 +151,6 @@ struct UpdateProofOfAgeView: View {
         }
         //overwrites it to userDefaults
         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
-    }
-    
-    // a helper function to initilse proof of age check if they already provided a background check instance.
-    private func initialiseProofOfAge(matchSeeker: MatchSeeker) throws {
-        try soulDatesMain.manageProofOfAgeCheck(currentMatchSeeker: matchSeeker, proofOfAge: ProofOfAge(dateIssued: updateProofOfAgeVM.dateIssued, expiryDate: updateProofOfAgeVM.expiryDate, issuer: updateProofOfAgeVM.issuer, proofOfIdNumber: updateProofOfAgeVM.proofOfAgeIdNumber, legalFirstName: updateProofOfAgeVM.legalFirstName, legalLastName: updateProofOfAgeVM.legalLastName, streetAddress: updateProofOfAgeVM.address, dateOfBirth: updateProofOfAgeVM.dateOfBirth))
     }
 }
 

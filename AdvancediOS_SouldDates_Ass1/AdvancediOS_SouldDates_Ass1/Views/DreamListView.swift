@@ -18,9 +18,11 @@ struct DreamListView: View {
             Group {
                 if errorStatus == .noError {
                     List(dreamList) { matchSeeker in
+                        //just like the Look view, it also navigates to the ProfileView.
                         NavigationLink (destination: ProfileView(matchSeeker: matchSeeker, selectedTab: $selectedTab))
                         {
                             MatchSeekerRow(matchSeeker: matchSeeker, selectedTab: $selectedTab).swipeActions {
+                                //enables the user to delete an item from the dreamList by swiping left.
                                 Button(role: .destructive) {
                                     selectedTab = .dreamList
                                     do {
@@ -39,11 +41,11 @@ struct DreamListView: View {
                     }
                 }
                 else {
+                    //displays an error message that the dream list is empty as a method of error handling.
                     VStack(spacing: 20) {
                         Text("DreamList is Empty").font(.headline)
                         Text("You have not added any matches onto your DreamList.").multilineTextAlignment(.center)
                     }
-                    
                 }
             }.navigationTitle("Dream List")
         }.onAppear {

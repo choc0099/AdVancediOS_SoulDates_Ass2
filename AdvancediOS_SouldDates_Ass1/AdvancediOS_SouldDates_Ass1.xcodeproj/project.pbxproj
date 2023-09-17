@@ -222,7 +222,6 @@
 				3250E6DD2AABFE3E00666581 /* Settings */,
 				32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */,
 				32C4974B2AA476B8000A660E /* SessionViewModel.swift */,
-				321E518C2AA56E5E00513CA9 /* ProfileViewModel.swift */,
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
 			);
 			path = ViewModels;
@@ -317,6 +316,7 @@
 				32D5382C2A91F04800DFC38D /* Models */,
 				32D5382D2A91F05800DFC38D /* Views */,
 				32BB89E62AA2B9FA0095A649 /* ViewModels */,
+				321E518C2AA56E5E00513CA9 /* ProfileViewModel.swift */,
 				32F250F62A90D2C20084424B /* Assets.xcassets */,
 				32F250F82A90D2C20084424B /* Preview Content */,
 			);

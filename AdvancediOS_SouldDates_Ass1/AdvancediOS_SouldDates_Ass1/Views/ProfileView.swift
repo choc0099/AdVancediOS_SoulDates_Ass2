@@ -90,15 +90,15 @@ struct ProfileView: View {
                 } label: {
                     StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
                 }
-                
             }.padding().frame(maxWidth: .infinity)
         }.toolbar {
             Button {
                 showActionSheet = true
             } label: {
                 Image(systemName: "ellipsis.circle")
-            }.accessibilityLabel(Text("More Options"))
-        }.actionSheet(isPresented: $showActionSheet) {
+            }.accessibilityLabel(Text("More Options")) //makes a icon button accessible for screen reader users.
+            //displays an action sheet when the user taps more options button containing actions to undertake.
+        }.actionSheet(isPresented: $showActionSheet)  {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
                 .default(Text(dreamListStatus)) {
                     handleDreamList()
@@ -127,8 +127,7 @@ struct ProfileView: View {
             //calls a function to check if the match seeker is a scammer.
             checkScamStatus()
             //checks if matchSeeker is already added to the dreamList
-            if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker)
-            {
+            if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker) {
                 dreamListStatus = "Remove from DreamList"
             }
             else {
@@ -142,9 +141,8 @@ struct ProfileView: View {
             )
         }
     }
-    
+    //checks if a matchSeeker is a scammer
     func checkScamStatus() {
-        //checks if a matchSeeker is a scammer
         if matchSeeker.isScammer {
             scammerStatus = "Cancel Report Scam"
         }

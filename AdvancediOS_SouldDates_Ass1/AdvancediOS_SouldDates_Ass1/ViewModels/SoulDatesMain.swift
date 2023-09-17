@@ -84,7 +84,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    //this is ued to list matches without the current matchSeeker during a session so they can't view themselves as a potential matchSeeker to connect.
+    //this is used to list matches without the current matchSeeker during a session so they can't view themselves as a potential matchSeeker to connect.
     private func listMatchesWtithoutCurrentUser(currentMatchSeeker: MatchSeeker) throws -> [MatchSeeker]
     {
         var listedMatchSekers: [MatchSeeker] = []
@@ -99,6 +99,8 @@ class SoulDatesMain: ObservableObject {
         return listedMatchSekers
     }
     
+    //filters a list of matchSeekers based on all their dating prferences including the age ranges, disability preferences and who they are interested in.
+    //it will also throw an exception if there are no matchSeekers fouond instead of shwoing an empty array. Same goes with helper functions relating to filtering matches.
     func tailorMatches(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreferences: DisabilityPreference, minAge: Int, maxAge: Int) throws -> [MatchSeeker]
     {
         var finalAllocatedMatches: [MatchSeeker] = []
@@ -118,7 +120,7 @@ class SoulDatesMain: ObservableObject {
         }
     }
     
-    //this is an overall function that will filter a list of matchSeekers based on their disabiity status and dating preferences
+    //this is a helper function that will filter a list of matchSeekers based on their disabiity status and dating preferences
     func tailorMatchesBasedOnDisabilityPreference(currentMatchSeeker: MatchSeeker, interestedIn: InterestedIn, disabilityPreference: DisabilityPreference) throws -> [MatchSeeker] {
         // this is another array to get allocated matches that it is based on gender and disabilities
         var finalAllocatedMatchSeekers: [MatchSeeker] = []

@@ -17,6 +17,7 @@ struct AbouteMeView: View {
     @State var borderColor: Color = .primary
     @Binding var isOnSession: Bool
     private let setupStep: Float = 7
+    
     var body: some View {
         NavigationStack {
             ScrollView {
