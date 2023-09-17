@@ -16,9 +16,12 @@ struct ProfileView: View {
     @State private var showActionSheet: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
-    @State private var dreamListStatus: String = ""
     @State private var alertMessage: String = ""
-    
+    //these are for the actionsheet buttons based on different scenarios
+    //for example, if the match seeker is already added to a dreamlist,
+    //it will dispaly "Remove from DreamList" instead of "Add to DreamList"
+    @State private var scammerStatus: String = ""
+    @State private var dreamListStatus: String = ""
     //this is the constants that will store a system image names
     private let scamIcon: String = "exclamationmark.triangle.fill"
     private let backgroundCheckIcon: String = "checkmark.seal"
@@ -101,15 +104,18 @@ struct ProfileView: View {
                 .default(Text(dreamListStatus)) {
                     handleDreamList()
                 },
-                .default(Text("Report Scam")) {
+                .default(Text(scammerStatus)) {
                     do {
                         //updates it on the backend side
                         try soulDatesMain.toggleMatchSeekerScammer(currentMatchSeeker: matchSeeker)
                         //imdediately updates it to the view side.
                         matchSeeker.toggleScammer()
+                        //refreshes the matchSeekers in SessionView.
                         session.gatherMatches(soulDatesMain: soulDatesMain)
                         //saves the scammer status to user defaults
                         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)
+                        //updates the label of the report scam button.
+                        checkScamStatus()
                     }
                     catch {
                         showAlert = true
@@ -119,6 +125,9 @@ struct ProfileView: View {
                 .cancel()
             ])
         }.onAppear{
+            //calls a function to check if the match seeker is a scammer.
+            checkScamStatus()
+            //checks if matchSeeker is already added to the dreamList
             if session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker)
             {
                 dreamListStatus = "Remove from DreamList"
@@ -132,6 +141,16 @@ struct ProfileView: View {
                     Text(alertTitle),
                 message: Text(alertMessage)
             )
+        }
+    }
+    
+    func checkScamStatus() {
+        //checks if a matchSeeker is a scammer
+        if matchSeeker.isScammer {
+            scammerStatus = "Cancel Report Scam"
+        }
+        else {
+            scammerStatus = "Report Scam"
         }
     }
     
