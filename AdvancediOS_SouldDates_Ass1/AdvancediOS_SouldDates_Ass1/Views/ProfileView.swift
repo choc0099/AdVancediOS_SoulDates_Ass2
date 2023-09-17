@@ -78,7 +78,6 @@ struct ProfileView: View {
                         Text("\(matchSeeker.favouriteMusic)").padding()
                     }
                 }
-                
                 //according to my UI Design, the connect button is used to sent a connection request to a match seeker.
                 //for the purpose of this prototype, there will be no API communications, therefore an alert will show.
                 //that the feature is still in development.
@@ -90,7 +89,8 @@ struct ProfileView: View {
                 } label: {
                     StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
                 }
-            }.padding().frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
+            }.padding()
         }.toolbar {
             Button {
                 showActionSheet = true
