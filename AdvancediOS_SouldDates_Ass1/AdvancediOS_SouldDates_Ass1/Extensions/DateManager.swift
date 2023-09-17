@@ -11,7 +11,7 @@ class DateManager {
     
     
     //this will be a helper function for sample objects at this stage.
-    static func setDate(day: Int, month: Int, year: Int) -> Date? {
+    static public func setDate(day: Int, month: Int, year: Int) -> Date? {
         var dateComp = DateComponents()
         dateComp.day = day
         dateComp.month = month
@@ -32,6 +32,12 @@ class DateManager {
             }
         }
         return false
+    }
+    
+    static public func calculateAge(birthDate: Date) -> Int {
+        let calander = Calendar.current
+        let ageComp = calander.dateComponents([.year], from: birthDate, to: Date.now)
+        return ageComp.year!
     }
     
 }

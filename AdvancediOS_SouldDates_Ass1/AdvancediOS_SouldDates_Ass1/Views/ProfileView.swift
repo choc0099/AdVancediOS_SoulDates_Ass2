@@ -40,6 +40,9 @@ struct ProfileView: View {
                         if let haveDisability = matchSeeker.getHeadlineText() {
                              Text(haveDisability).font(.subheadline)
                         }
+                        
+                        //displays the age of the match seeker
+                        Text("Age: \(DateManager.calculateAge(birthDate: matchSeeker.dateOfBirth))")
                     }
                     Spacer()
                     //a group of text relating to background check statues
