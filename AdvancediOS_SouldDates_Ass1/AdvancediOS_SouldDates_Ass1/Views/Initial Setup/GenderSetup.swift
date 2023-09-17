@@ -32,6 +32,7 @@ struct GenderSetupView: View {
                         }.padding()
                     }
                 }.navigationTitle("Gender Details").navigationBarTitleDisplayMode(.inline)
+                    .frame(maxWidth: .infinity)
             }
         }.navigationDestination(isPresented: $navActive) {
             InterestedInSetupView(setupVM: setupVM, isOnSession: $showWelcome)

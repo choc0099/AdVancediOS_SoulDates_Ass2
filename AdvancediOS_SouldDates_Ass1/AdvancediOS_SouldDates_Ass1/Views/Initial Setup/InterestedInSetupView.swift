@@ -32,6 +32,7 @@ struct InterestedInSetupView: View {
                         }.padding()
                     }
                 }
+                .frame(width: .infinity)
             }
         }.navigationDestination(isPresented: $navActive, destination: {
             DisabilityStatusSetupView(setupVM: setupVM, showWelcome: $isOnSession)

@@ -51,7 +51,8 @@ struct AbouteMeView: View {
                         title: Text("Some Text fields are not entered."),
                         message: Text("Please check your text fields.")
                     )
-                }
+                    }
+                    .frame(maxWidth: .infinity)
             }.onChange(of: allTextEntered()) { everythingIsEneterd in
                 if everythingIsEneterd {
                     buttonDisabled = false

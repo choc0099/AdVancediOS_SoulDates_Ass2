@@ -54,7 +54,7 @@ struct DisabilityDetailsSetupView: View {
                     } label: {
                         StyledButton(text: "Next", backGroundColour: .green, foregroundColour: .black)
                     }.disabled(buttonDisabled)
-                }
+                }.frame(maxWidth: .infinity)
             }
         }.padding().navigationDestination(isPresented: $navActive) {
             DatingPreferencesView(setupVM: setupVM, isOnSession: $isOnSession)

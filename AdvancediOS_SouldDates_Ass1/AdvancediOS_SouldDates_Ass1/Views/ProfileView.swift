@@ -91,7 +91,7 @@ struct ProfileView: View {
                     StyledButton(text: "Connect", backGroundColour: backgroundCheckBackgroundColour, foregroundColour: Color("HighContrastForeground"))
                 }
                 
-            }.padding().toolbar(.visible, for: .tabBar)
+            }.padding().frame(maxWidth: .infinity)
         }.toolbar {
             Button {
                 showActionSheet = true

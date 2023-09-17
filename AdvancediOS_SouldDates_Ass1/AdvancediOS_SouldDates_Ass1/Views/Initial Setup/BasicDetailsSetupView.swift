@@ -50,15 +50,16 @@ struct BasicDetailsSetupView: View {
                    
                     Button {
                             do {
+                                //checks for date of birth if it is under age.
+                                //only people over 18 can use this app.
                                 try setupVM.validateBasicDetails()
-                                //increases the step count so that the progress bar increases
-                                
+                                //navigates to the next screen
                                 navActive = true
                             }
                             catch ProfileError.underAgeException {
-                                showAlert = true
-                                alertTitle = "You are under age!"
-                                alertMessage = "You must be over 18 years old to use the dating app."
+                                showAlert       = true
+                                alertTitle      = "You are under age!"
+                                alertMessage    = "You must be over 18 years old to use the dating app."
                             }
                             catch {
                                 showAlert = true
@@ -68,7 +69,7 @@ struct BasicDetailsSetupView: View {
                     } label: {
                         StyledButton(text: "Next", backGroundColour: Color("GreenColour"), foregroundColour: .black)
                         }.padding().disabled(buttonDisabled)
-                }
+                }.frame(maxWidth: .infinity)
             }
         }.alert(isPresented: $showAlert) {
             Alert(

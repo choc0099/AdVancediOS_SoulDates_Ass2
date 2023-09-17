@@ -23,7 +23,7 @@ class InitialSetupViewModel: ObservableObject {
     @Published var favouriteMusic: String = ""
     @Published var disabilityPreference: DisabilityPreference = .openMinded
     @Published var minAge: Int = 18
-    @Published var maxAge: Int = 30
+    @Published var maxAge: Int = 35
     
     //this will validate the date of birth to ensure only users who are over 18 can use the app.
     //also in earlier stages before implementing the button to disable, it will show an alert if they have not entered their name.

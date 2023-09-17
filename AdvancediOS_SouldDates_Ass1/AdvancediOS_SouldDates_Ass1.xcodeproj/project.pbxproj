@@ -251,8 +251,8 @@
 		32D5382D2A91F05800DFC38D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3277DDAD2AB1B690005B5471 /* ViewComponents */,
 				32F250F42A90D2C10084424B /* ContentView.swift */,
+				3277DDAD2AB1B690005B5471 /* ViewComponents */,
 				321E518E2AA57E1200513CA9 /* Settings */,
 				32D538342A91F1D700DFC38D /* Initial Setup */,
 				32F2511E2A90DE800084424B /* ProfileView.swift */,
