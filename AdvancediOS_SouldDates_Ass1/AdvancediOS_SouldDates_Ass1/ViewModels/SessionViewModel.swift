@@ -23,7 +23,7 @@ class Session: ObservableObject {
             let interestedIn: InterestedIn = datingPref.interestedIn
             let disabilityPref: DisabilityPreference = datingPref.disabilityPreference
             
-            yourMatches = try soulDatesMain.tailorMatches(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreference: disabilityPref)
+            yourMatches = try soulDatesMain.tailorMatches(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreferences: disabilityPref, minAge: datingPref.minAge, maxAge: datingPref.maxAge)
             lookError = .noError
         }
         catch ProfileError.noMatchesFound

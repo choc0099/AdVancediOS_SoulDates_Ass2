@@ -10,7 +10,7 @@ import Foundation
 
 
 class LookViewModel: ObservableObject {
-    @Published var matchSeeker: MatchSeeker = MatchSeeker(screenName: "", hobbies: "", gender: .male, dateOfBirth: Date.now, bio: "", favourteMusic: "", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false))
+    @Published var matchSeeker: MatchSeeker = MatchSeeker(screenName: "", hobbies: "", gender: .male, dateOfBirth: Date.now, bio: "", favourteMusic: "", datingPreference: DatingPreference(interestedIn: .all, disabilityPreference: .openMinded, discloseMyDisability: false, minAge: 0, maxAge: 0))
     @Published var isError: Bool = false
     
     

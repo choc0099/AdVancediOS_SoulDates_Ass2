@@ -19,7 +19,6 @@ struct UpdateDatingPreferencesView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-       
         NavigationStack {
             Form {
                 Section("Dating Prefernces") {
@@ -37,6 +36,13 @@ struct UpdateDatingPreferencesView: View {
                             Text(option.rawValue)
                         }
                     }.pickerStyle(.navigationLink)
+                }
+                
+                Section("Minimum Age Range") {
+                    Stepper("\(updateDatingPrefVM.minAge)", value: $updateDatingPrefVM.minAge)
+                }
+                Section("Maximum Age Range") {
+                    Stepper("\(updateDatingPrefVM.maxAge)", value: $updateDatingPrefVM.maxAge)
                 }
             }.navigationTitle("Update Dating Preference").navigationBarTitleDisplayMode(.inline).toolbar {
                 Button {
@@ -65,7 +71,7 @@ struct UpdateDatingPreferencesView: View {
     func processData() throws {
         //gets the matchSeeker from session
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
-       try soulDatesMain.updateMatchSeekerDatingPreference(currentMatchSeeker: matchSeeker, newInterestedIn: updateDatingPrefVM.interestedIn, newDisabilityPrefernce: updateDatingPrefVM.disabilityPrefernces)
+        try soulDatesMain.updateMatchSeekerDatingPreference(currentMatchSeeker: matchSeeker, newInterestedIn: updateDatingPrefVM.interestedIn, newDisabilityPrefernce: updateDatingPrefVM.disabilityPrefernces, newMinAge: updateDatingPrefVM.minAge, newMaxAge: updateDatingPrefVM.maxAge)
         
         //overwrites the dating preferences to userDefaults.
         try session.overWriteMatchSeekertoUserDefautls(soulDatesMain: soulDatesMain)

@@ -37,10 +37,17 @@ struct BasicDetailsSetupView: View {
                         }
                     }
                     
+                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.automatic).textContentType(.dateTime)
+                    Spacer(minLength: 10)
                     Divider()
-                    Text("Date of Birth:")
-                    DatePicker("Date of birth:", selection: $setupVM.dateOfBirth, in: MatchSeeker.passedDateRange(), displayedComponents: [.date]).datePickerStyle(.graphical).textContentType(.dateTime)
-                    Spacer(minLength: 50)
+                    Group {
+                        Text("Minimum Age Range:")
+                        Stepper("\(setupVM.minAge)", value: $setupVM.minAge, in: 18...100)
+                        Text("Maximum Age Range")
+                        Stepper("\(setupVM.maxAge)", value: $setupVM.maxAge, in: 18...100)
+                        Text("This is the age ranges when it comes to looking for a matchSeeker?").font(.caption)
+                    }
+                   
                     Button {
                             do {
                                 try setupVM.validateBasicDetails()

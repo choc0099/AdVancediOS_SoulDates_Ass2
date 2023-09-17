@@ -22,6 +22,8 @@ class InitialSetupViewModel: ObservableObject {
     @Published var hobbies: String = ""
     @Published var favouriteMusic: String = ""
     @Published var disabilityPreference: DisabilityPreference = .openMinded
+    @Published var minAge: Int = 18
+    @Published var maxAge: Int = 30
     
     //a function that will be used to validate the age and names
     func validateBasicDetails() throws {
@@ -52,7 +54,7 @@ class InitialSetupViewModel: ObservableObject {
         {
             haveDisability = Disability(disabilities: disability, severeity: disabilitySeverity)
         }
-        let datingPreferences: DatingPreference = DatingPreference(interestedIn: interestedIn, disabilityPreference: disabilityPreference, discloseMyDisability: discloseMyDisability)
+        let datingPreferences: DatingPreference = DatingPreference(interestedIn: interestedIn, disabilityPreference: disabilityPreference, discloseMyDisability: discloseMyDisability, minAge: minAge, maxAge: maxAge)
         let matchSeeeker = MatchSeeker(screenName: screenName, hobbies: hobbies, gender: gender, dateOfBirth: dateOfBirth, bio: bio, favourteMusic: favouriteMusic, datingPreference: datingPreferences, disability: haveDisability)
         return matchSeeeker
     }

@@ -68,7 +68,6 @@ struct SettingsView: View {
                     print("Failed to remove matchSeeker")
                 }
                 
-               
             }), secondaryButton: .cancel())
         }
     }
@@ -94,9 +93,11 @@ struct SettingsView: View {
     }
      
     func transferToUpdateDatingPrefernceVM() throws {
-        let matchSeeker = try getMatchSeekerFromSesstion()
-        updateDatingPrefVM.interestedIn = matchSeeker.datingPreference.interestedIn
+        let matchSeeker                         = try getMatchSeekerFromSesstion()
+        updateDatingPrefVM.interestedIn         = matchSeeker.datingPreference.interestedIn
         updateDatingPrefVM.disabilityPrefernces = matchSeeker.datingPreference.disabilityPreference
+        updateDatingPrefVM.minAge               = matchSeeker.datingPreference.minAge
+        updateDatingPrefVM.maxAge               = matchSeeker.datingPreference.maxAge
     }
     
     func getMatchSeekerFromSesstion() throws -> MatchSeeker {
@@ -106,6 +107,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(selectedTab: .constant(.settings), isOnSession: .constant(false)).environmentObject(Session())
+        SettingsView(selectedTab: .constant(.settings), isOnSession: .constant(false)).environmentObject(Session()).environmentObject(SoulDatesMain())
     }
 }
