@@ -30,19 +30,17 @@ struct UpdateDatingPreferencesView: View {
                     }.pickerStyle(.navigationLink)
                     
                     Picker("Who are you open with dating?", selection: $updateDatingPrefVM.disabilityPrefernces) {
-                        ForEach(DisabilityPreference.allCases)
-                        {
+                        ForEach(DisabilityPreference.allCases) {
                             option in
                             Text(option.rawValue)
                         }
                     }.pickerStyle(.navigationLink)
                 }
-                
                 Section("Minimum Age Range") {
-                    Stepper("\(updateDatingPrefVM.minAge)", value: $updateDatingPrefVM.minAge)
+                    Stepper("\(updateDatingPrefVM.minAge)",  value: $updateDatingPrefVM.minAge, in: 18...100)
                 }
                 Section("Maximum Age Range") {
-                    Stepper("\(updateDatingPrefVM.maxAge)", value: $updateDatingPrefVM.maxAge)
+                    Stepper("\(updateDatingPrefVM.maxAge)", value: $updateDatingPrefVM.maxAge, in: 18...100)
                 }
             }.navigationTitle("Update Dating Preference").navigationBarTitleDisplayMode(.inline).toolbar {
                 Button {
@@ -68,6 +66,7 @@ struct UpdateDatingPreferencesView: View {
         }
     }
     
+    //updates the data on the main VM
     func processData() throws {
         //gets the matchSeeker from session
         let matchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
