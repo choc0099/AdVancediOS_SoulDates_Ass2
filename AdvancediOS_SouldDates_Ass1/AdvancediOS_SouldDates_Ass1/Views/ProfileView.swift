@@ -39,7 +39,6 @@ struct ProfileView: View {
                     //let matchSeeker = profileVM.matchSeeker
                     Group {
                         Text("\(matchSeeker.screenName)").font(.title2).fontWeight(.bold)
-                        
                         if let haveDisability = matchSeeker.getHeadlineText() {
                              Text(haveDisability).font(.subheadline)
                         }
@@ -72,7 +71,7 @@ struct ProfileView: View {
                     Text("Gender: \(matchSeeker.gender.rawValue.capitalized)")
                     Group {
                         Text("Bio").font(.headline).padding()
-                        Text("\(matchSeeker.bio)").font(.body).padding()
+                        Text("\(matchSeeker.bio)").font(.body)
                         Text("Hobbies").font(.headline).padding()
                         Text(matchSeeker.hobbies).padding()
                         Text("Favourite Music").padding()
@@ -98,7 +97,7 @@ struct ProfileView: View {
                 showActionSheet = true
             } label: {
                 Image(systemName: "ellipsis.circle")
-            }
+            }.accessibilityLabel(Text("More Options"))
         }.actionSheet(isPresented: $showActionSheet) {
             ActionSheet(title: Text("What do you want to do with this MatchSeeker?"), buttons: [
                 .default(Text(dreamListStatus)) {
@@ -154,22 +153,26 @@ struct ProfileView: View {
         }
     }
     
+    //adds or remove a matchseeker from the dreamList.
     func handleDreamList() {
         do {
             if !session.checkAlreadyAdded(selectedMatchSeeker: matchSeeker) {
                 session.addToDreamList(matchSeeker: matchSeeker)
                 showAlert = true
-                alertTitle = "Match Seeker added to Dream List."
+                alertTitle = "Match Seeker Added!"
+                alertMessage = "Match Seeker added to Dream List."
             }
             else {
                 try session.removeFromDreamList(matchSeeker: matchSeeker)
                 showAlert = true
-                alertTitle = "Match Seeker removed from Dream List."
+                alertTitle = "Match Seeker Removed!"
+                alertMessage = "Match Seeker removed from Dream List."
             }
         }
         catch {
             showAlert = true
-            alertTitle = "Unable to remove from Dream List."
+            alertTitle = "Something went wrong!"
+            alertMessage = "Unable to remove from Dream List."
         }
     }
 }

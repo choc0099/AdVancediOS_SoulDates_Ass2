@@ -18,16 +18,15 @@ class Session: ObservableObject {
     //it is used between multiple views so the matches update automatically when making certain changes.
     func gatherMatches(soulDatesMain: SoulDatesMain) {
         do {
-            let currentMatchSeeker = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeekerId)
-            let datingPref: DatingPreference = currentMatchSeeker.datingPreference
-            let interestedIn: InterestedIn = datingPref.interestedIn
+            let currentMatchSeeker                   = try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: matchSeekerId)
+            let datingPref: DatingPreference         = currentMatchSeeker.datingPreference
+            let interestedIn: InterestedIn           = datingPref.interestedIn
             let disabilityPref: DisabilityPreference = datingPref.disabilityPreference
             
             yourMatches = try soulDatesMain.tailorMatches(currentMatchSeeker: currentMatchSeeker, interestedIn: interestedIn, disabilityPreferences: disabilityPref, minAge: datingPref.minAge, maxAge: datingPref.maxAge)
             lookError = .noError
         }
-        catch ProfileError.noMatchesFound
-        {
+        catch ProfileError.noMatchesFound {
             lookError = .noMatches
         }
         catch {

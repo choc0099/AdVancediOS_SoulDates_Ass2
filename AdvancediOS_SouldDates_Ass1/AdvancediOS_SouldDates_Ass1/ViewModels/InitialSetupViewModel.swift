@@ -13,7 +13,7 @@ class InitialSetupViewModel: ObservableObject {
     @Published var dateOfBirth: Date = Date()
     @Published var gender: Gender = .male
     @Published var interestedIn: InterestedIn = .all
-    //optionals can't be used but instead, there is a seperate bollean to detemrin i a matchseeker have a disability.
+    //optionals can't be used but instead, there is a seperate boolean to detemrine if a matchseeker have a disability.
     @Published var disability: String = ""
     @Published var disabilitySeverity: DisabilitySeverity = .mild
     @Published var discloseMyDisability: Bool = false
@@ -25,7 +25,8 @@ class InitialSetupViewModel: ObservableObject {
     @Published var minAge: Int = 18
     @Published var maxAge: Int = 30
     
-    //a function that will be used to validate the age and names
+    //this will validate the date of birth to ensure only users who are over 18 can use the app.
+    //also in earlier stages before implementing the button to disable, it will show an alert if they have not entered their name.
     func validateBasicDetails() throws {
         guard (!screenName.isEmpty) else {
              throw ProfileError.emptyTextFields
@@ -36,18 +37,22 @@ class InitialSetupViewModel: ObservableObject {
         }
     }
     
+    //used to check if text fields are empty.
+    //it was done in earlier stages before implementing the disable button stuffs.
     func validateDisability() throws {
         guard (!disability.isEmpty) else {
             throw ProfileError.emptyTextFields
         }
     }
     
+    //same as above
     func validateAboutMe() throws {
         guard !(bio.isEmpty || hobbies.isEmpty || favouriteMusic.isEmpty) else {
             throw ProfileError.emptyTextFields
         }
     }
     
+    //converts all the properties related to matchSeeker into a MatchSeeker object to add.
     func convertToObject() -> MatchSeeker {
         var haveDisability: Disability?
         if(isDisabled == true)
@@ -59,6 +64,7 @@ class InitialSetupViewModel: ObservableObject {
         return matchSeeeker
     }
     
+    //this is used to calculate the percentage of the progress view based on the numbers of steps completed during the setup process.
     func calculateProgress(currentStep: Float) -> Float {
         let stepDivision: Float = currentStep / 7
         print(stepDivision)

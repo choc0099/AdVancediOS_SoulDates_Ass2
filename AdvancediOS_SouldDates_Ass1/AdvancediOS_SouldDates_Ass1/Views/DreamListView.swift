@@ -12,7 +12,7 @@ struct DreamListView: View {
     @EnvironmentObject var session: Session
     @State var dreamList: [MatchSeeker] = []
     @Binding var selectedTab: Tab
-    @State var navActive: Bool = true
+    @State var showAlert: Bool = false
     var body: some View {
         NavigationStack {
             Group {
@@ -24,20 +24,18 @@ struct DreamListView: View {
                                 Button(role: .destructive) {
                                     selectedTab = .dreamList
                                     do {
+                                        //deletes the item from the dreamList.
                                         try session.removeFromDreamList(matchSeeker: matchSeeker)
                                         loadDreamList() // refreshes the dreamList after remove.
                                     }
                                     catch {
-                                        print("Unable to delete item.")
+                                        showAlert = true
                                     }
                                 } label: {
                                     Label("Remove", systemImage: "trash.fill")
                                 }
-
                             }
-                            
                         }
-    
                     }
                 }
                 else {
@@ -49,13 +47,16 @@ struct DreamListView: View {
                 }
             }.navigationTitle("Dream List")
         }.onAppear {
-            loadDreamList()
+            loadDreamList() //loads the dreamLists from session when inside this view.
+        }.alert(isPresented: $showAlert) {
+            Alert(title: Text("Unable to remove from Dream List!"))
         }
     }
     
+    //this function retrieves data that is stored in the dreamList
+    //and have error handling in an event such as an unexpected error or if there are no items in the dreamList.
     func loadDreamList() {
         do {
-            
             dreamList = try session.getDreamList()
             errorStatus = .noError
         }

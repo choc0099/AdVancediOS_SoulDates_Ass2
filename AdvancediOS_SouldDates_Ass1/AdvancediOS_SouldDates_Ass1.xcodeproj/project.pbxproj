@@ -32,8 +32,6 @@
 		32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */; };
 		32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */; };
 		32BB89E82AA2BA810095A649 /* InitialSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */; };
-		32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */; };
-		32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */; };
 		32C4974A2AA46853000A660E /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C497492AA46853000A660E /* StyledButton.swift */; };
 		32C4974C2AA476B8000A660E /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C4974B2AA476B8000A660E /* SessionViewModel.swift */; };
 		32D538312A91F0A300DFC38D /* Verifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D538302A91F0A300DFC38D /* Verifiable.swift */; };
@@ -106,8 +104,6 @@
 		32BB89E22AA29F780095A649 /* InterestedInSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInSetupView.swift; sourceTree = "<group>"; };
 		32BB89E42AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabilityDetailsSetupView.swift; sourceTree = "<group>"; };
 		32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupViewModel.swift; sourceTree = "<group>"; };
-		32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSetupViewModel.swift; sourceTree = "<group>"; };
-		32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedInViewModel.swift; sourceTree = "<group>"; };
 		32C497492AA46853000A660E /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		32C4974B2AA476B8000A660E /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		32D538302A91F0A300DFC38D /* Verifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verifiable.swift; sourceTree = "<group>"; };
@@ -225,8 +221,6 @@
 			children = (
 				3250E6DD2AABFE3E00666581 /* Settings */,
 				32BB89E72AA2BA810095A649 /* InitialSetupViewModel.swift */,
-				32BB89E92AA2C5E90095A649 /* GenderSetupViewModel.swift */,
-				32BB89EB2AA2F2D10095A649 /* InterestedInViewModel.swift */,
 				32C4974B2AA476B8000A660E /* SessionViewModel.swift */,
 				321E518C2AA56E5E00513CA9 /* ProfileViewModel.swift */,
 				32F5191E2A9F487A005DA063 /* SoulDatesMain.swift */,
@@ -495,13 +489,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3250E6E32AAFC08700666581 /* ProfileImageView.swift in Sources */,
-				32BB89EA2AA2C5E90095A649 /* GenderSetupViewModel.swift in Sources */,
 				32BB89E32AA29F780095A649 /* InterestedInSetupView.swift in Sources */,
 				32BB89E52AA2B1FF0095A649 /* DisabilityDetailsSetupView.swift in Sources */,
 				3250E6E12AAE7E7A00666581 /* DreamListView.swift in Sources */,
 				3250E6E52AB032F600666581 /* SessionStorageManager.swift in Sources */,
 				32F2511F2A90DE800084424B /* ProfileView.swift in Sources */,
-				32BB89EC2AA2F2D10095A649 /* InterestedInViewModel.swift in Sources */,
 				3277DDB12AB527D3005B5471 /* Dateable.swift in Sources */,
 				32E3FFDB2AA73FC900DF1B91 /* UpdateDisabilityDetailsViewModel.swift in Sources */,
 				3250E6D82AABE2A700666581 /* UpdateProofOfAgeView.swift in Sources */,
