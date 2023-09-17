@@ -15,9 +15,9 @@ struct SettingsView: View {
     @Binding var selectedTab: Tab
     @Binding var isOnSession: Bool
     @State private var showAlert: Bool = false
-    @State var settingsNavPath: NavigationPath = NavigationPath()
+    
     var body: some View {
-      NavigationStack(path: $settingsNavPath) {
+      NavigationStack() {
             List {
                 NavigationLink {
                     UpdateProfileView(updateProfileVM: updateProfileVM, selectedTab: $selectedTab)
@@ -82,6 +82,7 @@ struct SettingsView: View {
         session.clearAllDreamList()
     }
     
+    //passes data from the matchseeker that is in a session to the updateMatchSeekerProfileViewModel.
     func transferToUpdateProfileVM() throws {
         let matchSeeker = try getMatchSeekerFromSesstion()
         updateProfileVM.screenName = matchSeeker.screenName
@@ -91,7 +92,8 @@ struct SettingsView: View {
         updateProfileVM.hobbies = matchSeeker.hobbies
         updateProfileVM.bio = matchSeeker.bio
     }
-     
+    
+    //same as above.
     func transferToUpdateDatingPrefernceVM() throws {
         let matchSeeker                         = try getMatchSeekerFromSesstion()
         updateDatingPrefVM.interestedIn         = matchSeeker.datingPreference.interestedIn
@@ -100,6 +102,7 @@ struct SettingsView: View {
         updateDatingPrefVM.maxAge               = matchSeeker.datingPreference.maxAge
     }
     
+    //returns a match seeker object from it id that is saved in the session.
     func getMatchSeekerFromSesstion() throws -> MatchSeeker {
         return try soulDatesMain.getSpecificMatchSeeker(matchSeekerId: session.matchSeekerId)
     }
