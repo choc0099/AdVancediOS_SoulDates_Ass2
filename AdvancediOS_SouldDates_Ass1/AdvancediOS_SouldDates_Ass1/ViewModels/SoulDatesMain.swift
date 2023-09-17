@@ -7,6 +7,19 @@
 
 import Foundation
 
+//this is an enum for error handling that is confined with Apple's error protocol.
+//it is used for error handling within certain scenarios
+//for example, it will throw an error if there are no matchSeekers in an array.
+enum ProfileError: Error {
+    case underAgeException
+    case noMatchesFound
+    case matchSeekerNotExist
+    case emptyTextFields
+    case matchSeekerAlreadyAdded
+    case invalidIDNumber
+    case unableToRemove
+}
+
 //this is the view model that displays a list of matchSeekers in a SwiftUI view.
 class SoulDatesMain: ObservableObject {
     @Published var matchSeekers: [MatchSeeker]

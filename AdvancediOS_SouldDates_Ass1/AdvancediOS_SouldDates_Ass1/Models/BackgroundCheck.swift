@@ -7,6 +7,28 @@
 
 import Foundation
 
+//this struct contains all background check instances.
+struct BackgroundCheck: Codable {
+    var policeCheck: PoliceCheck?
+    var proofOfAge: ProofOfAge?
+    var refereeCheck: RefereeCheck?
+    
+    //functions for setters
+    mutating func setPoliceCheck(policeCheck: PoliceCheck?) {
+        self.policeCheck = policeCheck
+    }
+    
+    mutating func setRefereeCheck(referee: RefereeCheck?)
+    {
+        self.refereeCheck = referee
+    }
+    
+    mutating func setProofOfAge(proofOfAge: ProofOfAge?)
+    {
+        self.proofOfAge = proofOfAge
+    }
+}
+
 struct PoliceCheck: Verifiable, Codable {
     var id: UUID = UUID()
     var dateIssued: Date
@@ -51,6 +73,7 @@ struct RefereeCheck: Verifiable, Codable {
     var expiryDate: Date
     var refereeName: String
     var description: String
+    
     //this will be used to update the refereeCheck
     mutating func updateRefereeCheck(dateIssued: Date, expiryDate: Date, description: String, refereeName: String) {
         self.dateIssued = dateIssued
@@ -60,34 +83,8 @@ struct RefereeCheck: Verifiable, Codable {
     }
 }
 
-struct BackgroundCheck: Codable {
-    var policeCheck: PoliceCheck?
-    var proofOfAge: ProofOfAge?
-    var refereeCheck: RefereeCheck?
-    
-    //functions for getters and setters
-    mutating func setPoliceCheck(policeCheck: PoliceCheck?) {
-        self.policeCheck = policeCheck
-    }
-    
-    mutating func setRefereeCheck(referee: RefereeCheck?)
-    {
-        self.refereeCheck = referee
-    }
-    
-    mutating func setProofOfAge(proofOfAge: ProofOfAge?)
-    {
-        self.proofOfAge = proofOfAge
-    }
-    /*
-    static func ==(Ihs: BackgroundCheck, rhs: BackgroundCheck) -> Bool {
-        return Ihs.hashValue == rhs.hashValue
-    }*/
-    
-}
 //adds additional functions related to background checks on the main class
 extension SoulDatesMain {
-   
     //this will be used to set or nil a background check.
     func manageBackgroundChecks(currentMatchSeekr: MatchSeeker, backgroundCheck: BackgroundCheck?) throws
     {
@@ -99,7 +96,7 @@ extension SoulDatesMain {
             throw ProfileError.matchSeekerNotExist
         }
     }
-    
+    //this will be used to set or nil a police check.
     func managePoliceCheck(currentMatchSeeker: MatchSeeker, policeCheck: PoliceCheck?) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.setPoliceCheck(policeCheck: policeCheck)
@@ -109,6 +106,7 @@ extension SoulDatesMain {
         }
     }
     
+    //this will be used to set or nil a proof of age identification.
     func manageProofOfAgeCheck(currentMatchSeeker: MatchSeeker, proofOfAge: ProofOfAge?) throws{
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             
@@ -119,6 +117,7 @@ extension SoulDatesMain {
         }
     }
     
+    //this will be used to set or nil a referee check.
     func manageRefereeCheck(currentMatchSeeker: MatchSeeker, refereeCheck: RefereeCheck?) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.setRefereeCheck(referee: refereeCheck)
@@ -128,6 +127,7 @@ extension SoulDatesMain {
         }
     }
     
+    //this will be used to update existing policeCheckDetails if they have already provided us with that.
     func updatePoliceCheckDetails(currentMatchSeeker: MatchSeeker, issueDate: Date, expiryDate: Date, description: String) throws
     {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
@@ -138,7 +138,7 @@ extension SoulDatesMain {
         }
     }
     
-    //this will be used to update existing proofOfAgeDetails if they have already provided us with that.
+    //same as above function but for proof of age details.
     func updateProofOfAgeDetails(currentMatchSeeker: MatchSeeker, legalFirstName: String, legalLastName: String, dateIssued: Date, expiryDate: Date, streetAddress: String, dateOfBirth: Date, issuer: String, proofOfIdNumber: String) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id})
         {
@@ -150,6 +150,7 @@ extension SoulDatesMain {
         }
     }
     
+    //same as above function but for referee check details
     func updateRefereeDetails(currentMatchSeeker: MatchSeeker, refereeName: String, description: String, dateIssued: Date, expiryDate: Date) throws {
         if let index = self.matchSeekers.firstIndex(where: {$0.id == currentMatchSeeker.id}) {
             self.matchSeekers[index].backgroundCheck?.refereeCheck?.updateRefereeCheck(dateIssued: dateIssued, expiryDate: expiryDate, description: description, refereeName: refereeName)
