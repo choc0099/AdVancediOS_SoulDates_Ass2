@@ -7,7 +7,7 @@ This is an online dating app with limited is simplified but does not have all th
 
 This is just a prototype to share my ideas of what I want the dating app to have.
 
-#Features
+# Features
 
 The app containts the following features including
 
@@ -35,12 +35,12 @@ If a Match Seeker declares that they have a disasbility, they can choose to disc
 ## DreamLists
 The DreamList, also known as a favourites list is where match seekers can shortList their potential matches. This complys with one of the assignment requirements where the app can manage and edit tasks. For instance, a match seeker can add items onto the ddreamList and remove items from the DreamList.
 
-#Code Structure
+# Code Structure
 
-##Protocol Oriented Approach
+## Protocol Oriented Approach
 The MatchSeeker struct confines with a Protocol Person because there is also an admin struct that needs to comform to the persons protocol.
 
-###Verifiable Protocol
+### Verifiable Protocol
 The Verifiable protocol is a protocol that is used to handle multple types of background checks including ProofOfAge, Police Checks and Raferee Checks. All of these checks have the same atrributes including Date Issued and Expiry dates that needs to conform to that protocol.
 
 
